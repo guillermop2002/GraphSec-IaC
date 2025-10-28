@@ -8,12 +8,7 @@ proyectos de infraestructura como código.
 import os
 import sys
 from modules.graph_generator import generate_graph, get_graph_summary
-from modules.security_analyzer import (
-    run_checkov_analysis, 
-    parse_checkov_results, 
-    get_security_summary,
-    get_high_severity_findings
-)
+from modules.security_scanner import scan_for_issues, get_sarif_summary
 
 def main():
     """
@@ -22,6 +17,7 @@ def main():
     
     # Ruta al directorio de prueba
     TEST_DIRECTORY = "./test_infra"
+    SARIF_OUTPUT_FILE = "checkov_results.sarif"
     
     print("=== GraphSec-IaC - Análisis Completo de Infraestructura ===")
     print(f"Analizando directorio: {TEST_DIRECTORY}")
@@ -88,50 +84,40 @@ def main():
     print("=" * 50)
     print()
     
-    # Ejecutar análisis de seguridad
-    print("Ejecutando análisis de seguridad con Checkov...")
-    checkov_data = run_checkov_analysis(TEST_DIRECTORY)
+    # Ejecutar escaneo de seguridad
+    print("Ejecutando escaneo de seguridad con Checkov...")
+    scan_success = scan_for_issues(TEST_DIRECTORY, SARIF_OUTPUT_FILE)
     
-    if checkov_data is None:
-        print("Error: No se pudo ejecutar el análisis de seguridad")
+    if not scan_success:
+        print("Error: No se pudo ejecutar el escaneo de seguridad")
         print("Continuando con el análisis del grafo...")
     else:
-        print("Análisis de seguridad completado exitosamente")
+        print("Escaneo de seguridad completado exitosamente")
         print()
         
-        # Parsear resultados de seguridad
-        print("Procesando resultados de seguridad...")
-        security_report = parse_checkov_results(checkov_data)
+        # Mostrar resumen del archivo SARIF
+        print("Procesando resultados del escaneo...")
+        sarif_summary = get_sarif_summary(SARIF_OUTPUT_FILE)
         
-        # Mostrar resumen de seguridad
-        security_summary = get_security_summary(security_report)
-        print("Resumen del análisis de seguridad:")
-        print(f"   Total de checks: {security_summary['total_checks']}")
-        print(f"   Checks pasados: {security_summary['passed_checks']}")
-        print(f"   Checks fallidos: {security_summary['failed_checks']}")
-        print(f"   Checks omitidos: {security_summary['skipped_checks']}")
-        print(f"   Puntaje de seguridad: {security_summary['security_score']}/100")
-        print(f"   Recursos afectados: {security_summary['affected_resources']}")
-        print()
-        
-        # Mostrar hallazgos de alta severidad
-        high_severity = get_high_severity_findings(security_report)
-        if high_severity:
-            print(f"Hallazgos de alta severidad ({len(high_severity)}):")
-            for i, finding in enumerate(high_severity[:3], 1):  # Mostrar solo los primeros 3
-                print(f"   {i}. {finding.check_name}")
-                print(f"      Recurso: {finding.resource}")
-                print(f"      Archivo: {finding.file_path}:{finding.file_line_range}")
-                print(f"      ID: {finding.check_id}")
-            
-            if len(high_severity) > 3:
-                print(f"   ... y {len(high_severity) - 3} hallazgos más")
+        if "error" in sarif_summary:
+            print(f"Error al procesar archivo SARIF: {sarif_summary['error']}")
+        else:
+            print("Resumen del escaneo de seguridad:")
+            print(f"   Herramienta: {sarif_summary['tool_name']} v{sarif_summary['tool_version']}")
+            print(f"   Total de resultados: {sarif_summary['total_results']}")
+            print(f"   Reglas aplicadas: {sarif_summary['rules_count']}")
+            print(f"   Archivos analizados: {sarif_summary['files_analyzed']}")
+            print(f"   Timestamp: {sarif_summary['scan_timestamp']}")
             print()
+            
+            # Mostrar desglose por severidad
+            if 'severity_breakdown' in sarif_summary:
+                print("Desglose por severidad:")
+                for severity, count in sarif_summary['severity_breakdown'].items():
+                    print(f"   {severity}: {count}")
+                print()
         
-        # Mostrar desglose por severidad
-        print("Desglose por severidad:")
-        for severity, count in security_summary['severity_breakdown'].items():
-            print(f"   {severity}: {count}")
+        print(f"Archivo SARIF generado: {SARIF_OUTPUT_FILE}")
         print()
     
     # ===== RESUMEN FINAL =====
@@ -147,10 +133,13 @@ def main():
     else:
         print("Análisis de infraestructura: FALLIDO")
     
-    if checkov_data:
+    if scan_success:
         print("Análisis de seguridad: COMPLETADO")
-        print(f"  - Vulnerabilidades encontradas: {security_summary['failed_checks']}")
-        print(f"  - Puntaje de seguridad: {security_summary['security_score']}/100")
+        if "error" not in sarif_summary:
+            print(f"  - Resultados encontrados: {sarif_summary['total_results']}")
+            print(f"  - Archivo SARIF: {SARIF_OUTPUT_FILE}")
+        else:
+            print(f"  - Error: {sarif_summary['error']}")
     else:
         print("Análisis de seguridad: FALLIDO")
     

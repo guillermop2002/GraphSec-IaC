@@ -15,10 +15,12 @@ El proyecto está dividido en tres etapas principales:
 - **Función**: Genera grafos de infraestructura usando `blast-radius` sobre proyectos de Terraform
 - **Salida**: JSON con estructura de nodos, aristas y metadatos
 
-### Etapa 2: Análisis de Seguridad (En desarrollo)
-- **Herramientas**: Checkov, Trivy
+### Etapa 2: Análisis de Seguridad ✅
+- **Módulo**: `modules/security_scanner.py`
+- **Herramienta**: Checkov
 - **Formato**: Reportes SARIF
 - **Función**: Escanear infraestructura en busca de vulnerabilidades y malas configuraciones
+- **Salida**: Archivo SARIF con 7 vulnerabilidades detectadas en el bucket S3 de prueba
 
 ### Etapa 3: Correlación y Visualización (Planificado)
 - **Función**: Correlacionar hallazgos de seguridad con recursos de infraestructura
@@ -85,7 +87,7 @@ GraphSec-IaC/
 ## Estado del Proyecto
 
 - ✅ **Etapa 1**: Generación de grafos implementada y funcionando
-- 🚧 **Etapa 2**: Análisis de seguridad (en desarrollo)
+- ✅ **Etapa 2**: Análisis de seguridad implementado y funcionando
 - ⏳ **Etapa 3**: Correlación y visualización (planificado)
 
 ## Contribución
