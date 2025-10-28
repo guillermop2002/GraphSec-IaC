@@ -252,6 +252,13 @@
             const nodes = data.nodes || [];
             const edges = data.edges || [];
             
+            console.log('Procesando datos del grafo:', {
+                totalNodes: nodes.length,
+                totalEdges: edges.length,
+                nodes: nodes.map(n => ({ id: n.id, type: n.type })),
+                edges: edges.map(e => ({ from: e.source || e.from, to: e.target || e.to }))
+            });
+            
             // Procesar nodos
             const visNodes = nodes.map((node, index) => {
                 const hasIssues = node.security_issues && node.security_issues.length > 0;
@@ -276,23 +283,49 @@
             
             // Procesar aristas
             const visEdges = edges.map((edge, index) => {
+                const sourceId = edge.source || edge.from;
+                const targetId = edge.target || edge.to;
+                
+                // Verificar que tanto el origen como el destino existen en los nodos
+                const sourceExists = visNodes.some(node => node.id === sourceId);
+                const targetExists = visNodes.some(node => node.id === targetId);
+                
+                if (!sourceExists || !targetExists) {
+                    console.warn(`Arista ${index}: Nodo origen o destino no encontrado`, { sourceId, targetId, sourceExists, targetExists });
+                    return null;
+                }
+                
                 return {
                     id: `edge_${index}`,
-                    from: edge.source || edge.from,
-                    to: edge.target || edge.to,
+                    from: sourceId,
+                    to: targetId,
                     color: {
-                        color: '#666',
-                        highlight: '#1976d2'
+                        color: '#666666',
+                        highlight: '#1976d2',
+                        hover: '#ff6b35'
                     },
-                    width: 2,
+                    width: 3,
                     arrows: {
                         to: {
                             enabled: true,
-                            scaleFactor: 0.8
+                            scaleFactor: 1.2,
+                            type: 'arrow'
                         }
+                    },
+                    smooth: {
+                        type: 'continuous',
+                        forceDirection: 'none',
+                        roundness: 0.4
+                    },
+                    shadow: true,
+                    label: edge.label || '', // Etiqueta opcional para la arista
+                    font: {
+                        color: '#343434',
+                        size: 12,
+                        background: 'rgba(255,255,255,0.7)'
                     }
                 };
-            });
+            }).filter(edge => edge !== null); // Filtrar aristas inválidas
             
             return {
                 nodes: visNodes,
@@ -302,7 +335,8 @@
         
         // Función para mostrar información del nodo
         function showNodeInfo(nodeData) {
-            const nodeId = nodeData.id || 'unknown';
+            // Usar el ID completo del recurso, con fallback a label o simple_name
+            const nodeId = nodeData.id || nodeData.label || nodeData.simple_name || 'unknown';
             const nodeType = nodeData.type || 'unknown';
             const securityIssues = nodeData.security_issues || [];
             
@@ -342,30 +376,57 @@
                     margin: 10,
                     font: {
                         size: 14
-                    }
+                    },
+                    borderWidth: 2,
+                    shadow: true
                 },
                 edges: {
-                    width: 2,
+                    width: 3,
                     color: {
-                        color: '#666',
-                        highlight: '#1976d2'
+                        color: '#666666',
+                        highlight: '#1976d2',
+                        hover: '#ff6b35'
                     },
                     arrows: {
                         to: {
                             enabled: true,
-                            scaleFactor: 0.8
+                            scaleFactor: 1.2,
+                            type: 'arrow'
                         }
+                    },
+                    smooth: {
+                        type: 'continuous',
+                        forceDirection: 'none',
+                        roundness: 0.4
+                    },
+                    shadow: true,
+                    font: {
+                        color: '#343434',
+                        size: 12,
+                        background: 'rgba(255,255,255,0.7)'
                     }
                 },
                 physics: {
                     enabled: true,
                     stabilization: {
-                        iterations: 100
+                        iterations: 200,
+                        updateInterval: 10
+                    },
+                    barnesHut: {
+                        gravitationalConstant: -2000,
+                        centralGravity: 0.1,
+                        springLength: 95,
+                        springConstant: 0.04,
+                        damping: 0.09
                     }
                 },
                 interaction: {
                     hover: true,
-                    selectConnectedEdges: false
+                    selectConnectedEdges: true,
+                    tooltipDelay: 300
+                },
+                layout: {
+                    improvedLayout: true
                 }
             };
             
