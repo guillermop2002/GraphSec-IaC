@@ -281,7 +281,7 @@
                 };
             });
             
-            // Procesar aristas
+            // Procesar aristas - VERSIÓN SIMPLIFICADA
             const visEdges = edges.map((edge, index) => {
                 const sourceId = edge.source || edge.from;
                 const targetId = edge.target || edge.to;
@@ -299,35 +299,16 @@
                     return null;
                 }
                 
+                // Crear arista SIMPLE para asegurar que se muestre
                 return {
                     id: `edge_${index}`,
                     from: sourceId,
                     to: targetId,
-                    color: {
-                        color: '#666666',
-                        highlight: '#1976d2',
-                        hover: '#ff6b35'
-                    },
-                    width: 3,
-                    arrows: {
-                        to: {
-                            enabled: true,
-                            scaleFactor: 1.2,
-                            type: 'arrow'
-                        }
-                    },
-                    smooth: {
-                        type: 'continuous',
-                        forceDirection: 'none',
-                        roundness: 0.4
-                    },
-                    shadow: true,
-                    label: edge.label || '', // Etiqueta opcional para la arista
-                    font: {
-                        color: '#343434',
-                        size: 12,
-                        background: 'rgba(255,255,255,0.7)'
-                    }
+                    color: '#666666',
+                    width: 4,
+                    arrows: 'to',
+                    smooth: false, // Línea recta para mejor visibilidad
+                    label: edge.label || ''
                 };
             }).filter(edge => edge !== null); // Filtrar aristas inválidas
             
@@ -376,19 +357,26 @@
         function initializeVisualization(data) {
             const processedData = processGraphData(data);
             
-            // Configuración de la red
+            // Configuración de la red - SIMPLIFICADA para asegurar que las aristas se muestren
             const options = {
                 nodes: {
                     shape: 'box',
-                    margin: 10,
+                    margin: 15,
                     font: {
-                        size: 14
+                        size: 14,
+                        color: '#333333'
                     },
                     borderWidth: 2,
-                    shadow: true
+                    shadow: {
+                        enabled: true,
+                        color: 'rgba(0,0,0,0.2)',
+                        size: 5,
+                        x: 2,
+                        y: 2
+                    }
                 },
                 edges: {
-                    width: 3,
+                    width: 4,
                     color: {
                         color: '#666666',
                         highlight: '#1976d2',
@@ -397,43 +385,41 @@
                     arrows: {
                         to: {
                             enabled: true,
-                            scaleFactor: 1.2,
+                            scaleFactor: 1.5,
                             type: 'arrow'
                         }
                     },
                     smooth: {
-                        type: 'continuous',
-                        forceDirection: 'none',
-                        roundness: 0.4
+                        type: 'straight',
+                        forceDirection: 'none'
                     },
-                    shadow: true,
-                    font: {
-                        color: '#343434',
-                        size: 12,
-                        background: 'rgba(255,255,255,0.7)'
+                    shadow: {
+                        enabled: true,
+                        color: 'rgba(0,0,0,0.2)',
+                        size: 3,
+                        x: 1,
+                        y: 1
                     }
                 },
                 physics: {
                     enabled: true,
                     stabilization: {
-                        iterations: 200,
-                        updateInterval: 10
+                        iterations: 100,
+                        updateInterval: 50
                     },
-                    barnesHut: {
-                        gravitationalConstant: -2000,
-                        centralGravity: 0.1,
-                        springLength: 95,
-                        springConstant: 0.04,
-                        damping: 0.09
+                    solver: 'forceAtlas2Based',
+                    forceAtlas2Based: {
+                        gravitationalConstant: -50,
+                        centralGravity: 0.01,
+                        springLength: 100,
+                        springConstant: 0.08,
+                        damping: 0.4
                     }
                 },
                 interaction: {
                     hover: true,
                     selectConnectedEdges: true,
-                    tooltipDelay: 300
-                },
-                layout: {
-                    improvedLayout: true
+                    tooltipDelay: 200
                 }
             };
             
@@ -454,7 +440,19 @@
             
             // Evento de estabilización
             network.on('stabilizationIterationsDone', function() {
+                console.log('Estabilización completada, deshabilitando física');
                 network.setOptions({ physics: false });
+                
+                // Forzar redibujado para asegurar que las aristas se muestren
+                setTimeout(() => {
+                    network.redraw();
+                    console.log('Redibujado forzado completado');
+                }, 100);
+            });
+            
+            // Evento adicional para debug
+            network.on('afterDrawing', function() {
+                console.log('Redibujado completado');
             });
         }
         
