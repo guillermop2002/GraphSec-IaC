@@ -1,0 +1,40 @@
+﻿{
+    "edges": [
+        {
+            "edge_type": 1,
+            "source": "aws_s3_bucket_logging.logging_config",
+            "svg_id": "edge_0",
+            "target": "aws_s3_bucket.my_test_bucket"
+        }
+    ],
+    "nodes": [
+        {
+            "cluster": "root",
+            "definition": "",
+            "group": 20000,
+            "label": "aws_s3_bucket.my_test_bucket",
+            "module": "root",
+            "modules": [
+                "root"
+            ],
+            "resource_name": "my_test_bucket",
+            "simple_name": "aws_s3_bucket.my_test_bucket",
+            "svg_id": "node_0",
+            "type": "aws_s3_bucket"
+        },
+        {
+            "cluster": "root",
+            "definition": "",
+            "group": 20000,
+            "label": "aws_s3_bucket_logging.logging_config",
+            "module": "root",
+            "modules": [
+                "root"
+            ],
+            "resource_name": "logging_config",
+            "simple_name": "aws_s3_bucket_logging.logging_config",
+            "svg_id": "node_1",
+            "type": "aws_s3_bucket_logging"
+        }
+    ]
+}
