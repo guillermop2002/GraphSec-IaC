@@ -259,12 +259,22 @@
                 edges: edges.map(e => ({ from: e.source || e.from, to: e.target || e.to, edge_type: e.edge_type }))
             });
             
-            // Procesar nodos
+            // Procesar nodos - USAR EL ID CORRECTO DEL BACKEND
             const visNodes = nodes.map((node, index) => {
                 const hasIssues = node.security_issues && node.security_issues.length > 0;
                 
+                // Usar el ID exacto que viene del backend (simple_name)
+                const nodeId = node.simple_name || node.id || `node_${index}`;
+                
+                console.log(`Procesando nodo ${index}:`, { 
+                    originalId: node.id, 
+                    simpleName: node.simple_name, 
+                    finalId: nodeId,
+                    label: node.label 
+                });
+                
                 return {
-                    id: node.id || `node_${index}`,
+                    id: nodeId, // Usar el ID que realmente viene del backend
                     label: node.label || node.simple_name || node.id || `Nodo ${index}`,
                     color: hasIssues ? '#ff4d4d' : '#97c2fc',
                     borderWidth: hasIssues ? 3 : 1,
@@ -287,15 +297,28 @@
                 const targetId = edge.target || edge.to;
                 
                 console.log(`Procesando arista ${index}:`, { sourceId, targetId, edge });
+                console.log(`IDs de nodos disponibles:`, visNodes.map(n => n.id));
                 
                 // Verificar que tanto el origen como el destino existen en los nodos
                 const sourceExists = visNodes.some(node => node.id === sourceId);
                 const targetExists = visNodes.some(node => node.id === targetId);
                 
-                console.log(`Validación de arista ${index}:`, { sourceExists, targetExists, visNodeIds: visNodes.map(n => n.id) });
+                console.log(`Validación de arista ${index}:`, { 
+                    sourceExists, 
+                    targetExists, 
+                    sourceId, 
+                    targetId,
+                    visNodeIds: visNodes.map(n => n.id)
+                });
                 
                 if (!sourceExists || !targetExists) {
-                    console.warn(`Arista ${index}: Nodo origen o destino no encontrado`, { sourceId, targetId, sourceExists, targetExists });
+                    console.warn(`Arista ${index}: Nodo origen o destino no encontrado`, { 
+                        sourceId, 
+                        targetId, 
+                        sourceExists, 
+                        targetExists,
+                        availableIds: visNodes.map(n => n.id)
+                    });
                     return null;
                 }
                 
@@ -390,7 +413,7 @@
                         }
                     },
                     smooth: {
-                        type: 'straight',
+                        type: 'dynamic',
                         forceDirection: 'none'
                     },
                     shadow: {
