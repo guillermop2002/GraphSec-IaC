@@ -28,6 +28,12 @@ El proyecto está dividido en tres etapas principales:
 - **Algoritmo**: Correlación basada en tipo de recurso y análisis de mensajes
 - **Salida**: Grafo enriquecido con 7 vulnerabilidades correlacionadas exitosamente
 
+### Etapa 4: API y Frontend Web ✅
+- **API**: `api.py` con FastAPI
+- **Frontend**: `static/index.html` con visualización vis.js
+- **Función**: Exponer funcionalidad a través de API RESTful y interfaz web
+- **Características**: Visualización interactiva, nodos coloreados por vulnerabilidades, estadísticas en tiempo real
+
 ## Instalación
 
 ### Prerrequisitos
@@ -65,24 +71,48 @@ winget install Hashicorp.Terraform
 
 ## Uso
 
-### Generar Grafo de Infraestructura
+### Ejecutar la Aplicación Web
+
+Con el entorno virtual activado y desde la raíz del proyecto:
 
 ```bash
-python main.py
+# Iniciar el servidor web
+uvicorn api:app --reload --host 127.0.0.1 --port 8000
 ```
 
-Esto ejecutará el generador de grafos sobre el proyecto de prueba en `test_infra/`.
+Luego abre tu navegador y ve a: **http://127.0.0.1:8000**
+
+### Ejecutar Análisis por Línea de Comandos (Opcional)
+
+Si prefieres ejecutar el análisis sin interfaz web, puedes usar directamente los módulos:
+
+```python
+from modules.graph_generator import generate_graph
+from modules.security_scanner import scan_for_issues
+from modules.correlation_engine import load_sarif_results, correlate_findings_to_graph
+
+# Ejecutar pipeline completo
+graph_data = generate_graph("./test_infra")
+scan_success = scan_for_issues("./test_infra", "checkov_results.sarif")
+sarif_findings = load_sarif_results("checkov_results.sarif")
+enriched_graph = correlate_findings_to_graph(graph_data, sarif_findings)
+```
 
 ## Estructura del Proyecto
 
 ```
 GraphSec-IaC/
 ├── modules/
-│   └── graph_generator.py    # Generador de grafos
-├── main.py                   # Script principal
+│   ├── graph_generator.py       # Generador de grafos (Etapa 1)
+│   ├── security_scanner.py      # Escáner de seguridad (Etapa 2)
+│   └── correlation_engine.py    # Motor de correlación (Etapa 3)
+├── static/
+│   └── index.html              # Frontend web (Etapa 4)
+├── api.py                      # API FastAPI (Etapa 4)
 ├── test_infra/
-│   └── main.tf              # Proyecto de prueba
-├── venv/                    # Entorno virtual
+│   └── main.tf                 # Proyecto de prueba
+├── checkov_results.sarif/      # Reportes de seguridad
+├── venv/                       # Entorno virtual
 └── README.md
 ```
 
@@ -91,6 +121,7 @@ GraphSec-IaC/
 - ✅ **Etapa 1**: Generación de grafos implementada y funcionando
 - ✅ **Etapa 2**: Análisis de seguridad implementado y funcionando
 - ✅ **Etapa 3**: Correlación y visualización implementada y funcionando
+- ✅ **Etapa 4**: API y frontend web implementados y funcionando
 
 ## Contribución
 
