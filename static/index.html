@@ -329,7 +329,18 @@
                     to: targetId,
                     color: '#666666',
                     width: 4,
-                    arrows: 'to',
+                    arrows: {
+                        to: {
+                            enabled: true,
+                            scaleFactor: 1.5,
+                            type: 'arrow'
+                        },
+                        from: {
+                            enabled: true,
+                            scaleFactor: 1.5,
+                            type: 'arrow'
+                        }
+                    },
                     smooth: false, // Línea recta para mejor visibilidad
                     label: edge.label || ''
                 };
