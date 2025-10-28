@@ -8,6 +8,12 @@ proyectos de infraestructura como código.
 import os
 import sys
 from modules.graph_generator import generate_graph, get_graph_summary
+from modules.security_analyzer import (
+    run_checkov_analysis, 
+    parse_checkov_results, 
+    get_security_summary,
+    get_high_severity_findings
+)
 
 def main():
     """
@@ -17,7 +23,7 @@ def main():
     # Ruta al directorio de prueba
     TEST_DIRECTORY = "./test_infra"
     
-    print("=== GraphSec-IaC - Generador de Grafos ===")
+    print("=== GraphSec-IaC - Análisis Completo de Infraestructura ===")
     print(f"Analizando directorio: {TEST_DIRECTORY}")
     print()
     
@@ -73,6 +79,80 @@ def main():
         
         if len(graph_data["edges"]) > 3:
             print(f"   ... y {len(graph_data['edges']) - 3} dependencias mas")
+    
+    print()
+    
+    # ===== ETAPA 2: ANÁLISIS DE SEGURIDAD =====
+    print("=" * 50)
+    print("ETAPA 2: ANÁLISIS DE SEGURIDAD")
+    print("=" * 50)
+    print()
+    
+    # Ejecutar análisis de seguridad
+    print("Ejecutando análisis de seguridad con Checkov...")
+    checkov_data = run_checkov_analysis(TEST_DIRECTORY)
+    
+    if checkov_data is None:
+        print("Error: No se pudo ejecutar el análisis de seguridad")
+        print("Continuando con el análisis del grafo...")
+    else:
+        print("Análisis de seguridad completado exitosamente")
+        print()
+        
+        # Parsear resultados de seguridad
+        print("Procesando resultados de seguridad...")
+        security_report = parse_checkov_results(checkov_data)
+        
+        # Mostrar resumen de seguridad
+        security_summary = get_security_summary(security_report)
+        print("Resumen del análisis de seguridad:")
+        print(f"   Total de checks: {security_summary['total_checks']}")
+        print(f"   Checks pasados: {security_summary['passed_checks']}")
+        print(f"   Checks fallidos: {security_summary['failed_checks']}")
+        print(f"   Checks omitidos: {security_summary['skipped_checks']}")
+        print(f"   Puntaje de seguridad: {security_summary['security_score']}/100")
+        print(f"   Recursos afectados: {security_summary['affected_resources']}")
+        print()
+        
+        # Mostrar hallazgos de alta severidad
+        high_severity = get_high_severity_findings(security_report)
+        if high_severity:
+            print(f"Hallazgos de alta severidad ({len(high_severity)}):")
+            for i, finding in enumerate(high_severity[:3], 1):  # Mostrar solo los primeros 3
+                print(f"   {i}. {finding.check_name}")
+                print(f"      Recurso: {finding.resource}")
+                print(f"      Archivo: {finding.file_path}:{finding.file_line_range}")
+                print(f"      ID: {finding.check_id}")
+            
+            if len(high_severity) > 3:
+                print(f"   ... y {len(high_severity) - 3} hallazgos más")
+            print()
+        
+        # Mostrar desglose por severidad
+        print("Desglose por severidad:")
+        for severity, count in security_summary['severity_breakdown'].items():
+            print(f"   {severity}: {count}")
+        print()
+    
+    # ===== RESUMEN FINAL =====
+    print("=" * 50)
+    print("RESUMEN FINAL")
+    print("=" * 50)
+    print()
+    
+    if graph_data:
+        print("Análisis de infraestructura: COMPLETADO")
+        print(f"  - Nodos encontrados: {len(graph_data.get('nodes', []))}")
+        print(f"  - Dependencias encontradas: {len(graph_data.get('edges', []))}")
+    else:
+        print("Análisis de infraestructura: FALLIDO")
+    
+    if checkov_data:
+        print("Análisis de seguridad: COMPLETADO")
+        print(f"  - Vulnerabilidades encontradas: {security_summary['failed_checks']}")
+        print(f"  - Puntaje de seguridad: {security_summary['security_score']}/100")
+    else:
+        print("Análisis de seguridad: FALLIDO")
     
     print()
     print("Proceso completado exitosamente")

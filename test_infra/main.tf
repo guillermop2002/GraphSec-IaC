@@ -12,6 +12,7 @@ provider "aws" {
 
 resource "aws_s3_bucket" "my_test_bucket" {
   bucket = "mi-cubo-de-prueba-tfg-12345"
+  acl    = "public-read"  # <-- VULNERABILIDAD DELIBERADA para pruebas
 }
 
 resource "aws_s3_bucket_logging" "logging_config" {
