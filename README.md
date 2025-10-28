@@ -22,9 +22,11 @@ El proyecto está dividido en tres etapas principales:
 - **Función**: Escanear infraestructura en busca de vulnerabilidades y malas configuraciones
 - **Salida**: Archivo SARIF con 7 vulnerabilidades detectadas en el bucket S3 de prueba
 
-### Etapa 3: Correlación y Visualización (Planificado)
+### Etapa 3: Correlación y Visualización ✅
+- **Módulo**: `modules/correlation_engine.py`
 - **Función**: Correlacionar hallazgos de seguridad con recursos de infraestructura
-- **Salida**: Mapa de riesgo visual integrado
+- **Algoritmo**: Correlación basada en tipo de recurso y análisis de mensajes
+- **Salida**: Grafo enriquecido con 7 vulnerabilidades correlacionadas exitosamente
 
 ## Instalación
 
@@ -88,7 +90,7 @@ GraphSec-IaC/
 
 - ✅ **Etapa 1**: Generación de grafos implementada y funcionando
 - ✅ **Etapa 2**: Análisis de seguridad implementado y funcionando
-- ⏳ **Etapa 3**: Correlación y visualización (planificado)
+- ✅ **Etapa 3**: Correlación y visualización implementada y funcionando
 
 ## Contribución
 

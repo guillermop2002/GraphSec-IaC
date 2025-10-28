@@ -9,6 +9,7 @@ import os
 import sys
 from modules.graph_generator import generate_graph, get_graph_summary
 from modules.security_scanner import scan_for_issues, get_sarif_summary
+from modules.correlation_engine import load_sarif_results, correlate_findings_to_graph, print_node_security_summary
 
 def main():
     """
@@ -120,6 +121,67 @@ def main():
         print(f"Archivo SARIF generado: {SARIF_OUTPUT_FILE}")
         print()
     
+    # ===== ETAPA 3: CORRELACIÓN =====
+    print("=" * 50)
+    print("ETAPA 3: CORRELACIÓN DE HALLAZGOS")
+    print("=" * 50)
+    print()
+    
+    # Verificar que tenemos tanto el grafo como el SARIF
+    if graph_data and scan_success:
+        print("Correlacionando hallazgos de seguridad con recursos de infraestructura...")
+        
+        # Cargar hallazgos de seguridad desde SARIF
+        sarif_findings = load_sarif_results(SARIF_OUTPUT_FILE)
+        
+        if not sarif_findings:
+            print("Error: No se pudieron cargar los hallazgos de seguridad")
+        else:
+            print(f"Cargados {len(sarif_findings)} hallazgos de seguridad")
+            
+            # Correlacionar hallazgos con el grafo
+            enriched_graph = correlate_findings_to_graph(graph_data, sarif_findings)
+            
+            # Mostrar estadísticas de correlación
+            correlation_metadata = enriched_graph.get("correlation_metadata", {})
+            print(f"Correlación completada:")
+            print(f"  - Hallazgos totales: {correlation_metadata.get('total_findings', 0)}")
+            print(f"  - Nodos analizados: {correlation_metadata.get('total_nodes', 0)}")
+            print(f"  - Correlaciones realizadas: {correlation_metadata.get('correlations_made', 0)}")
+            print(f"  - Nodos con problemas: {correlation_metadata.get('nodes_with_issues', 0)}")
+            print()
+            
+            # Buscar y mostrar problemas específicos del bucket S3
+            print("Buscando problemas de seguridad en recursos específicos...")
+            s3_bucket_found = False
+            
+            for node in enriched_graph.get("nodes", []):
+                node_id = node.get("id", "")
+                node_label = node.get("label", "")
+                node_simple_name = node.get("simple_name", "")
+                
+                # Buscar el bucket S3 de prueba por diferentes identificadores
+                if (("aws_s3_bucket" in node_id and "my_test_bucket" in node_id) or
+                    ("aws_s3_bucket" in node_label and "my_test_bucket" in node_label) or
+                    ("aws_s3_bucket" in node_simple_name and "my_test_bucket" in node_simple_name)):
+                    print_node_security_summary(node)
+                    s3_bucket_found = True
+                    break
+            
+            if not s3_bucket_found:
+                print("No se encontró el bucket S3 de prueba en el grafo")
+                print("Nodos disponibles:")
+                for i, node in enumerate(enriched_graph.get("nodes", []), 1):
+                    node_id = node.get("id", "unknown")
+                    node_label = node.get("label", "unknown")
+                    node_simple_name = node.get("simple_name", "unknown")
+                    print(f"  {i}. ID: {node_id}, Label: {node_label}, Simple: {node_simple_name}")
+            
+            print()
+    else:
+        print("No se puede realizar la correlación: faltan datos del grafo o del análisis de seguridad")
+        print()
+    
     # ===== RESUMEN FINAL =====
     print("=" * 50)
     print("RESUMEN FINAL")
@@ -142,6 +204,18 @@ def main():
             print(f"  - Error: {sarif_summary['error']}")
     else:
         print("Análisis de seguridad: FALLIDO")
+    
+    # Mostrar estado de la correlación
+    if graph_data and scan_success:
+        print("Correlación de hallazgos: COMPLETADO")
+        if 'enriched_graph' in locals():
+            correlation_metadata = enriched_graph.get("correlation_metadata", {})
+            print(f"  - Correlaciones realizadas: {correlation_metadata.get('correlations_made', 0)}")
+            print(f"  - Nodos con problemas: {correlation_metadata.get('nodes_with_issues', 0)}")
+        else:
+            print("  - Error: No se pudo realizar la correlación")
+    else:
+        print("Correlación de hallazgos: FALLIDO")
     
     print()
     print("Proceso completado exitosamente")
