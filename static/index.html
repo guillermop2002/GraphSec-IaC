@@ -273,6 +273,12 @@
                     label: node.label 
                 });
                 
+                // Posiciones iniciales para mejor separación
+                const initialPositions = [
+                    { x: -200, y: -100 },  // Primer nodo (izquierda arriba)
+                    { x: 200, y: 100 }     // Segundo nodo (derecha abajo)
+                ];
+                
                 return {
                     id: nodeId, // Usar el ID que realmente viene del backend
                     label: node.label || node.simple_name || node.id || `Nodo ${index}`,
@@ -285,7 +291,9 @@
                         bold: hasIssues
                     },
                     shape: 'box',
-                    margin: 10,
+                    margin: 15,
+                    x: initialPositions[index]?.x,
+                    y: initialPositions[index]?.y,
                     // Almacenar datos originales del nodo
                     originalData: node
                 };
@@ -438,16 +446,16 @@
                 physics: {
                     enabled: true,
                     stabilization: {
-                        iterations: 100,
+                        iterations: 200,
                         updateInterval: 50
                     },
                     solver: 'forceAtlas2Based',
                     forceAtlas2Based: {
-                        gravitationalConstant: -50,
-                        centralGravity: 0.01,
-                        springLength: 100,
-                        springConstant: 0.08,
-                        damping: 0.4
+                        gravitationalConstant: -200,  // Más repulsión entre nodos
+                        centralGravity: 0.005,        // Menos atracción al centro
+                        springLength: 200,            // Mayor longitud de resorte
+                        springConstant: 0.05,         // Menos fuerza de resorte
+                        damping: 0.6                  // Más amortiguación para estabilidad
                     }
                 },
                 interaction: {
@@ -475,7 +483,19 @@
             // Evento de estabilización
             network.on('stabilizationIterationsDone', function() {
                 console.log('Estabilización completada, deshabilitando física');
-                network.setOptions({ physics: false });
+                
+                // Mantener las posiciones actuales y deshabilitar física
+                network.setOptions({ 
+                    physics: false,
+                    interaction: {
+                        dragNodes: true,
+                        dragView: true,
+                        zoomView: true,
+                        hover: true,
+                        selectConnectedEdges: true,
+                        tooltipDelay: 200
+                    }
+                });
                 
                 // Forzar redibujado para asegurar que las aristas se muestren
                 setTimeout(() => {
