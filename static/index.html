@@ -255,8 +255,8 @@
             console.log('Procesando datos del grafo:', {
                 totalNodes: nodes.length,
                 totalEdges: edges.length,
-                nodes: nodes.map(n => ({ id: n.id, type: n.type })),
-                edges: edges.map(e => ({ from: e.source || e.from, to: e.target || e.to }))
+                nodes: nodes.map(n => ({ id: n.id, type: n.type, label: n.label, simple_name: n.simple_name })),
+                edges: edges.map(e => ({ from: e.source || e.from, to: e.target || e.to, edge_type: e.edge_type }))
             });
             
             // Procesar nodos
@@ -286,9 +286,13 @@
                 const sourceId = edge.source || edge.from;
                 const targetId = edge.target || edge.to;
                 
+                console.log(`Procesando arista ${index}:`, { sourceId, targetId, edge });
+                
                 // Verificar que tanto el origen como el destino existen en los nodos
                 const sourceExists = visNodes.some(node => node.id === sourceId);
                 const targetExists = visNodes.some(node => node.id === targetId);
+                
+                console.log(`Validación de arista ${index}:`, { sourceExists, targetExists, visNodeIds: visNodes.map(n => n.id) });
                 
                 if (!sourceExists || !targetExists) {
                     console.warn(`Arista ${index}: Nodo origen o destino no encontrado`, { sourceId, targetId, sourceExists, targetExists });
@@ -326,6 +330,9 @@
                     }
                 };
             }).filter(edge => edge !== null); // Filtrar aristas inválidas
+            
+            console.log('Aristas procesadas para vis.js:', visEdges);
+            console.log('Nodos procesados para vis.js:', visNodes.map(n => ({ id: n.id, label: n.label })));
             
             return {
                 nodes: visNodes,
