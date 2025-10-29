@@ -243,6 +243,7 @@ class TrivyScanner(Scanner):
         """Encuentra el ejecutable de Trivy."""
         possible_paths = [
             os.path.join(os.path.dirname(__file__), '..', 'venv', 'Scripts', 'trivy.cmd'),
+            os.path.expanduser("~\\AppData\\Local\\Microsoft\\WinGet\\Packages\\AquaSecurity.Trivy_Microsoft.Winget.Source_8wekyb3d8bbwe\\trivy.exe"),
             "trivy"  # Trivy está en el PATH del sistema
         ]
         
