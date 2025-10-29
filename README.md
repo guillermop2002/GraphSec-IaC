@@ -128,5 +128,3 @@ GraphSec-IaC/
 Este es un proyecto de TFG (Trabajo de Fin de Grado). Para contribuir, por favor contacta con el autor.
 
 ## Licencia
-
-[Especificar licencia]

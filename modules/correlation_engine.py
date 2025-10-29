@@ -50,6 +50,8 @@ def load_sarif_results(sarif_path: str) -> List[Dict[str, Any]]:
         
         run = runs[0]
         results = run.get("results", [])
+        tool = run.get("tool", {}).get("driver", {})
+        tool_name = tool.get("name", "unknown")
         
         # Simplificar cada hallazgo
         simplified_findings = []
@@ -60,7 +62,8 @@ def load_sarif_results(sarif_path: str) -> List[Dict[str, Any]]:
                 "level": result.get("level", "unknown"),
                 "file_path": None,
                 "start_line": None,
-                "end_line": None
+                "end_line": None,
+                "tool_name": tool_name  # Añadir nombre de la herramienta
             }
             
             # Extraer información de ubicación
@@ -76,7 +79,7 @@ def load_sarif_results(sarif_path: str) -> List[Dict[str, Any]]:
             
             simplified_findings.append(finding)
         
-        logger.info(f"Cargados {len(simplified_findings)} hallazgos de seguridad desde SARIF")
+        logger.info(f"Cargados {len(simplified_findings)} hallazgos de seguridad desde {tool_name}")
         return simplified_findings
         
     except FileNotFoundError:
@@ -90,9 +93,68 @@ def load_sarif_results(sarif_path: str) -> List[Dict[str, Any]]:
         return []
 
 
+def load_multiple_sarif_results(sarif_paths: List[str]) -> List[Dict[str, Any]]:
+    """
+    Carga y combina los resultados de múltiples archivos SARIF.
+    
+    Args:
+        sarif_paths (List[str]): Lista de rutas a archivos SARIF
+        
+    Returns:
+        List[Dict[str, Any]]: Lista combinada de hallazgos de seguridad
+    """
+    
+    all_findings = []
+    
+    for sarif_path in sarif_paths:
+        findings = load_sarif_results(sarif_path)
+        all_findings.extend(findings)
+    
+    logger.info(f"Total de hallazgos cargados de {len(sarif_paths)} archivos: {len(all_findings)}")
+    return all_findings
+
+
+def deduplicate_findings(findings: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    """
+    Elimina hallazgos duplicados basándose en una huella digital única.
+    
+    Args:
+        findings (List[Dict[str, Any]]): Lista de hallazgos de seguridad
+        
+    Returns:
+        List[Dict[str, Any]]: Lista de hallazgos únicos
+    """
+    
+    if not findings:
+        return []
+    
+    # Set para rastrear huellas digitales únicas
+    seen_fingerprints = set()
+    unique_findings = []
+    
+    for finding in findings:
+        # Crear huella digital única basada en regla, archivo y línea
+        rule_id = finding.get("rule_id", "unknown")
+        file_path = finding.get("file_path", "")
+        start_line = finding.get("start_line", 0)
+        
+        # Crear huella digital
+        fingerprint = (rule_id, file_path, str(start_line))
+        
+        if fingerprint not in seen_fingerprints:
+            seen_fingerprints.add(fingerprint)
+            unique_findings.append(finding)
+        else:
+            logger.debug(f"Hallazgo duplicado eliminado: {rule_id} en {file_path}:{start_line}")
+    
+    logger.info(f"De-duplicación completada: {len(findings)} -> {len(unique_findings)} hallazgos únicos")
+    return unique_findings
+
+
 def correlate_findings_to_graph(graph_data: Dict[str, Any], sarif_results: List[Dict[str, Any]]) -> Dict[str, Any]:
     """
     Correlaciona hallazgos de seguridad con nodos del grafo de infraestructura.
+    Aplica de-duplicación antes de la correlación.
     
     Args:
         graph_data (Dict[str, Any]): Datos del grafo de infraestructura
@@ -103,6 +165,10 @@ def correlate_findings_to_graph(graph_data: Dict[str, Any], sarif_results: List[
     """
     
     try:
+        # Aplicar de-duplicación antes de la correlación
+        logger.info(f"Aplicando de-duplicación a {len(sarif_results)} hallazgos...")
+        unique_findings = deduplicate_findings(sarif_results)
+        
         # Crear una copia del grafo para no modificar el original
         enriched_graph = graph_data.copy()
         
@@ -114,8 +180,8 @@ def correlate_findings_to_graph(graph_data: Dict[str, Any], sarif_results: List[
         # Contador de correlaciones exitosas
         correlations_made = 0
         
-        # Iterar sobre cada hallazgo de seguridad
-        for finding in sarif_results:
+        # Iterar sobre cada hallazgo único de seguridad
+        for finding in unique_findings:
             finding_file = finding.get("file_path", "")
             finding_start_line = finding.get("start_line", 0)
             
@@ -130,13 +196,15 @@ def correlate_findings_to_graph(graph_data: Dict[str, Any], sarif_results: List[
                     node["security_issues"].append(finding)
                     correlations_made += 1
                     
-                    logger.debug(f"Correlacionado hallazgo '{finding['rule_id']}' con nodo '{node.get('id', 'unknown')}'")
+                    logger.debug(f"Correlacionado hallazgo '{finding['rule_id']}' ({finding.get('tool_name', 'unknown')}) con nodo '{node.get('id', 'unknown')}'")
         
-        logger.info(f"Correlación completada: {correlations_made} hallazgos correlacionados con {len(nodes)} nodos")
+        logger.info(f"Correlación completada: {correlations_made} hallazgos únicos correlacionados con {len(nodes)} nodos")
         
         # Añadir metadatos de correlación al grafo
         enriched_graph["correlation_metadata"] = {
-            "total_findings": len(sarif_results),
+            "total_findings_original": len(sarif_results),
+            "total_findings_unique": len(unique_findings),
+            "duplicates_removed": len(sarif_results) - len(unique_findings),
             "total_nodes": len(nodes),
             "correlations_made": correlations_made,
             "nodes_with_issues": len([n for n in nodes if n.get("security_issues")])

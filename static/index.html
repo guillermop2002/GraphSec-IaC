@@ -151,6 +151,44 @@
             background: #e8f5e8;
             border-left-color: #4caf50;
         }
+        
+        .vulnerability-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 4px;
+        }
+        
+        .tool-badge {
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 10px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        
+        .tool-badge.checkov {
+            background: #e3f2fd;
+            color: #1976d2;
+            border: 1px solid #bbdefb;
+        }
+        
+        .tool-badge.trivy {
+            background: #f3e5f5;
+            color: #7b1fa2;
+            border: 1px solid #ce93d8;
+        }
+        
+        .vulnerability-message {
+            margin: 4px 0;
+            line-height: 1.4;
+        }
+        
+        .vulnerability-meta {
+            font-size: 10px;
+            color: #666;
+            margin-top: 4px;
+        }
     </style>
 </head>
 <body>
@@ -239,10 +277,36 @@
             const correlationMetadata = data.correlation_metadata || {};
             const apiMetadata = data.api_metadata || {};
             
+            // Estadísticas básicas
             document.getElementById('total-nodes').textContent = nodes.length;
             document.getElementById('total-edges').textContent = edges.length;
-            document.getElementById('total-findings').textContent = apiMetadata.total_findings || 0;
+            document.getElementById('total-findings').textContent = apiMetadata.total_findings_unique || correlationMetadata.total_findings_unique || 0;
             document.getElementById('vulnerable-nodes').textContent = correlationMetadata.nodes_with_issues || 0;
+            
+            // Añadir información de de-duplicación si está disponible
+            const duplicatesRemoved = apiMetadata.duplicates_removed || correlationMetadata.duplicates_removed || 0;
+            const scannersUsed = apiMetadata.scanners_used || 1;
+            
+            if (duplicatesRemoved > 0) {
+                // Crear elemento de información de de-duplicación
+                let dedupInfo = document.getElementById('dedup-info');
+                if (!dedupInfo) {
+                    dedupInfo = document.createElement('div');
+                    dedupInfo.id = 'dedup-info';
+                    dedupInfo.className = 'stat-item dedup-info';
+                    dedupInfo.style.gridColumn = '1 / -1';
+                    dedupInfo.style.fontSize = '0.9em';
+                    dedupInfo.style.color = '#666';
+                    dedupInfo.style.borderTop = '1px solid #eee';
+                    dedupInfo.style.paddingTop = '8px';
+                    dedupInfo.style.marginTop = '8px';
+                    document.getElementById('stats').appendChild(dedupInfo);
+                }
+                dedupInfo.innerHTML = `
+                    <strong>Duplicados eliminados:</strong> ${duplicatesRemoved} | 
+                    <strong>Escáneres usados:</strong> ${scannersUsed}
+                `;
+            }
             
             document.getElementById('stats').style.display = 'grid';
         }
@@ -382,9 +446,24 @@
                 securityIssues.forEach((issue, index) => {
                     const item = document.createElement('div');
                     item.className = `vulnerability-item ${issue.level || 'medium'}`;
+                    
+                    // Obtener nombre de la herramienta y crear etiqueta
+                    const toolName = issue.tool_name || 'unknown';
+                    const toolBadge = toolName === 'Checkov' ? 
+                        '<span class="tool-badge checkov">[Checkov]</span>' : 
+                        '<span class="tool-badge trivy">[Trivy]</span>';
+                    
                     item.innerHTML = `
-                        <strong>${issue.rule_id || 'N/A'}</strong><br>
-                        ${issue.message || 'Sin descripción'}
+                        <div class="vulnerability-header">
+                            ${toolBadge}
+                            <strong>${issue.rule_id || 'N/A'}</strong>
+                        </div>
+                        <div class="vulnerability-message">
+                            ${issue.message || 'Sin descripción'}
+                        </div>
+                        <div class="vulnerability-meta">
+                            Severidad: ${issue.level || 'unknown'}
+                        </div>
                     `;
                     vulnerabilityList.appendChild(item);
                 });

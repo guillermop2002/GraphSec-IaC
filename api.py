@@ -14,8 +14,8 @@ from typing import Dict, Any
 
 # Importar funciones de los módulos existentes
 from modules.graph_generator import generate_graph, get_graph_summary
-from modules.security_scanner import scan_for_issues, get_sarif_summary
-from modules.correlation_engine import load_sarif_results, correlate_findings_to_graph
+from modules.security_scanner import CheckovScanner, TrivyScanner
+from modules.correlation_engine import load_multiple_sarif_results, correlate_findings_to_graph
 
 # Configurar logging
 logging.basicConfig(level=logging.INFO)
@@ -33,7 +33,8 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 
 # Configuración
 TEST_DIRECTORY = "./test_infra"
-SARIF_OUTPUT_FILE = "checkov_results.sarif"
+CHECKOV_OUTPUT_FILE = "checkov_results.sarif"
+TRIVY_OUTPUT_FILE = "trivy_results.sarif"
 
 
 @app.get("/")
@@ -45,13 +46,13 @@ async def read_index():
 @app.get("/api/graph")
 async def get_enriched_graph():
     """
-    Endpoint principal que ejecuta todo el pipeline y devuelve el grafo enriquecido.
+    Endpoint principal que ejecuta todo el pipeline con múltiples escáneres y devuelve el grafo enriquecido.
     
     Returns:
-        Dict[str, Any]: Grafo enriquecido con información de seguridad
+        Dict[str, Any]: Grafo enriquecido con información de seguridad de múltiples fuentes
     """
     try:
-        logger.info("Iniciando pipeline completo de análisis...")
+        logger.info("Iniciando pipeline completo de análisis con múltiples escáneres...")
         
         # ===== ETAPA 1: GENERACIÓN DEL GRAFO =====
         logger.info("Ejecutando Etapa 1: Generación del grafo...")
@@ -65,45 +66,79 @@ async def get_enriched_graph():
         
         logger.info("Grafo generado exitosamente")
         
-        # ===== ETAPA 2: ANÁLISIS DE SEGURIDAD =====
-        logger.info("Ejecutando Etapa 2: Análisis de seguridad...")
-        scan_success = scan_for_issues(TEST_DIRECTORY, SARIF_OUTPUT_FILE)
+        # ===== ETAPA 2: ANÁLISIS DE SEGURIDAD CON MÚLTIPLES ESCÁNERES =====
+        logger.info("Ejecutando Etapa 2: Análisis de seguridad con Checkov y Trivy...")
         
-        if not scan_success:
+        # Inicializar escáneres
+        checkov_scanner = CheckovScanner()
+        trivy_scanner = TrivyScanner()
+        
+        # Ejecutar Checkov
+        logger.info("Ejecutando escaneo con Checkov...")
+        checkov_success = checkov_scanner.scan(TEST_DIRECTORY, CHECKOV_OUTPUT_FILE)
+        
+        if not checkov_success:
+            logger.warning("Checkov falló, continuando solo con Trivy...")
+        
+        # Ejecutar Trivy
+        logger.info("Ejecutando escaneo con Trivy...")
+        trivy_success = trivy_scanner.scan(TEST_DIRECTORY, TRIVY_OUTPUT_FILE)
+        
+        if not trivy_success:
+            logger.warning("Trivy falló, continuando solo con Checkov...")
+        
+        # Verificar que al menos un escáner funcionó
+        if not checkov_success and not trivy_success:
             raise HTTPException(
                 status_code=500,
-                detail="Error: No se pudo ejecutar el análisis de seguridad"
+                detail="Error: Ambos escáneres fallaron"
             )
         
         logger.info("Análisis de seguridad completado exitosamente")
         
-        # ===== ETAPA 3: CORRELACIÓN =====
-        logger.info("Ejecutando Etapa 3: Correlación de hallazgos...")
+        # ===== ETAPA 3: CARGA Y COMBINACIÓN DE RESULTADOS =====
+        logger.info("Ejecutando Etapa 3: Carga y combinación de resultados...")
         
-        # Cargar hallazgos de seguridad desde SARIF
-        sarif_findings = load_sarif_results(SARIF_OUTPUT_FILE)
+        # Cargar resultados de ambos escáneres
+        sarif_paths = []
+        if checkov_success:
+            sarif_paths.append(CHECKOV_OUTPUT_FILE)
+        if trivy_success:
+            sarif_paths.append(TRIVY_OUTPUT_FILE)
         
-        if not sarif_findings:
+        # Cargar y combinar hallazgos de seguridad
+        combined_findings = load_multiple_sarif_results(sarif_paths)
+        
+        if not combined_findings:
             raise HTTPException(
                 status_code=500,
                 detail="Error: No se pudieron cargar los hallazgos de seguridad"
             )
         
-        logger.info(f"Cargados {len(sarif_findings)} hallazgos de seguridad")
+        logger.info(f"Cargados {len(combined_findings)} hallazgos combinados de {len(sarif_paths)} escáneres")
         
-        # Correlacionar hallazgos con el grafo
-        enriched_graph = correlate_findings_to_graph(graph_data, sarif_findings)
+        # ===== ETAPA 4: CORRELACIÓN CON DE-DUPLICACIÓN =====
+        logger.info("Ejecutando Etapa 4: Correlación con de-duplicación...")
+        
+        # Correlacionar hallazgos con el grafo (incluye de-duplicación automática)
+        enriched_graph = correlate_findings_to_graph(graph_data, combined_findings)
         
         # Añadir metadatos adicionales para la API
+        correlation_metadata = enriched_graph.get("correlation_metadata", {})
         enriched_graph["api_metadata"] = {
             "status": "success",
-            "message": "Pipeline completado exitosamente",
-            "total_findings": len(sarif_findings),
+            "message": "Pipeline completado exitosamente con múltiples escáneres",
+            "scanners_used": len(sarif_paths),
+            "checkov_success": checkov_success,
+            "trivy_success": trivy_success,
+            "total_findings_original": correlation_metadata.get("total_findings_original", 0),
+            "total_findings_unique": correlation_metadata.get("total_findings_unique", 0),
+            "duplicates_removed": correlation_metadata.get("duplicates_removed", 0),
             "total_nodes": len(enriched_graph.get("nodes", [])),
             "total_edges": len(enriched_graph.get("edges", []))
         }
         
-        logger.info("Pipeline completado exitosamente")
+        logger.info("Pipeline completado exitosamente con múltiples escáneres")
         return enriched_graph
         
     except HTTPException:
@@ -143,13 +178,16 @@ async def get_analysis_summary():
                 detail=f"Directorio de prueba no encontrado: {TEST_DIRECTORY}"
             )
         
-        # Verificar archivo SARIF
-        sarif_exists = os.path.exists(SARIF_OUTPUT_FILE) or os.path.exists(f"{SARIF_OUTPUT_FILE}/results_sarif.sarif")
+        # Verificar archivos SARIF
+        checkov_exists = os.path.exists(CHECKOV_OUTPUT_FILE) or os.path.exists(f"{CHECKOV_OUTPUT_FILE}/results_sarif.sarif")
+        trivy_exists = os.path.exists(TRIVY_OUTPUT_FILE)
         
         return {
             "test_directory": TEST_DIRECTORY,
-            "sarif_file_exists": sarif_exists,
-            "sarif_file_path": SARIF_OUTPUT_FILE,
+            "checkov_file_exists": checkov_exists,
+            "trivy_file_exists": trivy_exists,
+            "checkov_file_path": CHECKOV_OUTPUT_FILE,
+            "trivy_file_path": TRIVY_OUTPUT_FILE,
             "status": "ready"
         }
         
