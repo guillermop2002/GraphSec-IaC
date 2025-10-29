@@ -249,6 +249,7 @@ class TrivyScanner(Scanner):
         for path in possible_paths:
             if os.path.exists(path) or path == "trivy":
                 self.trivy_cmd = path
+                logger.info(f"Trivy encontrado en: {path}")
                 return
         
         self.trivy_cmd = None
@@ -294,6 +295,8 @@ class TrivyScanner(Scanner):
             "--output", output_file,
             directory_path
         ]
+        
+        logger.info(f"Comando Trivy construido: {' '.join(cmd)}")
         
         try:
             logger.info(f"Ejecutando escaneo de seguridad con {self.name}: {' '.join(cmd)}")
