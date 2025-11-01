@@ -9,6 +9,7 @@ import subprocess
 import json
 import logging
 import os
+import sys
 from typing import Dict, Any, List, Optional
 from abc import ABC, abstractmethod
 
@@ -56,24 +57,41 @@ class CheckovScanner(Scanner):
     
     def __init__(self):
         super().__init__("Checkov")
-        self._find_checkov_executable()
+        # Detectar y usar el intérprete correcto (priorizar venv del proyecto)
+        self.python_exec = self._find_python_executable()
     
-    def _find_checkov_executable(self):
-        """Encuentra el ejecutable de Checkov."""
-        possible_paths = [
-            os.path.join(os.path.dirname(__file__), '..', 'venv', 'Scripts', 'checkov.cmd'),
-            os.path.join(os.path.dirname(__file__), '..', 'venv', 'Scripts', 'checkov.exe'),
-            os.path.join(os.path.dirname(__file__), '..', 'venv', 'Scripts', 'checkov'),
-            "checkov"
-        ]
+    def _find_python_executable(self) -> str:
+        """
+        Encuentra el intérprete de Python correcto.
+        Prioriza el venv del proyecto, luego el intérprete actual.
+        Usa rutas absolutas para garantizar portabilidad después de reiniciar.
+        """
+        # Paso 1: Si ya estamos en un venv, verificar que sea el del proyecto
+        current_exec = os.path.abspath(sys.executable)
+        if hasattr(sys, 'real_prefix') or (hasattr(sys, 'base_prefix') and sys.prefix != sys.base_prefix):
+            # Estamos en un venv, verificar si es el del proyecto
+            module_dir = os.path.dirname(os.path.abspath(__file__))
+            project_root = os.path.dirname(module_dir)
+            venv_scripts = os.path.join(project_root, 'venv', 'Scripts')
+            venv_python = os.path.join(venv_scripts, 'python.exe')
+            
+            # Normalizar rutas para comparación
+            if os.path.normpath(os.path.dirname(current_exec)) == os.path.normpath(venv_scripts):
+                logger.info(f"Python ejecutándose en venv del proyecto: {current_exec}")
+                return current_exec
         
-        for path in possible_paths:
-            if os.path.exists(path) or path == "checkov":
-                self.checkov_cmd = path
-                return
+        # Paso 2: Buscar el venv del proyecto usando rutas absolutas
+        module_dir = os.path.dirname(os.path.abspath(__file__))
+        project_root = os.path.dirname(module_dir)  # Subir un nivel desde modules/
+        venv_python = os.path.abspath(os.path.join(project_root, 'venv', 'Scripts', 'python.exe'))
         
-        self.checkov_cmd = None
-        logger.error("Checkov no encontrado en ninguna ubicación esperada")
+        if os.path.exists(venv_python):
+            logger.info(f"Usando Python del venv del proyecto: {venv_python}")
+            return venv_python
+        
+        # Paso 3: Fallback: usar el intérprete actual (pero avisar)
+        logger.warning(f"Venv del proyecto no encontrado en {venv_python}, usando Python actual: {sys.executable}")
+        return os.path.abspath(sys.executable)
     
     def scan(self, directory_path: str, output_file: str) -> bool:
         """
@@ -88,8 +106,9 @@ class CheckovScanner(Scanner):
             bool: True si el escaneo es exitoso, False si falla
         """
         
-        if not self.checkov_cmd:
-            logger.error("Checkov no está disponible")
+        # Verificar intérprete activo
+        if not os.path.exists(self.python_exec):
+            logger.error("Intérprete de Python no encontrado.")
             return False
         
         # Convertir a ruta absoluta
@@ -108,23 +127,69 @@ class CheckovScanner(Scanner):
             return False
         
         # Construir el comando Checkov
-        cmd = [
-            self.checkov_cmd,
-            "--directory", directory_path,
-            "--output", "sarif",
-            "--output-file-path", output_file
-        ]
+        # Método más robusto: usar 'python -m checkov' que garantiza usar el módulo del venv correcto
+        # Esto funciona incluso después de reiniciar porque usa rutas absolutas
+        
+        # Verificar primero si checkov está disponible como módulo
+        venv_scripts_dir = os.path.dirname(self.python_exec)
+        checkov_cmd_path = os.path.join(venv_scripts_dir, "checkov.exe")
+        checkov_cmd_alt = os.path.join(venv_scripts_dir, "checkov.cmd")
+        
+        if os.path.exists(checkov_cmd_path):
+            # Usar el ejecutable .exe directamente (más portable)
+            cmd = [
+                checkov_cmd_path,
+                "--directory", directory_path,
+                "--output", "sarif",
+                "--output-file-path", output_file
+            ]
+            env = os.environ.copy()
+            # Forzar UTF-8 en Python para que Checkov lea archivos correctamente
+            env['PYTHONIOENCODING'] = 'utf-8'
+            env['PYTHONUTF8'] = '1'
+        elif os.path.exists(checkov_cmd_alt):
+            # Usar el wrapper .cmd pero modificar PATH para que use nuestro Python
+            cmd = [
+                checkov_cmd_alt,
+                "--directory", directory_path,
+                "--output", "sarif",
+                "--output-file-path", output_file
+            ]
+            # Modificar PATH para que checkov.cmd encuentre nuestro Python del venv primero
+            env = os.environ.copy()
+            env['PATH'] = venv_scripts_dir + os.pathsep + env.get('PATH', '')
+            # Forzar UTF-8 en Python para que Checkov lea archivos correctamente
+            env['PYTHONIOENCODING'] = 'utf-8'
+            env['PYTHONUTF8'] = '1'
+        else:
+            # Fallback más robusto: usar 'python -m checkov' (recomendado)
+            # Esto garantiza que use el módulo checkov del venv correcto
+            cmd = [
+                self.python_exec,
+                "-m", "checkov",
+                "--directory", directory_path,
+                "--output", "sarif",
+                "--output-file-path", output_file
+            ]
+            env = os.environ.copy()
+            # Forzar UTF-8 en Python para que Checkov lea archivos correctamente
+            env['PYTHONIOENCODING'] = 'utf-8'
+            env['PYTHONUTF8'] = '1'
         
         try:
-            logger.info(f"Ejecutando escaneo de seguridad con {self.name}: {' '.join(cmd)}")
+            logger.info(f"Ejecutando escaneo de seguridad con {self.name}: {' '.join(cmd[:3])} ...")
             
             # Ejecutar el comando y capturar la salida
+            # Usar encoding='utf-8' y errors='ignore' para ser robusto ante caracteres especiales
             result = subprocess.run(
                 cmd,
                 capture_output=True,
                 text=True,
+                encoding='utf-8',  # Forzar UTF-8 para evitar problemas de encoding
+                errors='ignore',   # Ignorar caracteres no decodificables (evita UnicodeDecodeError)
                 cwd=os.path.dirname(__file__),  # Ejecutar desde la raíz del proyecto
-                timeout=120  # Timeout de 2 minutos
+                timeout=300,  # Timeout de 5 minutos para proyectos complejos (antes 180s)
+                env=env
             )
             
             # Checkov devuelve código de salida 1 cuando encuentra vulnerabilidades
@@ -134,18 +199,21 @@ class CheckovScanner(Scanner):
                 logger.error(f"Error: {result.stderr}")
                 return False
             
-            # Checkov crea un directorio con el nombre del archivo
-            # y dentro pone results_sarif.sarif
+            # Checkov puede crear el archivo directamente o en un subdirectorio
+            # Intentar varias ubicaciones posibles
             actual_output_file = None
             
-            # Buscar el archivo en el directorio creado por Checkov
-            potential_file = os.path.join(output_file, 'results_sarif.sarif')
-            if os.path.exists(potential_file):
-                actual_output_file = potential_file
+            # 1. Buscar en el subdirectorio (comportamiento antiguo de Checkov)
+            potential_dir_file = os.path.join(output_file, 'results_sarif.sarif')
+            if os.path.exists(potential_dir_file):
+                actual_output_file = potential_dir_file
+            # 2. Buscar el archivo directamente (comportamiento nuevo de Checkov)
+            elif os.path.exists(output_file):
+                actual_output_file = output_file
             else:
                 logger.error(f"El archivo de salida {output_file} no se creó")
-                logger.error(f"Salida de {self.name}: {result.stdout}")
-                logger.error(f"Error de {self.name}: {result.stderr}")
+                logger.error(f"Salida de {self.name}: {result.stdout[-500:] if result.stdout else '(sin salida)'}")
+                logger.error(f"Error de {self.name}: {result.stderr[-500:] if result.stderr else '(sin errores)'}")
                 return False
             
             # Verificar que el archivo no está vacío
@@ -241,20 +309,32 @@ class TrivyScanner(Scanner):
     
     def _find_trivy_executable(self):
         """Encuentra el ejecutable de Trivy."""
+        # Priorizar PATH del sistema para portabilidad
         possible_paths = [
+            "trivy",  # Trivy está en el PATH del sistema (preferido para portabilidad)
             os.path.join(os.path.dirname(__file__), '..', 'venv', 'Scripts', 'trivy.cmd'),
-            os.path.expanduser("~\\AppData\\Local\\Microsoft\\WinGet\\Packages\\AquaSecurity.Trivy_Microsoft.Winget.Source_8wekyb3d8bbwe\\trivy.exe"),
-            "trivy"  # Trivy está en el PATH del sistema
+            os.path.expanduser("~\\AppData\\Local\\Microsoft\\WinGet\\Packages\\AquaSecurity.Trivy_Microsoft.Winget.Source_8wekyb3d8bbwe\\trivy.exe")
         ]
         
         for path in possible_paths:
-            if os.path.exists(path) or path == "trivy":
+            if path == "trivy":
+                # Verificar que trivy está disponible en PATH
+                try:
+                    import subprocess
+                    result = subprocess.run([path, "--version"], capture_output=True, text=True, timeout=5)
+                    if result.returncode == 0:
+                        self.trivy_cmd = path
+                        logger.info(f"Trivy encontrado en PATH: {path}")
+                        return
+                except:
+                    continue
+            elif os.path.exists(path):
                 self.trivy_cmd = path
                 logger.info(f"Trivy encontrado en: {path}")
                 return
         
         self.trivy_cmd = None
-        logger.error("Trivy no encontrado en ninguna ubicación esperada")
+        logger.error("Trivy no encontrado. Asegúrate de que esté instalado y en el PATH del sistema.")
     
     def scan(self, directory_path: str, output_file: str) -> bool:
         """
@@ -307,8 +387,10 @@ class TrivyScanner(Scanner):
                 cmd,
                 capture_output=True,
                 text=True,
+                encoding='utf-8',  # Forzar UTF-8 para evitar problemas de encoding
+                errors='ignore',   # Ignorar caracteres no decodificables (evita UnicodeDecodeError)
                 cwd=os.path.dirname(__file__),  # Ejecutar desde la raíz del proyecto
-                timeout=120  # Timeout de 2 minutos
+                timeout=300  # Timeout de 5 minutos para proyectos complejos (antes 120s)
             )
             
             # Trivy devuelve código de salida 1 cuando encuentra vulnerabilidades

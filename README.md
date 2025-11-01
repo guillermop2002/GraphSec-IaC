@@ -10,23 +10,36 @@ GraphSec-IaC es una herramienta que combina la visualización de infraestructura
 
 El proyecto está dividido en tres etapas principales:
 
-### Etapa 1: Generación de Grafos ✅
-- **Módulo**: `modules/graph_generator.py`
-- **Función**: Genera grafos de infraestructura usando `blast-radius` sobre proyectos de Terraform
-- **Salida**: JSON con estructura de nodos, aristas y metadatos
+### Etapa 1: Generación y Enriquecimiento de Grafos ✅
+- **Módulos**: 
+  - `modules/graph_generator.py`: Genera grafos usando `blast-radius`
+  - `modules/tf_parser.py`: Parser robusto de Terraform usando `python-hcl2`
+  - `modules/graph_builder.py`: Enriquece nodos con metadatos precisos de archivo/líneas
+- **Función**: Genera grafos de infraestructura y enriquece nodos con ubicación precisa
+- **Salida**: JSON con estructura de nodos, aristas y metadatos de ubicación
 
 ### Etapa 2: Análisis de Seguridad ✅
 - **Módulo**: `modules/security_scanner.py`
-- **Herramienta**: Checkov
+- **Herramientas**: Checkov y Trivy (múltiples escáneres)
 - **Formato**: Reportes SARIF
 - **Función**: Escanear infraestructura en busca de vulnerabilidades y malas configuraciones
-- **Salida**: Archivo SARIF con 7 vulnerabilidades detectadas en el bucket S3 de prueba
+- **Salida**: Archivos SARIF con hallazgos de seguridad de múltiples fuentes
 
-### Etapa 3: Correlación y Visualización ✅
+### Etapa 3: Normalización (CIS) y De-duplicación con CFI ✅
 - **Módulo**: `modules/correlation_engine.py`
-- **Función**: Correlacionar hallazgos de seguridad con recursos de infraestructura
-- **Algoritmo**: Correlación basada en tipo de recurso y análisis de mensajes
-- **Salida**: Grafo enriquecido con 7 vulnerabilidades correlacionadas exitosamente
+- **Funciones clave**:
+  - `load_sarif_results(path)`: Carga SARIF y extrae `partialFingerprints` si existen
+  - `process_and_deduplicate_findings(findings, graph_data, project_root)`: Genera CFI, filtra ruido y de-duplica
+  - `attach_findings_to_graph(graph_data, unique_findings)`: Adjunta hallazgos por recurso
+- **Algoritmo**: CFI (Canonical Finding Identifier) basado en controles CIS normalizados + ubicación + resource_id; prioriza `partialFingerprints` cuando están presentes
+- **De-duplicación**: Estable por CFI (independiente del texto del mensaje), elimina duplicados entre y dentro de escáneres
+- **Filtrado inteligente**: Elimina automáticamente hallazgos de `examples/`, `tests/` y archivos `.yml/.yaml` que no tienen nodos en el grafo
+- **Correlación por capas**:
+  - **Capa 1 (Precisa)**: Correlación por rango de líneas exactas + rutas absolutas normalizadas. Requiere que el hallazgo esté dentro del rango `[start_line, end_line]` del nodo.
+  - **Capa 2 (Filename)**: Fallback por coincidencia de nombre de archivo (ruta absoluta normalizada). Útil cuando el parser no capturó rangos precisos.
+  - **Capa 3 (Semántica/CIS)**: Fallback conservador que solo asigna cuando hay exactamente 1 candidato único basado en tipo de recurso y regla CIS.
+- **Normalización de rutas**: Usa rutas absolutas como fuente única de verdad, permitiendo comparación directa entre hallazgos SARIF y nodos del parser
+- **Salida**: Grafo enriquecido con vulnerabilidades únicas correlacionadas exitosamente, estadísticas de distribución por capas
 
 ### Etapa 4: API y Frontend Web ✅
 - **API**: `api.py` con FastAPI
@@ -61,6 +74,7 @@ source venv/bin/activate
 
 # Instalar dependencias
 pip install git+https://github.com/Ianyliu/blast-radius-fork
+pip install python-hcl2
 
 # Instalar Graphviz (Windows)
 winget install Graphviz
@@ -88,14 +102,22 @@ Si prefieres ejecutar el análisis sin interfaz web, puedes usar directamente lo
 
 ```python
 from modules.graph_generator import generate_graph
-from modules.security_scanner import scan_for_issues
-from modules.correlation_engine import load_sarif_results, correlate_findings_to_graph
+from modules.correlation_engine import (
+    load_sarif_results,
+    process_and_deduplicate_findings,
+    attach_findings_to_graph,
+)
 
-# Ejecutar pipeline completo
+# Generar grafo e importar hallazgos SARIF
 graph_data = generate_graph("./test_infra")
-scan_success = scan_for_issues("./test_infra", "checkov_results.sarif")
-sarif_findings = load_sarif_results("checkov_results.sarif")
-enriched_graph = correlate_findings_to_graph(graph_data, sarif_findings)
+all_findings = []
+all_findings.extend(load_sarif_results("checkov_results.sarif"))
+all_findings.extend(load_sarif_results("trivy_results.sarif"))
+
+# De-duplicación con CFI y adjunto al grafo
+dedup = process_and_deduplicate_findings(all_findings, graph_data)
+unique = dedup["unique_findings"]
+enriched_graph = attach_findings_to_graph(graph_data, unique)
 ```
 
 ## Estructura del Proyecto
@@ -104,23 +126,47 @@ enriched_graph = correlate_findings_to_graph(graph_data, sarif_findings)
 GraphSec-IaC/
 ├── modules/
 │   ├── graph_generator.py       # Generador de grafos (Etapa 1)
+│   ├── tf_parser.py             # Parser robusto de Terraform usando python-hcl2
+│   ├── graph_builder.py         # Enriquecimiento de nodos con metadatos precisos
 │   ├── security_scanner.py      # Escáner de seguridad (Etapa 2)
-│   └── correlation_engine.py    # Motor de correlación (Etapa 3)
+│   └── correlation_engine.py    # Motor de correlación y de-duplicación (Etapa 3)
 ├── static/
 │   └── index.html              # Frontend web (Etapa 4)
 ├── api.py                      # API FastAPI (Etapa 4)
 ├── test_infra/
 │   └── main.tf                 # Proyecto de prueba
-├── checkov_results.sarif/      # Reportes de seguridad
+├── checkov_results.sarif/      # Reportes de seguridad (generados al ejecutar)
 ├── venv/                       # Entorno virtual
 └── README.md
 ```
 
+## Características Principales
+
+### ✅ Parser Robusto de Terraform
+- Usa `python-hcl2` (parser oficial de HCL) para parsear archivos Terraform
+- Maneja correctamente casos complejos: `count`, `for_each`, bloques dinámicos, comentarios
+- Extrae metadatos precisos de ubicación (archivo, línea de inicio, línea de fin)
+
+### ✅ Correlación Precisa por Capas
+- **Capa 1 (Rango de líneas + filename)**: Correlación precisa usando rangos de líneas exactos del parser y rutas absolutas normalizadas. Método más preciso.
+- **Capa 2 (Filename)**: Fallback cuando no hay rango preciso, usa coincidencia por nombre de archivo.
+- **Capa 3 (Semántica/CIS)**: Fallback conservador que solo asigna cuando hay un único candidato claro basado en tipo de recurso y regla CIS.
+
+### ✅ De-duplicación Inteligente con CFI
+- Identificador Canónico de Hallazgo (CFI) basado en normalización CIS
+- Prioriza `partialFingerprints` de SARIF cuando están disponibles
+- Elimina duplicados entre diferentes escáneres (Checkov, Trivy)
+
+### ✅ Multi-scanner Orchestration
+- Ejecuta múltiples escáneres de seguridad (Checkov, Trivy)
+- Combina resultados y aplica de-duplicación inteligente
+- Muestra origen de cada hallazgo en la interfaz web
+
 ## Estado del Proyecto
 
-- ✅ **Etapa 1**: Generación de grafos implementada y funcionando
-- ✅ **Etapa 2**: Análisis de seguridad implementado y funcionando
-- ✅ **Etapa 3**: Correlación y visualización implementada y funcionando
+- ✅ **Etapa 1**: Generación y enriquecimiento de grafos implementado y funcionando
+- ✅ **Etapa 2**: Análisis de seguridad multi-scanner implementado y funcionando
+- ✅ **Etapa 3**: Correlación precisa y de-duplicación con CFI implementada y funcionando
 - ✅ **Etapa 4**: API y frontend web implementados y funcionando
 
 ## Contribución

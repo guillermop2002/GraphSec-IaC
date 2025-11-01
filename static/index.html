@@ -189,6 +189,16 @@
             color: #666;
             margin-top: 4px;
         }
+        
+        #unassigned-panel {
+            margin-top: 20px;
+            background: #fff3e0;
+            border-left: 4px solid #ff9800;
+        }
+        
+        #unassigned-panel h3 {
+            color: #f57c00;
+        }
     </style>
 </head>
 <body>
@@ -235,6 +245,18 @@
             
             <div id="graph-container"></div>
             
+            <div id="unassigned-panel" class="info-panel" style="display: none;">
+                <h3>⚠️ Hallazgos No Asignados</h3>
+                <p style="font-size: 0.9em; color: #666; margin-bottom: 15px;">
+                    Estos hallazgos no pudieron ser correlacionados con ningún nodo del grafo.
+                    Pueden estar en módulos (<code>modules/</code>) que no están en el grafo, 
+                    ser recursos <code>provider</code> o <code>terraform</code>, o tener rutas/líneas que no coinciden.
+                </p>
+                <div id="unassigned-findings" class="vulnerability-list">
+                    <!-- Se poblará dinámicamente -->
+                </div>
+            </div>
+            
             <div id="info-panel" class="info-panel" style="display: none;">
                 <h3>Información del Nodo Seleccionado</h3>
                 <div id="node-info">
@@ -270,6 +292,50 @@
             document.getElementById('success').style.display = 'block';
         }
         
+        // Función para mostrar hallazgos no asignados
+        function displayUnassignedFindings(data) {
+            const unassigned = data.unassigned_findings || [];
+            const panel = document.getElementById('unassigned-panel');
+            const container = document.getElementById('unassigned-findings');
+            
+            if (unassigned.length === 0) {
+                panel.style.display = 'none';
+                return;
+            }
+            
+            panel.style.display = 'block';
+            container.innerHTML = '';
+            
+            unassigned.forEach((finding, index) => {
+                const item = document.createElement('div');
+                item.className = 'vulnerability-item medium';
+                
+                const severity = finding.level || 'unknown';
+                const severityClass = severity.toLowerCase();
+                item.className = `vulnerability-item ${severityClass}`;
+                
+                const toolName = finding.tool_name || 'unknown';
+                const toolClass = toolName.toLowerCase().includes('checkov') ? 'checkov' : 'trivy';
+                
+                item.innerHTML = `
+                    <div class="vulnerability-header">
+                        <span class="tool-badge ${toolClass}">${toolName}</span>
+                        <strong>${finding.rule_id || 'Unknown Rule'}</strong>
+                        <span style="margin-left: auto; font-size: 0.85em; color: #666;">Severidad: ${severity}</span>
+                    </div>
+                    <div class="vulnerability-message">
+                        ${finding.message || 'No message available'}
+                    </div>
+                    <div class="vulnerability-meta">
+                        📄 ${finding.file_path || 'Unknown file'} | Línea ${finding.start_line || 'N/A'} | 
+                        Capa de correlación: ${finding.correlation_layer || 0}
+                    </div>
+                `;
+                
+                container.appendChild(item);
+            });
+        }
+        
         // Función para actualizar estadísticas
         function updateStats(data) {
             const nodes = data.nodes || [];
@@ -277,11 +343,24 @@
             const correlationMetadata = data.correlation_metadata || {};
             const apiMetadata = data.api_metadata || {};
             
+            // Calcular nodos vulnerables manualmente si no está en metadata
+            // Un nodo es vulnerable si tiene security_issues con al menos 1 hallazgo
+            let vulnerableNodesCount = 0;
+            if (correlationMetadata.nodes_with_issues !== undefined) {
+                vulnerableNodesCount = correlationMetadata.nodes_with_issues;
+            } else {
+                // Fallback: calcular manualmente contando nodos con security_issues
+                vulnerableNodesCount = nodes.filter(node => {
+                    const issues = node.security_issues || [];
+                    return issues.length > 0;
+                }).length;
+            }
+            
             // Estadísticas básicas
             document.getElementById('total-nodes').textContent = nodes.length;
             document.getElementById('total-edges').textContent = edges.length;
             document.getElementById('total-findings').textContent = apiMetadata.total_findings_unique || correlationMetadata.total_findings_unique || 0;
-            document.getElementById('vulnerable-nodes').textContent = correlationMetadata.nodes_with_issues || 0;
+            document.getElementById('vulnerable-nodes').textContent = vulnerableNodesCount;
             
             // Añadir información de de-duplicación si está disponible
             const duplicatesRemoved = apiMetadata.duplicates_removed || correlationMetadata.duplicates_removed || 0;
@@ -403,11 +482,6 @@
                     width: 4,
                     arrows: {
                         to: {
-                            enabled: true,
-                            scaleFactor: 1.5,
-                            type: 'arrow'
-                        },
-                        from: {
                             enabled: true,
                             scaleFactor: 1.5,
                             type: 'arrow'
@@ -594,7 +668,18 @@
             try {
                 console.log('Iniciando carga del grafo...');
                 
-                const response = await fetch('/api/graph');
+                // Detectar qué proyecto analizar según parámetros URL
+                const useVpc = window.location.search.includes('vpc=true');
+                const useEks = window.location.search.includes('eks=true');
+                
+                let endpoint = '/api/graph'; // Por defecto: test_infra
+                if (useVpc) {
+                    endpoint = '/api/graph-vpc';
+                } else if (useEks) {
+                    endpoint = '/api/graph-eks';
+                }
+                console.log(`Cargando grafo desde: ${endpoint}`);
+                const response = await fetch(endpoint);
                 
                 if (!response.ok) {
                     const errorData = await response.json();
@@ -612,6 +697,9 @@
                 
                 // Actualizar estadísticas
                 updateStats(data);
+                
+                // Mostrar hallazgos no asignados
+                displayUnassignedFindings(data);
                 
                 // Inicializar visualización
                 initializeVisualization(data);
