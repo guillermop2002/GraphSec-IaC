@@ -870,7 +870,7 @@ def attach_findings_to_graph(graph_data: Dict[str, Any], unique_findings: List[D
     enriched_graph["correlation_metadata"] = {
         "assigned_findings": assigned_count,
         "unassigned_findings_count": len(unassigned),
-        "nodes_with_issues": nodes_with_issues_count,  # Nodos que tienen al menos 1 hallazgo
+        "nodes_with_issues_count": nodes_with_issues_count,  # Nodos que tienen al menos 1 hallazgo
         "total_unique_findings": len(unique_findings)
     }
 
