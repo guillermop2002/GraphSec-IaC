@@ -40,9 +40,10 @@ def parse_terraform(directory: str) -> List[Dict[str, Any]]:
             'type': 'aws_s3_bucket',
             'name': 'my_bucket',
             'simple_name': 'aws_s3_bucket.my_bucket',
-            'file': 'main.tf',  # Ruta relativa desde directory
+            'file': 'C:\\...\\main.tf',  # Ruta absoluta
             'start_line': 13,
-            'end_line': 16
+            'end_line': 16,
+            'raw_block_text': 'resource "aws_s3_bucket" "my_bucket" {...}'  # Texto crudo del bloque
         }
     """
     resources: List[Dict[str, Any]] = []
@@ -87,6 +88,9 @@ def parse_terraform(directory: str) -> List[Dict[str, Any]]:
                                         )
                                     
                                     if start_line and end_line:
+                                        # Extraer el bloque de texto crudo del recurso
+                                        raw_block_text = _extract_resource_block_text(content, start_line, end_line)
+                                        
                                         resources.append({
                                             'type': resource_type,
                                             'name': resource_name,
@@ -94,6 +98,7 @@ def parse_terraform(directory: str) -> List[Dict[str, Any]]:
                                             'file': file_path_abs,  # Ruta absoluta para comparación directa
                                             'start_line': start_line,
                                             'end_line': end_line,
+                                            'raw_block_text': raw_block_text,  # Texto crudo para análisis de dependencias
                                         })
                                     else:
                                         logger.warning(
@@ -109,6 +114,25 @@ def parse_terraform(directory: str) -> List[Dict[str, Any]]:
     
     logger.info(f"Parseados {len(resources)} recursos desde {len(tf_files)} archivos usando hcl2")
     return resources
+
+
+def _extract_resource_block_text(content: str, start_line: int, end_line: int) -> str:
+    """
+    Extrae el bloque de texto crudo de un recurso entre start_line y end_line.
+    
+    Args:
+        content: Contenido completo del archivo
+        start_line: Línea de inicio del recurso (1-based)
+        end_line: Línea de fin del recurso (1-based)
+    
+    Returns:
+        String con el texto del bloque del recurso
+    """
+    lines = content.split('\n')
+    # Convertir a índices 0-based
+    start_idx = max(0, start_line - 1)
+    end_idx = min(len(lines), end_line)
+    return '\n'.join(lines[start_idx:end_idx])
 
 
 def _find_resource_lines_fallback(content: str, resource_type: str, resource_name: str) -> tuple[int | None, int | None]:

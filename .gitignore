@@ -41,6 +41,19 @@ wheels/
 *.dot
 terraform_graph.json
 
+# Caché de GraphSec-IaC
+.graphsec_cache/
+
+# Resultados de escáneres temporales
+checkov_output_*.sarif/
+trivy_output_*.sarif
+checkov_results_*.sarif/
+trivy_results_*.sarif
+
+# Informes temporales de análisis
+ANALISIS_FINAL.md
+RESULTADOS_*.md
+
 # Archivos del sistema
 .DS_Store
 Thumbs.db

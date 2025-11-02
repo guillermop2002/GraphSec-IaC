@@ -668,15 +668,16 @@
             try {
                 console.log('Iniciando carga del grafo...');
                 
-                // Detectar qué proyecto analizar según parámetros URL
-                const useVpc = window.location.search.includes('vpc=true');
-                const useEks = window.location.search.includes('eks=true');
+                // Detectar qué proyecto analizar según parámetros URL (vpc=true o eks=true)
+                const params = new URLSearchParams(window.location.search);
+                const useVpc = params.has('vpc');
+                const useEks = params.has('eks');
                 
                 let endpoint = '/api/graph'; // Por defecto: test_infra
                 if (useVpc) {
-                    endpoint = '/api/graph-vpc';
+                    endpoint = '/api/graph?project=vpc';
                 } else if (useEks) {
-                    endpoint = '/api/graph-eks';
+                    endpoint = '/api/graph?project=eks';
                 }
                 console.log(`Cargando grafo desde: ${endpoint}`);
                 const response = await fetch(endpoint);

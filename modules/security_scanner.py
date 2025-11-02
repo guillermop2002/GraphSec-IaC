@@ -10,6 +10,7 @@ import json
 import logging
 import os
 import sys
+import asyncio
 from typing import Dict, Any, List, Optional
 from abc import ABC, abstractmethod
 
@@ -25,7 +26,7 @@ class Scanner(ABC):
         self.name = name
     
     @abstractmethod
-    def scan(self, directory_path: str, output_file: str) -> bool:
+    async def scan(self, directory_path: str, output_file: str) -> bool:
         """
         Ejecuta el escaneo de seguridad sobre un directorio.
         
@@ -93,10 +94,10 @@ class CheckovScanner(Scanner):
         logger.warning(f"Venv del proyecto no encontrado en {venv_python}, usando Python actual: {sys.executable}")
         return os.path.abspath(sys.executable)
     
-    def scan(self, directory_path: str, output_file: str) -> bool:
+    async def scan(self, directory_path: str, output_file: str) -> bool:
         """
         Ejecuta un escaneo de seguridad usando Checkov sobre un directorio de Terraform
-        y guarda los resultados en formato SARIF.
+        y guarda los resultados en formato SARIF (asíncrono).
         
         Args:
             directory_path (str): Ruta al directorio que contiene los archivos de Terraform
@@ -135,6 +136,11 @@ class CheckovScanner(Scanner):
         checkov_cmd_path = os.path.join(venv_scripts_dir, "checkov.exe")
         checkov_cmd_alt = os.path.join(venv_scripts_dir, "checkov.cmd")
         
+        # Preparar variables de entorno
+        env = os.environ.copy()
+        env['PYTHONIOENCODING'] = 'utf-8'
+        env['PYTHONUTF8'] = '1'
+        
         if os.path.exists(checkov_cmd_path):
             # Usar el ejecutable .exe directamente (más portable)
             cmd = [
@@ -143,10 +149,6 @@ class CheckovScanner(Scanner):
                 "--output", "sarif",
                 "--output-file-path", output_file
             ]
-            env = os.environ.copy()
-            # Forzar UTF-8 en Python para que Checkov lea archivos correctamente
-            env['PYTHONIOENCODING'] = 'utf-8'
-            env['PYTHONUTF8'] = '1'
         elif os.path.exists(checkov_cmd_alt):
             # Usar el wrapper .cmd pero modificar PATH para que use nuestro Python
             cmd = [
@@ -156,11 +158,7 @@ class CheckovScanner(Scanner):
                 "--output-file-path", output_file
             ]
             # Modificar PATH para que checkov.cmd encuentre nuestro Python del venv primero
-            env = os.environ.copy()
             env['PATH'] = venv_scripts_dir + os.pathsep + env.get('PATH', '')
-            # Forzar UTF-8 en Python para que Checkov lea archivos correctamente
-            env['PYTHONIOENCODING'] = 'utf-8'
-            env['PYTHONUTF8'] = '1'
         else:
             # Fallback más robusto: usar 'python -m checkov' (recomendado)
             # Esto garantiza que use el módulo checkov del venv correcto
@@ -171,26 +169,45 @@ class CheckovScanner(Scanner):
                 "--output", "sarif",
                 "--output-file-path", output_file
             ]
-            env = os.environ.copy()
-            # Forzar UTF-8 en Python para que Checkov lea archivos correctamente
-            env['PYTHONIOENCODING'] = 'utf-8'
-            env['PYTHONUTF8'] = '1'
         
         try:
-            logger.info(f"Ejecutando escaneo de seguridad con {self.name}: {' '.join(cmd[:3])} ...")
+            import time as time_module
+            scan_start = time_module.time()
+            logger.info(f"[{time_module.strftime('%H:%M:%S')}] Ejecutando escaneo de seguridad con {self.name}: {' '.join(cmd[:3])} ...")
             
-            # Ejecutar el comando y capturar la salida
-            # Usar encoding='utf-8' y errors='ignore' para ser robusto ante caracteres especiales
-            result = subprocess.run(
-                cmd,
-                capture_output=True,
-                text=True,
-                encoding='utf-8',  # Forzar UTF-8 para evitar problemas de encoding
-                errors='ignore',   # Ignorar caracteres no decodificables (evita UnicodeDecodeError)
-                cwd=os.path.dirname(__file__),  # Ejecutar desde la raíz del proyecto
-                timeout=300,  # Timeout de 5 minutos para proyectos complejos (antes 180s)
+            # Ejecutar el comando de forma asíncrona usando asyncio.create_subprocess_exec
+            process = await asyncio.create_subprocess_exec(
+                *cmd,
+                stdout=asyncio.subprocess.PIPE,
+                stderr=asyncio.subprocess.PIPE,
+                cwd=os.path.dirname(__file__),
                 env=env
             )
+            
+            # Esperar a que termine y capturar salida (con timeout)
+            try:
+                stdout, stderr = await asyncio.wait_for(
+                    process.communicate(),
+                    timeout=300  # Timeout de 5 minutos
+                )
+            except asyncio.TimeoutError:
+                logger.error(f"{self.name} excedió el timeout de 5 minutos")
+                process.kill()
+                await process.wait()
+                return False
+            
+            # Decodificar salida
+            stdout_text = stdout.decode('utf-8', errors='ignore')
+            stderr_text = stderr.decode('utf-8', errors='ignore')
+            
+            # Crear un objeto similar a subprocess.run para compatibilidad
+            class ProcessResult:
+                def __init__(self, returncode, stdout, stderr):
+                    self.returncode = returncode
+                    self.stdout = stdout
+                    self.stderr = stderr
+            
+            result = ProcessResult(process.returncode, stdout_text, stderr_text)
             
             # Checkov devuelve código de salida 1 cuando encuentra vulnerabilidades
             # Esto es normal, no es un error
@@ -222,11 +239,17 @@ class CheckovScanner(Scanner):
                 return False
             
             # El archivo está en actual_output_file, que es la ubicación real donde Checkov lo guardó
-            logger.info(f"¡Éxito! Escaneo de seguridad con {self.name} completado. El informe se ha guardado en {actual_output_file}")
+            scan_elapsed = time_module.time() - scan_start
+            logger.info(f"[{time_module.strftime('%H:%M:%S')}] ¡Éxito! Escaneo de seguridad con {self.name} completado en {scan_elapsed:.2f}s. El informe se ha guardado en {actual_output_file}")
             return True
             
         except FileNotFoundError:
             logger.error(f"{self.name} no está instalado o no se encuentra en el PATH")
+            return False
+        except Exception as e:
+            logger.error(f"Error inesperado con {self.name}: {e}")
+            import traceback
+            logger.error(traceback.format_exc())
             return False
             
         except subprocess.TimeoutExpired:
@@ -336,10 +359,10 @@ class TrivyScanner(Scanner):
         self.trivy_cmd = None
         logger.error("Trivy no encontrado. Asegúrate de que esté instalado y en el PATH del sistema.")
     
-    def scan(self, directory_path: str, output_file: str) -> bool:
+    async def scan(self, directory_path: str, output_file: str) -> bool:
         """
         Ejecuta un escaneo de seguridad usando Trivy sobre un directorio de Terraform
-        y guarda los resultados en formato SARIF.
+        y guarda los resultados en formato SARIF (asíncrono).
         
         Args:
             directory_path (str): Ruta al directorio que contiene los archivos de Terraform
@@ -380,18 +403,42 @@ class TrivyScanner(Scanner):
         logger.info(f"Comando Trivy construido: {' '.join(cmd)}")
         
         try:
-            logger.info(f"Ejecutando escaneo de seguridad con {self.name}: {' '.join(cmd)}")
+            import time as time_module
+            scan_start = time_module.time()
+            logger.info(f"[{time_module.strftime('%H:%M:%S')}] Ejecutando escaneo de seguridad con {self.name}: {' '.join(cmd)}")
             
-            # Ejecutar el comando y capturar la salida
-            result = subprocess.run(
-                cmd,
-                capture_output=True,
-                text=True,
-                encoding='utf-8',  # Forzar UTF-8 para evitar problemas de encoding
-                errors='ignore',   # Ignorar caracteres no decodificables (evita UnicodeDecodeError)
-                cwd=os.path.dirname(__file__),  # Ejecutar desde la raíz del proyecto
-                timeout=300  # Timeout de 5 minutos para proyectos complejos (antes 120s)
+            # Ejecutar el comando de forma asíncrona usando asyncio.create_subprocess_exec
+            process = await asyncio.create_subprocess_exec(
+                *cmd,
+                stdout=asyncio.subprocess.PIPE,
+                stderr=asyncio.subprocess.PIPE,
+                cwd=os.path.dirname(__file__)
             )
+            
+            # Esperar a que termine y capturar salida (con timeout)
+            try:
+                stdout, stderr = await asyncio.wait_for(
+                    process.communicate(),
+                    timeout=300  # Timeout de 5 minutos
+                )
+            except asyncio.TimeoutError:
+                logger.error(f"{self.name} excedió el timeout de 5 minutos")
+                process.kill()
+                await process.wait()
+                return False
+            
+            # Decodificar salida
+            stdout_text = stdout.decode('utf-8', errors='ignore')
+            stderr_text = stderr.decode('utf-8', errors='ignore')
+            
+            # Crear un objeto similar a subprocess.run para compatibilidad
+            class ProcessResult:
+                def __init__(self, returncode, stdout, stderr):
+                    self.returncode = returncode
+                    self.stdout = stdout
+                    self.stderr = stderr
+            
+            result = ProcessResult(process.returncode, stdout_text, stderr_text)
             
             # Trivy devuelve código de salida 1 cuando encuentra vulnerabilidades
             # Esto es normal, no es un error
@@ -412,7 +459,8 @@ class TrivyScanner(Scanner):
                 logger.error(f"El archivo de salida {output_file} está vacío")
                 return False
             
-            logger.info(f"¡Éxito! Escaneo de seguridad con {self.name} completado. El informe se ha guardado en {output_file}")
+            scan_elapsed = time_module.time() - scan_start
+            logger.info(f"[{time_module.strftime('%H:%M:%S')}] ¡Éxito! Escaneo de seguridad con {self.name} completado en {scan_elapsed:.2f}s. El informe se ha guardado en {output_file}")
             return True
             
         except FileNotFoundError:

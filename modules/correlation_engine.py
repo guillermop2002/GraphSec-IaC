@@ -126,6 +126,19 @@ RULE_CIS_MAP: Dict[str, str] = {
     # ===== Security Groups =====
     # Security Group Public Egress
     "aws-vpc-no-public-egress-sgr": "CIS-AWS-4.2.3",
+    # Security Group Rule Description (añadido desde build_rule_map.py)
+    "aws-vpc-add-description-to-security-group-rule": "CIS-AWS-4.2.2-DESC",
+    
+    # ===== Kubernetes (CIS-K8S) =====
+    # K8S Default Namespace
+    "CKV_K8S_21": "CIS-K8S-5.7.1",
+    "KSV110": "CIS-K8S-5.7.1",
+    # K8S Memory Requests
+    "CKV_K8S_12": "CIS-K8S-5.2.1",
+    "KSV016": "CIS-K8S-5.2.1",
+    # K8S Seccomp Profile
+    "CKV_K8S_31": "CIS-K8S-5.7.3",
+    "KSV030": "CIS-K8S-5.7.3",
 }
 
 # ... existing code ...
@@ -273,13 +286,22 @@ def load_sarif_results(sarif_path: str) -> List[Dict[str, Any]]:
                 return []
         
         # Cargar y parsear el archivo SARIF
-        with open(actual_sarif_file, 'r', encoding='utf-8') as f:
-            sarif_data = json.load(f)
+        try:
+            with open(actual_sarif_file, 'r', encoding='utf-8') as f:
+                sarif_data = json.load(f)
+        except json.JSONDecodeError as e:
+            logger.warning(f"Fichero SARIF corrupto o con formato JSON inválido: {actual_sarif_file}. Error: {e}. Omitiendo.")
+            return []
+        
+        # Validar estructura básica del archivo SARIF
+        if not isinstance(sarif_data, dict):
+            logger.warning(f"Fichero SARIF no es un objeto JSON válido: {actual_sarif_file}. Omitiendo.")
+            return []
         
         # Extraer resultados del primer run
         runs = sarif_data.get("runs", [])
-        if not runs:
-            logger.error("No se encontraron runs en el archivo SARIF")
+        if not runs or not isinstance(runs, list) or len(runs) == 0:
+            logger.warning(f"Fichero SARIF inválido o vacío (sin runs): {actual_sarif_file}. Omitiendo.")
             return []
         
         run = runs[0]
@@ -443,50 +465,89 @@ def print_node_security_summary(node: Dict[str, Any]) -> None:
     print(f"\n  Total: {len(security_issues)} problemas encontrados")
 
 
-def _match_resource_id_by_filename(findings_file: str, nodes: List[Dict[str, Any]], project_root: Optional[str] = None) -> str:
+def _match_resource_id_by_filename(finding: Dict[str, Any], nodes: List[Dict[str, Any]], project_root: Optional[str] = None) -> str:
     """
-    Intenta inferir el resource_id del nodo comparando el nombre de archivo del hallazgo
-    con el nombre de archivo del nodo usando rutas absolutas. Si hay múltiples, elige el de línea más cercana.
+    Intenta inferir el resource_id del nodo comparando el nombre del archivo del hallazgo
+    con el nombre del archivo del nodo usando rutas absolutas normalizadas.
+    
+    ESTRATEGIA MEJORADA: Encuentra el nodo más cercano por distancia de líneas dentro del mismo archivo.
     
     Args:
-        findings_file: Ruta del archivo del hallazgo
-        nodes: Lista de nodos del grafo
+        finding: Hallazgo completo con metadatos de ubicación (incluye file_path y start_line)
+        nodes: Lista de nodos del grafo con metadatos de archivo y líneas
         project_root: Directorio raíz del proyecto para normalización
     """
-    if not findings_file:
+    finding_file_path = finding.get("file_path", "") or ""
+    if not finding_file_path:
         return "unknown_resource"
     
-    finding_path_abs = normalize_file_path(findings_file, project_root)
+    # Normalizar ruta del hallazgo a absoluta
+    finding_path_abs = normalize_file_path(finding_file_path, project_root)
+    
     if not finding_path_abs:
+        logger.debug(f"[Capa 2] No se pudo normalizar ruta del hallazgo: '{finding_file_path}'")
         return "unknown_resource"
     
-    logger.debug(f"[Capa 2] Buscando match por filename: '{findings_file}' -> '{finding_path_abs}'")
+    logger.debug(f"[Capa 2] Buscando match por filename: '{finding_file_path}' -> '{finding_path_abs}'")
     
-    best = (None, 10**9)
-    matches_found = 0
-    
+    # Encontrar todos los nodos en el mismo archivo
+    nodes_in_file = []
     for node in nodes:
-        node_file = node.get("file", "")
-        if not node_file:
+        node_file_path = node.get("file", "") or ""
+        if not node_file_path:
             continue
         
-        node_path_abs = normalize_file_path(node_file, project_root)
+        # Normalizar ruta del nodo a absoluta (los nodos ya tienen rutas absolutas del parser)
+        node_path_abs = normalize_file_path(node_file_path, project_root)
         
-        if node_path_abs and node_path_abs == finding_path_abs:
-            matches_found += 1
-            # Usar start_line del parser si está disponible, sino 'line'
-            nline = node.get("start_line", 0) or node.get("line", 0)
-            dist = abs(int(nline or 0))
-            if dist < best[1]:
-                best = (node.get("simple_name", "unknown_resource"), dist)
+        if not node_path_abs:
+            continue
+        
+        # Comparar rutas absolutas directamente
+        if finding_path_abs == node_path_abs:
+            nodes_in_file.append(node)
     
-    result = best[0] or "unknown_resource"
-    if result != "unknown_resource":
-        logger.debug(f"[Capa 2] MATCH encontrado: {result} (de {matches_found} nodos en mismo archivo)")
-    else:
+    if not nodes_in_file:
         logger.debug(f"[Capa 2] NO SE ENCONTRO MATCH para archivo '{finding_path_abs}'")
+        return "unknown_resource"
     
-    return result
+    # Obtener la línea del hallazgo
+    finding_line = int(finding.get("start_line", 0) or 0)
+    
+    # Inicializar variables para encontrar el nodo más cercano
+    min_distance = float('inf')
+    best_match_node = None
+    
+    # Iterar sobre todos los nodos en el mismo archivo para encontrar el más cercano
+    for node in nodes_in_file:
+        node_line = int(node.get("start_line", 0) or 0)
+        
+        # Si el nodo tiene línea válida, calcular distancia
+        if node_line > 0:
+            distance = abs(finding_line - node_line)
+            
+            # Actualizar si encontramos un nodo más cercano
+            if distance < min_distance:
+                min_distance = distance
+                best_match_node = node
+    
+    # Verificar si encontramos un match válido
+    if best_match_node:
+        result = best_match_node.get("simple_name", "unknown_resource")
+        logger.debug(
+            f"[Capa 2] Hallazgo en línea {finding_line} asignado al nodo más cercano "
+            f"{result} (línea {best_match_node.get('start_line')}, distancia: {min_distance})"
+        )
+        return result
+    else:
+        # Ningún nodo tenía línea válida, devolver el primero como fallback
+        if nodes_in_file:
+            result = nodes_in_file[0].get("simple_name", "unknown_resource")
+            logger.debug(f"[Capa 2] Ningún nodo con línea válida, usando primer nodo: {result}")
+            return result
+    
+    logger.debug(f"[Capa 2] NO SE ENCONTRO MATCH válido para archivo '{finding_path_abs}'")
+    return "unknown_resource"
 
 
 def _match_resource_id_by_semantics(finding: Dict[str, Any], nodes: List[Dict[str, Any]]) -> str:
@@ -644,8 +705,17 @@ def _should_filter_finding(finding: Dict[str, Any], project_root: Optional[str] 
     # Normalizar a ruta absoluta para análisis
     file_path_abs = normalize_file_path(file_path, project_root)
     
+    # Verificar si el archivo existe físicamente (CRÍTICO para módulos remotos)
+    # Los escáneres pueden reportar hallazgos en módulos de Terraform Registry que están en cache
+    # pero no existen en el código fuente del usuario
+    if file_path_abs and project_root:
+        if not os.path.exists(file_path_abs):
+            # El archivo no existe físicamente - probablemente es un módulo remoto en cache
+            logger.debug(f"Filtrando hallazgo en archivo inexistente (módulo remoto/cache): {file_path}")
+            return True
+    
     # Normalizar separadores para comparación
-    file_path_normalized = file_path_abs.replace("\\", "/").lower()
+    file_path_normalized = file_path_abs.replace("\\", "/").lower() if file_path_abs else ""
     
     # Filtrar archivos YAML
     if file_path_normalized.endswith((".yml", ".yaml")):
@@ -659,6 +729,17 @@ def _should_filter_finding(finding: Dict[str, Any], project_root: Optional[str] 
     
     if "/tests/" in file_path_normalized or "\\tests\\" in file_path_normalized:
         logger.debug(f"Filtrando hallazgo en directorio tests/: {file_path}")
+        return True
+    
+    # Filtrar módulos remotos de Terraform Registry (están en cache pero no en el proyecto)
+    # Estos aparecen como terraform-aws-modules/... pero no existen físicamente
+    if "terraform-aws-modules/" in file_path_normalized:
+        logger.debug(f"Filtrando hallazgo en módulo remoto terraform-aws-modules/: {file_path}")
+        return True
+    
+    # Filtrar directorio de cache de Terraform
+    if "/.terraform/" in file_path_normalized or "\\.terraform\\" in file_path_normalized:
+        logger.debug(f"Filtrando hallazgo en cache .terraform/: {file_path}")
         return True
     
     return False
@@ -709,11 +790,11 @@ def process_and_deduplicate_findings(findings: List[Dict[str, Any]], graph_data:
         correlation_layer = 1
         layer_reason = "rango de líneas + filename"
         
-        # 2) Filename simple (Capa 2: fallback)
+        # 2) Filename simple (Capa 2: fallback mejorado - nodo más cercano)
         if resource_id == "unknown_resource":
-            resource_id = _match_resource_id_by_filename(finding.get("file_path", ""), nodes, project_root=project_root)
+            resource_id = _match_resource_id_by_filename(finding, nodes, project_root=project_root)
             correlation_layer = 2
-            layer_reason = "filename simple"
+            layer_reason = "filename simple (nodo más cercano)"
         
         # 3) Semántica (Capa 3: último recurso, conservadora)
         if resource_id == "unknown_resource":
@@ -759,6 +840,7 @@ def process_and_deduplicate_findings(findings: List[Dict[str, Any]], graph_data:
     return {
         "unique_findings": unique_findings,
         "duplicates_removed": duplicates_removed,
+        "layer_stats": layer_stats,  # Incluir estadísticas de capas
     }
 
 
