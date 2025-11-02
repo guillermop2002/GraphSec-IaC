@@ -1,0 +1,96 @@
+name: 'GraphSec-IaC Análisis de Seguridad'
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  analysis:
+    runs-on: ubuntu-latest
+    
+    steps:
+      # 1. Checkout del código del PR
+      - name: Checkout del código
+        uses: actions/checkout@v4
+      
+      # 2. Configurar Python
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      
+      # 3. Configurar Terraform
+      - name: Configurar Terraform
+        uses: hashicorp/setup-terraform@v3
+      
+      # 4. Instalar Trivy (via apt-get)
+      - name: Instalar Trivy
+        run: |
+          sudo apt-get install -y wget apt-transport-https gnupg
+          wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | sudo apt-key add -
+          echo "deb https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -sc) main" | sudo tee -a /etc/apt/sources.list.d/trivy.list
+          sudo apt-get update
+          sudo apt-get install -y trivy
+      
+      # 5. Instalar dependencias de Python (Checkov, etc.)
+      - name: Instalar dependencias
+        run: pip install -r requirements.txt
+      
+      # 6. Inicializar Terraform (analizando 'test_infra' como demo)
+      # CAMBIA ESTO por el directorio de tu proyecto real
+      - name: Terraform Init
+        run: terraform init -backend=false
+        working-directory: ./test_infra
+      
+      # 7. Ejecutar el Pipeline (analizando 'test_infra')
+      # CAMBIA ESTO por el directorio de tu proyecto real
+      - name: Ejecutar Pipeline de GraphSec-IaC
+        run: |
+          python run_pipeline.py \
+            --directory ./test_infra \
+            --project test_infra_pr_${{ github.event.pull_request.number }} \
+            --output graph_data.json
+      
+      # 8. Subir el grafo como Artefacto
+      - name: Subir Artefacto del Grafo
+        uses: actions/upload-artifact@v4
+        with:
+          name: graph-security-report
+          path: graph_data.json
+      
+      # 9. Publicar un comentario en el PR
+      - name: Publicar Comentario en PR
+        uses: actions/github-script@v7
+        with:
+          script: |
+            // Cargar el JSON generado para obtener el resumen
+            const fs = require('fs');
+            const results = JSON.parse(fs.readFileSync('graph_data.json', 'utf8'));
+            const metadata = results.api_metadata;
+            const correlation = metadata.correlation_metadata;
+            
+            // Construir el comentario
+            const body = `
+            ## 🔬 Análisis de GraphSec-IaC Completado
+            
+            Se han analizado los cambios en la infraestructura.
+            
+            | Métrica | Resultado |
+            | :--- | :--- |
+            | Nodos Vulnerables | **${correlation.nodes_with_issues_count}** |
+            | Hallazgos Únicos | **${metadata.total_findings_unique}** |
+            | Nodos Totales | ${metadata.total_nodes} |
+            | Hallazgos No Asignados | ${metadata.unassigned_findings_count} |
+            
+            [**Descarga el informe visual completo (artefacto .json)**](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
+            `;
+            
+            // Publicar el comentario
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: body
+            });
+
+

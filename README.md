@@ -95,7 +95,7 @@ El proyecto está dividido en tres etapas principales:
    winget install Hashicorp.Terraform
    ```
 
-## 🚀 Uso
+## 🚀 Uso (UI Local)
 
 1. Abre tu terminal y navega al directorio raíz del proyecto (GraphSec-IaC).
 
@@ -108,12 +108,27 @@ El proyecto está dividido en tres etapas principales:
 3. Abre tu navegador y visita una de las siguientes URLs:
 
    - **Proyecto de Prueba**: http://localhost:8000
-   - **Proyecto VPC**: http://localhost:8000/?vpc=true
-   - **Proyecto EKS**: http://localhost:8000/?eks=true
+   - **Proyecto VPC**: http://localhost:8000/?project=vpc
+   - **Proyecto EKS**: http://localhost:8000/?project=eks
 
-### Ejecutar Análisis por Línea de Comandos (Opcional)
+### Ejecutar Análisis por Línea de Comandos
 
-Si prefieres ejecutar el análisis sin interfaz web, puedes usar directamente los módulos:
+Si prefieres ejecutar el análisis sin interfaz web, puedes usar el script CLI `run_pipeline.py`:
+
+```bash
+python run_pipeline.py --directory ./test_infra --project test_infra --output graph_data.json
+```
+
+Esto generará un archivo `graph_data.json` con el grafo enriquecido y los metadatos del análisis.
+
+**Parámetros:**
+- `-d, --directory`: Directorio del proyecto Terraform a analizar (requerido)
+- `-p, --project`: Nombre del proyecto (para el caché) (requerido)
+- `-o, --output`: Archivo JSON de salida (por defecto: `graph_data.json`)
+
+### Uso Programático (Opcional)
+
+Si necesitas usar los módulos directamente en tu código Python:
 
 ```python
 from modules.tf_parser import parse_terraform
@@ -157,6 +172,37 @@ unique = dedup["unique_findings"]
 enriched_graph = attach_findings_to_graph(graph_data, unique)
 ```
 
+## 🔄 Integración CI/CD (GitHub Action)
+
+GraphSec-IaC está diseñado para ejecutarse en un pipeline de CI/CD. Se incluye un fichero de ejemplo (`.github/workflows/security_analysis.yml`) que:
+
+- Se activa en cada Pull Request hacia la rama `main`
+- Instala todas las dependencias (Terraform, Trivy, Checkov)
+- Ejecuta el script `run_pipeline.py` sobre el código
+- Sube el `graph_data.json` resultante como un artefacto del workflow
+- Publica un comentario en el Pull Request con un resumen de las métricas y un enlace para descargar el artefacto
+
+### Visualización del Artefacto
+
+Para ver el informe (`graph_data.json`) descargado del artefacto, simplemente abre el fichero `static/index.html` en tu navegador y cárgalo usando la función de carga de archivos JSON de la interfaz.
+
+### Personalización del Workflow
+
+Para analizar un directorio diferente (no `test_infra`), edita `.github/workflows/security_analysis.yml` y cambia:
+
+```yaml
+- name: Terraform Init
+  run: terraform init -backend=false
+  working-directory: ./tu-directorio  # Cambia esto
+
+- name: Ejecutar Pipeline de GraphSec-IaC
+  run: |
+    python run_pipeline.py \
+      --directory ./tu-directorio \  # Cambia esto
+      --project mi_proyecto_pr_${{ github.event.pull_request.number }} \
+      --output graph_data.json
+```
+
 ## Estructura del Proyecto
 
 ```
@@ -165,13 +211,21 @@ GraphSec-IaC/
 │   ├── tf_parser.py             # Parser robusto de Terraform usando python-hcl2 (Etapa 1)
 │   ├── graph_builder.py         # Construcción de aristas y enriquecimiento de nodos (Etapa 1)
 │   ├── security_scanner.py      # Escáner de seguridad multi-herramienta (Etapa 2)
-│   └── correlation_engine.py    # Motor de correlación, filtrado y de-duplicación (Etapa 3)
+│   ├── correlation_engine.py    # Motor de correlación, filtrado y de-duplicación (Etapa 3)
+│   ├── utils.py                 # Utilidades (hashing para caché)
+│   └── health_checker.py        # Verificación de dependencias externas
 ├── static/
 │   └── index.html              # Frontend web con visualización interactiva (Etapa 4)
+├── .github/
+│   └── workflows/
+│       └── security_analysis.yml # Workflow de GitHub Actions para CI/CD
+├── tests/
+│   └── unit/                   # Suite de tests unitarios
 ├── api.py                      # API FastAPI (Etapa 4)
+├── run_pipeline.py             # Script CLI para ejecutar el pipeline
+├── requirements.txt            # Dependencias de Python
 ├── test_infra/
 │   └── main.tf                 # Proyecto de prueba
-├── venv/                       # Entorno virtual
 └── README.md
 ```
 
