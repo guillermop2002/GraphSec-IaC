@@ -346,7 +346,10 @@
             // Calcular nodos vulnerables manualmente si no está en metadata
             // Un nodo es vulnerable si tiene security_issues con al menos 1 hallazgo
             let vulnerableNodesCount = 0;
-            if (correlationMetadata.nodes_with_issues !== undefined) {
+            if (correlationMetadata.nodes_with_issues_count !== undefined) {
+                vulnerableNodesCount = correlationMetadata.nodes_with_issues_count;
+            } else if (correlationMetadata.nodes_with_issues !== undefined) {
+                // Fallback para compatibilidad con versiones antiguas
                 vulnerableNodesCount = correlationMetadata.nodes_with_issues;
             } else {
                 // Fallback: calcular manualmente contando nodos con security_issues

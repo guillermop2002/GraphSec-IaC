@@ -8,6 +8,10 @@ jobs:
   analysis:
     runs-on: ubuntu-latest
     
+    permissions:
+      contents: read
+      pull-requests: write
+    
     steps:
       # 1. Checkout del código del PR
       - name: Checkout del código
@@ -63,11 +67,19 @@ jobs:
         uses: actions/github-script@v7
         with:
           script: |
-            // Cargar el JSON generado para obtener el resumen
+            // Cargar el JSON generado
             const fs = require('fs');
             const results = JSON.parse(fs.readFileSync('graph_data.json', 'utf8'));
-            const metadata = results.api_metadata;
-            const correlation = metadata.correlation_metadata;
+            
+            // Usar valores por defecto ({}) para evitar errores 'undefined'
+            const metadata = results.api_metadata || {};
+            const correlation = metadata.correlation_metadata || {};
+            
+            // Extraer métricas con valores por defecto
+            const nodes_vulnerable = correlation.nodes_with_issues_count || 0;
+            const findings_unique = metadata.total_findings_unique || 0;
+            const nodes_total = metadata.total_nodes || 0;
+            const findings_unassigned = metadata.unassigned_findings_count || 0;
             
             // Construir el comentario
             const body = `
@@ -77,10 +89,10 @@ jobs:
             
             | Métrica | Resultado |
             | :--- | :--- |
-            | Nodos Vulnerables | **${correlation.nodes_with_issues_count}** |
-            | Hallazgos Únicos | **${metadata.total_findings_unique}** |
-            | Nodos Totales | ${metadata.total_nodes} |
-            | Hallazgos No Asignados | ${metadata.unassigned_findings_count} |
+            | Nodos Vulnerables | **${nodes_vulnerable}** |
+            | Hallazgos Únicos | **${findings_unique}** |
+            | Nodos Totales | ${nodes_total} |
+            | Hallazgos No Asignados | ${findings_unassigned} |
             
             [**Descarga el informe visual completo (artefacto .json)**](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
             `;
