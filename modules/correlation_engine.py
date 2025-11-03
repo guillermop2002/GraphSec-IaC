@@ -733,9 +733,10 @@ def _should_filter_finding(finding: Dict[str, Any], project_root: Optional[str] 
     
     # Filtrar módulos remotos de Terraform Registry (están en cache pero no en el proyecto)
     # Estos aparecen como terraform-aws-modules/... pero no existen físicamente
-    if "terraform-aws-modules/" in file_path_normalized:
-        logger.debug(f"Filtrando hallazgo en módulo remoto terraform-aws-modules/: {file_path}")
-        return True
+    # COMENTADO: Este filtro estaba eliminando hallazgos válidos
+    # if "terraform-aws-modules/" in file_path_normalized:
+    #     logger.debug(f"Filtrando hallazgo en módulo remoto terraform-aws-modules/: {file_path}")
+    #     return True
     
     # Filtrar directorio de cache de Terraform
     if "/.terraform/" in file_path_normalized or "\\.terraform\\" in file_path_normalized:

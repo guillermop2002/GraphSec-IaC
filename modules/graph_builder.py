@@ -61,8 +61,8 @@ def build_edges(parsed_resources: List[Dict[str, Any]], name_to_id_map: Dict[str
         dependencies_found = set(pattern_direct.findall(raw_block_text))
         
         for dep_name in dependencies_found:
-            if dep_name.startswith("var.") or dep_name.startswith("local.") or \
-               dep_name.startswith("each.") or dep_name.startswith("count."):
+            # Filtro MEJORADO: Solo ignorar var y local
+            if dep_name.startswith("var.") or dep_name.startswith("local."):
                 continue
             
             dep_unique_ids = name_to_id_map.get(dep_name)
