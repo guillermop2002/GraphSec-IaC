@@ -10,6 +10,36 @@
             "end_line": 53,
             "security_issues": [
                 {
+                    "cfi": "93f52b4d562723c7e509b51665538ec90002a66442849c681836b0472891c50a",
+                    "rule_id": "CKV2_AWS_11",
+                    "normalized_cis": "CIS-AWS-3.1",
+                    "resource_id": "aws_vpc.this",
+                    "message": "Ensure VPC flow logging is enabled in all VPCs",
+                    "level": "error",
+                    "file_path": "main.tf",
+                    "start_line": 28,
+                    "tool_name": "Checkov",
+                    "sources": [
+                        "Checkov"
+                    ],
+                    "correlation_layer": 1
+                },
+                {
+                    "cfi": "4275735aabafcc2ecf0a959ab1140090de40787ae517e7087afadb97fb13179f",
+                    "rule_id": "CKV2_AWS_12",
+                    "normalized_cis": "CIS-AWS-3.2",
+                    "resource_id": "aws_vpc.this",
+                    "message": "Ensure the default security group of every VPC restricts all traffic",
+                    "level": "error",
+                    "file_path": "main.tf",
+                    "start_line": 28,
+                    "tool_name": "Checkov",
+                    "sources": [
+                        "Checkov"
+                    ],
+                    "correlation_layer": 1
+                },
+                {
                     "cfi": "be664c3bb6b280e85e8b35577d3f8e018d6ac26a0537a51dbb035a57f1e132d9",
                     "rule_id": "aws-autoscaling-enable-at-rest-encryption",
                     "normalized_cis": "CIS-AWS-2.3.1",
@@ -687,7 +717,23 @@
             "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/main.tf",
             "start_line": 1207,
             "end_line": 1226,
-            "security_issues": []
+            "security_issues": [
+                {
+                    "cfi": "f4a9d2d02bbd47caa5313256661c36d69220a57b8dcea593c442d776f9e74ec6",
+                    "rule_id": "CKV2_AWS_19",
+                    "normalized_cis": "CIS-AWS-2.1.6",
+                    "resource_id": "aws_eip.nat",
+                    "message": "Ensure that all EIP addresses allocated to a VPC are attached to EC2 instances",
+                    "level": "error",
+                    "file_path": "main.tf",
+                    "start_line": 1207,
+                    "tool_name": "Checkov",
+                    "sources": [
+                        "Checkov"
+                    ],
+                    "correlation_layer": 1
+                }
+            ]
         },
         {
             "id": "aws_nat_gateway.this_61",
@@ -790,16 +836,16 @@
             "security_issues": [
                 {
                     "cfi": "65351a4d73118187ae1c7696a457d734dc91f8da9d89e5a275b66583d2aec51a",
-                    "rule_id": "aws-vpc-no-default-vpc",
+                    "rule_id": "CKV_AWS_148",
                     "normalized_cis": "CIS-AWS-4.1.1",
                     "resource_id": "aws_default_vpc.this",
-                    "message": "Artifact: main.tf\nType: terraform\nVulnerability aws-vpc-no-default-vpc\nSeverity: HIGH\nMessage: Default VPC is used.\nLink: [aws-vpc-no-default-vpc](https://avd.aquasec.com/misconfig/aws-vpc-no-default-vpc)",
+                    "message": "Ensure no default VPC is planned to be provisioned",
                     "level": "error",
                     "file_path": "main.tf",
                     "start_line": 1388,
-                    "tool_name": "Trivy",
+                    "tool_name": "Checkov",
                     "sources": [
-                        "Trivy"
+                        "Checkov"
                     ],
                     "correlation_layer": 1
                 },
@@ -1008,7 +1054,23 @@
             "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/modules/flow-log/main.tf",
             "start_line": 83,
             "end_line": 98,
-            "security_issues": []
+            "security_issues": [
+                {
+                    "cfi": "e91e196fb630376755d5b337c0970da3eac332afa09a5da2291ca6506991b063",
+                    "rule_id": "CKV_AWS_338",
+                    "normalized_cis": "CIS-AWS-3.2.2",
+                    "resource_id": "aws_cloudwatch_log_group.this",
+                    "message": "Ensure CloudWatch log groups retains logs for at least 1 year",
+                    "level": "error",
+                    "file_path": "modules/flow-log/main.tf",
+                    "start_line": 83,
+                    "tool_name": "Checkov",
+                    "sources": [
+                        "Checkov"
+                    ],
+                    "correlation_layer": 1
+                }
+            ]
         },
         {
             "id": "aws_iam_role.this_90",
@@ -1058,7 +1120,23 @@
             "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/modules/vpc-endpoints/main.tf",
             "start_line": 81,
             "end_line": 100,
-            "security_issues": []
+            "security_issues": [
+                {
+                    "cfi": "67ba740a56595d3cf704a5a188eaf74d69ea6388550af37cf970fac31191aef3",
+                    "rule_id": "CKV2_AWS_5",
+                    "normalized_cis": "CIS-AWS-2.2.1",
+                    "resource_id": "aws_security_group.this",
+                    "message": "Ensure that Security Groups are attached to another resource",
+                    "level": "error",
+                    "file_path": "modules/vpc-endpoints/main.tf",
+                    "start_line": 81,
+                    "tool_name": "Checkov",
+                    "sources": [
+                        "Checkov"
+                    ],
+                    "correlation_layer": 1
+                }
+            ]
         },
         {
             "id": "aws_security_group_rule.this_95",
@@ -1079,27 +1157,7 @@
         },
         {
             "from": "aws_vpc_block_public_access_exclusion.this_3",
-            "to": "aws_subnet.public_6",
-            "arrows": "to"
-        },
-        {
-            "from": "aws_vpc_block_public_access_exclusion.this_3",
             "to": "aws_subnet.private_14",
-            "arrows": "to"
-        },
-        {
-            "from": "aws_vpc_block_public_access_exclusion.this_3",
-            "to": "aws_subnet.redshift_31",
-            "arrows": "to"
-        },
-        {
-            "from": "aws_vpc_block_public_access_exclusion.this_3",
-            "to": "aws_subnet.outpost_52",
-            "arrows": "to"
-        },
-        {
-            "from": "aws_vpc_block_public_access_exclusion.this_3",
-            "to": "aws_subnet.database_20",
             "arrows": "to"
         },
         {
@@ -1109,7 +1167,27 @@
         },
         {
             "from": "aws_vpc_block_public_access_exclusion.this_3",
+            "to": "aws_subnet.outpost_52",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_vpc_block_public_access_exclusion.this_3",
             "to": "aws_subnet.intra_46",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_vpc_block_public_access_exclusion.this_3",
+            "to": "aws_subnet.public_6",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_vpc_block_public_access_exclusion.this_3",
+            "to": "aws_subnet.database_20",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_vpc_block_public_access_exclusion.this_3",
+            "to": "aws_subnet.redshift_31",
             "arrows": "to"
         },
         {
@@ -1174,12 +1252,12 @@
         },
         {
             "from": "aws_route_table_association.private_16",
-            "to": "aws_route_table.private_15",
+            "to": "aws_subnet.private_14",
             "arrows": "to"
         },
         {
             "from": "aws_route_table_association.private_16",
-            "to": "aws_subnet.private_14",
+            "to": "aws_route_table.private_15",
             "arrows": "to"
         },
         {
@@ -1209,12 +1287,12 @@
         },
         {
             "from": "aws_route_table_association.database_23",
-            "to": "aws_route_table.private_15",
+            "to": "aws_route_table.database_22",
             "arrows": "to"
         },
         {
             "from": "aws_route_table_association.database_23",
-            "to": "aws_route_table.database_22",
+            "to": "aws_route_table.private_15",
             "arrows": "to"
         },
         {
@@ -1224,12 +1302,12 @@
         },
         {
             "from": "aws_route.database_internet_gateway_24",
-            "to": "aws_internet_gateway.this_57",
+            "to": "aws_route_table.database_22",
             "arrows": "to"
         },
         {
             "from": "aws_route.database_internet_gateway_24",
-            "to": "aws_route_table.database_22",
+            "to": "aws_internet_gateway.this_57",
             "arrows": "to"
         },
         {
@@ -1309,12 +1387,12 @@
         },
         {
             "from": "aws_route_table_association.redshift_public_35",
-            "to": "aws_route_table.redshift_33",
+            "to": "aws_route_table.public_7",
             "arrows": "to"
         },
         {
             "from": "aws_route_table_association.redshift_public_35",
-            "to": "aws_route_table.public_7",
+            "to": "aws_route_table.redshift_33",
             "arrows": "to"
         },
         {
@@ -1344,7 +1422,7 @@
         },
         {
             "from": "aws_route_table_association.elasticache_42",
-            "to": "aws_route_table.private_15",
+            "to": "aws_subnet.elasticache_39",
             "arrows": "to"
         },
         {
@@ -1354,7 +1432,7 @@
         },
         {
             "from": "aws_route_table_association.elasticache_42",
-            "to": "aws_subnet.elasticache_39",
+            "to": "aws_route_table.private_15",
             "arrows": "to"
         },
         {
@@ -1379,12 +1457,12 @@
         },
         {
             "from": "aws_route_table_association.intra_48",
-            "to": "aws_route_table.intra_47",
+            "to": "aws_subnet.intra_46",
             "arrows": "to"
         },
         {
             "from": "aws_route_table_association.intra_48",
-            "to": "aws_subnet.intra_46",
+            "to": "aws_route_table.intra_47",
             "arrows": "to"
         },
         {
@@ -1409,12 +1487,12 @@
         },
         {
             "from": "aws_route_table_association.outpost_53",
-            "to": "aws_route_table.private_15",
+            "to": "aws_subnet.outpost_52",
             "arrows": "to"
         },
         {
             "from": "aws_route_table_association.outpost_53",
-            "to": "aws_subnet.outpost_52",
+            "to": "aws_route_table.private_15",
             "arrows": "to"
         },
         {
@@ -1484,11 +1562,21 @@
         },
         {
             "from": "aws_vpn_gateway_route_propagation.public_67",
-            "to": "aws_route_table.public_7",
+            "to": "aws_vpn_gateway.this_65",
             "arrows": "to"
         },
         {
             "from": "aws_vpn_gateway_route_propagation.public_67",
+            "to": "aws_route_table.public_7",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_vpn_gateway_route_propagation.private_68",
+            "to": "aws_vpn_gateway_attachment.this_66",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_vpn_gateway_route_propagation.private_68",
             "to": "aws_vpn_gateway.this_65",
             "arrows": "to"
         },
@@ -1498,28 +1586,18 @@
             "arrows": "to"
         },
         {
-            "from": "aws_vpn_gateway_route_propagation.private_68",
+            "from": "aws_vpn_gateway_route_propagation.intra_69",
             "to": "aws_vpn_gateway_attachment.this_66",
-            "arrows": "to"
-        },
-        {
-            "from": "aws_vpn_gateway_route_propagation.private_68",
-            "to": "aws_vpn_gateway.this_65",
             "arrows": "to"
         },
         {
             "from": "aws_vpn_gateway_route_propagation.intra_69",
-            "to": "aws_vpn_gateway_attachment.this_66",
+            "to": "aws_vpn_gateway.this_65",
             "arrows": "to"
         },
         {
             "from": "aws_vpn_gateway_route_propagation.intra_69",
             "to": "aws_route_table.intra_47",
-            "arrows": "to"
-        },
-        {
-            "from": "aws_vpn_gateway_route_propagation.intra_69",
-            "to": "aws_vpn_gateway.this_65",
             "arrows": "to"
         },
         {
@@ -1549,17 +1627,17 @@
         },
         {
             "from": "aws_iam_role_policy.flow_log_cloudwatch_81",
+            "to": "aws_iam_role.flow_log_cloudwatch_80",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_iam_role_policy.flow_log_cloudwatch_81",
             "to": "aws_cloudwatch_log_group.flow_log_75",
             "arrows": "to"
         },
         {
             "from": "aws_iam_role_policy.flow_log_cloudwatch_81",
             "to": "aws_cloudwatch_log_group.flow_log_79",
-            "arrows": "to"
-        },
-        {
-            "from": "aws_iam_role_policy.flow_log_cloudwatch_81",
-            "to": "aws_iam_role.flow_log_cloudwatch_80",
             "arrows": "to"
         },
         {
@@ -1599,12 +1677,12 @@
         },
         {
             "from": "aws_iam_role_policy_attachment.this_92",
-            "to": "aws_iam_role.this_90",
+            "to": "aws_iam_policy.this_91",
             "arrows": "to"
         },
         {
             "from": "aws_iam_role_policy_attachment.this_92",
-            "to": "aws_iam_policy.this_91",
+            "to": "aws_iam_role.this_90",
             "arrows": "to"
         },
         {
@@ -1615,12 +1693,12 @@
     ],
     "unassigned_findings": [],
     "correlation_metadata": {
-        "assigned_findings": 7,
+        "assigned_findings": 12,
         "unassigned_findings_count": 0,
-        "nodes_with_issues_count": 5,
-        "total_unique_findings": 7,
+        "nodes_with_issues_count": 8,
+        "total_unique_findings": 12,
         "layer_stats": {
-            "1": 21,
+            "1": 43,
             "2": 0,
             "3": 0,
             "0": 0
@@ -1631,22 +1709,22 @@
         "message": "Pipeline completado exitosamente para proyecto 'vpc_pr_28'",
         "project_name": "vpc_pr_28",
         "project_directory": "./terraform-aws-vpc",
-        "scanners_used": 1,
-        "checkov_success": false,
+        "scanners_used": 2,
+        "checkov_success": true,
         "trivy_success": true,
-        "total_findings_original": 26,
-        "total_findings_unique": 7,
-        "duplicates_removed": 19,
+        "total_findings_original": 51,
+        "total_findings_unique": 12,
+        "duplicates_removed": 39,
         "deduplication_method": "CFI_CIS+SARIF_FP",
         "total_nodes": 96,
         "total_edges": 108,
         "correlation_metadata": {
-            "assigned_findings": 7,
+            "assigned_findings": 12,
             "unassigned_findings_count": 0,
-            "nodes_with_issues_count": 5,
-            "total_unique_findings": 7,
+            "nodes_with_issues_count": 8,
+            "total_unique_findings": 12,
             "layer_stats": {
-                "1": 21,
+                "1": 43,
                 "2": 0,
                 "3": 0,
                 "0": 0
