@@ -392,8 +392,8 @@
                     document.getElementById('stats').appendChild(dedupInfo);
                 }
                 dedupInfo.innerHTML = `
-                    <strong>Duplicados eliminados:</strong> ${duplicatesRemoved} | 
-                    <strong>Escáneres usados:</strong> ${scannersUsed}
+                    <strong>Duplicados eliminados:</strong> ${duplicates_removed} | 
+                    <strong>Escáneres usados:</strong> ${scanners_used}
                 `;
             }
             
@@ -412,15 +412,15 @@
                 edges: edges.map(e => ({ from: e.source || e.from, to: e.target || e.to, edge_type: e.edge_type }))
             });
             
-            // Procesar nodos - USAR EL ID CORRECTO DEL BACKEND
+            // Procesar nodos - USAR EL ID ÚNICO DEL BACKEND
             const visNodes = nodes.map((node, index) => {
                 const hasIssues = node.security_issues && node.security_issues.length > 0;
                 
-                // Usar el ID exacto que viene del backend (simple_name)
-                const nodeId = node.simple_name || node.id || `node_${index}`;
+                // Usar el ID único que viene del backend (ahora es unique_id: simple_name_filename)
+                const nodeId = node.id || `node_${index}`;
                 
                 console.log(`Procesando nodo ${index}:`, { 
-                    originalId: node.id, 
+                    uniqueId: node.id, 
                     simpleName: node.simple_name, 
                     finalId: nodeId,
                     label: node.label 
