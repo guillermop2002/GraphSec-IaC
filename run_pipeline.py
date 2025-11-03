@@ -4,7 +4,7 @@ Script CLI para ejecutar el pipeline de análisis de GraphSec-IaC.
 Este script puede ser ejecutado desde la línea de comandos o desde una GitHub Action.
 """
 
-import os
+import os  # Módulo necesario para operaciones del sistema de archivos
 import json
 import shutil
 import logging
