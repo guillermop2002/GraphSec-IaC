@@ -10,6 +10,66 @@
             "end_line": 206,
             "security_issues": [
                 {
+                    "cfi": "38457341ac2ea00251659d86b99fa8876e587284c97b232c57760a586141232d",
+                    "rule_id": "CKV_AWS_37",
+                    "normalized_cis": "CKV_AWS_37",
+                    "resource_id": "aws_eks_cluster.this",
+                    "message": "Ensure Amazon EKS control plane logging is enabled for all log types",
+                    "level": "error",
+                    "file_path": "terraform-aws-eks/main.tf",
+                    "start_line": 36,
+                    "tool_name": "Checkov",
+                    "sources": [
+                        "Checkov"
+                    ],
+                    "correlation_layer": 1
+                },
+                {
+                    "cfi": "188f1d94651b8eb4a799d9091ee32c1b3e0d13d7055ca89c0c9b5235e9092354",
+                    "rule_id": "CKV_AWS_58",
+                    "normalized_cis": "CKV_AWS_58",
+                    "resource_id": "aws_eks_cluster.this",
+                    "message": "Ensure EKS Cluster has Secrets Encryption Enabled",
+                    "level": "error",
+                    "file_path": "terraform-aws-eks/main.tf",
+                    "start_line": 36,
+                    "tool_name": "Checkov",
+                    "sources": [
+                        "Checkov"
+                    ],
+                    "correlation_layer": 1
+                },
+                {
+                    "cfi": "39f916a61a01ec529cee99488f1a23259f6421de0bba606d9204f099c610fbf9",
+                    "rule_id": "CKV_AWS_39",
+                    "normalized_cis": "CKV_AWS_39",
+                    "resource_id": "aws_eks_cluster.this",
+                    "message": "Ensure Amazon EKS public endpoint disabled",
+                    "level": "error",
+                    "file_path": "terraform-aws-eks/main.tf",
+                    "start_line": 36,
+                    "tool_name": "Checkov",
+                    "sources": [
+                        "Checkov"
+                    ],
+                    "correlation_layer": 1
+                },
+                {
+                    "cfi": "91999f6e5e2b837d85340ebb68b47c7f298ff7552934fda489fd0c39d5c70170",
+                    "rule_id": "CKV_AWS_38",
+                    "normalized_cis": "CKV_AWS_38",
+                    "resource_id": "aws_eks_cluster.this",
+                    "message": "Ensure Amazon EKS public endpoint not accessible to 0.0.0.0/0",
+                    "level": "error",
+                    "file_path": "terraform-aws-eks/main.tf",
+                    "start_line": 36,
+                    "tool_name": "Checkov",
+                    "sources": [
+                        "Checkov"
+                    ],
+                    "correlation_layer": 1
+                },
+                {
                     "cfi": "ae84471399a774a807cdca760dd145f03ceea97be0a806d971f656749eff8604",
                     "rule_id": "AVD-AWS-0038",
                     "normalized_cis": "CIS-AWS-2.3.2",
@@ -74,7 +134,23 @@
             "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/main.tf",
             "start_line": 223,
             "end_line": 238,
-            "security_issues": []
+            "security_issues": [
+                {
+                    "cfi": "f58ce3c6e7cd0524eea7192ae486c2bf7bfd154d6286949dafc45056f100d56a",
+                    "rule_id": "CKV_AWS_338",
+                    "normalized_cis": "CIS-AWS-3.2.2",
+                    "resource_id": "aws_cloudwatch_log_group.this",
+                    "message": "Ensure CloudWatch log groups retains logs for at least 1 year",
+                    "level": "error",
+                    "file_path": "terraform-aws-eks/main.tf",
+                    "start_line": 223,
+                    "tool_name": "Checkov",
+                    "sources": [
+                        "Checkov"
+                    ],
+                    "correlation_layer": 1
+                }
+            ]
         },
         {
             "id": "aws_eks_access_entry.this_main.tf",
@@ -94,7 +170,23 @@
             "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/main.tf",
             "start_line": 307,
             "end_line": 325,
-            "security_issues": []
+            "security_issues": [
+                {
+                    "cfi": "e0a09b6e001e161077e2764ca7676926cd3480911e9618a24eefc61f507292c6",
+                    "rule_id": "CKV_TF_1",
+                    "normalized_cis": "TF-BACKEND-1",
+                    "resource_id": "aws_eks_access_policy_association.this",
+                    "message": "Ensure Terraform module sources use a commit hash",
+                    "level": "error",
+                    "file_path": "terraform-aws-eks/main.tf",
+                    "start_line": 331,
+                    "tool_name": "Checkov",
+                    "sources": [
+                        "Checkov"
+                    ],
+                    "correlation_layer": 2
+                }
+            ]
         },
         {
             "id": "aws_security_group.cluster_main.tf",
@@ -104,7 +196,23 @@
             "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/main.tf",
             "start_line": 391,
             "end_line": 410,
-            "security_issues": []
+            "security_issues": [
+                {
+                    "cfi": "0e98a9ad0eba5d87d055b3c726724dc6eb79f03248205de3aa65ae44abf9a214",
+                    "rule_id": "CKV2_AWS_5",
+                    "normalized_cis": "CIS-AWS-2.2.1",
+                    "resource_id": "aws_security_group.cluster",
+                    "message": "Ensure that Security Groups are attached to another resource",
+                    "level": "error",
+                    "file_path": "terraform-aws-eks/main.tf",
+                    "start_line": 391,
+                    "tool_name": "Checkov",
+                    "sources": [
+                        "Checkov"
+                    ],
+                    "correlation_layer": 1
+                }
+            ]
         },
         {
             "id": "aws_security_group_rule.cluster_main.tf",
@@ -264,7 +372,38 @@
             "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/node_groups.tf",
             "start_line": 10,
             "end_line": 23,
-            "security_issues": []
+            "security_issues": [
+                {
+                    "cfi": "878face298f8725f1068a3154fe5bdbe6213726b902da20d7bd26dc210a779a3",
+                    "rule_id": "CKV_AWS_356",
+                    "normalized_cis": "CIS-AWS-1.3.2",
+                    "resource_id": "time_sleep.this",
+                    "message": "Ensure no IAM policies documents allow \"*\" as a statement's resource for restrictable actions",
+                    "level": "error",
+                    "file_path": "terraform-aws-eks/node_groups.tf",
+                    "start_line": 30,
+                    "tool_name": "Checkov",
+                    "sources": [
+                        "Checkov"
+                    ],
+                    "correlation_layer": 2
+                },
+                {
+                    "cfi": "616e11667f13ab1e0b8c58499eeb3c457e08a364ac8c054d8a3d2257f502163d",
+                    "rule_id": "CKV_AWS_111",
+                    "normalized_cis": "CKV_AWS_111",
+                    "resource_id": "time_sleep.this",
+                    "message": "Ensure IAM policies does not allow write access without constraints",
+                    "level": "error",
+                    "file_path": "terraform-aws-eks/node_groups.tf",
+                    "start_line": 30,
+                    "tool_name": "Checkov",
+                    "sources": [
+                        "Checkov"
+                    ],
+                    "correlation_layer": 2
+                }
+            ]
         },
         {
             "id": "aws_iam_policy.cni_ipv6_policy_node_groups.tf",
@@ -284,7 +423,23 @@
             "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/node_groups.tf",
             "start_line": 177,
             "end_line": 199,
-            "security_issues": []
+            "security_issues": [
+                {
+                    "cfi": "60a94f5e6584ed767e6e86adee07f3df397456315c96dea72c74e6a1b704bfa7",
+                    "rule_id": "CKV2_AWS_5",
+                    "normalized_cis": "CIS-AWS-2.2.1",
+                    "resource_id": "aws_security_group.node",
+                    "message": "Ensure that Security Groups are attached to another resource",
+                    "level": "error",
+                    "file_path": "terraform-aws-eks/node_groups.tf",
+                    "start_line": 177,
+                    "tool_name": "Checkov",
+                    "sources": [
+                        "Checkov"
+                    ],
+                    "correlation_layer": 1
+                }
+            ]
         },
         {
             "id": "aws_security_group_rule.node_node_groups.tf",
@@ -1035,7 +1190,68 @@
             "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/self-managed-node-group/main.tf",
             "start_line": 139,
             "end_line": 495,
-            "security_issues": []
+            "security_issues": [
+                {
+                    "cfi": "f25f1e022c5b012d78dd800de6dee2f5c4824bef99de98a38550cd40924cf7bf",
+                    "rule_id": "CKV_AWS_79",
+                    "normalized_cis": "CIS-AWS-1.3.1",
+                    "resource_id": "aws_launch_template.this",
+                    "message": "Ensure Instance Metadata Service Version 1 is not enabled",
+                    "level": "error",
+                    "file_path": "terraform-aws-eks/modules/eks-managed-node-group/main.tf",
+                    "start_line": 98,
+                    "tool_name": "Checkov",
+                    "sources": [
+                        "Checkov"
+                    ],
+                    "correlation_layer": 1
+                },
+                {
+                    "cfi": "5b95f170ec77b30c1758f580240c2731c94ce0e005d5b44009ec441edbcee301",
+                    "rule_id": "CKV_AWS_341",
+                    "normalized_cis": "CIS-AWS-1.4.1",
+                    "resource_id": "aws_launch_template.this",
+                    "message": "Ensure Launch template should not have a metadata response hop limit greater than 1",
+                    "level": "error",
+                    "file_path": "terraform-aws-eks/modules/eks-managed-node-group/main.tf",
+                    "start_line": 98,
+                    "tool_name": "Checkov",
+                    "sources": [
+                        "Checkov"
+                    ],
+                    "correlation_layer": 1
+                },
+                {
+                    "cfi": "730da4b252b38d4c7780571be5acf1d67107ca51d5e36c4943fcd53e41db87f6",
+                    "rule_id": "CKV_AWS_79",
+                    "normalized_cis": "CIS-AWS-1.3.1",
+                    "resource_id": "aws_launch_template.this",
+                    "message": "Ensure Instance Metadata Service Version 1 is not enabled",
+                    "level": "error",
+                    "file_path": "terraform-aws-eks/modules/self-managed-node-group/main.tf",
+                    "start_line": 139,
+                    "tool_name": "Checkov",
+                    "sources": [
+                        "Checkov"
+                    ],
+                    "correlation_layer": 1
+                },
+                {
+                    "cfi": "b159e88241010b7fe6a69f66e31f8856634ed5bb7f88b439a3c3aa30dc5568bd",
+                    "rule_id": "CKV_AWS_341",
+                    "normalized_cis": "CIS-AWS-1.4.1",
+                    "resource_id": "aws_launch_template.this",
+                    "message": "Ensure Launch template should not have a metadata response hop limit greater than 1",
+                    "level": "error",
+                    "file_path": "terraform-aws-eks/modules/self-managed-node-group/main.tf",
+                    "start_line": 139,
+                    "tool_name": "Checkov",
+                    "sources": [
+                        "Checkov"
+                    ],
+                    "correlation_layer": 1
+                }
+            ]
         },
         {
             "id": "aws_autoscaling_group.this_modules/self-managed-node-group/main.tf",
@@ -1125,7 +1341,23 @@
             "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/self-managed-node-group/main.tf",
             "start_line": 1041,
             "end_line": 1060,
-            "security_issues": []
+            "security_issues": [
+                {
+                    "cfi": "e8c1b39ba4c9aa2aa76ad8e9aca1134c5a787b24737f118b9032be388b9b54a0",
+                    "rule_id": "CKV2_AWS_5",
+                    "normalized_cis": "CIS-AWS-2.2.1",
+                    "resource_id": "aws_security_group.this",
+                    "message": "Ensure that Security Groups are attached to another resource",
+                    "level": "error",
+                    "file_path": "terraform-aws-eks/modules/self-managed-node-group/main.tf",
+                    "start_line": 1041,
+                    "tool_name": "Checkov",
+                    "sources": [
+                        "Checkov"
+                    ],
+                    "correlation_layer": 1
+                }
+            ]
         },
         {
             "id": "aws_vpc_security_group_ingress_rule.this_modules/self-managed-node-group/main.tf",
@@ -1205,7 +1437,38 @@
             "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/hybrid-node-role/main.tf",
             "start_line": 73,
             "end_line": 87,
-            "security_issues": []
+            "security_issues": [
+                {
+                    "cfi": "3cb254b079aa69f7dc0fc9ee8dc7a584448c6928f4c89c75d5611a811f68783c",
+                    "rule_id": "CKV_AWS_356",
+                    "normalized_cis": "CIS-AWS-1.3.2",
+                    "resource_id": "aws_iam_role.this",
+                    "message": "Ensure no IAM policies documents allow \"*\" as a statement's resource for restrictable actions",
+                    "level": "error",
+                    "file_path": "terraform-aws-eks/modules/hybrid-node-role/main.tf",
+                    "start_line": 93,
+                    "tool_name": "Checkov",
+                    "sources": [
+                        "Checkov"
+                    ],
+                    "correlation_layer": 2
+                },
+                {
+                    "cfi": "f5188e5ad6bac390d9d999db5f72b66dbf01fdd2261bee4ebf9d8d5c40acb625",
+                    "rule_id": "CKV_AWS_111",
+                    "normalized_cis": "CKV_AWS_111",
+                    "resource_id": "aws_iam_role.this",
+                    "message": "Ensure IAM policies does not allow write access without constraints",
+                    "level": "error",
+                    "file_path": "terraform-aws-eks/modules/hybrid-node-role/main.tf",
+                    "start_line": 93,
+                    "tool_name": "Checkov",
+                    "sources": [
+                        "Checkov"
+                    ],
+                    "correlation_layer": 2
+                }
+            ]
         },
         {
             "id": "aws_iam_policy.this_modules/hybrid-node-role/main.tf",
@@ -1431,18 +1694,6 @@
     "edges": [
         {
             "from": "aws_eks_cluster.this_main.tf",
-            "to": "aws_iam_role.eks_auto_main.tf",
-            "source": "aws_eks_cluster.this_main.tf",
-            "target": "aws_iam_role.eks_auto_main.tf"
-        },
-        {
-            "from": "aws_eks_cluster.this_main.tf",
-            "to": "aws_security_group_rule.node_node_groups.tf",
-            "source": "aws_eks_cluster.this_main.tf",
-            "target": "aws_security_group_rule.node_node_groups.tf"
-        },
-        {
-            "from": "aws_eks_cluster.this_main.tf",
             "to": "aws_iam_role_policy_attachment.this_main.tf",
             "source": "aws_eks_cluster.this_main.tf",
             "target": "aws_iam_role_policy_attachment.this_main.tf"
@@ -1473,15 +1724,27 @@
         },
         {
             "from": "aws_eks_cluster.this_main.tf",
-            "to": "aws_cloudwatch_log_group.this_main.tf",
+            "to": "aws_iam_role.eks_auto_main.tf",
             "source": "aws_eks_cluster.this_main.tf",
-            "target": "aws_cloudwatch_log_group.this_main.tf"
+            "target": "aws_iam_role.eks_auto_main.tf"
         },
         {
             "from": "aws_eks_cluster.this_main.tf",
             "to": "aws_security_group_rule.cluster_main.tf",
             "source": "aws_eks_cluster.this_main.tf",
             "target": "aws_security_group_rule.cluster_main.tf"
+        },
+        {
+            "from": "aws_eks_cluster.this_main.tf",
+            "to": "aws_security_group_rule.node_node_groups.tf",
+            "source": "aws_eks_cluster.this_main.tf",
+            "target": "aws_security_group_rule.node_node_groups.tf"
+        },
+        {
+            "from": "aws_eks_cluster.this_main.tf",
+            "to": "aws_cloudwatch_log_group.this_main.tf",
+            "source": "aws_eks_cluster.this_main.tf",
+            "target": "aws_cloudwatch_log_group.this_main.tf"
         },
         {
             "from": "aws_eks_cluster.this_main.tf",
@@ -1503,6 +1766,12 @@
         },
         {
             "from": "aws_eks_access_policy_association.this_main.tf",
+            "to": "aws_eks_cluster.this_main.tf",
+            "source": "aws_eks_access_policy_association.this_main.tf",
+            "target": "aws_eks_cluster.this_main.tf"
+        },
+        {
+            "from": "aws_eks_access_policy_association.this_main.tf",
             "to": "aws_eks_access_entry.this_main.tf",
             "source": "aws_eks_access_policy_association.this_main.tf",
             "target": "aws_eks_access_entry.this_main.tf"
@@ -1512,12 +1781,6 @@
             "to": "aws_eks_access_entry.this_modules/self-managed-node-group/main.tf",
             "source": "aws_eks_access_policy_association.this_main.tf",
             "target": "aws_eks_access_entry.this_modules/self-managed-node-group/main.tf"
-        },
-        {
-            "from": "aws_eks_access_policy_association.this_main.tf",
-            "to": "aws_eks_cluster.this_main.tf",
-            "source": "aws_eks_access_policy_association.this_main.tf",
-            "target": "aws_eks_cluster.this_main.tf"
         },
         {
             "from": "aws_security_group_rule.cluster_main.tf",
@@ -1605,80 +1868,44 @@
         },
         {
             "from": "aws_iam_role_policy_attachment.cluster_encryption_main.tf",
-            "to": "aws_iam_role.this_main.tf",
-            "source": "aws_iam_role_policy_attachment.cluster_encryption_main.tf",
-            "target": "aws_iam_role.this_main.tf"
-        },
-        {
-            "from": "aws_iam_role_policy_attachment.cluster_encryption_main.tf",
-            "to": "aws_iam_role.this_tests/eks-managed-node-group/main.tf",
-            "source": "aws_iam_role_policy_attachment.cluster_encryption_main.tf",
-            "target": "aws_iam_role.this_tests/eks-managed-node-group/main.tf"
-        },
-        {
-            "from": "aws_iam_role_policy_attachment.cluster_encryption_main.tf",
-            "to": "aws_iam_role.this_modules/eks-managed-node-group/main.tf",
-            "source": "aws_iam_role_policy_attachment.cluster_encryption_main.tf",
-            "target": "aws_iam_role.this_modules/eks-managed-node-group/main.tf"
-        },
-        {
-            "from": "aws_iam_role_policy_attachment.cluster_encryption_main.tf",
-            "to": "aws_iam_role.this_modules/self-managed-node-group/main.tf",
-            "source": "aws_iam_role_policy_attachment.cluster_encryption_main.tf",
-            "target": "aws_iam_role.this_modules/self-managed-node-group/main.tf"
-        },
-        {
-            "from": "aws_iam_role_policy_attachment.cluster_encryption_main.tf",
-            "to": "aws_iam_role.this_modules/fargate-profile/main.tf",
-            "source": "aws_iam_role_policy_attachment.cluster_encryption_main.tf",
-            "target": "aws_iam_role.this_modules/fargate-profile/main.tf"
-        },
-        {
-            "from": "aws_iam_role_policy_attachment.cluster_encryption_main.tf",
-            "to": "aws_iam_role.this_modules/hybrid-node-role/main.tf",
-            "source": "aws_iam_role_policy_attachment.cluster_encryption_main.tf",
-            "target": "aws_iam_role.this_modules/hybrid-node-role/main.tf"
-        },
-        {
-            "from": "aws_iam_role_policy_attachment.cluster_encryption_main.tf",
             "to": "aws_iam_policy.cluster_encryption_main.tf",
             "source": "aws_iam_role_policy_attachment.cluster_encryption_main.tf",
             "target": "aws_iam_policy.cluster_encryption_main.tf"
         },
         {
-            "from": "aws_iam_role_policy_attachment.custom_main.tf",
+            "from": "aws_iam_role_policy_attachment.cluster_encryption_main.tf",
             "to": "aws_iam_role.this_main.tf",
-            "source": "aws_iam_role_policy_attachment.custom_main.tf",
+            "source": "aws_iam_role_policy_attachment.cluster_encryption_main.tf",
             "target": "aws_iam_role.this_main.tf"
         },
         {
-            "from": "aws_iam_role_policy_attachment.custom_main.tf",
+            "from": "aws_iam_role_policy_attachment.cluster_encryption_main.tf",
             "to": "aws_iam_role.this_tests/eks-managed-node-group/main.tf",
-            "source": "aws_iam_role_policy_attachment.custom_main.tf",
+            "source": "aws_iam_role_policy_attachment.cluster_encryption_main.tf",
             "target": "aws_iam_role.this_tests/eks-managed-node-group/main.tf"
         },
         {
-            "from": "aws_iam_role_policy_attachment.custom_main.tf",
+            "from": "aws_iam_role_policy_attachment.cluster_encryption_main.tf",
             "to": "aws_iam_role.this_modules/eks-managed-node-group/main.tf",
-            "source": "aws_iam_role_policy_attachment.custom_main.tf",
+            "source": "aws_iam_role_policy_attachment.cluster_encryption_main.tf",
             "target": "aws_iam_role.this_modules/eks-managed-node-group/main.tf"
         },
         {
-            "from": "aws_iam_role_policy_attachment.custom_main.tf",
+            "from": "aws_iam_role_policy_attachment.cluster_encryption_main.tf",
             "to": "aws_iam_role.this_modules/self-managed-node-group/main.tf",
-            "source": "aws_iam_role_policy_attachment.custom_main.tf",
+            "source": "aws_iam_role_policy_attachment.cluster_encryption_main.tf",
             "target": "aws_iam_role.this_modules/self-managed-node-group/main.tf"
         },
         {
-            "from": "aws_iam_role_policy_attachment.custom_main.tf",
+            "from": "aws_iam_role_policy_attachment.cluster_encryption_main.tf",
             "to": "aws_iam_role.this_modules/fargate-profile/main.tf",
-            "source": "aws_iam_role_policy_attachment.custom_main.tf",
+            "source": "aws_iam_role_policy_attachment.cluster_encryption_main.tf",
             "target": "aws_iam_role.this_modules/fargate-profile/main.tf"
         },
         {
-            "from": "aws_iam_role_policy_attachment.custom_main.tf",
+            "from": "aws_iam_role_policy_attachment.cluster_encryption_main.tf",
             "to": "aws_iam_role.this_modules/hybrid-node-role/main.tf",
-            "source": "aws_iam_role_policy_attachment.custom_main.tf",
+            "source": "aws_iam_role_policy_attachment.cluster_encryption_main.tf",
             "target": "aws_iam_role.this_modules/hybrid-node-role/main.tf"
         },
         {
@@ -1686,6 +1913,42 @@
             "to": "aws_iam_policy.custom_main.tf",
             "source": "aws_iam_role_policy_attachment.custom_main.tf",
             "target": "aws_iam_policy.custom_main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.custom_main.tf",
+            "to": "aws_iam_role.this_main.tf",
+            "source": "aws_iam_role_policy_attachment.custom_main.tf",
+            "target": "aws_iam_role.this_main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.custom_main.tf",
+            "to": "aws_iam_role.this_tests/eks-managed-node-group/main.tf",
+            "source": "aws_iam_role_policy_attachment.custom_main.tf",
+            "target": "aws_iam_role.this_tests/eks-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.custom_main.tf",
+            "to": "aws_iam_role.this_modules/eks-managed-node-group/main.tf",
+            "source": "aws_iam_role_policy_attachment.custom_main.tf",
+            "target": "aws_iam_role.this_modules/eks-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.custom_main.tf",
+            "to": "aws_iam_role.this_modules/self-managed-node-group/main.tf",
+            "source": "aws_iam_role_policy_attachment.custom_main.tf",
+            "target": "aws_iam_role.this_modules/self-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.custom_main.tf",
+            "to": "aws_iam_role.this_modules/fargate-profile/main.tf",
+            "source": "aws_iam_role_policy_attachment.custom_main.tf",
+            "target": "aws_iam_role.this_modules/fargate-profile/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.custom_main.tf",
+            "to": "aws_iam_role.this_modules/hybrid-node-role/main.tf",
+            "source": "aws_iam_role_policy_attachment.custom_main.tf",
+            "target": "aws_iam_role.this_modules/hybrid-node-role/main.tf"
         },
         {
             "from": "aws_eks_addon.this_main.tf",
@@ -1743,15 +2006,15 @@
         },
         {
             "from": "local_file.join_examples/eks-hybrid-nodes/remote.tf",
-            "to": "aws_ssm_activation.this_examples/eks-hybrid-nodes/remote.tf",
-            "source": "local_file.join_examples/eks-hybrid-nodes/remote.tf",
-            "target": "aws_ssm_activation.this_examples/eks-hybrid-nodes/remote.tf"
-        },
-        {
-            "from": "local_file.join_examples/eks-hybrid-nodes/remote.tf",
             "to": "local_file.key_pem_examples/eks-hybrid-nodes/remote.tf",
             "source": "local_file.join_examples/eks-hybrid-nodes/remote.tf",
             "target": "local_file.key_pem_examples/eks-hybrid-nodes/remote.tf"
+        },
+        {
+            "from": "local_file.join_examples/eks-hybrid-nodes/remote.tf",
+            "to": "aws_ssm_activation.this_examples/eks-hybrid-nodes/remote.tf",
+            "source": "local_file.join_examples/eks-hybrid-nodes/remote.tf",
+            "target": "aws_ssm_activation.this_examples/eks-hybrid-nodes/remote.tf"
         },
         {
             "from": "aws_vpc_security_group_ingress_rule.remote_node_examples/eks-hybrid-nodes/remote.tf",
@@ -1785,6 +2048,18 @@
         },
         {
             "from": "aws_kms_alias.this_.terraform/modules/kms/main.tf",
+            "to": "aws_kms_replica_key.this_.terraform/modules/kms/main.tf",
+            "source": "aws_kms_alias.this_.terraform/modules/kms/main.tf",
+            "target": "aws_kms_replica_key.this_.terraform/modules/kms/main.tf"
+        },
+        {
+            "from": "aws_kms_alias.this_.terraform/modules/kms/main.tf",
+            "to": "aws_kms_external_key.this_.terraform/modules/kms/main.tf",
+            "source": "aws_kms_alias.this_.terraform/modules/kms/main.tf",
+            "target": "aws_kms_external_key.this_.terraform/modules/kms/main.tf"
+        },
+        {
+            "from": "aws_kms_alias.this_.terraform/modules/kms/main.tf",
             "to": "aws_kms_replica_external_key.this_.terraform/modules/kms/main.tf",
             "source": "aws_kms_alias.this_.terraform/modules/kms/main.tf",
             "target": "aws_kms_replica_external_key.this_.terraform/modules/kms/main.tf"
@@ -1796,16 +2071,16 @@
             "target": "aws_kms_key.this_.terraform/modules/kms/main.tf"
         },
         {
-            "from": "aws_kms_alias.this_.terraform/modules/kms/main.tf",
-            "to": "aws_kms_external_key.this_.terraform/modules/kms/main.tf",
-            "source": "aws_kms_alias.this_.terraform/modules/kms/main.tf",
-            "target": "aws_kms_external_key.this_.terraform/modules/kms/main.tf"
+            "from": "aws_kms_grant.this_.terraform/modules/kms/main.tf",
+            "to": "aws_kms_replica_key.this_.terraform/modules/kms/main.tf",
+            "source": "aws_kms_grant.this_.terraform/modules/kms/main.tf",
+            "target": "aws_kms_replica_key.this_.terraform/modules/kms/main.tf"
         },
         {
-            "from": "aws_kms_alias.this_.terraform/modules/kms/main.tf",
-            "to": "aws_kms_replica_key.this_.terraform/modules/kms/main.tf",
-            "source": "aws_kms_alias.this_.terraform/modules/kms/main.tf",
-            "target": "aws_kms_replica_key.this_.terraform/modules/kms/main.tf"
+            "from": "aws_kms_grant.this_.terraform/modules/kms/main.tf",
+            "to": "aws_kms_external_key.this_.terraform/modules/kms/main.tf",
+            "source": "aws_kms_grant.this_.terraform/modules/kms/main.tf",
+            "target": "aws_kms_external_key.this_.terraform/modules/kms/main.tf"
         },
         {
             "from": "aws_kms_grant.this_.terraform/modules/kms/main.tf",
@@ -1818,30 +2093,6 @@
             "to": "aws_kms_key.this_.terraform/modules/kms/main.tf",
             "source": "aws_kms_grant.this_.terraform/modules/kms/main.tf",
             "target": "aws_kms_key.this_.terraform/modules/kms/main.tf"
-        },
-        {
-            "from": "aws_kms_grant.this_.terraform/modules/kms/main.tf",
-            "to": "aws_kms_external_key.this_.terraform/modules/kms/main.tf",
-            "source": "aws_kms_grant.this_.terraform/modules/kms/main.tf",
-            "target": "aws_kms_external_key.this_.terraform/modules/kms/main.tf"
-        },
-        {
-            "from": "aws_kms_grant.this_.terraform/modules/kms/main.tf",
-            "to": "aws_kms_replica_key.this_.terraform/modules/kms/main.tf",
-            "source": "aws_kms_grant.this_.terraform/modules/kms/main.tf",
-            "target": "aws_kms_replica_key.this_.terraform/modules/kms/main.tf"
-        },
-        {
-            "from": "aws_launch_template.this_modules/eks-managed-node-group/main.tf",
-            "to": "aws_placement_group.this_modules/eks-managed-node-group/main.tf",
-            "source": "aws_launch_template.this_modules/eks-managed-node-group/main.tf",
-            "target": "aws_placement_group.this_modules/eks-managed-node-group/main.tf"
-        },
-        {
-            "from": "aws_launch_template.this_modules/eks-managed-node-group/main.tf",
-            "to": "aws_placement_group.this_modules/self-managed-node-group/main.tf",
-            "source": "aws_launch_template.this_modules/eks-managed-node-group/main.tf",
-            "target": "aws_placement_group.this_modules/self-managed-node-group/main.tf"
         },
         {
             "from": "aws_launch_template.this_modules/eks-managed-node-group/main.tf",
@@ -1898,184 +2149,184 @@
             "target": "aws_iam_role_policy_attachment.additional_modules/fargate-profile/main.tf"
         },
         {
-            "from": "aws_eks_node_group.this_modules/eks-managed-node-group/main.tf",
-            "to": "aws_iam_role.this_main.tf",
-            "source": "aws_eks_node_group.this_modules/eks-managed-node-group/main.tf",
-            "target": "aws_iam_role.this_main.tf"
-        },
-        {
-            "from": "aws_eks_node_group.this_modules/eks-managed-node-group/main.tf",
-            "to": "aws_iam_role.this_tests/eks-managed-node-group/main.tf",
-            "source": "aws_eks_node_group.this_modules/eks-managed-node-group/main.tf",
-            "target": "aws_iam_role.this_tests/eks-managed-node-group/main.tf"
-        },
-        {
-            "from": "aws_eks_node_group.this_modules/eks-managed-node-group/main.tf",
-            "to": "aws_iam_role.this_modules/eks-managed-node-group/main.tf",
-            "source": "aws_eks_node_group.this_modules/eks-managed-node-group/main.tf",
-            "target": "aws_iam_role.this_modules/eks-managed-node-group/main.tf"
-        },
-        {
-            "from": "aws_eks_node_group.this_modules/eks-managed-node-group/main.tf",
-            "to": "aws_iam_role.this_modules/self-managed-node-group/main.tf",
-            "source": "aws_eks_node_group.this_modules/eks-managed-node-group/main.tf",
-            "target": "aws_iam_role.this_modules/self-managed-node-group/main.tf"
-        },
-        {
-            "from": "aws_eks_node_group.this_modules/eks-managed-node-group/main.tf",
-            "to": "aws_iam_role.this_modules/fargate-profile/main.tf",
-            "source": "aws_eks_node_group.this_modules/eks-managed-node-group/main.tf",
-            "target": "aws_iam_role.this_modules/fargate-profile/main.tf"
-        },
-        {
-            "from": "aws_eks_node_group.this_modules/eks-managed-node-group/main.tf",
-            "to": "aws_iam_role.this_modules/hybrid-node-role/main.tf",
-            "source": "aws_eks_node_group.this_modules/eks-managed-node-group/main.tf",
-            "target": "aws_iam_role.this_modules/hybrid-node-role/main.tf"
-        },
-        {
-            "from": "aws_iam_role_policy_attachment.this_modules/eks-managed-node-group/main.tf",
-            "to": "aws_iam_role.this_main.tf",
-            "source": "aws_iam_role_policy_attachment.this_modules/eks-managed-node-group/main.tf",
-            "target": "aws_iam_role.this_main.tf"
-        },
-        {
-            "from": "aws_iam_role_policy_attachment.this_modules/eks-managed-node-group/main.tf",
-            "to": "aws_iam_role.this_tests/eks-managed-node-group/main.tf",
-            "source": "aws_iam_role_policy_attachment.this_modules/eks-managed-node-group/main.tf",
-            "target": "aws_iam_role.this_tests/eks-managed-node-group/main.tf"
-        },
-        {
-            "from": "aws_iam_role_policy_attachment.this_modules/eks-managed-node-group/main.tf",
-            "to": "aws_iam_role.this_modules/eks-managed-node-group/main.tf",
-            "source": "aws_iam_role_policy_attachment.this_modules/eks-managed-node-group/main.tf",
-            "target": "aws_iam_role.this_modules/eks-managed-node-group/main.tf"
-        },
-        {
-            "from": "aws_iam_role_policy_attachment.this_modules/eks-managed-node-group/main.tf",
-            "to": "aws_iam_role.this_modules/self-managed-node-group/main.tf",
-            "source": "aws_iam_role_policy_attachment.this_modules/eks-managed-node-group/main.tf",
-            "target": "aws_iam_role.this_modules/self-managed-node-group/main.tf"
-        },
-        {
-            "from": "aws_iam_role_policy_attachment.this_modules/eks-managed-node-group/main.tf",
-            "to": "aws_iam_role.this_modules/fargate-profile/main.tf",
-            "source": "aws_iam_role_policy_attachment.this_modules/eks-managed-node-group/main.tf",
-            "target": "aws_iam_role.this_modules/fargate-profile/main.tf"
-        },
-        {
-            "from": "aws_iam_role_policy_attachment.this_modules/eks-managed-node-group/main.tf",
-            "to": "aws_iam_role.this_modules/hybrid-node-role/main.tf",
-            "source": "aws_iam_role_policy_attachment.this_modules/eks-managed-node-group/main.tf",
-            "target": "aws_iam_role.this_modules/hybrid-node-role/main.tf"
-        },
-        {
-            "from": "aws_iam_role_policy_attachment.additional_modules/eks-managed-node-group/main.tf",
-            "to": "aws_iam_role.this_main.tf",
-            "source": "aws_iam_role_policy_attachment.additional_modules/eks-managed-node-group/main.tf",
-            "target": "aws_iam_role.this_main.tf"
-        },
-        {
-            "from": "aws_iam_role_policy_attachment.additional_modules/eks-managed-node-group/main.tf",
-            "to": "aws_iam_role.this_tests/eks-managed-node-group/main.tf",
-            "source": "aws_iam_role_policy_attachment.additional_modules/eks-managed-node-group/main.tf",
-            "target": "aws_iam_role.this_tests/eks-managed-node-group/main.tf"
-        },
-        {
-            "from": "aws_iam_role_policy_attachment.additional_modules/eks-managed-node-group/main.tf",
-            "to": "aws_iam_role.this_modules/eks-managed-node-group/main.tf",
-            "source": "aws_iam_role_policy_attachment.additional_modules/eks-managed-node-group/main.tf",
-            "target": "aws_iam_role.this_modules/eks-managed-node-group/main.tf"
-        },
-        {
-            "from": "aws_iam_role_policy_attachment.additional_modules/eks-managed-node-group/main.tf",
-            "to": "aws_iam_role.this_modules/self-managed-node-group/main.tf",
-            "source": "aws_iam_role_policy_attachment.additional_modules/eks-managed-node-group/main.tf",
-            "target": "aws_iam_role.this_modules/self-managed-node-group/main.tf"
-        },
-        {
-            "from": "aws_iam_role_policy_attachment.additional_modules/eks-managed-node-group/main.tf",
-            "to": "aws_iam_role.this_modules/fargate-profile/main.tf",
-            "source": "aws_iam_role_policy_attachment.additional_modules/eks-managed-node-group/main.tf",
-            "target": "aws_iam_role.this_modules/fargate-profile/main.tf"
-        },
-        {
-            "from": "aws_iam_role_policy_attachment.additional_modules/eks-managed-node-group/main.tf",
-            "to": "aws_iam_role.this_modules/hybrid-node-role/main.tf",
-            "source": "aws_iam_role_policy_attachment.additional_modules/eks-managed-node-group/main.tf",
-            "target": "aws_iam_role.this_modules/hybrid-node-role/main.tf"
-        },
-        {
-            "from": "aws_iam_role_policy.this_modules/eks-managed-node-group/main.tf",
-            "to": "aws_iam_role.this_main.tf",
-            "source": "aws_iam_role_policy.this_modules/eks-managed-node-group/main.tf",
-            "target": "aws_iam_role.this_main.tf"
-        },
-        {
-            "from": "aws_iam_role_policy.this_modules/eks-managed-node-group/main.tf",
-            "to": "aws_iam_role.this_tests/eks-managed-node-group/main.tf",
-            "source": "aws_iam_role_policy.this_modules/eks-managed-node-group/main.tf",
-            "target": "aws_iam_role.this_tests/eks-managed-node-group/main.tf"
-        },
-        {
-            "from": "aws_iam_role_policy.this_modules/eks-managed-node-group/main.tf",
-            "to": "aws_iam_role.this_modules/eks-managed-node-group/main.tf",
-            "source": "aws_iam_role_policy.this_modules/eks-managed-node-group/main.tf",
-            "target": "aws_iam_role.this_modules/eks-managed-node-group/main.tf"
-        },
-        {
-            "from": "aws_iam_role_policy.this_modules/eks-managed-node-group/main.tf",
-            "to": "aws_iam_role.this_modules/self-managed-node-group/main.tf",
-            "source": "aws_iam_role_policy.this_modules/eks-managed-node-group/main.tf",
-            "target": "aws_iam_role.this_modules/self-managed-node-group/main.tf"
-        },
-        {
-            "from": "aws_iam_role_policy.this_modules/eks-managed-node-group/main.tf",
-            "to": "aws_iam_role.this_modules/fargate-profile/main.tf",
-            "source": "aws_iam_role_policy.this_modules/eks-managed-node-group/main.tf",
-            "target": "aws_iam_role.this_modules/fargate-profile/main.tf"
-        },
-        {
-            "from": "aws_iam_role_policy.this_modules/eks-managed-node-group/main.tf",
-            "to": "aws_iam_role.this_modules/hybrid-node-role/main.tf",
-            "source": "aws_iam_role_policy.this_modules/eks-managed-node-group/main.tf",
-            "target": "aws_iam_role.this_modules/hybrid-node-role/main.tf"
-        },
-        {
-            "from": "aws_vpc_security_group_ingress_rule.this_modules/eks-managed-node-group/main.tf",
-            "to": "aws_security_group.this_modules/eks-managed-node-group/main.tf",
-            "source": "aws_vpc_security_group_ingress_rule.this_modules/eks-managed-node-group/main.tf",
-            "target": "aws_security_group.this_modules/eks-managed-node-group/main.tf"
-        },
-        {
-            "from": "aws_vpc_security_group_ingress_rule.this_modules/eks-managed-node-group/main.tf",
-            "to": "aws_security_group.this_modules/self-managed-node-group/main.tf",
-            "source": "aws_vpc_security_group_ingress_rule.this_modules/eks-managed-node-group/main.tf",
-            "target": "aws_security_group.this_modules/self-managed-node-group/main.tf"
-        },
-        {
-            "from": "aws_vpc_security_group_egress_rule.this_modules/eks-managed-node-group/main.tf",
-            "to": "aws_security_group.this_modules/eks-managed-node-group/main.tf",
-            "source": "aws_vpc_security_group_egress_rule.this_modules/eks-managed-node-group/main.tf",
-            "target": "aws_security_group.this_modules/eks-managed-node-group/main.tf"
-        },
-        {
-            "from": "aws_vpc_security_group_egress_rule.this_modules/eks-managed-node-group/main.tf",
-            "to": "aws_security_group.this_modules/self-managed-node-group/main.tf",
-            "source": "aws_vpc_security_group_egress_rule.this_modules/eks-managed-node-group/main.tf",
-            "target": "aws_security_group.this_modules/self-managed-node-group/main.tf"
-        },
-        {
-            "from": "aws_launch_template.this_modules/self-managed-node-group/main.tf",
+            "from": "aws_launch_template.this_modules/eks-managed-node-group/main.tf",
             "to": "aws_placement_group.this_modules/eks-managed-node-group/main.tf",
-            "source": "aws_launch_template.this_modules/self-managed-node-group/main.tf",
+            "source": "aws_launch_template.this_modules/eks-managed-node-group/main.tf",
             "target": "aws_placement_group.this_modules/eks-managed-node-group/main.tf"
         },
         {
-            "from": "aws_launch_template.this_modules/self-managed-node-group/main.tf",
+            "from": "aws_launch_template.this_modules/eks-managed-node-group/main.tf",
             "to": "aws_placement_group.this_modules/self-managed-node-group/main.tf",
-            "source": "aws_launch_template.this_modules/self-managed-node-group/main.tf",
+            "source": "aws_launch_template.this_modules/eks-managed-node-group/main.tf",
             "target": "aws_placement_group.this_modules/self-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_eks_node_group.this_modules/eks-managed-node-group/main.tf",
+            "to": "aws_iam_role.this_main.tf",
+            "source": "aws_eks_node_group.this_modules/eks-managed-node-group/main.tf",
+            "target": "aws_iam_role.this_main.tf"
+        },
+        {
+            "from": "aws_eks_node_group.this_modules/eks-managed-node-group/main.tf",
+            "to": "aws_iam_role.this_tests/eks-managed-node-group/main.tf",
+            "source": "aws_eks_node_group.this_modules/eks-managed-node-group/main.tf",
+            "target": "aws_iam_role.this_tests/eks-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_eks_node_group.this_modules/eks-managed-node-group/main.tf",
+            "to": "aws_iam_role.this_modules/eks-managed-node-group/main.tf",
+            "source": "aws_eks_node_group.this_modules/eks-managed-node-group/main.tf",
+            "target": "aws_iam_role.this_modules/eks-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_eks_node_group.this_modules/eks-managed-node-group/main.tf",
+            "to": "aws_iam_role.this_modules/self-managed-node-group/main.tf",
+            "source": "aws_eks_node_group.this_modules/eks-managed-node-group/main.tf",
+            "target": "aws_iam_role.this_modules/self-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_eks_node_group.this_modules/eks-managed-node-group/main.tf",
+            "to": "aws_iam_role.this_modules/fargate-profile/main.tf",
+            "source": "aws_eks_node_group.this_modules/eks-managed-node-group/main.tf",
+            "target": "aws_iam_role.this_modules/fargate-profile/main.tf"
+        },
+        {
+            "from": "aws_eks_node_group.this_modules/eks-managed-node-group/main.tf",
+            "to": "aws_iam_role.this_modules/hybrid-node-role/main.tf",
+            "source": "aws_eks_node_group.this_modules/eks-managed-node-group/main.tf",
+            "target": "aws_iam_role.this_modules/hybrid-node-role/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.this_modules/eks-managed-node-group/main.tf",
+            "to": "aws_iam_role.this_main.tf",
+            "source": "aws_iam_role_policy_attachment.this_modules/eks-managed-node-group/main.tf",
+            "target": "aws_iam_role.this_main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.this_modules/eks-managed-node-group/main.tf",
+            "to": "aws_iam_role.this_tests/eks-managed-node-group/main.tf",
+            "source": "aws_iam_role_policy_attachment.this_modules/eks-managed-node-group/main.tf",
+            "target": "aws_iam_role.this_tests/eks-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.this_modules/eks-managed-node-group/main.tf",
+            "to": "aws_iam_role.this_modules/eks-managed-node-group/main.tf",
+            "source": "aws_iam_role_policy_attachment.this_modules/eks-managed-node-group/main.tf",
+            "target": "aws_iam_role.this_modules/eks-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.this_modules/eks-managed-node-group/main.tf",
+            "to": "aws_iam_role.this_modules/self-managed-node-group/main.tf",
+            "source": "aws_iam_role_policy_attachment.this_modules/eks-managed-node-group/main.tf",
+            "target": "aws_iam_role.this_modules/self-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.this_modules/eks-managed-node-group/main.tf",
+            "to": "aws_iam_role.this_modules/fargate-profile/main.tf",
+            "source": "aws_iam_role_policy_attachment.this_modules/eks-managed-node-group/main.tf",
+            "target": "aws_iam_role.this_modules/fargate-profile/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.this_modules/eks-managed-node-group/main.tf",
+            "to": "aws_iam_role.this_modules/hybrid-node-role/main.tf",
+            "source": "aws_iam_role_policy_attachment.this_modules/eks-managed-node-group/main.tf",
+            "target": "aws_iam_role.this_modules/hybrid-node-role/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.additional_modules/eks-managed-node-group/main.tf",
+            "to": "aws_iam_role.this_main.tf",
+            "source": "aws_iam_role_policy_attachment.additional_modules/eks-managed-node-group/main.tf",
+            "target": "aws_iam_role.this_main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.additional_modules/eks-managed-node-group/main.tf",
+            "to": "aws_iam_role.this_tests/eks-managed-node-group/main.tf",
+            "source": "aws_iam_role_policy_attachment.additional_modules/eks-managed-node-group/main.tf",
+            "target": "aws_iam_role.this_tests/eks-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.additional_modules/eks-managed-node-group/main.tf",
+            "to": "aws_iam_role.this_modules/eks-managed-node-group/main.tf",
+            "source": "aws_iam_role_policy_attachment.additional_modules/eks-managed-node-group/main.tf",
+            "target": "aws_iam_role.this_modules/eks-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.additional_modules/eks-managed-node-group/main.tf",
+            "to": "aws_iam_role.this_modules/self-managed-node-group/main.tf",
+            "source": "aws_iam_role_policy_attachment.additional_modules/eks-managed-node-group/main.tf",
+            "target": "aws_iam_role.this_modules/self-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.additional_modules/eks-managed-node-group/main.tf",
+            "to": "aws_iam_role.this_modules/fargate-profile/main.tf",
+            "source": "aws_iam_role_policy_attachment.additional_modules/eks-managed-node-group/main.tf",
+            "target": "aws_iam_role.this_modules/fargate-profile/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.additional_modules/eks-managed-node-group/main.tf",
+            "to": "aws_iam_role.this_modules/hybrid-node-role/main.tf",
+            "source": "aws_iam_role_policy_attachment.additional_modules/eks-managed-node-group/main.tf",
+            "target": "aws_iam_role.this_modules/hybrid-node-role/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy.this_modules/eks-managed-node-group/main.tf",
+            "to": "aws_iam_role.this_main.tf",
+            "source": "aws_iam_role_policy.this_modules/eks-managed-node-group/main.tf",
+            "target": "aws_iam_role.this_main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy.this_modules/eks-managed-node-group/main.tf",
+            "to": "aws_iam_role.this_tests/eks-managed-node-group/main.tf",
+            "source": "aws_iam_role_policy.this_modules/eks-managed-node-group/main.tf",
+            "target": "aws_iam_role.this_tests/eks-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy.this_modules/eks-managed-node-group/main.tf",
+            "to": "aws_iam_role.this_modules/eks-managed-node-group/main.tf",
+            "source": "aws_iam_role_policy.this_modules/eks-managed-node-group/main.tf",
+            "target": "aws_iam_role.this_modules/eks-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy.this_modules/eks-managed-node-group/main.tf",
+            "to": "aws_iam_role.this_modules/self-managed-node-group/main.tf",
+            "source": "aws_iam_role_policy.this_modules/eks-managed-node-group/main.tf",
+            "target": "aws_iam_role.this_modules/self-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy.this_modules/eks-managed-node-group/main.tf",
+            "to": "aws_iam_role.this_modules/fargate-profile/main.tf",
+            "source": "aws_iam_role_policy.this_modules/eks-managed-node-group/main.tf",
+            "target": "aws_iam_role.this_modules/fargate-profile/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy.this_modules/eks-managed-node-group/main.tf",
+            "to": "aws_iam_role.this_modules/hybrid-node-role/main.tf",
+            "source": "aws_iam_role_policy.this_modules/eks-managed-node-group/main.tf",
+            "target": "aws_iam_role.this_modules/hybrid-node-role/main.tf"
+        },
+        {
+            "from": "aws_vpc_security_group_ingress_rule.this_modules/eks-managed-node-group/main.tf",
+            "to": "aws_security_group.this_modules/eks-managed-node-group/main.tf",
+            "source": "aws_vpc_security_group_ingress_rule.this_modules/eks-managed-node-group/main.tf",
+            "target": "aws_security_group.this_modules/eks-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_vpc_security_group_ingress_rule.this_modules/eks-managed-node-group/main.tf",
+            "to": "aws_security_group.this_modules/self-managed-node-group/main.tf",
+            "source": "aws_vpc_security_group_ingress_rule.this_modules/eks-managed-node-group/main.tf",
+            "target": "aws_security_group.this_modules/self-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_vpc_security_group_egress_rule.this_modules/eks-managed-node-group/main.tf",
+            "to": "aws_security_group.this_modules/eks-managed-node-group/main.tf",
+            "source": "aws_vpc_security_group_egress_rule.this_modules/eks-managed-node-group/main.tf",
+            "target": "aws_security_group.this_modules/eks-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_vpc_security_group_egress_rule.this_modules/eks-managed-node-group/main.tf",
+            "to": "aws_security_group.this_modules/self-managed-node-group/main.tf",
+            "source": "aws_vpc_security_group_egress_rule.this_modules/eks-managed-node-group/main.tf",
+            "target": "aws_security_group.this_modules/self-managed-node-group/main.tf"
         },
         {
             "from": "aws_launch_template.this_modules/self-managed-node-group/main.tf",
@@ -2144,6 +2395,18 @@
             "target": "aws_iam_instance_profile.this_modules/karpenter/main.tf"
         },
         {
+            "from": "aws_launch_template.this_modules/self-managed-node-group/main.tf",
+            "to": "aws_placement_group.this_modules/eks-managed-node-group/main.tf",
+            "source": "aws_launch_template.this_modules/self-managed-node-group/main.tf",
+            "target": "aws_placement_group.this_modules/eks-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_launch_template.this_modules/self-managed-node-group/main.tf",
+            "to": "aws_placement_group.this_modules/self-managed-node-group/main.tf",
+            "source": "aws_launch_template.this_modules/self-managed-node-group/main.tf",
+            "target": "aws_placement_group.this_modules/self-managed-node-group/main.tf"
+        },
+        {
             "from": "aws_iam_role_policy_attachment.this_modules/self-managed-node-group/main.tf",
             "to": "aws_iam_role.this_main.tf",
             "source": "aws_iam_role_policy_attachment.this_modules/self-managed-node-group/main.tf",
@@ -2489,42 +2752,6 @@
             "from": "aws_eks_fargate_profile.this_modules/fargate-profile/main.tf",
             "to": "aws_iam_role.this_modules/hybrid-node-role/main.tf",
             "source": "aws_eks_fargate_profile.this_modules/fargate-profile/main.tf",
-            "target": "aws_iam_role.this_modules/hybrid-node-role/main.tf"
-        },
-        {
-            "from": "aws_iam_role_policy_attachment.this_modules/hybrid-node-role/main.tf",
-            "to": "aws_iam_role.this_main.tf",
-            "source": "aws_iam_role_policy_attachment.this_modules/hybrid-node-role/main.tf",
-            "target": "aws_iam_role.this_main.tf"
-        },
-        {
-            "from": "aws_iam_role_policy_attachment.this_modules/hybrid-node-role/main.tf",
-            "to": "aws_iam_role.this_tests/eks-managed-node-group/main.tf",
-            "source": "aws_iam_role_policy_attachment.this_modules/hybrid-node-role/main.tf",
-            "target": "aws_iam_role.this_tests/eks-managed-node-group/main.tf"
-        },
-        {
-            "from": "aws_iam_role_policy_attachment.this_modules/hybrid-node-role/main.tf",
-            "to": "aws_iam_role.this_modules/eks-managed-node-group/main.tf",
-            "source": "aws_iam_role_policy_attachment.this_modules/hybrid-node-role/main.tf",
-            "target": "aws_iam_role.this_modules/eks-managed-node-group/main.tf"
-        },
-        {
-            "from": "aws_iam_role_policy_attachment.this_modules/hybrid-node-role/main.tf",
-            "to": "aws_iam_role.this_modules/self-managed-node-group/main.tf",
-            "source": "aws_iam_role_policy_attachment.this_modules/hybrid-node-role/main.tf",
-            "target": "aws_iam_role.this_modules/self-managed-node-group/main.tf"
-        },
-        {
-            "from": "aws_iam_role_policy_attachment.this_modules/hybrid-node-role/main.tf",
-            "to": "aws_iam_role.this_modules/fargate-profile/main.tf",
-            "source": "aws_iam_role_policy_attachment.this_modules/hybrid-node-role/main.tf",
-            "target": "aws_iam_role.this_modules/fargate-profile/main.tf"
-        },
-        {
-            "from": "aws_iam_role_policy_attachment.this_modules/hybrid-node-role/main.tf",
-            "to": "aws_iam_role.this_modules/hybrid-node-role/main.tf",
-            "source": "aws_iam_role_policy_attachment.this_modules/hybrid-node-role/main.tf",
             "target": "aws_iam_role.this_modules/hybrid-node-role/main.tf"
         },
         {
@@ -2534,6 +2761,48 @@
             "target": "aws_iam_policy.this_modules/hybrid-node-role/main.tf"
         },
         {
+            "from": "aws_iam_role_policy_attachment.this_modules/hybrid-node-role/main.tf",
+            "to": "aws_iam_role.this_main.tf",
+            "source": "aws_iam_role_policy_attachment.this_modules/hybrid-node-role/main.tf",
+            "target": "aws_iam_role.this_main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.this_modules/hybrid-node-role/main.tf",
+            "to": "aws_iam_role.this_tests/eks-managed-node-group/main.tf",
+            "source": "aws_iam_role_policy_attachment.this_modules/hybrid-node-role/main.tf",
+            "target": "aws_iam_role.this_tests/eks-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.this_modules/hybrid-node-role/main.tf",
+            "to": "aws_iam_role.this_modules/eks-managed-node-group/main.tf",
+            "source": "aws_iam_role_policy_attachment.this_modules/hybrid-node-role/main.tf",
+            "target": "aws_iam_role.this_modules/eks-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.this_modules/hybrid-node-role/main.tf",
+            "to": "aws_iam_role.this_modules/self-managed-node-group/main.tf",
+            "source": "aws_iam_role_policy_attachment.this_modules/hybrid-node-role/main.tf",
+            "target": "aws_iam_role.this_modules/self-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.this_modules/hybrid-node-role/main.tf",
+            "to": "aws_iam_role.this_modules/fargate-profile/main.tf",
+            "source": "aws_iam_role_policy_attachment.this_modules/hybrid-node-role/main.tf",
+            "target": "aws_iam_role.this_modules/fargate-profile/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.this_modules/hybrid-node-role/main.tf",
+            "to": "aws_iam_role.this_modules/hybrid-node-role/main.tf",
+            "source": "aws_iam_role_policy_attachment.this_modules/hybrid-node-role/main.tf",
+            "target": "aws_iam_role.this_modules/hybrid-node-role/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.intermediate_modules/hybrid-node-role/main.tf",
+            "to": "aws_iam_policy.intermediate_modules/hybrid-node-role/main.tf",
+            "source": "aws_iam_role_policy_attachment.intermediate_modules/hybrid-node-role/main.tf",
+            "target": "aws_iam_policy.intermediate_modules/hybrid-node-role/main.tf"
+        },
+        {
             "from": "aws_iam_role_policy_attachment.intermediate_modules/hybrid-node-role/main.tf",
             "to": "aws_iam_role.this_main.tf",
             "source": "aws_iam_role_policy_attachment.intermediate_modules/hybrid-node-role/main.tf",
@@ -2568,12 +2837,6 @@
             "to": "aws_iam_role.this_modules/hybrid-node-role/main.tf",
             "source": "aws_iam_role_policy_attachment.intermediate_modules/hybrid-node-role/main.tf",
             "target": "aws_iam_role.this_modules/hybrid-node-role/main.tf"
-        },
-        {
-            "from": "aws_iam_role_policy_attachment.intermediate_modules/hybrid-node-role/main.tf",
-            "to": "aws_iam_policy.intermediate_modules/hybrid-node-role/main.tf",
-            "source": "aws_iam_role_policy_attachment.intermediate_modules/hybrid-node-role/main.tf",
-            "target": "aws_iam_policy.intermediate_modules/hybrid-node-role/main.tf"
         },
         {
             "from": "aws_iam_role_policy.controller_modules/karpenter/main.tf",
@@ -2613,15 +2876,15 @@
         },
         {
             "from": "aws_cloudwatch_event_target.this_modules/karpenter/main.tf",
-            "to": "aws_sqs_queue.this_modules/karpenter/main.tf",
-            "source": "aws_cloudwatch_event_target.this_modules/karpenter/main.tf",
-            "target": "aws_sqs_queue.this_modules/karpenter/main.tf"
-        },
-        {
-            "from": "aws_cloudwatch_event_target.this_modules/karpenter/main.tf",
             "to": "aws_cloudwatch_event_rule.this_modules/karpenter/main.tf",
             "source": "aws_cloudwatch_event_target.this_modules/karpenter/main.tf",
             "target": "aws_cloudwatch_event_rule.this_modules/karpenter/main.tf"
+        },
+        {
+            "from": "aws_cloudwatch_event_target.this_modules/karpenter/main.tf",
+            "to": "aws_sqs_queue.this_modules/karpenter/main.tf",
+            "source": "aws_cloudwatch_event_target.this_modules/karpenter/main.tf",
+            "target": "aws_sqs_queue.this_modules/karpenter/main.tf"
         },
         {
             "from": "aws_iam_role_policy_attachment.node_modules/karpenter/main.tf",
@@ -2637,15 +2900,15 @@
         },
         {
             "from": "aws_eks_access_entry.node_modules/karpenter/main.tf",
-            "to": "aws_iam_role.node_modules/karpenter/main.tf",
-            "source": "aws_eks_access_entry.node_modules/karpenter/main.tf",
-            "target": "aws_iam_role.node_modules/karpenter/main.tf"
-        },
-        {
-            "from": "aws_eks_access_entry.node_modules/karpenter/main.tf",
             "to": "aws_sqs_queue_policy.this_modules/karpenter/main.tf",
             "source": "aws_eks_access_entry.node_modules/karpenter/main.tf",
             "target": "aws_sqs_queue_policy.this_modules/karpenter/main.tf"
+        },
+        {
+            "from": "aws_eks_access_entry.node_modules/karpenter/main.tf",
+            "to": "aws_iam_role.node_modules/karpenter/main.tf",
+            "source": "aws_eks_access_entry.node_modules/karpenter/main.tf",
+            "target": "aws_iam_role.node_modules/karpenter/main.tf"
         },
         {
             "from": "aws_iam_instance_profile.this_modules/karpenter/main.tf",
@@ -2672,13 +2935,13 @@
         }
     ],
     "correlation_metadata": {
-        "assigned_findings": 5,
+        "assigned_findings": 22,
         "unassigned_findings_count": 1,
-        "nodes_with_issues_count": 2,
-        "total_unique_findings": 6,
+        "nodes_with_issues_count": 10,
+        "total_unique_findings": 23,
         "layer_stats": {
-            "1": 34,
-            "2": 0,
+            "1": 70,
+            "2": 11,
             "3": 0,
             "0": 1
         }
@@ -2688,23 +2951,23 @@
         "message": "Pipeline completado exitosamente para proyecto 'eks_pr_26'",
         "project_name": "eks_pr_26",
         "project_directory": "./terraform-aws-eks",
-        "scanners_used": 1,
-        "checkov_success": false,
+        "scanners_used": 2,
+        "checkov_success": true,
         "trivy_success": true,
-        "total_findings_original": 101,
-        "total_findings_unique": 6,
-        "duplicates_removed": 95,
+        "total_findings_original": 233,
+        "total_findings_unique": 23,
+        "duplicates_removed": 210,
         "deduplication_method": "CFI_CIS+SARIF_FP",
         "total_nodes": 135,
         "total_edges": 204,
         "correlation_metadata": {
-            "assigned_findings": 5,
+            "assigned_findings": 22,
             "unassigned_findings_count": 1,
-            "nodes_with_issues_count": 2,
-            "total_unique_findings": 6,
+            "nodes_with_issues_count": 10,
+            "total_unique_findings": 23,
             "layer_stats": {
-                "1": 34,
-                "2": 0,
+                "1": 70,
+                "2": 11,
                 "3": 0,
                 "0": 1
             }
