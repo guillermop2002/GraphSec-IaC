@@ -7,7 +7,6 @@ Este módulo proporciona:
 """
 
 from typing import Dict, Any, List
-from collections import defaultdict
 import re
 import logging
 
@@ -49,24 +48,16 @@ def build_edges(parsed_resources: List[Dict[str, Any]], name_to_id_map: Dict[str
     edges = []
     pattern_direct = re.compile(r'([a-zA-Z0-9_]+\.[a-zA-Z0-9_]+)(?:\.[a-zA-Z0-9_]+)*')
     
-    # Crear un mapa de simple_name -> lista de nodos
-    nodes_by_simple_name = defaultdict(list)
-    for n in nodes:
-        nodes_by_simple_name[n['simple_name']].append(n)
+    # Crear un mapa de (file, start_line) -> unique_id
+    node_lookup = {(n['file'], n['start_line']): n['id'] for n in nodes}
     
-    for resource_node in nodes:
-        resource_id = resource_node.get('id')  # ID ÚNICO (ej. 'aws_iam_role.this_0')
-        resource_simple_name = resource_node.get('simple_name')
+    for resource in parsed_resources:
+        # Encontrar el ID 'from' (el ID único de este recurso)
+        resource_id = node_lookup.get((resource.get('file'), resource.get('start_line')))
         if not resource_id:
             continue
         
-        # Encontrar el 'parsed_resource' original
-        # Esta es una búsqueda ineficiente, pero necesaria por el refactor
-        parsed_resource = next((p for p in parsed_resources if p['file'] == resource_node['file'] and p['start_line'] == resource_node['start_line']), None)
-        if not parsed_resource:
-            continue
-        
-        raw_block_text = parsed_resource.get('raw_block_text', '')
+        raw_block_text = resource.get('raw_block_text', '')
         dependencies_found = set(pattern_direct.findall(raw_block_text))
         
         for dep_name in dependencies_found:
@@ -74,10 +65,8 @@ def build_edges(parsed_resources: List[Dict[str, Any]], name_to_id_map: Dict[str
                dep_name.startswith("each.") or dep_name.startswith("count."):
                 continue
             
-            # Verificar si la dependencia es un recurso real
             dep_unique_ids = name_to_id_map.get(dep_name)
             if dep_unique_ids:
-                # Éxito: Encontrada una dependencia
                 for dep_id in dep_unique_ids:
                     edges.append({
                         "from": resource_id,
