@@ -154,7 +154,7 @@ class CheckovScanner(Scanner):
                 env=env
             )
             
-            stdout, stderr = await asyncio.wait_for(process.communicate(), timeout=self.timeout if hasattr(self, 'timeout') else 300)
+            stdout, stderr = await asyncio.wait_for(process.communicate(), timeout=self.timeout)
             
             stdout_decoded = stdout.decode('utf-8', errors='ignore')
             stderr_decoded = stderr.decode('utf-8', errors='ignore')
