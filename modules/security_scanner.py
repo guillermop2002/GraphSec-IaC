@@ -98,11 +98,24 @@ class CheckovScanner(Scanner):
     
     async def scan(self, directory_path: str, output_file: str) -> bool:
         """
-        Ejecuta Checkov usando 'python -m checkov'.
+        Ejecuta Checkov usando el ejecutable 'checkov' directamente.
         Esto es universal para Windows (venv) y Linux (CI).
-        Versión V13: Forzando arreglo completo.
+        Versión V16: Usar ejecutable checkov directamente.
         """
-        python_exec = self._find_python_executable()
+        # Intentar encontrar el ejecutable de checkov
+        # Primero intentar 'checkov' directamente (instalado en PATH)
+        checkov_cmd = "checkov"
+        
+        # Si estamos en Windows, intentar encontrar el ejecutable en Scripts
+        if os.name == 'nt':
+            python_exec = self._find_python_executable()
+            venv_scripts = os.path.dirname(python_exec)
+            checkov_exe = os.path.join(venv_scripts, "checkov.exe")
+            checkov_bat = os.path.join(venv_scripts, "checkov.bat")
+            if os.path.exists(checkov_exe):
+                checkov_cmd = checkov_exe
+            elif os.path.exists(checkov_bat):
+                checkov_cmd = checkov_bat
         
         # 'output_file' ES el path COMPLETO del archivo SARIF final.
         actual_sarif_file = os.path.abspath(output_file)
@@ -121,8 +134,7 @@ class CheckovScanner(Scanner):
             shutil.rmtree(old_dir_style)
         
         cmd = [
-            python_exec,
-            "-m", "checkov",  # <- Usar '-m' es la forma correcta
+            checkov_cmd,
             "--directory", ".",  # <- Ejecutar desde el CWD
             "--output", "sarif",
             "--output-file-path", actual_sarif_file,
@@ -135,7 +147,7 @@ class CheckovScanner(Scanner):
         
         import time as time_module
         scan_start = time_module.time()
-        logger.info(f"[{time_module.strftime('%H:%M:%S')}] Ejecutando Checkov: {' '.join(cmd[:5])} ...")
+        logger.info(f"[{time_module.strftime('%H:%M:%S')}] Ejecutando Checkov: {checkov_cmd} ...")
         try:
             process = await asyncio.create_subprocess_exec(
                 *cmd,
