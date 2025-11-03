@@ -338,10 +338,21 @@
         
         // Función para actualizar estadísticas
         function updateStats(data) {
+            // Si 'data' no existe (ej. cargando un JSON de GH Pages),
+            // lo extraemos del objeto 'graphData' global.
+            if (!data) {
+                data = window.graphData || {};
+            }
+            
             const nodes = data.nodes || [];
             const edges = data.edges || [];
             const correlationMetadata = data.correlation_metadata || {};
             const apiMetadata = data.api_metadata || {};
+            
+            // Calcular métricas manualmente si es necesario
+            const unique_findings = apiMetadata.total_findings_unique || 0;
+            const duplicates_removed = apiMetadata.duplicates_removed || correlationMetadata.duplicates_removed || 0;
+            const scanners_used = apiMetadata.scanners_used || (apiMetadata.checkov_success && apiMetadata.trivy_success ? 2 : (apiMetadata.checkov_success || apiMetadata.trivy_success ? 1 : 0));
             
             // Calcular nodos vulnerables manualmente si no está en metadata
             // Un nodo es vulnerable si tiene security_issues con al menos 1 hallazgo
@@ -360,14 +371,10 @@
             }
             
             // Estadísticas básicas
-            document.getElementById('total-nodes').textContent = nodes.length;
-            document.getElementById('total-edges').textContent = edges.length;
-            document.getElementById('total-findings').textContent = apiMetadata.total_findings_unique || correlationMetadata.total_findings_unique || 0;
+            document.getElementById('total-nodes').textContent = apiMetadata.total_nodes || nodes.length;
+            document.getElementById('total-edges').textContent = apiMetadata.total_edges || edges.length;
+            document.getElementById('total-findings').textContent = unique_findings;
             document.getElementById('vulnerable-nodes').textContent = vulnerableNodesCount;
-            
-            // Añadir información de de-duplicación si está disponible
-            const duplicatesRemoved = apiMetadata.duplicates_removed || correlationMetadata.duplicates_removed || 0;
-            const scannersUsed = apiMetadata.scanners_used || 1;
             
             if (duplicatesRemoved > 0) {
                 // Crear elemento de información de de-duplicación
@@ -707,6 +714,7 @@
                 
                 // Almacenar datos globalmente
                 graphData = data;
+                window.graphData = data; // Guardar datos globalmente para updateStats
                 
                 // Mostrar éxito
                 showSuccess();

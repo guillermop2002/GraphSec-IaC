@@ -79,20 +79,36 @@ def get_cached_or_generate_graph(directory: str, project_name: str) -> Dict[str,
     if not parsed_resources:
         raise PipelineError("Error: No se encontraron recursos Terraform para analizar")
     
-    edges = build_edges(parsed_resources)
-    
+    # Crear nodos con IDs únicos primero (para evitar duplicados en vis.js)
     nodes = []
+    # Mapa de simple_name -> unique_id para usar en build_edges
+    name_to_id_map = {}
+    
     for resource in parsed_resources:
+        # Crear un ID único basado en el nombre Y el fichero,
+        # para diferenciar recursos con el mismo nombre en distintos ficheros.
+        file_name = os.path.basename(resource.get('file', ''))
+        simple_name = resource.get('simple_name', '')
+        unique_id = f"{simple_name}_{file_name}" if file_name else simple_name
+        
+        # Guardar mapeo para usar en build_edges
+        if simple_name not in name_to_id_map:
+            name_to_id_map[simple_name] = []
+        name_to_id_map[simple_name].append(unique_id)
+        
         node = {
-            "id": resource.get('simple_name'),
-            "simple_name": resource.get('simple_name'),
-            "label": resource.get('simple_name'),
+            "id": unique_id,  # ID único para vis.js
+            "simple_name": simple_name,  # Nombre real
+            "label": simple_name,
             "type": resource.get('type'),
             "file": resource.get('file'),
             "start_line": resource.get('start_line'),
             "end_line": resource.get('end_line'),
         }
         nodes.append(node)
+    
+    # Construir aristas usando los IDs únicos
+    edges = build_edges(parsed_resources, name_to_id_map)
     
     graph_data = {"nodes": nodes, "edges": edges}
     
