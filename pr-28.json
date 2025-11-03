@@ -1,7 +1,7 @@
 {
     "nodes": [
         {
-            "id": "aws_vpc.this_main.tf",
+            "id": "aws_vpc.this_0",
             "simple_name": "aws_vpc.this",
             "label": "aws_vpc.this",
             "type": "aws_vpc",
@@ -27,7 +27,7 @@
             ]
         },
         {
-            "id": "aws_vpc_ipv4_cidr_block_association.this_main.tf",
+            "id": "aws_vpc_ipv4_cidr_block_association.this_1",
             "simple_name": "aws_vpc_ipv4_cidr_block_association.this",
             "label": "aws_vpc_ipv4_cidr_block_association.this",
             "type": "aws_vpc_ipv4_cidr_block_association",
@@ -37,7 +37,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_vpc_block_public_access_options.this_main.tf",
+            "id": "aws_vpc_block_public_access_options.this_2",
             "simple_name": "aws_vpc_block_public_access_options.this",
             "label": "aws_vpc_block_public_access_options.this",
             "type": "aws_vpc_block_public_access_options",
@@ -47,7 +47,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_vpc_block_public_access_exclusion.this_main.tf",
+            "id": "aws_vpc_block_public_access_exclusion.this_3",
             "simple_name": "aws_vpc_block_public_access_exclusion.this",
             "label": "aws_vpc_block_public_access_exclusion.this",
             "type": "aws_vpc_block_public_access_exclusion",
@@ -57,7 +57,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_vpc_dhcp_options.this_main.tf",
+            "id": "aws_vpc_dhcp_options.this_4",
             "simple_name": "aws_vpc_dhcp_options.this",
             "label": "aws_vpc_dhcp_options.this",
             "type": "aws_vpc_dhcp_options",
@@ -67,7 +67,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_vpc_dhcp_options_association.this_main.tf",
+            "id": "aws_vpc_dhcp_options_association.this_5",
             "simple_name": "aws_vpc_dhcp_options_association.this",
             "label": "aws_vpc_dhcp_options_association.this",
             "type": "aws_vpc_dhcp_options_association",
@@ -77,7 +77,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_subnet.public_main.tf",
+            "id": "aws_subnet.public_6",
             "simple_name": "aws_subnet.public",
             "label": "aws_subnet.public",
             "type": "aws_subnet",
@@ -87,7 +87,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_route_table.public_main.tf",
+            "id": "aws_route_table.public_7",
             "simple_name": "aws_route_table.public",
             "label": "aws_route_table.public",
             "type": "aws_route_table",
@@ -97,7 +97,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_route_table_association.public_main.tf",
+            "id": "aws_route_table_association.public_8",
             "simple_name": "aws_route_table_association.public",
             "label": "aws_route_table_association.public",
             "type": "aws_route_table_association",
@@ -107,7 +107,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_route.public_internet_gateway_main.tf",
+            "id": "aws_route.public_internet_gateway_9",
             "simple_name": "aws_route.public_internet_gateway",
             "label": "aws_route.public_internet_gateway",
             "type": "aws_route",
@@ -117,7 +117,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_route.public_internet_gateway_ipv6_main.tf",
+            "id": "aws_route.public_internet_gateway_ipv6_10",
             "simple_name": "aws_route.public_internet_gateway_ipv6",
             "label": "aws_route.public_internet_gateway_ipv6",
             "type": "aws_route",
@@ -127,7 +127,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_network_acl.public_main.tf",
+            "id": "aws_network_acl.public_11",
             "simple_name": "aws_network_acl.public",
             "label": "aws_network_acl.public",
             "type": "aws_network_acl",
@@ -137,7 +137,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_network_acl_rule.public_inbound_main.tf",
+            "id": "aws_network_acl_rule.public_inbound_12",
             "simple_name": "aws_network_acl_rule.public_inbound",
             "label": "aws_network_acl_rule.public_inbound",
             "type": "aws_network_acl_rule",
@@ -163,7 +163,7 @@
             ]
         },
         {
-            "id": "aws_network_acl_rule.public_outbound_main.tf",
+            "id": "aws_network_acl_rule.public_outbound_13",
             "simple_name": "aws_network_acl_rule.public_outbound",
             "label": "aws_network_acl_rule.public_outbound",
             "type": "aws_network_acl_rule",
@@ -173,7 +173,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_subnet.private_main.tf",
+            "id": "aws_subnet.private_14",
             "simple_name": "aws_subnet.private",
             "label": "aws_subnet.private",
             "type": "aws_subnet",
@@ -183,7 +183,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_route_table.private_main.tf",
+            "id": "aws_route_table.private_15",
             "simple_name": "aws_route_table.private",
             "label": "aws_route_table.private",
             "type": "aws_route_table",
@@ -193,7 +193,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_route_table_association.private_main.tf",
+            "id": "aws_route_table_association.private_16",
             "simple_name": "aws_route_table_association.private",
             "label": "aws_route_table_association.private",
             "type": "aws_route_table_association",
@@ -203,7 +203,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_network_acl.private_main.tf",
+            "id": "aws_network_acl.private_17",
             "simple_name": "aws_network_acl.private",
             "label": "aws_network_acl.private",
             "type": "aws_network_acl",
@@ -213,7 +213,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_network_acl_rule.private_inbound_main.tf",
+            "id": "aws_network_acl_rule.private_inbound_18",
             "simple_name": "aws_network_acl_rule.private_inbound",
             "label": "aws_network_acl_rule.private_inbound",
             "type": "aws_network_acl_rule",
@@ -223,7 +223,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_network_acl_rule.private_outbound_main.tf",
+            "id": "aws_network_acl_rule.private_outbound_19",
             "simple_name": "aws_network_acl_rule.private_outbound",
             "label": "aws_network_acl_rule.private_outbound",
             "type": "aws_network_acl_rule",
@@ -233,7 +233,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_subnet.database_main.tf",
+            "id": "aws_subnet.database_20",
             "simple_name": "aws_subnet.database",
             "label": "aws_subnet.database",
             "type": "aws_subnet",
@@ -243,7 +243,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_db_subnet_group.database_main.tf",
+            "id": "aws_db_subnet_group.database_21",
             "simple_name": "aws_db_subnet_group.database",
             "label": "aws_db_subnet_group.database",
             "type": "aws_db_subnet_group",
@@ -253,7 +253,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_route_table.database_main.tf",
+            "id": "aws_route_table.database_22",
             "simple_name": "aws_route_table.database",
             "label": "aws_route_table.database",
             "type": "aws_route_table",
@@ -263,7 +263,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_route_table_association.database_main.tf",
+            "id": "aws_route_table_association.database_23",
             "simple_name": "aws_route_table_association.database",
             "label": "aws_route_table_association.database",
             "type": "aws_route_table_association",
@@ -273,7 +273,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_route.database_internet_gateway_main.tf",
+            "id": "aws_route.database_internet_gateway_24",
             "simple_name": "aws_route.database_internet_gateway",
             "label": "aws_route.database_internet_gateway",
             "type": "aws_route",
@@ -283,7 +283,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_route.database_nat_gateway_main.tf",
+            "id": "aws_route.database_nat_gateway_25",
             "simple_name": "aws_route.database_nat_gateway",
             "label": "aws_route.database_nat_gateway",
             "type": "aws_route",
@@ -293,7 +293,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_route.database_dns64_nat_gateway_main.tf",
+            "id": "aws_route.database_dns64_nat_gateway_26",
             "simple_name": "aws_route.database_dns64_nat_gateway",
             "label": "aws_route.database_dns64_nat_gateway",
             "type": "aws_route",
@@ -303,7 +303,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_route.database_ipv6_egress_main.tf",
+            "id": "aws_route.database_ipv6_egress_27",
             "simple_name": "aws_route.database_ipv6_egress",
             "label": "aws_route.database_ipv6_egress",
             "type": "aws_route",
@@ -313,7 +313,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_network_acl.database_main.tf",
+            "id": "aws_network_acl.database_28",
             "simple_name": "aws_network_acl.database",
             "label": "aws_network_acl.database",
             "type": "aws_network_acl",
@@ -323,7 +323,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_network_acl_rule.database_inbound_main.tf",
+            "id": "aws_network_acl_rule.database_inbound_29",
             "simple_name": "aws_network_acl_rule.database_inbound",
             "label": "aws_network_acl_rule.database_inbound",
             "type": "aws_network_acl_rule",
@@ -333,7 +333,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_network_acl_rule.database_outbound_main.tf",
+            "id": "aws_network_acl_rule.database_outbound_30",
             "simple_name": "aws_network_acl_rule.database_outbound",
             "label": "aws_network_acl_rule.database_outbound",
             "type": "aws_network_acl_rule",
@@ -343,7 +343,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_subnet.redshift_main.tf",
+            "id": "aws_subnet.redshift_31",
             "simple_name": "aws_subnet.redshift",
             "label": "aws_subnet.redshift",
             "type": "aws_subnet",
@@ -353,7 +353,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_redshift_subnet_group.redshift_main.tf",
+            "id": "aws_redshift_subnet_group.redshift_32",
             "simple_name": "aws_redshift_subnet_group.redshift",
             "label": "aws_redshift_subnet_group.redshift",
             "type": "aws_redshift_subnet_group",
@@ -363,7 +363,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_route_table.redshift_main.tf",
+            "id": "aws_route_table.redshift_33",
             "simple_name": "aws_route_table.redshift",
             "label": "aws_route_table.redshift",
             "type": "aws_route_table",
@@ -373,7 +373,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_route_table_association.redshift_main.tf",
+            "id": "aws_route_table_association.redshift_34",
             "simple_name": "aws_route_table_association.redshift",
             "label": "aws_route_table_association.redshift",
             "type": "aws_route_table_association",
@@ -383,7 +383,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_route_table_association.redshift_public_main.tf",
+            "id": "aws_route_table_association.redshift_public_35",
             "simple_name": "aws_route_table_association.redshift_public",
             "label": "aws_route_table_association.redshift_public",
             "type": "aws_route_table_association",
@@ -393,7 +393,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_network_acl.redshift_main.tf",
+            "id": "aws_network_acl.redshift_36",
             "simple_name": "aws_network_acl.redshift",
             "label": "aws_network_acl.redshift",
             "type": "aws_network_acl",
@@ -403,7 +403,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_network_acl_rule.redshift_inbound_main.tf",
+            "id": "aws_network_acl_rule.redshift_inbound_37",
             "simple_name": "aws_network_acl_rule.redshift_inbound",
             "label": "aws_network_acl_rule.redshift_inbound",
             "type": "aws_network_acl_rule",
@@ -413,7 +413,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_network_acl_rule.redshift_outbound_main.tf",
+            "id": "aws_network_acl_rule.redshift_outbound_38",
             "simple_name": "aws_network_acl_rule.redshift_outbound",
             "label": "aws_network_acl_rule.redshift_outbound",
             "type": "aws_network_acl_rule",
@@ -423,7 +423,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_subnet.elasticache_main.tf",
+            "id": "aws_subnet.elasticache_39",
             "simple_name": "aws_subnet.elasticache",
             "label": "aws_subnet.elasticache",
             "type": "aws_subnet",
@@ -433,7 +433,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_elasticache_subnet_group.elasticache_main.tf",
+            "id": "aws_elasticache_subnet_group.elasticache_40",
             "simple_name": "aws_elasticache_subnet_group.elasticache",
             "label": "aws_elasticache_subnet_group.elasticache",
             "type": "aws_elasticache_subnet_group",
@@ -443,7 +443,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_route_table.elasticache_main.tf",
+            "id": "aws_route_table.elasticache_41",
             "simple_name": "aws_route_table.elasticache",
             "label": "aws_route_table.elasticache",
             "type": "aws_route_table",
@@ -453,7 +453,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_route_table_association.elasticache_main.tf",
+            "id": "aws_route_table_association.elasticache_42",
             "simple_name": "aws_route_table_association.elasticache",
             "label": "aws_route_table_association.elasticache",
             "type": "aws_route_table_association",
@@ -463,7 +463,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_network_acl.elasticache_main.tf",
+            "id": "aws_network_acl.elasticache_43",
             "simple_name": "aws_network_acl.elasticache",
             "label": "aws_network_acl.elasticache",
             "type": "aws_network_acl",
@@ -473,7 +473,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_network_acl_rule.elasticache_inbound_main.tf",
+            "id": "aws_network_acl_rule.elasticache_inbound_44",
             "simple_name": "aws_network_acl_rule.elasticache_inbound",
             "label": "aws_network_acl_rule.elasticache_inbound",
             "type": "aws_network_acl_rule",
@@ -514,7 +514,7 @@
             ]
         },
         {
-            "id": "aws_network_acl_rule.elasticache_outbound_main.tf",
+            "id": "aws_network_acl_rule.elasticache_outbound_45",
             "simple_name": "aws_network_acl_rule.elasticache_outbound",
             "label": "aws_network_acl_rule.elasticache_outbound",
             "type": "aws_network_acl_rule",
@@ -524,7 +524,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_subnet.intra_main.tf",
+            "id": "aws_subnet.intra_46",
             "simple_name": "aws_subnet.intra",
             "label": "aws_subnet.intra",
             "type": "aws_subnet",
@@ -534,7 +534,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_route_table.intra_main.tf",
+            "id": "aws_route_table.intra_47",
             "simple_name": "aws_route_table.intra",
             "label": "aws_route_table.intra",
             "type": "aws_route_table",
@@ -544,7 +544,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_route_table_association.intra_main.tf",
+            "id": "aws_route_table_association.intra_48",
             "simple_name": "aws_route_table_association.intra",
             "label": "aws_route_table_association.intra",
             "type": "aws_route_table_association",
@@ -554,7 +554,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_network_acl.intra_main.tf",
+            "id": "aws_network_acl.intra_49",
             "simple_name": "aws_network_acl.intra",
             "label": "aws_network_acl.intra",
             "type": "aws_network_acl",
@@ -564,7 +564,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_network_acl_rule.intra_inbound_main.tf",
+            "id": "aws_network_acl_rule.intra_inbound_50",
             "simple_name": "aws_network_acl_rule.intra_inbound",
             "label": "aws_network_acl_rule.intra_inbound",
             "type": "aws_network_acl_rule",
@@ -574,7 +574,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_network_acl_rule.intra_outbound_main.tf",
+            "id": "aws_network_acl_rule.intra_outbound_51",
             "simple_name": "aws_network_acl_rule.intra_outbound",
             "label": "aws_network_acl_rule.intra_outbound",
             "type": "aws_network_acl_rule",
@@ -584,7 +584,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_subnet.outpost_main.tf",
+            "id": "aws_subnet.outpost_52",
             "simple_name": "aws_subnet.outpost",
             "label": "aws_subnet.outpost",
             "type": "aws_subnet",
@@ -594,7 +594,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_route_table_association.outpost_main.tf",
+            "id": "aws_route_table_association.outpost_53",
             "simple_name": "aws_route_table_association.outpost",
             "label": "aws_route_table_association.outpost",
             "type": "aws_route_table_association",
@@ -604,7 +604,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_network_acl.outpost_main.tf",
+            "id": "aws_network_acl.outpost_54",
             "simple_name": "aws_network_acl.outpost",
             "label": "aws_network_acl.outpost",
             "type": "aws_network_acl",
@@ -614,7 +614,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_network_acl_rule.outpost_inbound_main.tf",
+            "id": "aws_network_acl_rule.outpost_inbound_55",
             "simple_name": "aws_network_acl_rule.outpost_inbound",
             "label": "aws_network_acl_rule.outpost_inbound",
             "type": "aws_network_acl_rule",
@@ -640,7 +640,7 @@
             ]
         },
         {
-            "id": "aws_network_acl_rule.outpost_outbound_main.tf",
+            "id": "aws_network_acl_rule.outpost_outbound_56",
             "simple_name": "aws_network_acl_rule.outpost_outbound",
             "label": "aws_network_acl_rule.outpost_outbound",
             "type": "aws_network_acl_rule",
@@ -650,7 +650,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_internet_gateway.this_main.tf",
+            "id": "aws_internet_gateway.this_57",
             "simple_name": "aws_internet_gateway.this",
             "label": "aws_internet_gateway.this",
             "type": "aws_internet_gateway",
@@ -660,7 +660,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_egress_only_internet_gateway.this_main.tf",
+            "id": "aws_egress_only_internet_gateway.this_58",
             "simple_name": "aws_egress_only_internet_gateway.this",
             "label": "aws_egress_only_internet_gateway.this",
             "type": "aws_egress_only_internet_gateway",
@@ -670,7 +670,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_route.private_ipv6_egress_main.tf",
+            "id": "aws_route.private_ipv6_egress_59",
             "simple_name": "aws_route.private_ipv6_egress",
             "label": "aws_route.private_ipv6_egress",
             "type": "aws_route",
@@ -680,7 +680,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_eip.nat_main.tf",
+            "id": "aws_eip.nat_60",
             "simple_name": "aws_eip.nat",
             "label": "aws_eip.nat",
             "type": "aws_eip",
@@ -690,7 +690,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_nat_gateway.this_main.tf",
+            "id": "aws_nat_gateway.this_61",
             "simple_name": "aws_nat_gateway.this",
             "label": "aws_nat_gateway.this",
             "type": "aws_nat_gateway",
@@ -700,7 +700,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_route.private_nat_gateway_main.tf",
+            "id": "aws_route.private_nat_gateway_62",
             "simple_name": "aws_route.private_nat_gateway",
             "label": "aws_route.private_nat_gateway",
             "type": "aws_route",
@@ -710,7 +710,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_route.private_dns64_nat_gateway_main.tf",
+            "id": "aws_route.private_dns64_nat_gateway_63",
             "simple_name": "aws_route.private_dns64_nat_gateway",
             "label": "aws_route.private_dns64_nat_gateway",
             "type": "aws_route",
@@ -720,7 +720,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_customer_gateway.this_main.tf",
+            "id": "aws_customer_gateway.this_64",
             "simple_name": "aws_customer_gateway.this",
             "label": "aws_customer_gateway.this",
             "type": "aws_customer_gateway",
@@ -730,7 +730,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_vpn_gateway.this_main.tf",
+            "id": "aws_vpn_gateway.this_65",
             "simple_name": "aws_vpn_gateway.this",
             "label": "aws_vpn_gateway.this",
             "type": "aws_vpn_gateway",
@@ -740,7 +740,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_vpn_gateway_attachment.this_main.tf",
+            "id": "aws_vpn_gateway_attachment.this_66",
             "simple_name": "aws_vpn_gateway_attachment.this",
             "label": "aws_vpn_gateway_attachment.this",
             "type": "aws_vpn_gateway_attachment",
@@ -750,7 +750,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_vpn_gateway_route_propagation.public_main.tf",
+            "id": "aws_vpn_gateway_route_propagation.public_67",
             "simple_name": "aws_vpn_gateway_route_propagation.public",
             "label": "aws_vpn_gateway_route_propagation.public",
             "type": "aws_vpn_gateway_route_propagation",
@@ -760,7 +760,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_vpn_gateway_route_propagation.private_main.tf",
+            "id": "aws_vpn_gateway_route_propagation.private_68",
             "simple_name": "aws_vpn_gateway_route_propagation.private",
             "label": "aws_vpn_gateway_route_propagation.private",
             "type": "aws_vpn_gateway_route_propagation",
@@ -770,7 +770,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_vpn_gateway_route_propagation.intra_main.tf",
+            "id": "aws_vpn_gateway_route_propagation.intra_69",
             "simple_name": "aws_vpn_gateway_route_propagation.intra",
             "label": "aws_vpn_gateway_route_propagation.intra",
             "type": "aws_vpn_gateway_route_propagation",
@@ -780,7 +780,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_default_vpc.this_main.tf",
+            "id": "aws_default_vpc.this_70",
             "simple_name": "aws_default_vpc.this",
             "label": "aws_default_vpc.this",
             "type": "aws_default_vpc",
@@ -821,7 +821,7 @@
             ]
         },
         {
-            "id": "aws_default_security_group.this_main.tf",
+            "id": "aws_default_security_group.this_71",
             "simple_name": "aws_default_security_group.this",
             "label": "aws_default_security_group.this",
             "type": "aws_default_security_group",
@@ -831,7 +831,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_default_network_acl.this_main.tf",
+            "id": "aws_default_network_acl.this_72",
             "simple_name": "aws_default_network_acl.this",
             "label": "aws_default_network_acl.this",
             "type": "aws_default_network_acl",
@@ -841,7 +841,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_default_route_table.default_main.tf",
+            "id": "aws_default_route_table.default_73",
             "simple_name": "aws_default_route_table.default",
             "label": "aws_default_route_table.default",
             "type": "aws_default_route_table",
@@ -851,7 +851,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_flow_log.this_vpc-flow-logs.tf",
+            "id": "aws_flow_log.this_74",
             "simple_name": "aws_flow_log.this",
             "label": "aws_flow_log.this",
             "type": "aws_flow_log",
@@ -861,7 +861,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_cloudwatch_log_group.flow_log_vpc-flow-logs.tf",
+            "id": "aws_cloudwatch_log_group.flow_log_75",
             "simple_name": "aws_cloudwatch_log_group.flow_log",
             "label": "aws_cloudwatch_log_group.flow_log",
             "type": "aws_cloudwatch_log_group",
@@ -871,7 +871,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_iam_role.vpc_flow_log_cloudwatch_vpc-flow-logs.tf",
+            "id": "aws_iam_role.vpc_flow_log_cloudwatch_76",
             "simple_name": "aws_iam_role.vpc_flow_log_cloudwatch",
             "label": "aws_iam_role.vpc_flow_log_cloudwatch",
             "type": "aws_iam_role",
@@ -881,7 +881,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_iam_role_policy_attachment.vpc_flow_log_cloudwatch_vpc-flow-logs.tf",
+            "id": "aws_iam_role_policy_attachment.vpc_flow_log_cloudwatch_77",
             "simple_name": "aws_iam_role_policy_attachment.vpc_flow_log_cloudwatch",
             "label": "aws_iam_role_policy_attachment.vpc_flow_log_cloudwatch",
             "type": "aws_iam_role_policy_attachment",
@@ -891,7 +891,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_iam_policy.vpc_flow_log_cloudwatch_vpc-flow-logs.tf",
+            "id": "aws_iam_policy.vpc_flow_log_cloudwatch_78",
             "simple_name": "aws_iam_policy.vpc_flow_log_cloudwatch",
             "label": "aws_iam_policy.vpc_flow_log_cloudwatch",
             "type": "aws_iam_policy",
@@ -901,7 +901,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_cloudwatch_log_group.flow_log_examples/flow-log/main.tf",
+            "id": "aws_cloudwatch_log_group.flow_log_79",
             "simple_name": "aws_cloudwatch_log_group.flow_log",
             "label": "aws_cloudwatch_log_group.flow_log",
             "type": "aws_cloudwatch_log_group",
@@ -911,7 +911,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_iam_role.flow_log_cloudwatch_examples/flow-log/main.tf",
+            "id": "aws_iam_role.flow_log_cloudwatch_80",
             "simple_name": "aws_iam_role.flow_log_cloudwatch",
             "label": "aws_iam_role.flow_log_cloudwatch",
             "type": "aws_iam_role",
@@ -921,7 +921,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_iam_role_policy.flow_log_cloudwatch_examples/flow-log/main.tf",
+            "id": "aws_iam_role_policy.flow_log_cloudwatch_81",
             "simple_name": "aws_iam_role_policy.flow_log_cloudwatch",
             "label": "aws_iam_role_policy.flow_log_cloudwatch",
             "type": "aws_iam_role_policy",
@@ -931,7 +931,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_vpc_ipam.this_examples/ipam/main.tf",
+            "id": "aws_vpc_ipam.this_82",
             "simple_name": "aws_vpc_ipam.this",
             "label": "aws_vpc_ipam.this",
             "type": "aws_vpc_ipam",
@@ -941,7 +941,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_vpc_ipam_pool.this_examples/ipam/main.tf",
+            "id": "aws_vpc_ipam_pool.this_83",
             "simple_name": "aws_vpc_ipam_pool.this",
             "label": "aws_vpc_ipam_pool.this",
             "type": "aws_vpc_ipam_pool",
@@ -951,7 +951,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_vpc_ipam_pool_cidr.this_examples/ipam/main.tf",
+            "id": "aws_vpc_ipam_pool_cidr.this_84",
             "simple_name": "aws_vpc_ipam_pool_cidr.this",
             "label": "aws_vpc_ipam_pool_cidr.this",
             "type": "aws_vpc_ipam_pool_cidr",
@@ -961,7 +961,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_vpc_ipam_preview_next_cidr.this_examples/ipam/main.tf",
+            "id": "aws_vpc_ipam_preview_next_cidr.this_85",
             "simple_name": "aws_vpc_ipam_preview_next_cidr.this",
             "label": "aws_vpc_ipam_preview_next_cidr.this",
             "type": "aws_vpc_ipam_preview_next_cidr",
@@ -971,7 +971,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_vpc_ipam_pool.ipv6_examples/ipam/main.tf",
+            "id": "aws_vpc_ipam_pool.ipv6_86",
             "simple_name": "aws_vpc_ipam_pool.ipv6",
             "label": "aws_vpc_ipam_pool.ipv6",
             "type": "aws_vpc_ipam_pool",
@@ -981,7 +981,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_security_group.rds_examples/complete/main.tf",
+            "id": "aws_security_group.rds_87",
             "simple_name": "aws_security_group.rds",
             "label": "aws_security_group.rds",
             "type": "aws_security_group",
@@ -991,7 +991,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_flow_log.this_modules/flow-log/main.tf",
+            "id": "aws_flow_log.this_88",
             "simple_name": "aws_flow_log.this",
             "label": "aws_flow_log.this",
             "type": "aws_flow_log",
@@ -1001,7 +1001,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_cloudwatch_log_group.this_modules/flow-log/main.tf",
+            "id": "aws_cloudwatch_log_group.this_89",
             "simple_name": "aws_cloudwatch_log_group.this",
             "label": "aws_cloudwatch_log_group.this",
             "type": "aws_cloudwatch_log_group",
@@ -1011,7 +1011,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_iam_role.this_modules/flow-log/main.tf",
+            "id": "aws_iam_role.this_90",
             "simple_name": "aws_iam_role.this",
             "label": "aws_iam_role.this",
             "type": "aws_iam_role",
@@ -1021,7 +1021,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_iam_policy.this_modules/flow-log/main.tf",
+            "id": "aws_iam_policy.this_91",
             "simple_name": "aws_iam_policy.this",
             "label": "aws_iam_policy.this",
             "type": "aws_iam_policy",
@@ -1031,7 +1031,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_iam_role_policy_attachment.this_modules/flow-log/main.tf",
+            "id": "aws_iam_role_policy_attachment.this_92",
             "simple_name": "aws_iam_role_policy_attachment.this",
             "label": "aws_iam_role_policy_attachment.this",
             "type": "aws_iam_role_policy_attachment",
@@ -1041,7 +1041,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_vpc_endpoint.this_modules/vpc-endpoints/main.tf",
+            "id": "aws_vpc_endpoint.this_93",
             "simple_name": "aws_vpc_endpoint.this",
             "label": "aws_vpc_endpoint.this",
             "type": "aws_vpc_endpoint",
@@ -1051,7 +1051,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_security_group.this_modules/vpc-endpoints/main.tf",
+            "id": "aws_security_group.this_94",
             "simple_name": "aws_security_group.this",
             "label": "aws_security_group.this",
             "type": "aws_security_group",
@@ -1061,7 +1061,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_security_group_rule.this_modules/vpc-endpoints/main.tf",
+            "id": "aws_security_group_rule.this_95",
             "simple_name": "aws_security_group_rule.this",
             "label": "aws_security_group_rule.this",
             "type": "aws_security_group_rule",
@@ -1073,543 +1073,543 @@
     ],
     "edges": [
         {
-            "from": "aws_vpc_ipv4_cidr_block_association.this_main.tf",
-            "to": "aws_vpc.this_main.tf",
+            "from": "aws_vpc_ipv4_cidr_block_association.this_1",
+            "to": "aws_vpc.this_0",
             "arrows": "to"
         },
         {
-            "from": "aws_vpc_block_public_access_exclusion.this_main.tf",
-            "to": "aws_subnet.public_main.tf",
+            "from": "aws_vpc_block_public_access_exclusion.this_3",
+            "to": "aws_subnet.elasticache_39",
             "arrows": "to"
         },
         {
-            "from": "aws_vpc_block_public_access_exclusion.this_main.tf",
-            "to": "aws_subnet.elasticache_main.tf",
+            "from": "aws_vpc_block_public_access_exclusion.this_3",
+            "to": "aws_subnet.intra_46",
             "arrows": "to"
         },
         {
-            "from": "aws_vpc_block_public_access_exclusion.this_main.tf",
-            "to": "aws_subnet.intra_main.tf",
+            "from": "aws_vpc_block_public_access_exclusion.this_3",
+            "to": "aws_subnet.redshift_31",
             "arrows": "to"
         },
         {
-            "from": "aws_vpc_block_public_access_exclusion.this_main.tf",
-            "to": "aws_subnet.database_main.tf",
+            "from": "aws_vpc_block_public_access_exclusion.this_3",
+            "to": "aws_subnet.private_14",
             "arrows": "to"
         },
         {
-            "from": "aws_vpc_block_public_access_exclusion.this_main.tf",
-            "to": "aws_subnet.private_main.tf",
+            "from": "aws_vpc_block_public_access_exclusion.this_3",
+            "to": "aws_subnet.outpost_52",
             "arrows": "to"
         },
         {
-            "from": "aws_vpc_block_public_access_exclusion.this_main.tf",
-            "to": "aws_subnet.outpost_main.tf",
+            "from": "aws_vpc_block_public_access_exclusion.this_3",
+            "to": "aws_subnet.public_6",
             "arrows": "to"
         },
         {
-            "from": "aws_vpc_block_public_access_exclusion.this_main.tf",
-            "to": "aws_subnet.redshift_main.tf",
+            "from": "aws_vpc_block_public_access_exclusion.this_3",
+            "to": "aws_subnet.database_20",
             "arrows": "to"
         },
         {
-            "from": "aws_vpc_dhcp_options_association.this_main.tf",
-            "to": "aws_vpc_dhcp_options.this_main.tf",
+            "from": "aws_vpc_dhcp_options_association.this_5",
+            "to": "aws_vpc_dhcp_options.this_4",
             "arrows": "to"
         },
         {
-            "from": "aws_subnet.public_main.tf",
-            "to": "aws_vpc.this_main.tf",
+            "from": "aws_subnet.public_6",
+            "to": "aws_vpc.this_0",
             "arrows": "to"
         },
         {
-            "from": "aws_route_table_association.public_main.tf",
-            "to": "aws_subnet.public_main.tf",
+            "from": "aws_route_table_association.public_8",
+            "to": "aws_route_table.public_7",
             "arrows": "to"
         },
         {
-            "from": "aws_route_table_association.public_main.tf",
-            "to": "aws_route_table.public_main.tf",
+            "from": "aws_route_table_association.public_8",
+            "to": "aws_subnet.public_6",
             "arrows": "to"
         },
         {
-            "from": "aws_route.public_internet_gateway_main.tf",
-            "to": "aws_route_table.public_main.tf",
+            "from": "aws_route.public_internet_gateway_9",
+            "to": "aws_route_table.public_7",
             "arrows": "to"
         },
         {
-            "from": "aws_route.public_internet_gateway_main.tf",
-            "to": "aws_internet_gateway.this_main.tf",
+            "from": "aws_route.public_internet_gateway_9",
+            "to": "aws_internet_gateway.this_57",
             "arrows": "to"
         },
         {
-            "from": "aws_route.public_internet_gateway_ipv6_main.tf",
-            "to": "aws_route_table.public_main.tf",
+            "from": "aws_route.public_internet_gateway_ipv6_10",
+            "to": "aws_route_table.public_7",
             "arrows": "to"
         },
         {
-            "from": "aws_route.public_internet_gateway_ipv6_main.tf",
-            "to": "aws_internet_gateway.this_main.tf",
+            "from": "aws_route.public_internet_gateway_ipv6_10",
+            "to": "aws_internet_gateway.this_57",
             "arrows": "to"
         },
         {
-            "from": "aws_network_acl.public_main.tf",
-            "to": "aws_subnet.public_main.tf",
+            "from": "aws_network_acl.public_11",
+            "to": "aws_subnet.public_6",
             "arrows": "to"
         },
         {
-            "from": "aws_network_acl_rule.public_inbound_main.tf",
-            "to": "aws_network_acl.public_main.tf",
+            "from": "aws_network_acl_rule.public_inbound_12",
+            "to": "aws_network_acl.public_11",
             "arrows": "to"
         },
         {
-            "from": "aws_network_acl_rule.public_outbound_main.tf",
-            "to": "aws_network_acl.public_main.tf",
+            "from": "aws_network_acl_rule.public_outbound_13",
+            "to": "aws_network_acl.public_11",
             "arrows": "to"
         },
         {
-            "from": "aws_subnet.private_main.tf",
-            "to": "aws_vpc.this_main.tf",
+            "from": "aws_subnet.private_14",
+            "to": "aws_vpc.this_0",
             "arrows": "to"
         },
         {
-            "from": "aws_route_table_association.private_main.tf",
-            "to": "aws_route_table.private_main.tf",
+            "from": "aws_route_table_association.private_16",
+            "to": "aws_subnet.private_14",
             "arrows": "to"
         },
         {
-            "from": "aws_route_table_association.private_main.tf",
-            "to": "aws_subnet.private_main.tf",
+            "from": "aws_route_table_association.private_16",
+            "to": "aws_route_table.private_15",
             "arrows": "to"
         },
         {
-            "from": "aws_network_acl.private_main.tf",
-            "to": "aws_subnet.private_main.tf",
+            "from": "aws_network_acl.private_17",
+            "to": "aws_subnet.private_14",
             "arrows": "to"
         },
         {
-            "from": "aws_network_acl_rule.private_inbound_main.tf",
-            "to": "aws_network_acl.private_main.tf",
+            "from": "aws_network_acl_rule.private_inbound_18",
+            "to": "aws_network_acl.private_17",
             "arrows": "to"
         },
         {
-            "from": "aws_network_acl_rule.private_outbound_main.tf",
-            "to": "aws_network_acl.private_main.tf",
+            "from": "aws_network_acl_rule.private_outbound_19",
+            "to": "aws_network_acl.private_17",
             "arrows": "to"
         },
         {
-            "from": "aws_subnet.database_main.tf",
-            "to": "aws_vpc.this_main.tf",
+            "from": "aws_subnet.database_20",
+            "to": "aws_vpc.this_0",
             "arrows": "to"
         },
         {
-            "from": "aws_db_subnet_group.database_main.tf",
-            "to": "aws_subnet.database_main.tf",
+            "from": "aws_db_subnet_group.database_21",
+            "to": "aws_subnet.database_20",
             "arrows": "to"
         },
         {
-            "from": "aws_route_table_association.database_main.tf",
-            "to": "aws_route_table.private_main.tf",
+            "from": "aws_route_table_association.database_23",
+            "to": "aws_route_table.database_22",
             "arrows": "to"
         },
         {
-            "from": "aws_route_table_association.database_main.tf",
-            "to": "aws_route_table.database_main.tf",
+            "from": "aws_route_table_association.database_23",
+            "to": "aws_route_table.private_15",
             "arrows": "to"
         },
         {
-            "from": "aws_route_table_association.database_main.tf",
-            "to": "aws_subnet.database_main.tf",
+            "from": "aws_route_table_association.database_23",
+            "to": "aws_subnet.database_20",
             "arrows": "to"
         },
         {
-            "from": "aws_route.database_internet_gateway_main.tf",
-            "to": "aws_route_table.database_main.tf",
+            "from": "aws_route.database_internet_gateway_24",
+            "to": "aws_route_table.database_22",
             "arrows": "to"
         },
         {
-            "from": "aws_route.database_internet_gateway_main.tf",
-            "to": "aws_internet_gateway.this_main.tf",
+            "from": "aws_route.database_internet_gateway_24",
+            "to": "aws_internet_gateway.this_57",
             "arrows": "to"
         },
         {
-            "from": "aws_route.database_nat_gateway_main.tf",
-            "to": "aws_nat_gateway.this_main.tf",
+            "from": "aws_route.database_nat_gateway_25",
+            "to": "aws_nat_gateway.this_61",
             "arrows": "to"
         },
         {
-            "from": "aws_route.database_nat_gateway_main.tf",
-            "to": "aws_route_table.database_main.tf",
+            "from": "aws_route.database_nat_gateway_25",
+            "to": "aws_route_table.database_22",
             "arrows": "to"
         },
         {
-            "from": "aws_route.database_dns64_nat_gateway_main.tf",
-            "to": "aws_route_table.database_main.tf",
+            "from": "aws_route.database_dns64_nat_gateway_26",
+            "to": "aws_nat_gateway.this_61",
             "arrows": "to"
         },
         {
-            "from": "aws_route.database_dns64_nat_gateway_main.tf",
-            "to": "aws_nat_gateway.this_main.tf",
+            "from": "aws_route.database_dns64_nat_gateway_26",
+            "to": "aws_route_table.database_22",
             "arrows": "to"
         },
         {
-            "from": "aws_route.database_ipv6_egress_main.tf",
-            "to": "aws_route_table.database_main.tf",
+            "from": "aws_route.database_ipv6_egress_27",
+            "to": "aws_egress_only_internet_gateway.this_58",
             "arrows": "to"
         },
         {
-            "from": "aws_route.database_ipv6_egress_main.tf",
-            "to": "aws_egress_only_internet_gateway.this_main.tf",
+            "from": "aws_route.database_ipv6_egress_27",
+            "to": "aws_route_table.database_22",
             "arrows": "to"
         },
         {
-            "from": "aws_network_acl.database_main.tf",
-            "to": "aws_subnet.database_main.tf",
+            "from": "aws_network_acl.database_28",
+            "to": "aws_subnet.database_20",
             "arrows": "to"
         },
         {
-            "from": "aws_network_acl_rule.database_inbound_main.tf",
-            "to": "aws_network_acl.database_main.tf",
+            "from": "aws_network_acl_rule.database_inbound_29",
+            "to": "aws_network_acl.database_28",
             "arrows": "to"
         },
         {
-            "from": "aws_network_acl_rule.database_outbound_main.tf",
-            "to": "aws_network_acl.database_main.tf",
+            "from": "aws_network_acl_rule.database_outbound_30",
+            "to": "aws_network_acl.database_28",
             "arrows": "to"
         },
         {
-            "from": "aws_subnet.redshift_main.tf",
-            "to": "aws_vpc.this_main.tf",
+            "from": "aws_subnet.redshift_31",
+            "to": "aws_vpc.this_0",
             "arrows": "to"
         },
         {
-            "from": "aws_redshift_subnet_group.redshift_main.tf",
-            "to": "aws_subnet.redshift_main.tf",
+            "from": "aws_redshift_subnet_group.redshift_32",
+            "to": "aws_subnet.redshift_31",
             "arrows": "to"
         },
         {
-            "from": "aws_route_table_association.redshift_main.tf",
-            "to": "aws_route_table.private_main.tf",
+            "from": "aws_route_table_association.redshift_34",
+            "to": "aws_route_table.redshift_33",
             "arrows": "to"
         },
         {
-            "from": "aws_route_table_association.redshift_main.tf",
-            "to": "aws_route_table.redshift_main.tf",
+            "from": "aws_route_table_association.redshift_34",
+            "to": "aws_subnet.redshift_31",
             "arrows": "to"
         },
         {
-            "from": "aws_route_table_association.redshift_main.tf",
-            "to": "aws_subnet.redshift_main.tf",
+            "from": "aws_route_table_association.redshift_34",
+            "to": "aws_route_table.private_15",
             "arrows": "to"
         },
         {
-            "from": "aws_route_table_association.redshift_public_main.tf",
-            "to": "aws_route_table.redshift_main.tf",
+            "from": "aws_route_table_association.redshift_public_35",
+            "to": "aws_route_table.public_7",
             "arrows": "to"
         },
         {
-            "from": "aws_route_table_association.redshift_public_main.tf",
-            "to": "aws_route_table.public_main.tf",
+            "from": "aws_route_table_association.redshift_public_35",
+            "to": "aws_route_table.redshift_33",
             "arrows": "to"
         },
         {
-            "from": "aws_route_table_association.redshift_public_main.tf",
-            "to": "aws_subnet.redshift_main.tf",
+            "from": "aws_route_table_association.redshift_public_35",
+            "to": "aws_subnet.redshift_31",
             "arrows": "to"
         },
         {
-            "from": "aws_network_acl.redshift_main.tf",
-            "to": "aws_subnet.redshift_main.tf",
+            "from": "aws_network_acl.redshift_36",
+            "to": "aws_subnet.redshift_31",
             "arrows": "to"
         },
         {
-            "from": "aws_network_acl_rule.redshift_inbound_main.tf",
-            "to": "aws_network_acl.redshift_main.tf",
+            "from": "aws_network_acl_rule.redshift_inbound_37",
+            "to": "aws_network_acl.redshift_36",
             "arrows": "to"
         },
         {
-            "from": "aws_network_acl_rule.redshift_outbound_main.tf",
-            "to": "aws_network_acl.redshift_main.tf",
+            "from": "aws_network_acl_rule.redshift_outbound_38",
+            "to": "aws_network_acl.redshift_36",
             "arrows": "to"
         },
         {
-            "from": "aws_subnet.elasticache_main.tf",
-            "to": "aws_vpc.this_main.tf",
+            "from": "aws_subnet.elasticache_39",
+            "to": "aws_vpc.this_0",
             "arrows": "to"
         },
         {
-            "from": "aws_elasticache_subnet_group.elasticache_main.tf",
-            "to": "aws_subnet.elasticache_main.tf",
+            "from": "aws_elasticache_subnet_group.elasticache_40",
+            "to": "aws_subnet.elasticache_39",
             "arrows": "to"
         },
         {
-            "from": "aws_route_table_association.elasticache_main.tf",
-            "to": "aws_route_table.private_main.tf",
+            "from": "aws_route_table_association.elasticache_42",
+            "to": "aws_subnet.elasticache_39",
             "arrows": "to"
         },
         {
-            "from": "aws_route_table_association.elasticache_main.tf",
-            "to": "aws_subnet.elasticache_main.tf",
+            "from": "aws_route_table_association.elasticache_42",
+            "to": "aws_route_table.elasticache_41",
             "arrows": "to"
         },
         {
-            "from": "aws_route_table_association.elasticache_main.tf",
-            "to": "aws_route_table.elasticache_main.tf",
+            "from": "aws_route_table_association.elasticache_42",
+            "to": "aws_route_table.private_15",
             "arrows": "to"
         },
         {
-            "from": "aws_network_acl.elasticache_main.tf",
-            "to": "aws_subnet.elasticache_main.tf",
+            "from": "aws_network_acl.elasticache_43",
+            "to": "aws_subnet.elasticache_39",
             "arrows": "to"
         },
         {
-            "from": "aws_network_acl_rule.elasticache_inbound_main.tf",
-            "to": "aws_network_acl.elasticache_main.tf",
+            "from": "aws_network_acl_rule.elasticache_inbound_44",
+            "to": "aws_network_acl.elasticache_43",
             "arrows": "to"
         },
         {
-            "from": "aws_network_acl_rule.elasticache_outbound_main.tf",
-            "to": "aws_network_acl.elasticache_main.tf",
+            "from": "aws_network_acl_rule.elasticache_outbound_45",
+            "to": "aws_network_acl.elasticache_43",
             "arrows": "to"
         },
         {
-            "from": "aws_subnet.intra_main.tf",
-            "to": "aws_vpc.this_main.tf",
+            "from": "aws_subnet.intra_46",
+            "to": "aws_vpc.this_0",
             "arrows": "to"
         },
         {
-            "from": "aws_route_table_association.intra_main.tf",
-            "to": "aws_subnet.intra_main.tf",
+            "from": "aws_route_table_association.intra_48",
+            "to": "aws_route_table.intra_47",
             "arrows": "to"
         },
         {
-            "from": "aws_route_table_association.intra_main.tf",
-            "to": "aws_route_table.intra_main.tf",
+            "from": "aws_route_table_association.intra_48",
+            "to": "aws_subnet.intra_46",
             "arrows": "to"
         },
         {
-            "from": "aws_network_acl.intra_main.tf",
-            "to": "aws_subnet.intra_main.tf",
+            "from": "aws_network_acl.intra_49",
+            "to": "aws_subnet.intra_46",
             "arrows": "to"
         },
         {
-            "from": "aws_network_acl_rule.intra_inbound_main.tf",
-            "to": "aws_network_acl.intra_main.tf",
+            "from": "aws_network_acl_rule.intra_inbound_50",
+            "to": "aws_network_acl.intra_49",
             "arrows": "to"
         },
         {
-            "from": "aws_network_acl_rule.intra_outbound_main.tf",
-            "to": "aws_network_acl.intra_main.tf",
+            "from": "aws_network_acl_rule.intra_outbound_51",
+            "to": "aws_network_acl.intra_49",
             "arrows": "to"
         },
         {
-            "from": "aws_subnet.outpost_main.tf",
-            "to": "aws_vpc.this_main.tf",
+            "from": "aws_subnet.outpost_52",
+            "to": "aws_vpc.this_0",
             "arrows": "to"
         },
         {
-            "from": "aws_route_table_association.outpost_main.tf",
-            "to": "aws_route_table.private_main.tf",
+            "from": "aws_route_table_association.outpost_53",
+            "to": "aws_subnet.outpost_52",
             "arrows": "to"
         },
         {
-            "from": "aws_route_table_association.outpost_main.tf",
-            "to": "aws_subnet.outpost_main.tf",
+            "from": "aws_route_table_association.outpost_53",
+            "to": "aws_route_table.private_15",
             "arrows": "to"
         },
         {
-            "from": "aws_network_acl.outpost_main.tf",
-            "to": "aws_subnet.outpost_main.tf",
+            "from": "aws_network_acl.outpost_54",
+            "to": "aws_subnet.outpost_52",
             "arrows": "to"
         },
         {
-            "from": "aws_network_acl_rule.outpost_inbound_main.tf",
-            "to": "aws_network_acl.outpost_main.tf",
+            "from": "aws_network_acl_rule.outpost_inbound_55",
+            "to": "aws_network_acl.outpost_54",
             "arrows": "to"
         },
         {
-            "from": "aws_network_acl_rule.outpost_outbound_main.tf",
-            "to": "aws_network_acl.outpost_main.tf",
+            "from": "aws_network_acl_rule.outpost_outbound_56",
+            "to": "aws_network_acl.outpost_54",
             "arrows": "to"
         },
         {
-            "from": "aws_route.private_ipv6_egress_main.tf",
-            "to": "aws_route_table.private_main.tf",
+            "from": "aws_route.private_ipv6_egress_59",
+            "to": "aws_egress_only_internet_gateway.this_58",
             "arrows": "to"
         },
         {
-            "from": "aws_route.private_ipv6_egress_main.tf",
-            "to": "aws_egress_only_internet_gateway.this_main.tf",
+            "from": "aws_route.private_ipv6_egress_59",
+            "to": "aws_route_table.private_15",
             "arrows": "to"
         },
         {
-            "from": "aws_eip.nat_main.tf",
-            "to": "aws_internet_gateway.this_main.tf",
+            "from": "aws_eip.nat_60",
+            "to": "aws_internet_gateway.this_57",
             "arrows": "to"
         },
         {
-            "from": "aws_nat_gateway.this_main.tf",
-            "to": "aws_subnet.public_main.tf",
+            "from": "aws_nat_gateway.this_61",
+            "to": "aws_internet_gateway.this_57",
             "arrows": "to"
         },
         {
-            "from": "aws_nat_gateway.this_main.tf",
-            "to": "aws_internet_gateway.this_main.tf",
+            "from": "aws_nat_gateway.this_61",
+            "to": "aws_subnet.public_6",
             "arrows": "to"
         },
         {
-            "from": "aws_route.private_nat_gateway_main.tf",
-            "to": "aws_route_table.private_main.tf",
+            "from": "aws_route.private_nat_gateway_62",
+            "to": "aws_nat_gateway.this_61",
             "arrows": "to"
         },
         {
-            "from": "aws_route.private_nat_gateway_main.tf",
-            "to": "aws_nat_gateway.this_main.tf",
+            "from": "aws_route.private_nat_gateway_62",
+            "to": "aws_route_table.private_15",
             "arrows": "to"
         },
         {
-            "from": "aws_route.private_dns64_nat_gateway_main.tf",
-            "to": "aws_route_table.private_main.tf",
+            "from": "aws_route.private_dns64_nat_gateway_63",
+            "to": "aws_nat_gateway.this_61",
             "arrows": "to"
         },
         {
-            "from": "aws_route.private_dns64_nat_gateway_main.tf",
-            "to": "aws_nat_gateway.this_main.tf",
+            "from": "aws_route.private_dns64_nat_gateway_63",
+            "to": "aws_route_table.private_15",
             "arrows": "to"
         },
         {
-            "from": "aws_vpn_gateway_route_propagation.public_main.tf",
-            "to": "aws_vpn_gateway_attachment.this_main.tf",
+            "from": "aws_vpn_gateway_route_propagation.public_67",
+            "to": "aws_route_table.public_7",
             "arrows": "to"
         },
         {
-            "from": "aws_vpn_gateway_route_propagation.public_main.tf",
-            "to": "aws_vpn_gateway.this_main.tf",
+            "from": "aws_vpn_gateway_route_propagation.public_67",
+            "to": "aws_vpn_gateway.this_65",
             "arrows": "to"
         },
         {
-            "from": "aws_vpn_gateway_route_propagation.public_main.tf",
-            "to": "aws_route_table.public_main.tf",
+            "from": "aws_vpn_gateway_route_propagation.public_67",
+            "to": "aws_vpn_gateway_attachment.this_66",
             "arrows": "to"
         },
         {
-            "from": "aws_vpn_gateway_route_propagation.private_main.tf",
-            "to": "aws_route_table.private_main.tf",
+            "from": "aws_vpn_gateway_route_propagation.private_68",
+            "to": "aws_vpn_gateway_attachment.this_66",
             "arrows": "to"
         },
         {
-            "from": "aws_vpn_gateway_route_propagation.private_main.tf",
-            "to": "aws_vpn_gateway_attachment.this_main.tf",
+            "from": "aws_vpn_gateway_route_propagation.private_68",
+            "to": "aws_vpn_gateway.this_65",
             "arrows": "to"
         },
         {
-            "from": "aws_vpn_gateway_route_propagation.private_main.tf",
-            "to": "aws_vpn_gateway.this_main.tf",
+            "from": "aws_vpn_gateway_route_propagation.private_68",
+            "to": "aws_route_table.private_15",
             "arrows": "to"
         },
         {
-            "from": "aws_vpn_gateway_route_propagation.intra_main.tf",
-            "to": "aws_vpn_gateway_attachment.this_main.tf",
+            "from": "aws_vpn_gateway_route_propagation.intra_69",
+            "to": "aws_vpn_gateway.this_65",
             "arrows": "to"
         },
         {
-            "from": "aws_vpn_gateway_route_propagation.intra_main.tf",
-            "to": "aws_vpn_gateway.this_main.tf",
+            "from": "aws_vpn_gateway_route_propagation.intra_69",
+            "to": "aws_route_table.intra_47",
             "arrows": "to"
         },
         {
-            "from": "aws_vpn_gateway_route_propagation.intra_main.tf",
-            "to": "aws_route_table.intra_main.tf",
+            "from": "aws_vpn_gateway_route_propagation.intra_69",
+            "to": "aws_vpn_gateway_attachment.this_66",
             "arrows": "to"
         },
         {
-            "from": "aws_default_security_group.this_main.tf",
-            "to": "aws_vpc.this_main.tf",
+            "from": "aws_default_security_group.this_71",
+            "to": "aws_vpc.this_0",
             "arrows": "to"
         },
         {
-            "from": "aws_default_network_acl.this_main.tf",
-            "to": "aws_vpc.this_main.tf",
+            "from": "aws_default_network_acl.this_72",
+            "to": "aws_vpc.this_0",
             "arrows": "to"
         },
         {
-            "from": "aws_default_route_table.default_main.tf",
-            "to": "aws_vpc.this_main.tf",
+            "from": "aws_default_route_table.default_73",
+            "to": "aws_vpc.this_0",
             "arrows": "to"
         },
         {
-            "from": "aws_iam_role_policy_attachment.vpc_flow_log_cloudwatch_vpc-flow-logs.tf",
-            "to": "aws_iam_policy.vpc_flow_log_cloudwatch_vpc-flow-logs.tf",
+            "from": "aws_iam_role_policy_attachment.vpc_flow_log_cloudwatch_77",
+            "to": "aws_iam_role.vpc_flow_log_cloudwatch_76",
             "arrows": "to"
         },
         {
-            "from": "aws_iam_role_policy_attachment.vpc_flow_log_cloudwatch_vpc-flow-logs.tf",
-            "to": "aws_iam_role.vpc_flow_log_cloudwatch_vpc-flow-logs.tf",
+            "from": "aws_iam_role_policy_attachment.vpc_flow_log_cloudwatch_77",
+            "to": "aws_iam_policy.vpc_flow_log_cloudwatch_78",
             "arrows": "to"
         },
         {
-            "from": "aws_iam_role_policy.flow_log_cloudwatch_examples/flow-log/main.tf",
-            "to": "aws_iam_role.flow_log_cloudwatch_examples/flow-log/main.tf",
+            "from": "aws_iam_role_policy.flow_log_cloudwatch_81",
+            "to": "aws_iam_role.flow_log_cloudwatch_80",
             "arrows": "to"
         },
         {
-            "from": "aws_iam_role_policy.flow_log_cloudwatch_examples/flow-log/main.tf",
-            "to": "aws_cloudwatch_log_group.flow_log_vpc-flow-logs.tf",
+            "from": "aws_iam_role_policy.flow_log_cloudwatch_81",
+            "to": "aws_cloudwatch_log_group.flow_log_75",
             "arrows": "to"
         },
         {
-            "from": "aws_iam_role_policy.flow_log_cloudwatch_examples/flow-log/main.tf",
-            "to": "aws_cloudwatch_log_group.flow_log_examples/flow-log/main.tf",
+            "from": "aws_iam_role_policy.flow_log_cloudwatch_81",
+            "to": "aws_cloudwatch_log_group.flow_log_79",
             "arrows": "to"
         },
         {
-            "from": "aws_vpc_ipam_pool.this_examples/ipam/main.tf",
-            "to": "aws_vpc_ipam.this_examples/ipam/main.tf",
+            "from": "aws_vpc_ipam_pool.this_83",
+            "to": "aws_vpc_ipam.this_82",
             "arrows": "to"
         },
         {
-            "from": "aws_vpc_ipam_pool_cidr.this_examples/ipam/main.tf",
-            "to": "aws_vpc_ipam_pool.this_examples/ipam/main.tf",
+            "from": "aws_vpc_ipam_pool_cidr.this_84",
+            "to": "aws_vpc_ipam_pool.this_83",
             "arrows": "to"
         },
         {
-            "from": "aws_vpc_ipam_preview_next_cidr.this_examples/ipam/main.tf",
-            "to": "aws_vpc_ipam_pool.this_examples/ipam/main.tf",
+            "from": "aws_vpc_ipam_preview_next_cidr.this_85",
+            "to": "aws_vpc_ipam_pool_cidr.this_84",
             "arrows": "to"
         },
         {
-            "from": "aws_vpc_ipam_preview_next_cidr.this_examples/ipam/main.tf",
-            "to": "aws_vpc_ipam_pool_cidr.this_examples/ipam/main.tf",
+            "from": "aws_vpc_ipam_preview_next_cidr.this_85",
+            "to": "aws_vpc_ipam_pool.this_83",
             "arrows": "to"
         },
         {
-            "from": "aws_vpc_ipam_pool.ipv6_examples/ipam/main.tf",
-            "to": "aws_vpc_ipam.this_examples/ipam/main.tf",
+            "from": "aws_vpc_ipam_pool.ipv6_86",
+            "to": "aws_vpc_ipam.this_82",
             "arrows": "to"
         },
         {
-            "from": "aws_flow_log.this_modules/flow-log/main.tf",
-            "to": "aws_cloudwatch_log_group.this_modules/flow-log/main.tf",
+            "from": "aws_flow_log.this_88",
+            "to": "aws_cloudwatch_log_group.this_89",
             "arrows": "to"
         },
         {
-            "from": "aws_flow_log.this_modules/flow-log/main.tf",
-            "to": "aws_iam_role.this_modules/flow-log/main.tf",
+            "from": "aws_flow_log.this_88",
+            "to": "aws_iam_role.this_90",
             "arrows": "to"
         },
         {
-            "from": "aws_iam_role_policy_attachment.this_modules/flow-log/main.tf",
-            "to": "aws_iam_role.this_modules/flow-log/main.tf",
+            "from": "aws_iam_role_policy_attachment.this_92",
+            "to": "aws_iam_role.this_90",
             "arrows": "to"
         },
         {
-            "from": "aws_iam_role_policy_attachment.this_modules/flow-log/main.tf",
-            "to": "aws_iam_policy.this_modules/flow-log/main.tf",
+            "from": "aws_iam_role_policy_attachment.this_92",
+            "to": "aws_iam_policy.this_91",
             "arrows": "to"
         },
         {
-            "from": "aws_security_group_rule.this_modules/vpc-endpoints/main.tf",
-            "to": "aws_security_group.this_modules/vpc-endpoints/main.tf",
+            "from": "aws_security_group_rule.this_95",
+            "to": "aws_security_group.this_94",
             "arrows": "to"
         }
     ],
