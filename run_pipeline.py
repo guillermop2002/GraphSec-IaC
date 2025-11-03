@@ -106,13 +106,8 @@ def get_cached_or_generate_graph(directory: str, project_name: str) -> Dict[str,
         if simple_name not in name_to_id_map:
             name_to_id_map[simple_name] = []
         name_to_id_map[simple_name].append(unique_id)
-    
-    # Añadir el unique_id a cada recurso para que build_edges lo use
-    id_counter = 0
-    for resource in parsed_resources:
-        simple_name = resource.get('simple_name')
-        unique_id = f"{simple_name}_{id_counter}"
-        id_counter += 1
+        
+        # Añadir el unique_id al recurso parseado para que build_edges lo use
         resource['id'] = unique_id
     
     # Construir aristas (edges)
