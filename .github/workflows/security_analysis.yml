@@ -87,7 +87,7 @@ jobs:
           script: |
             // Cargar el JSON generado
             const fs = require('fs');
-            const results = JSON.parse(fs.readFileSync(`pr-${context.issue.number}.json`, 'utf8'));
+            const results = JSON.parse(fs.readFileSync(`deploy_dir/pr-${context.issue.number}.json`, 'utf8'));
             
             // Usar valores por defecto ({})
             const metadata = results.api_metadata || {};
