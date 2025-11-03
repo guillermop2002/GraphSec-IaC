@@ -103,22 +103,12 @@ class CheckovScanner(Scanner):
         """
         python_exec = self._find_python_executable()
         
-        # 'output_file' ES el path COMPLETO del archivo SARIF final.
-        actual_sarif_file = os.path.abspath(output_file)
+        # Checkov crea un directorio con el nombre de output_file
+        output_dir = output_file
+        actual_sarif_file = os.path.join(output_dir, "results_sarif.sarif")
         
-        # El directorio donde se guardará el archivo
-        output_dir = os.path.dirname(actual_sarif_file)
-        # Asegurarse de que el directorio de salida exista
-        os.makedirs(output_dir, exist_ok=True)
-        
-        # Limpiar el *archivo* antiguo si existe, no el directorio
-        if os.path.exists(actual_sarif_file):
-            os.remove(actual_sarif_file)
-        
-        # Limpiar el directorio antiguo si existe (lógica antigua)
-        old_dir_style = os.path.abspath(output_file)
-        if os.path.isdir(old_dir_style):
-            shutil.rmtree(old_dir_style)
+        if os.path.exists(output_dir):
+            shutil.rmtree(output_dir)
         
         cmd = [
             python_exec,
@@ -148,7 +138,7 @@ class CheckovScanner(Scanner):
             
             stdout_decoded = stdout.decode('utf-8', errors='ignore')
             stderr_decoded = stderr.decode('utf-8', errors='ignore')
-            if process.returncode != 0 and process.returncode != 1:
+            if process.returncode != 0:
                 logger.error(f"Error al ejecutar Checkov. Código: {process.returncode}")
                 logger.error(f"Error de Checkov: {stderr_decoded}")
                 return False
