@@ -671,7 +671,7 @@
             try {
                 console.log('Iniciando carga del grafo...');
                 
-                // Detectar qué proyecto analizar según parámetros URL (vpc=true o eks=true)
+                // Detectar modo de carga: desde informe de PR o desde API local
                 const params = new URLSearchParams(window.location.search);
                 const reportUrl = params.get('report'); // Nuevo: Buscar un ?report=...
                 
@@ -686,6 +686,7 @@
                     const useVpc = params.has('vpc');
                     const useEks = params.has('eks');
                     endpoint = '/api/graph'; // Por defecto: test_infra
+                    
                     if (useVpc) {
                         endpoint = '/api/graph?project=vpc';
                     } else if (useEks) {
@@ -694,7 +695,6 @@
                     console.log(`Cargando demo local desde: ${endpoint}`);
                 }
                 
-                // El fetch() sigue igual, ahora usará el 'endpoint' correcto
                 const response = await fetch(endpoint);
                 
                 if (!response.ok) {

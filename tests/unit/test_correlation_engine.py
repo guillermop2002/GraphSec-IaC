@@ -85,3 +85,4 @@ def test_normalize_path_with_project_root_prefix():
     assert "test_infra" in normalized
     assert "main.tf" in normalized
 
+

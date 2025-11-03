@@ -461,117 +461,117 @@
                   "uriBaseId": "ROOTPATH"
                 },
                 "region": {
-                  "startLine": 28,
-                  "startColumn": 1,
-                  "endLine": 53,
-                  "endColumn": 1
-                }
-              },
-              "message": {
-                "text": "main.tf"
-              }
-            }
-          ]
-        },
-        {
-          "ruleId": "aws-autoscaling-enable-at-rest-encryption",
-          "ruleIndex": 4,
-          "level": "warning",
-          "message": {
-            "text": "Artifact: main.tf\nType: terraform\nVulnerability aws-autoscaling-enable-at-rest-encryption\nSeverity: MEDIUM\nMessage: VPC does not have VPC Flow Logs enabled.\nLink: [aws-autoscaling-enable-at-rest-encryption](https://avd.aquasec.com/misconfig/aws-autoscaling-enable-at-rest-encryption)"
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "main.tf",
-                  "uriBaseId": "ROOTPATH"
-                },
-                "region": {
-                  "startLine": 28,
-                  "startColumn": 1,
-                  "endLine": 53,
-                  "endColumn": 1
-                }
-              },
-              "message": {
-                "text": "main.tf"
-              }
-            }
-          ]
-        },
-        {
-          "ruleId": "aws-autoscaling-enable-at-rest-encryption",
-          "ruleIndex": 4,
-          "level": "warning",
-          "message": {
-            "text": "Artifact: main.tf\nType: terraform\nVulnerability aws-autoscaling-enable-at-rest-encryption\nSeverity: MEDIUM\nMessage: VPC does not have VPC Flow Logs enabled.\nLink: [aws-autoscaling-enable-at-rest-encryption](https://avd.aquasec.com/misconfig/aws-autoscaling-enable-at-rest-encryption)"
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "main.tf",
-                  "uriBaseId": "ROOTPATH"
-                },
-                "region": {
-                  "startLine": 28,
-                  "startColumn": 1,
-                  "endLine": 53,
-                  "endColumn": 1
-                }
-              },
-              "message": {
-                "text": "main.tf"
-              }
-            }
-          ]
-        },
-        {
-          "ruleId": "aws-autoscaling-enable-at-rest-encryption",
-          "ruleIndex": 4,
-          "level": "warning",
-          "message": {
-            "text": "Artifact: main.tf\nType: terraform\nVulnerability aws-autoscaling-enable-at-rest-encryption\nSeverity: MEDIUM\nMessage: VPC does not have VPC Flow Logs enabled.\nLink: [aws-autoscaling-enable-at-rest-encryption](https://avd.aquasec.com/misconfig/aws-autoscaling-enable-at-rest-encryption)"
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "main.tf",
-                  "uriBaseId": "ROOTPATH"
-                },
-                "region": {
-                  "startLine": 28,
-                  "startColumn": 1,
-                  "endLine": 53,
-                  "endColumn": 1
-                }
-              },
-              "message": {
-                "text": "main.tf"
-              }
-            }
-          ]
-        },
-        {
-          "ruleId": "aws-autoscaling-enable-at-rest-encryption",
-          "ruleIndex": 4,
-          "level": "warning",
-          "message": {
-            "text": "Artifact: main.tf\nType: terraform\nVulnerability aws-autoscaling-enable-at-rest-encryption\nSeverity: MEDIUM\nMessage: VPC does not have VPC Flow Logs enabled.\nLink: [aws-autoscaling-enable-at-rest-encryption](https://avd.aquasec.com/misconfig/aws-autoscaling-enable-at-rest-encryption)"
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "main.tf",
-                  "uriBaseId": "ROOTPATH"
-                },
-                "region": {
                   "startLine": 1388,
                   "startColumn": 1,
                   "endLine": 1401,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "main.tf"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "aws-autoscaling-enable-at-rest-encryption",
+          "ruleIndex": 4,
+          "level": "warning",
+          "message": {
+            "text": "Artifact: main.tf\nType: terraform\nVulnerability aws-autoscaling-enable-at-rest-encryption\nSeverity: MEDIUM\nMessage: VPC does not have VPC Flow Logs enabled.\nLink: [aws-autoscaling-enable-at-rest-encryption](https://avd.aquasec.com/misconfig/aws-autoscaling-enable-at-rest-encryption)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "main.tf",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 28,
+                  "startColumn": 1,
+                  "endLine": 53,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "main.tf"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "aws-autoscaling-enable-at-rest-encryption",
+          "ruleIndex": 4,
+          "level": "warning",
+          "message": {
+            "text": "Artifact: main.tf\nType: terraform\nVulnerability aws-autoscaling-enable-at-rest-encryption\nSeverity: MEDIUM\nMessage: VPC does not have VPC Flow Logs enabled.\nLink: [aws-autoscaling-enable-at-rest-encryption](https://avd.aquasec.com/misconfig/aws-autoscaling-enable-at-rest-encryption)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "main.tf",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 28,
+                  "startColumn": 1,
+                  "endLine": 53,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "main.tf"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "aws-autoscaling-enable-at-rest-encryption",
+          "ruleIndex": 4,
+          "level": "warning",
+          "message": {
+            "text": "Artifact: main.tf\nType: terraform\nVulnerability aws-autoscaling-enable-at-rest-encryption\nSeverity: MEDIUM\nMessage: VPC does not have VPC Flow Logs enabled.\nLink: [aws-autoscaling-enable-at-rest-encryption](https://avd.aquasec.com/misconfig/aws-autoscaling-enable-at-rest-encryption)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "main.tf",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 28,
+                  "startColumn": 1,
+                  "endLine": 53,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "main.tf"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "aws-autoscaling-enable-at-rest-encryption",
+          "ruleIndex": 4,
+          "level": "warning",
+          "message": {
+            "text": "Artifact: main.tf\nType: terraform\nVulnerability aws-autoscaling-enable-at-rest-encryption\nSeverity: MEDIUM\nMessage: VPC does not have VPC Flow Logs enabled.\nLink: [aws-autoscaling-enable-at-rest-encryption](https://avd.aquasec.com/misconfig/aws-autoscaling-enable-at-rest-encryption)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "main.tf",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 28,
+                  "startColumn": 1,
+                  "endLine": 53,
                   "endColumn": 1
                 }
               },

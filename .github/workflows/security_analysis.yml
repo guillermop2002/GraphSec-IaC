@@ -59,23 +59,27 @@ jobs:
       - name: Renombrar artefacto JSON
         run: mv graph_data.json pr-${{ github.event.pull_request.number }}.json
       
-      # 9. Desplegar informe en GitHub Pages
+      # 9. Copiar index.html a la raíz para GitHub Pages
+      - name: Copiar index.html a la raíz
+        run: cp static/index.html index.html
+      
+      # 10. Desplegar informe en GitHub Pages
       - name: Desplegar informe en GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
           folder: .
           clean: false
-          file_pattern: '(index.html|pr-${{ github.event.pull_request.number }}.json)'
+          single-commit: true
       
-      # 10. Publicar un comentario en el PR
+      # 11. Publicar un comentario en el PR
       - name: Publicar Comentario en PR
         uses: actions/github-script@v7
         with:
           script: |
             // Cargar el JSON generado
             const fs = require('fs');
-            const results = JSON.parse(fs.readFileSync('pr-${{ github.event.pull_request.number }}.json', 'utf8'));
+            const results = JSON.parse(fs.readFileSync(`pr-${context.issue.number}.json`, 'utf8'));
             
             // Usar valores por defecto ({})
             const metadata = results.api_metadata || {};
@@ -88,7 +92,7 @@ jobs:
             const findings_unassigned = metadata.unassigned_findings_count || 0;
             
             // Construir la URL del informe visual
-            const report_url = `https://guillermop2002.github.io/GraphSec-IaC/?report=pr-${{ github.event.pull_request.number }}.json`;
+            const report_url = `https://guillermop2002.github.io/GraphSec-IaC/?report=https://guillermop2002.github.io/GraphSec-IaC/pr-${context.issue.number}.json`;
             
             // Construir el comentario
             const body = `
@@ -103,7 +107,7 @@ jobs:
             | Nodos Totales | ${nodes_total} |
             | Hallazgos No Asignados | ${findings_unassigned} |
             
-            [**Ver Informe Visual Interactivo**](${report_url})
+            [**🔗 Ver Informe Visual Interactivo**](${report_url})
             `;
             
             // Publicar el comentario
