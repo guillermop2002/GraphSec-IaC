@@ -100,6 +100,7 @@ class CheckovScanner(Scanner):
         """
         Ejecuta Checkov usando 'python -m checkov'.
         Esto es universal para Windows (venv) y Linux (CI).
+        Versión V13: Forzando arreglo completo.
         """
         python_exec = self._find_python_executable()
         

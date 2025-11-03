@@ -80,6 +80,7 @@ def get_cached_or_generate_graph(directory: str, project_name: str) -> Dict[str,
         raise PipelineError("Error: No se encontraron recursos Terraform para analizar")
     
     # ===== ETAPA 1: GENERACIÓN DEL GRAFO =====
+    # Versión V13: IDs únicos con contador garantizado
     nodes = []
     name_to_id_map = {}
     project_root_abs = os.path.abspath(project_root)

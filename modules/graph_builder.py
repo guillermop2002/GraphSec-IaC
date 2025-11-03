@@ -43,7 +43,8 @@ def enrich_graph_nodes_with_parsed(graph_data: Dict[str, Any], parsed_resources:
 
 
 def build_edges(parsed_resources: List[Dict[str, Any]], name_to_id_map: Dict[str, list], project_root: str, nodes: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
-    """Construye las aristas (edges) del grafo analizando dependencias."""
+    """Construye las aristas (edges) del grafo analizando dependencias.
+    Versión V13: Usa node_lookup para IDs únicos correctos."""
     
     edges = []
     pattern_direct = re.compile(r'([a-zA-Z0-9_]+\.[a-zA-Z0-9_]+)(?:\.[a-zA-Z0-9_]+)*')
