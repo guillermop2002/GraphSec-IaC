@@ -129,13 +129,32 @@ class CheckovScanner(Scanner):
             import shutil
             shutil.rmtree(output_dir)
         
-        cmd = [
-            python_exec,
-            "-m", "checkov",
+        # --- INICIO DEL NUEVO BLOQUE CMD ---
+        # Esta lógica es agnóstica al SO.
+        # 1. Intenta encontrar el 'python.exe'/'python' del venv
+        venv_bin_dir = os.path.dirname(python_exec)
+        
+        # 2. El binario 'checkov' (sin extensión) o 'checkov.exe' (Windows)
+        # debería estar en la misma carpeta que el python del venv.
+        checkov_bin = os.path.join(venv_bin_dir, "checkov")
+        if os.name == 'nt' and not os.path.exists(checkov_bin):
+            checkov_bin = os.path.join(venv_bin_dir, "checkov.exe")
+        
+        cmd = []
+        if os.path.exists(checkov_bin):
+            # Modo VENV (Local/Windows): Llama al binario específico
+            cmd = [checkov_bin]
+        else:
+            # Modo CI (Linux/PATH): Asume que 'checkov' está en el PATH
+            # (instalado por el workflow)
+            cmd = ["checkov"]
+        
+        cmd.extend([
             "--directory", directory_path,
             "--output", "sarif",
-            "--output-file-path", actual_sarif_file  # Apuntar al fichero SARIF real
-        ]
+            "--output-file-path", actual_sarif_file
+        ])
+        # --- FIN DEL NUEVO BLOQUE CMD ---
         
         # Forzar UTF-8 para que Checkov lea ficheros correctamente
         env = os.environ.copy()
