@@ -390,12 +390,12 @@
                 edges: edges.map(e => ({ from: e.source || e.from, to: e.target || e.to, edge_type: e.edge_type }))
             });
             
-            // Procesar nodos - USAR EL ID CORRECTO DEL BACKEND
+            // Procesar nodos - USAR EL ID ÚNICO DEL BACKEND
             const visNodes = nodes.map((node, index) => {
                 const hasIssues = node.security_issues && node.security_issues.length > 0;
                 
-                // Usar el ID exacto que viene del backend (simple_name)
-                const nodeId = node.simple_name || node.id || `node_${index}`;
+                // Usar el ID único del backend (con contador), NO simple_name
+                const nodeId = node.id || `node_${index}`;
                 
                 console.log(`Procesando nodo ${index}:`, { 
                     originalId: node.id, 

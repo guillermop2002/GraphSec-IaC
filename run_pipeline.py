@@ -67,7 +67,16 @@ def get_cached_or_generate_graph(directory: str, project_name: str) -> Dict[str,
         try:
             with open(cache_file_graph, 'r', encoding='utf-8') as f:
                 graph_data = json.load(f)
-            logger.info(f"Grafo cargado desde caché: {len(graph_data.get('nodes', []))} nodos, {len(graph_data.get('edges', []))} aristas")
+            nodes = graph_data.get('nodes', [])
+            
+            # VALIDACIÓN: Verificar que los IDs del caché sean únicos
+            node_ids = [n.get("id") for n in nodes]
+            unique_ids = set(node_ids)
+            if len(node_ids) != len(unique_ids):
+                logger.warning(f"Caché tiene IDs duplicados, regenerando grafo...")
+                raise ValueError("Caché corrupto con IDs duplicados")
+            
+            logger.info(f"Grafo cargado desde caché: {len(nodes)} nodos, {len(graph_data.get('edges', []))} aristas")
             return graph_data
         except Exception as e:
             logger.warning(f"Error al cargar caché, regenerando grafo: {e}")
@@ -111,6 +120,18 @@ def get_cached_or_generate_graph(directory: str, project_name: str) -> Dict[str,
         resource['id'] = unique_id
     
     edges = build_edges(parsed_resources, name_to_id_map, project_root_abs, nodes)
+    
+    # VALIDACIÓN: Verificar que todos los IDs sean únicos
+    node_ids = [n.get("id") for n in nodes]
+    unique_ids = set(node_ids)
+    if len(node_ids) != len(unique_ids):
+        duplicates = [id for id in node_ids if node_ids.count(id) > 1]
+        logger.error(f"ERROR: Se encontraron IDs duplicados en los nodos: {set(duplicates)}")
+        logger.error(f"Total nodos: {len(node_ids)}, IDs únicos: {len(unique_ids)}")
+        # Forzar regeneración de IDs únicos
+        for i, node in enumerate(nodes):
+            node["id"] = f"{node.get('simple_name')}_{i}"
+            logger.warning(f"Regenerado ID para nodo {i}: {node['id']}")
     
     graph_data = {"nodes": nodes, "edges": edges}
     
