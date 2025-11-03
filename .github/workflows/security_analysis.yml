@@ -39,10 +39,12 @@ jobs:
       # 5. Instalar dependencias de Python (Checkov, etc.)
       - name: Instalar dependencias de Python
         run: |
+          # Usa 'python' (el alias de setup-python) para todo
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
-          # Forzar la instalación de checkov explícitamente
-          pip install checkov
+          python -m pip install -r requirements.txt
+          # Verifica que checkov está instalado en este python
+          echo "--- Verificando instalación de Checkov ---"
+          python -m checkov --version
       
       # 6. Clonar el repositorio de EKS (para prueba)
       - name: Clonar el repositorio de EKS (para prueba)
