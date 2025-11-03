@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     
     permissions:
-      contents: read
+      contents: write
       pull-requests: write
     
     steps:
@@ -55,31 +55,40 @@ jobs:
             --project test_infra_pr_${{ github.event.pull_request.number }} \
             --output graph_data.json
       
-      # 8. Subir el grafo como Artefacto
-      - name: Subir Artefacto del Grafo
-        uses: actions/upload-artifact@v4
-        with:
-          name: graph-security-report
-          path: graph_data.json
+      # 8. Renombrar artefacto JSON
+      - name: Renombrar artefacto JSON
+        run: mv graph_data.json pr-${{ github.event.pull_request.number }}.json
       
-      # 9. Publicar un comentario en el PR
+      # 9. Desplegar informe en GitHub Pages
+      - name: Desplegar informe en GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: .
+          clean: false
+          file_pattern: '(index.html|pr-${{ github.event.pull_request.number }}.json)'
+      
+      # 10. Publicar un comentario en el PR
       - name: Publicar Comentario en PR
         uses: actions/github-script@v7
         with:
           script: |
             // Cargar el JSON generado
             const fs = require('fs');
-            const results = JSON.parse(fs.readFileSync('graph_data.json', 'utf8'));
+            const results = JSON.parse(fs.readFileSync('pr-${{ github.event.pull_request.number }}.json', 'utf8'));
             
-            // Usar valores por defecto ({}) para evitar errores 'undefined'
+            // Usar valores por defecto ({})
             const metadata = results.api_metadata || {};
             const correlation = metadata.correlation_metadata || {};
             
-            // Extraer métricas con valores por defecto
+            // Extraer métricas
             const nodes_vulnerable = correlation.nodes_with_issues_count || 0;
             const findings_unique = metadata.total_findings_unique || 0;
             const nodes_total = metadata.total_nodes || 0;
             const findings_unassigned = metadata.unassigned_findings_count || 0;
+            
+            // Construir la URL del informe visual
+            const report_url = `https://guillermop2002.github.io/GraphSec-IaC/?report=pr-${{ github.event.pull_request.number }}.json`;
             
             // Construir el comentario
             const body = `
@@ -94,7 +103,7 @@ jobs:
             | Nodos Totales | ${nodes_total} |
             | Hallazgos No Asignados | ${findings_unassigned} |
             
-            [**Descarga el informe visual completo (artefacto .json)**](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
+            [**Ver Informe Visual Interactivo**](${report_url})
             `;
             
             // Publicar el comentario
