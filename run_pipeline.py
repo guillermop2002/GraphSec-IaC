@@ -80,7 +80,6 @@ def get_cached_or_generate_graph(directory: str, project_name: str) -> Dict[str,
         raise PipelineError("Error: No se encontraron recursos Terraform para analizar")
     
     # ===== ETAPA 1: GENERACIÓN DEL GRAFO =====
-    # Versión V13: IDs únicos con contador garantizado
     nodes = []
     name_to_id_map = {}
     project_root_abs = os.path.abspath(project_root)
@@ -111,7 +110,6 @@ def get_cached_or_generate_graph(directory: str, project_name: str) -> Dict[str,
         # Añadir el unique_id al recurso parseado para que build_edges lo use
         resource['id'] = unique_id
     
-    # Construir aristas (edges)
     edges = build_edges(parsed_resources, name_to_id_map, project_root_abs, nodes)
     
     graph_data = {"nodes": nodes, "edges": edges}

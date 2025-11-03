@@ -43,40 +43,34 @@ def enrich_graph_nodes_with_parsed(graph_data: Dict[str, Any], parsed_resources:
 
 
 def build_edges(parsed_resources: List[Dict[str, Any]], name_to_id_map: Dict[str, list], project_root: str, nodes: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
-    """Construye las aristas (edges) del grafo analizando dependencias.
-    Versión V13: Usa node_lookup para IDs únicos correctos."""
+    """Construye las aristas (edges) del grafo analizando dependencias."""
     
     edges = []
     pattern_direct = re.compile(r'([a-zA-Z0-9_]+\.[a-zA-Z0-9_]+)(?:\.[a-zA-Z0-9_]+)*')
     
     # Crear un mapa de (file, start_line) -> unique_id
-    # Esto nos permite encontrar el ID único exacto de un recurso
     node_lookup = {(n['file'], n['start_line']): n['id'] for n in nodes}
     
     for resource in parsed_resources:
         # Encontrar el ID 'from' (el ID único de este recurso)
         resource_id = node_lookup.get((resource.get('file'), resource.get('start_line')))
         if not resource_id:
-            continue  # Este recurso no tiene un nodo (raro, pero posible)
+            continue
         
         raw_block_text = resource.get('raw_block_text', '')
         dependencies_found = set(pattern_direct.findall(raw_block_text))
         
         for dep_name in dependencies_found:
-            # Filtrar dependencias no deseadas
             if dep_name.startswith("var.") or dep_name.startswith("local.") or \
                dep_name.startswith("each.") or dep_name.startswith("count."):
                 continue
             
-            # Verificar si la dependencia es un recurso real
             dep_unique_ids = name_to_id_map.get(dep_name)
             if dep_unique_ids:
-                # Éxito: Encontrada una dependencia
-                # Crear aristas a TODOS los IDs únicos para ese nombre
                 for dep_id in dep_unique_ids:
                     edges.append({
-                        "from": resource_id,  # El ID único del recurso que depende
-                        "to": dep_id,  # El ID único del recurso del que depende
+                        "from": resource_id,
+                        "to": dep_id,
                         "arrows": "to"
                     })
                     logger.debug(f"Arista encontrada: {resource_id} -> {dep_id}")
