@@ -1,0 +1,1657 @@
+{
+    "nodes": [
+        {
+            "id": "aws_vpc.this_main.tf",
+            "simple_name": "aws_vpc.this",
+            "label": "aws_vpc.this",
+            "type": "aws_vpc",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/main.tf",
+            "start_line": 28,
+            "end_line": 53,
+            "security_issues": [
+                {
+                    "cfi": "be664c3bb6b280e85e8b35577d3f8e018d6ac26a0537a51dbb035a57f1e132d9",
+                    "rule_id": "aws-autoscaling-enable-at-rest-encryption",
+                    "normalized_cis": "CIS-AWS-2.3.1",
+                    "resource_id": "aws_vpc.this",
+                    "message": "Artifact: main.tf\nType: terraform\nVulnerability aws-autoscaling-enable-at-rest-encryption\nSeverity: MEDIUM\nMessage: VPC does not have VPC Flow Logs enabled.\nLink: [aws-autoscaling-enable-at-rest-encryption](https://avd.aquasec.com/misconfig/aws-autoscaling-enable-at-rest-encryption)",
+                    "level": "warning",
+                    "file_path": "main.tf",
+                    "start_line": 28,
+                    "tool_name": "Trivy",
+                    "sources": [
+                        "Trivy"
+                    ],
+                    "correlation_layer": 1
+                }
+            ]
+        },
+        {
+            "id": "aws_vpc_ipv4_cidr_block_association.this_main.tf",
+            "simple_name": "aws_vpc_ipv4_cidr_block_association.this",
+            "label": "aws_vpc_ipv4_cidr_block_association.this",
+            "type": "aws_vpc_ipv4_cidr_block_association",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/main.tf",
+            "start_line": 55,
+            "end_line": 64,
+            "security_issues": []
+        },
+        {
+            "id": "aws_vpc_block_public_access_options.this_main.tf",
+            "simple_name": "aws_vpc_block_public_access_options.this",
+            "label": "aws_vpc_block_public_access_options.this",
+            "type": "aws_vpc_block_public_access_options",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/main.tf",
+            "start_line": 66,
+            "end_line": 72,
+            "security_issues": []
+        },
+        {
+            "id": "aws_vpc_block_public_access_exclusion.this_main.tf",
+            "simple_name": "aws_vpc_block_public_access_exclusion.this",
+            "label": "aws_vpc_block_public_access_exclusion.this",
+            "type": "aws_vpc_block_public_access_exclusion",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/main.tf",
+            "start_line": 74,
+            "end_line": 101,
+            "security_issues": []
+        },
+        {
+            "id": "aws_vpc_dhcp_options.this_main.tf",
+            "simple_name": "aws_vpc_dhcp_options.this",
+            "label": "aws_vpc_dhcp_options.this",
+            "type": "aws_vpc_dhcp_options",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/main.tf",
+            "start_line": 107,
+            "end_line": 124,
+            "security_issues": []
+        },
+        {
+            "id": "aws_vpc_dhcp_options_association.this_main.tf",
+            "simple_name": "aws_vpc_dhcp_options_association.this",
+            "label": "aws_vpc_dhcp_options_association.this",
+            "type": "aws_vpc_dhcp_options_association",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/main.tf",
+            "start_line": 126,
+            "end_line": 133,
+            "security_issues": []
+        },
+        {
+            "id": "aws_subnet.public_main.tf",
+            "simple_name": "aws_subnet.public",
+            "label": "aws_subnet.public",
+            "type": "aws_subnet",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/main.tf",
+            "start_line": 145,
+            "end_line": 174,
+            "security_issues": []
+        },
+        {
+            "id": "aws_route_table.public_main.tf",
+            "simple_name": "aws_route_table.public",
+            "label": "aws_route_table.public",
+            "type": "aws_route_table",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/main.tf",
+            "start_line": 176,
+            "end_line": 193,
+            "security_issues": []
+        },
+        {
+            "id": "aws_route_table_association.public_main.tf",
+            "simple_name": "aws_route_table_association.public",
+            "label": "aws_route_table_association.public",
+            "type": "aws_route_table_association",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/main.tf",
+            "start_line": 195,
+            "end_line": 202,
+            "security_issues": []
+        },
+        {
+            "id": "aws_route.public_internet_gateway_main.tf",
+            "simple_name": "aws_route.public_internet_gateway",
+            "label": "aws_route.public_internet_gateway",
+            "type": "aws_route",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/main.tf",
+            "start_line": 204,
+            "end_line": 216,
+            "security_issues": []
+        },
+        {
+            "id": "aws_route.public_internet_gateway_ipv6_main.tf",
+            "simple_name": "aws_route.public_internet_gateway_ipv6",
+            "label": "aws_route.public_internet_gateway_ipv6",
+            "type": "aws_route",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/main.tf",
+            "start_line": 218,
+            "end_line": 226,
+            "security_issues": []
+        },
+        {
+            "id": "aws_network_acl.public_main.tf",
+            "simple_name": "aws_network_acl.public",
+            "label": "aws_network_acl.public",
+            "type": "aws_network_acl",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/main.tf",
+            "start_line": 232,
+            "end_line": 245,
+            "security_issues": []
+        },
+        {
+            "id": "aws_network_acl_rule.public_inbound_main.tf",
+            "simple_name": "aws_network_acl_rule.public_inbound",
+            "label": "aws_network_acl_rule.public_inbound",
+            "type": "aws_network_acl_rule",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/main.tf",
+            "start_line": 247,
+            "end_line": 264,
+            "security_issues": [
+                {
+                    "cfi": "d7c1424c3c154c96b253d602fd48d425a870058c2790047f8949a2bc8427a40b",
+                    "rule_id": "aws-vpc-no-public-ingress-acl",
+                    "normalized_cis": "CIS-AWS-4.2.1",
+                    "resource_id": "aws_network_acl_rule.public_inbound",
+                    "message": "Artifact: main.tf\nType: terraform\nVulnerability aws-vpc-no-public-ingress-acl\nSeverity: MEDIUM\nMessage: Network ACL rule allows unrestricted ingress from any IP address.\nLink: [aws-vpc-no-public-ingress-acl](https://avd.aquasec.com/misconfig/aws-vpc-no-public-ingress-acl)",
+                    "level": "warning",
+                    "file_path": "main.tf",
+                    "start_line": 262,
+                    "tool_name": "Trivy",
+                    "sources": [
+                        "Trivy"
+                    ],
+                    "correlation_layer": 1
+                }
+            ]
+        },
+        {
+            "id": "aws_network_acl_rule.public_outbound_main.tf",
+            "simple_name": "aws_network_acl_rule.public_outbound",
+            "label": "aws_network_acl_rule.public_outbound",
+            "type": "aws_network_acl_rule",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/main.tf",
+            "start_line": 266,
+            "end_line": 283,
+            "security_issues": []
+        },
+        {
+            "id": "aws_subnet.private_main.tf",
+            "simple_name": "aws_subnet.private",
+            "label": "aws_subnet.private",
+            "type": "aws_subnet",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/main.tf",
+            "start_line": 293,
+            "end_line": 321,
+            "security_issues": []
+        },
+        {
+            "id": "aws_route_table.private_main.tf",
+            "simple_name": "aws_route_table.private",
+            "label": "aws_route_table.private",
+            "type": "aws_route_table",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/main.tf",
+            "start_line": 324,
+            "end_line": 341,
+            "security_issues": []
+        },
+        {
+            "id": "aws_route_table_association.private_main.tf",
+            "simple_name": "aws_route_table_association.private",
+            "label": "aws_route_table_association.private",
+            "type": "aws_route_table_association",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/main.tf",
+            "start_line": 343,
+            "end_line": 353,
+            "security_issues": []
+        },
+        {
+            "id": "aws_network_acl.private_main.tf",
+            "simple_name": "aws_network_acl.private",
+            "label": "aws_network_acl.private",
+            "type": "aws_network_acl",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/main.tf",
+            "start_line": 363,
+            "end_line": 376,
+            "security_issues": []
+        },
+        {
+            "id": "aws_network_acl_rule.private_inbound_main.tf",
+            "simple_name": "aws_network_acl_rule.private_inbound",
+            "label": "aws_network_acl_rule.private_inbound",
+            "type": "aws_network_acl_rule",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/main.tf",
+            "start_line": 378,
+            "end_line": 395,
+            "security_issues": []
+        },
+        {
+            "id": "aws_network_acl_rule.private_outbound_main.tf",
+            "simple_name": "aws_network_acl_rule.private_outbound",
+            "label": "aws_network_acl_rule.private_outbound",
+            "type": "aws_network_acl_rule",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/main.tf",
+            "start_line": 397,
+            "end_line": 414,
+            "security_issues": []
+        },
+        {
+            "id": "aws_subnet.database_main.tf",
+            "simple_name": "aws_subnet.database",
+            "label": "aws_subnet.database",
+            "type": "aws_subnet",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/main.tf",
+            "start_line": 425,
+            "end_line": 452,
+            "security_issues": []
+        },
+        {
+            "id": "aws_db_subnet_group.database_main.tf",
+            "simple_name": "aws_db_subnet_group.database",
+            "label": "aws_db_subnet_group.database",
+            "type": "aws_db_subnet_group",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/main.tf",
+            "start_line": 454,
+            "end_line": 470,
+            "security_issues": []
+        },
+        {
+            "id": "aws_route_table.database_main.tf",
+            "simple_name": "aws_route_table.database",
+            "label": "aws_route_table.database",
+            "type": "aws_route_table",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/main.tf",
+            "start_line": 472,
+            "end_line": 489,
+            "security_issues": []
+        },
+        {
+            "id": "aws_route_table_association.database_main.tf",
+            "simple_name": "aws_route_table_association.database",
+            "label": "aws_route_table_association.database",
+            "type": "aws_route_table_association",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/main.tf",
+            "start_line": 491,
+            "end_line": 501,
+            "security_issues": []
+        },
+        {
+            "id": "aws_route.database_internet_gateway_main.tf",
+            "simple_name": "aws_route.database_internet_gateway",
+            "label": "aws_route.database_internet_gateway",
+            "type": "aws_route",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/main.tf",
+            "start_line": 503,
+            "end_line": 515,
+            "security_issues": []
+        },
+        {
+            "id": "aws_route.database_nat_gateway_main.tf",
+            "simple_name": "aws_route.database_nat_gateway",
+            "label": "aws_route.database_nat_gateway",
+            "type": "aws_route",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/main.tf",
+            "start_line": 517,
+            "end_line": 529,
+            "security_issues": []
+        },
+        {
+            "id": "aws_route.database_dns64_nat_gateway_main.tf",
+            "simple_name": "aws_route.database_dns64_nat_gateway",
+            "label": "aws_route.database_dns64_nat_gateway",
+            "type": "aws_route",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/main.tf",
+            "start_line": 531,
+            "end_line": 543,
+            "security_issues": []
+        },
+        {
+            "id": "aws_route.database_ipv6_egress_main.tf",
+            "simple_name": "aws_route.database_ipv6_egress",
+            "label": "aws_route.database_ipv6_egress",
+            "type": "aws_route",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/main.tf",
+            "start_line": 545,
+            "end_line": 557,
+            "security_issues": []
+        },
+        {
+            "id": "aws_network_acl.database_main.tf",
+            "simple_name": "aws_network_acl.database",
+            "label": "aws_network_acl.database",
+            "type": "aws_network_acl",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/main.tf",
+            "start_line": 567,
+            "end_line": 580,
+            "security_issues": []
+        },
+        {
+            "id": "aws_network_acl_rule.database_inbound_main.tf",
+            "simple_name": "aws_network_acl_rule.database_inbound",
+            "label": "aws_network_acl_rule.database_inbound",
+            "type": "aws_network_acl_rule",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/main.tf",
+            "start_line": 582,
+            "end_line": 599,
+            "security_issues": []
+        },
+        {
+            "id": "aws_network_acl_rule.database_outbound_main.tf",
+            "simple_name": "aws_network_acl_rule.database_outbound",
+            "label": "aws_network_acl_rule.database_outbound",
+            "type": "aws_network_acl_rule",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/main.tf",
+            "start_line": 601,
+            "end_line": 618,
+            "security_issues": []
+        },
+        {
+            "id": "aws_subnet.redshift_main.tf",
+            "simple_name": "aws_subnet.redshift",
+            "label": "aws_subnet.redshift",
+            "type": "aws_subnet",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/main.tf",
+            "start_line": 629,
+            "end_line": 656,
+            "security_issues": []
+        },
+        {
+            "id": "aws_redshift_subnet_group.redshift_main.tf",
+            "simple_name": "aws_redshift_subnet_group.redshift",
+            "label": "aws_redshift_subnet_group.redshift",
+            "type": "aws_redshift_subnet_group",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/main.tf",
+            "start_line": 658,
+            "end_line": 672,
+            "security_issues": []
+        },
+        {
+            "id": "aws_route_table.redshift_main.tf",
+            "simple_name": "aws_route_table.redshift",
+            "label": "aws_route_table.redshift",
+            "type": "aws_route_table",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/main.tf",
+            "start_line": 674,
+            "end_line": 686,
+            "security_issues": []
+        },
+        {
+            "id": "aws_route_table_association.redshift_main.tf",
+            "simple_name": "aws_route_table_association.redshift",
+            "label": "aws_route_table_association.redshift",
+            "type": "aws_route_table_association",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/main.tf",
+            "start_line": 688,
+            "end_line": 698,
+            "security_issues": []
+        },
+        {
+            "id": "aws_route_table_association.redshift_public_main.tf",
+            "simple_name": "aws_route_table_association.redshift_public",
+            "label": "aws_route_table_association.redshift_public",
+            "type": "aws_route_table_association",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/main.tf",
+            "start_line": 700,
+            "end_line": 710,
+            "security_issues": []
+        },
+        {
+            "id": "aws_network_acl.redshift_main.tf",
+            "simple_name": "aws_network_acl.redshift",
+            "label": "aws_network_acl.redshift",
+            "type": "aws_network_acl",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/main.tf",
+            "start_line": 720,
+            "end_line": 733,
+            "security_issues": []
+        },
+        {
+            "id": "aws_network_acl_rule.redshift_inbound_main.tf",
+            "simple_name": "aws_network_acl_rule.redshift_inbound",
+            "label": "aws_network_acl_rule.redshift_inbound",
+            "type": "aws_network_acl_rule",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/main.tf",
+            "start_line": 735,
+            "end_line": 752,
+            "security_issues": []
+        },
+        {
+            "id": "aws_network_acl_rule.redshift_outbound_main.tf",
+            "simple_name": "aws_network_acl_rule.redshift_outbound",
+            "label": "aws_network_acl_rule.redshift_outbound",
+            "type": "aws_network_acl_rule",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/main.tf",
+            "start_line": 754,
+            "end_line": 771,
+            "security_issues": []
+        },
+        {
+            "id": "aws_subnet.elasticache_main.tf",
+            "simple_name": "aws_subnet.elasticache",
+            "label": "aws_subnet.elasticache",
+            "type": "aws_subnet",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/main.tf",
+            "start_line": 782,
+            "end_line": 809,
+            "security_issues": []
+        },
+        {
+            "id": "aws_elasticache_subnet_group.elasticache_main.tf",
+            "simple_name": "aws_elasticache_subnet_group.elasticache",
+            "label": "aws_elasticache_subnet_group.elasticache",
+            "type": "aws_elasticache_subnet_group",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/main.tf",
+            "start_line": 811,
+            "end_line": 825,
+            "security_issues": []
+        },
+        {
+            "id": "aws_route_table.elasticache_main.tf",
+            "simple_name": "aws_route_table.elasticache",
+            "label": "aws_route_table.elasticache",
+            "type": "aws_route_table",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/main.tf",
+            "start_line": 827,
+            "end_line": 839,
+            "security_issues": []
+        },
+        {
+            "id": "aws_route_table_association.elasticache_main.tf",
+            "simple_name": "aws_route_table_association.elasticache",
+            "label": "aws_route_table_association.elasticache",
+            "type": "aws_route_table_association",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/main.tf",
+            "start_line": 841,
+            "end_line": 854,
+            "security_issues": []
+        },
+        {
+            "id": "aws_network_acl.elasticache_main.tf",
+            "simple_name": "aws_network_acl.elasticache",
+            "label": "aws_network_acl.elasticache",
+            "type": "aws_network_acl",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/main.tf",
+            "start_line": 864,
+            "end_line": 877,
+            "security_issues": []
+        },
+        {
+            "id": "aws_network_acl_rule.elasticache_inbound_main.tf",
+            "simple_name": "aws_network_acl_rule.elasticache_inbound",
+            "label": "aws_network_acl_rule.elasticache_inbound",
+            "type": "aws_network_acl_rule",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/main.tf",
+            "start_line": 879,
+            "end_line": 896,
+            "security_issues": [
+                {
+                    "cfi": "f1e18663198ef570974fa107f73170b12006a6de46966323deb01e5b064d4739",
+                    "rule_id": "aws-vpc-no-excessive-port-access",
+                    "normalized_cis": "CIS-AWS-4.2.2",
+                    "resource_id": "aws_network_acl_rule.elasticache_inbound",
+                    "message": "Artifact: main.tf\nType: terraform\nVulnerability aws-vpc-no-excessive-port-access\nSeverity: CRITICAL\nMessage: Network ACL rule allows access using ALL ports.\nLink: [aws-vpc-no-excessive-port-access](https://avd.aquasec.com/misconfig/aws-vpc-no-excessive-port-access)",
+                    "level": "error",
+                    "file_path": "main.tf",
+                    "start_line": 893,
+                    "tool_name": "Trivy",
+                    "sources": [
+                        "Trivy"
+                    ],
+                    "correlation_layer": 1
+                },
+                {
+                    "cfi": "a2f494214de3e9f55df4a74f82d6e41772e9d7e9dd3866c7e141843b051e0619",
+                    "rule_id": "aws-vpc-no-public-ingress-acl",
+                    "normalized_cis": "CIS-AWS-4.2.1",
+                    "resource_id": "aws_network_acl_rule.elasticache_inbound",
+                    "message": "Artifact: main.tf\nType: terraform\nVulnerability aws-vpc-no-public-ingress-acl\nSeverity: MEDIUM\nMessage: Network ACL rule allows unrestricted ingress from any IP address.\nLink: [aws-vpc-no-public-ingress-acl](https://avd.aquasec.com/misconfig/aws-vpc-no-public-ingress-acl)",
+                    "level": "warning",
+                    "file_path": "main.tf",
+                    "start_line": 894,
+                    "tool_name": "Trivy",
+                    "sources": [
+                        "Trivy"
+                    ],
+                    "correlation_layer": 1
+                }
+            ]
+        },
+        {
+            "id": "aws_network_acl_rule.elasticache_outbound_main.tf",
+            "simple_name": "aws_network_acl_rule.elasticache_outbound",
+            "label": "aws_network_acl_rule.elasticache_outbound",
+            "type": "aws_network_acl_rule",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/main.tf",
+            "start_line": 898,
+            "end_line": 915,
+            "security_issues": []
+        },
+        {
+            "id": "aws_subnet.intra_main.tf",
+            "simple_name": "aws_subnet.intra",
+            "label": "aws_subnet.intra",
+            "type": "aws_subnet",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/main.tf",
+            "start_line": 926,
+            "end_line": 953,
+            "security_issues": []
+        },
+        {
+            "id": "aws_route_table.intra_main.tf",
+            "simple_name": "aws_route_table.intra",
+            "label": "aws_route_table.intra",
+            "type": "aws_route_table",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/main.tf",
+            "start_line": 955,
+            "end_line": 972,
+            "security_issues": []
+        },
+        {
+            "id": "aws_route_table_association.intra_main.tf",
+            "simple_name": "aws_route_table_association.intra",
+            "label": "aws_route_table_association.intra",
+            "type": "aws_route_table_association",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/main.tf",
+            "start_line": 974,
+            "end_line": 981,
+            "security_issues": []
+        },
+        {
+            "id": "aws_network_acl.intra_main.tf",
+            "simple_name": "aws_network_acl.intra",
+            "label": "aws_network_acl.intra",
+            "type": "aws_network_acl",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/main.tf",
+            "start_line": 991,
+            "end_line": 1004,
+            "security_issues": []
+        },
+        {
+            "id": "aws_network_acl_rule.intra_inbound_main.tf",
+            "simple_name": "aws_network_acl_rule.intra_inbound",
+            "label": "aws_network_acl_rule.intra_inbound",
+            "type": "aws_network_acl_rule",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/main.tf",
+            "start_line": 1006,
+            "end_line": 1023,
+            "security_issues": []
+        },
+        {
+            "id": "aws_network_acl_rule.intra_outbound_main.tf",
+            "simple_name": "aws_network_acl_rule.intra_outbound",
+            "label": "aws_network_acl_rule.intra_outbound",
+            "type": "aws_network_acl_rule",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/main.tf",
+            "start_line": 1025,
+            "end_line": 1042,
+            "security_issues": []
+        },
+        {
+            "id": "aws_subnet.outpost_main.tf",
+            "simple_name": "aws_subnet.outpost",
+            "label": "aws_subnet.outpost",
+            "type": "aws_subnet",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/main.tf",
+            "start_line": 1052,
+            "end_line": 1081,
+            "security_issues": []
+        },
+        {
+            "id": "aws_route_table_association.outpost_main.tf",
+            "simple_name": "aws_route_table_association.outpost",
+            "label": "aws_route_table_association.outpost",
+            "type": "aws_route_table_association",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/main.tf",
+            "start_line": 1083,
+            "end_line": 1093,
+            "security_issues": []
+        },
+        {
+            "id": "aws_network_acl.outpost_main.tf",
+            "simple_name": "aws_network_acl.outpost",
+            "label": "aws_network_acl.outpost",
+            "type": "aws_network_acl",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/main.tf",
+            "start_line": 1103,
+            "end_line": 1116,
+            "security_issues": []
+        },
+        {
+            "id": "aws_network_acl_rule.outpost_inbound_main.tf",
+            "simple_name": "aws_network_acl_rule.outpost_inbound",
+            "label": "aws_network_acl_rule.outpost_inbound",
+            "type": "aws_network_acl_rule",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/main.tf",
+            "start_line": 1118,
+            "end_line": 1135,
+            "security_issues": [
+                {
+                    "cfi": "5faca8b948baaf0e48740338a200ca8c1f280e127c90270e1cac610b18a5daf4",
+                    "rule_id": "aws-vpc-no-public-ingress-acl",
+                    "normalized_cis": "CIS-AWS-4.2.1",
+                    "resource_id": "aws_network_acl_rule.outpost_inbound",
+                    "message": "Artifact: main.tf\nType: terraform\nVulnerability aws-vpc-no-public-ingress-acl\nSeverity: MEDIUM\nMessage: Network ACL rule allows unrestricted ingress from any IP address.\nLink: [aws-vpc-no-public-ingress-acl](https://avd.aquasec.com/misconfig/aws-vpc-no-public-ingress-acl)",
+                    "level": "warning",
+                    "file_path": "main.tf",
+                    "start_line": 1133,
+                    "tool_name": "Trivy",
+                    "sources": [
+                        "Trivy"
+                    ],
+                    "correlation_layer": 1
+                }
+            ]
+        },
+        {
+            "id": "aws_network_acl_rule.outpost_outbound_main.tf",
+            "simple_name": "aws_network_acl_rule.outpost_outbound",
+            "label": "aws_network_acl_rule.outpost_outbound",
+            "type": "aws_network_acl_rule",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/main.tf",
+            "start_line": 1137,
+            "end_line": 1154,
+            "security_issues": []
+        },
+        {
+            "id": "aws_internet_gateway.this_main.tf",
+            "simple_name": "aws_internet_gateway.this",
+            "label": "aws_internet_gateway.this",
+            "type": "aws_internet_gateway",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/main.tf",
+            "start_line": 1160,
+            "end_line": 1172,
+            "security_issues": []
+        },
+        {
+            "id": "aws_egress_only_internet_gateway.this_main.tf",
+            "simple_name": "aws_egress_only_internet_gateway.this",
+            "label": "aws_egress_only_internet_gateway.this",
+            "type": "aws_egress_only_internet_gateway",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/main.tf",
+            "start_line": 1174,
+            "end_line": 1186,
+            "security_issues": []
+        },
+        {
+            "id": "aws_route.private_ipv6_egress_main.tf",
+            "simple_name": "aws_route.private_ipv6_egress",
+            "label": "aws_route.private_ipv6_egress",
+            "type": "aws_route",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/main.tf",
+            "start_line": 1188,
+            "end_line": 1196,
+            "security_issues": []
+        },
+        {
+            "id": "aws_eip.nat_main.tf",
+            "simple_name": "aws_eip.nat",
+            "label": "aws_eip.nat",
+            "type": "aws_eip",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/main.tf",
+            "start_line": 1207,
+            "end_line": 1226,
+            "security_issues": []
+        },
+        {
+            "id": "aws_nat_gateway.this_main.tf",
+            "simple_name": "aws_nat_gateway.this",
+            "label": "aws_nat_gateway.this",
+            "type": "aws_nat_gateway",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/main.tf",
+            "start_line": 1228,
+            "end_line": 1254,
+            "security_issues": []
+        },
+        {
+            "id": "aws_route.private_nat_gateway_main.tf",
+            "simple_name": "aws_route.private_nat_gateway",
+            "label": "aws_route.private_nat_gateway",
+            "type": "aws_route",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/main.tf",
+            "start_line": 1256,
+            "end_line": 1268,
+            "security_issues": []
+        },
+        {
+            "id": "aws_route.private_dns64_nat_gateway_main.tf",
+            "simple_name": "aws_route.private_dns64_nat_gateway",
+            "label": "aws_route.private_dns64_nat_gateway",
+            "type": "aws_route",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/main.tf",
+            "start_line": 1270,
+            "end_line": 1282,
+            "security_issues": []
+        },
+        {
+            "id": "aws_customer_gateway.this_main.tf",
+            "simple_name": "aws_customer_gateway.this",
+            "label": "aws_customer_gateway.this",
+            "type": "aws_customer_gateway",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/main.tf",
+            "start_line": 1288,
+            "end_line": 1308,
+            "security_issues": []
+        },
+        {
+            "id": "aws_vpn_gateway.this_main.tf",
+            "simple_name": "aws_vpn_gateway.this",
+            "label": "aws_vpn_gateway.this",
+            "type": "aws_vpn_gateway",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/main.tf",
+            "start_line": 1314,
+            "end_line": 1328,
+            "security_issues": []
+        },
+        {
+            "id": "aws_vpn_gateway_attachment.this_main.tf",
+            "simple_name": "aws_vpn_gateway_attachment.this",
+            "label": "aws_vpn_gateway_attachment.this",
+            "type": "aws_vpn_gateway_attachment",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/main.tf",
+            "start_line": 1330,
+            "end_line": 1337,
+            "security_issues": []
+        },
+        {
+            "id": "aws_vpn_gateway_route_propagation.public_main.tf",
+            "simple_name": "aws_vpn_gateway_route_propagation.public",
+            "label": "aws_vpn_gateway_route_propagation.public",
+            "type": "aws_vpn_gateway_route_propagation",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/main.tf",
+            "start_line": 1339,
+            "end_line": 1352,
+            "security_issues": []
+        },
+        {
+            "id": "aws_vpn_gateway_route_propagation.private_main.tf",
+            "simple_name": "aws_vpn_gateway_route_propagation.private",
+            "label": "aws_vpn_gateway_route_propagation.private",
+            "type": "aws_vpn_gateway_route_propagation",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/main.tf",
+            "start_line": 1354,
+            "end_line": 1367,
+            "security_issues": []
+        },
+        {
+            "id": "aws_vpn_gateway_route_propagation.intra_main.tf",
+            "simple_name": "aws_vpn_gateway_route_propagation.intra",
+            "label": "aws_vpn_gateway_route_propagation.intra",
+            "type": "aws_vpn_gateway_route_propagation",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/main.tf",
+            "start_line": 1369,
+            "end_line": 1382,
+            "security_issues": []
+        },
+        {
+            "id": "aws_default_vpc.this_main.tf",
+            "simple_name": "aws_default_vpc.this",
+            "label": "aws_default_vpc.this",
+            "type": "aws_default_vpc",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/main.tf",
+            "start_line": 1388,
+            "end_line": 1401,
+            "security_issues": [
+                {
+                    "cfi": "65351a4d73118187ae1c7696a457d734dc91f8da9d89e5a275b66583d2aec51a",
+                    "rule_id": "aws-vpc-no-default-vpc",
+                    "normalized_cis": "CIS-AWS-4.1.1",
+                    "resource_id": "aws_default_vpc.this",
+                    "message": "Artifact: main.tf\nType: terraform\nVulnerability aws-vpc-no-default-vpc\nSeverity: HIGH\nMessage: Default VPC is used.\nLink: [aws-vpc-no-default-vpc](https://avd.aquasec.com/misconfig/aws-vpc-no-default-vpc)",
+                    "level": "error",
+                    "file_path": "main.tf",
+                    "start_line": 1388,
+                    "tool_name": "Trivy",
+                    "sources": [
+                        "Trivy"
+                    ],
+                    "correlation_layer": 1
+                },
+                {
+                    "cfi": "ddd857c11417dae3f6ed07c95930a0f744425105007511332862ede948bf833e",
+                    "rule_id": "aws-autoscaling-enable-at-rest-encryption",
+                    "normalized_cis": "CIS-AWS-2.3.1",
+                    "resource_id": "aws_default_vpc.this",
+                    "message": "Artifact: main.tf\nType: terraform\nVulnerability aws-autoscaling-enable-at-rest-encryption\nSeverity: MEDIUM\nMessage: VPC does not have VPC Flow Logs enabled.\nLink: [aws-autoscaling-enable-at-rest-encryption](https://avd.aquasec.com/misconfig/aws-autoscaling-enable-at-rest-encryption)",
+                    "level": "warning",
+                    "file_path": "main.tf",
+                    "start_line": 1388,
+                    "tool_name": "Trivy",
+                    "sources": [
+                        "Trivy"
+                    ],
+                    "correlation_layer": 1
+                }
+            ]
+        },
+        {
+            "id": "aws_default_security_group.this_main.tf",
+            "simple_name": "aws_default_security_group.this",
+            "label": "aws_default_security_group.this",
+            "type": "aws_default_security_group",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/main.tf",
+            "start_line": 1403,
+            "end_line": 1445,
+            "security_issues": []
+        },
+        {
+            "id": "aws_default_network_acl.this_main.tf",
+            "simple_name": "aws_default_network_acl.this",
+            "label": "aws_default_network_acl.this",
+            "type": "aws_default_network_acl",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/main.tf",
+            "start_line": 1451,
+            "end_line": 1500,
+            "security_issues": []
+        },
+        {
+            "id": "aws_default_route_table.default_main.tf",
+            "simple_name": "aws_default_route_table.default",
+            "label": "aws_default_route_table.default",
+            "type": "aws_default_route_table",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/main.tf",
+            "start_line": 1506,
+            "end_line": 1543,
+            "security_issues": []
+        },
+        {
+            "id": "aws_flow_log.this_vpc-flow-logs.tf",
+            "simple_name": "aws_flow_log.this",
+            "label": "aws_flow_log.this",
+            "type": "aws_flow_log",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/vpc-flow-logs.tf",
+            "start_line": 34,
+            "end_line": 59,
+            "security_issues": []
+        },
+        {
+            "id": "aws_cloudwatch_log_group.flow_log_vpc-flow-logs.tf",
+            "simple_name": "aws_cloudwatch_log_group.flow_log",
+            "label": "aws_cloudwatch_log_group.flow_log",
+            "type": "aws_cloudwatch_log_group",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/vpc-flow-logs.tf",
+            "start_line": 65,
+            "end_line": 77,
+            "security_issues": []
+        },
+        {
+            "id": "aws_iam_role.vpc_flow_log_cloudwatch_vpc-flow-logs.tf",
+            "simple_name": "aws_iam_role.vpc_flow_log_cloudwatch",
+            "label": "aws_iam_role.vpc_flow_log_cloudwatch",
+            "type": "aws_iam_role",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/vpc-flow-logs.tf",
+            "start_line": 79,
+            "end_line": 90,
+            "security_issues": []
+        },
+        {
+            "id": "aws_iam_role_policy_attachment.vpc_flow_log_cloudwatch_vpc-flow-logs.tf",
+            "simple_name": "aws_iam_role_policy_attachment.vpc_flow_log_cloudwatch",
+            "label": "aws_iam_role_policy_attachment.vpc_flow_log_cloudwatch",
+            "type": "aws_iam_role_policy_attachment",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/vpc-flow-logs.tf",
+            "start_line": 118,
+            "end_line": 123,
+            "security_issues": []
+        },
+        {
+            "id": "aws_iam_policy.vpc_flow_log_cloudwatch_vpc-flow-logs.tf",
+            "simple_name": "aws_iam_policy.vpc_flow_log_cloudwatch",
+            "label": "aws_iam_policy.vpc_flow_log_cloudwatch",
+            "type": "aws_iam_policy",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/vpc-flow-logs.tf",
+            "start_line": 125,
+            "end_line": 132,
+            "security_issues": []
+        },
+        {
+            "id": "aws_cloudwatch_log_group.flow_log_examples/flow-log/main.tf",
+            "simple_name": "aws_cloudwatch_log_group.flow_log",
+            "label": "aws_cloudwatch_log_group.flow_log",
+            "type": "aws_cloudwatch_log_group",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/examples/flow-log/main.tf",
+            "start_line": 114,
+            "end_line": 120,
+            "security_issues": []
+        },
+        {
+            "id": "aws_iam_role.flow_log_cloudwatch_examples/flow-log/main.tf",
+            "simple_name": "aws_iam_role.flow_log_cloudwatch",
+            "label": "aws_iam_role.flow_log_cloudwatch",
+            "type": "aws_iam_role",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/examples/flow-log/main.tf",
+            "start_line": 122,
+            "end_line": 140,
+            "security_issues": []
+        },
+        {
+            "id": "aws_iam_role_policy.flow_log_cloudwatch_examples/flow-log/main.tf",
+            "simple_name": "aws_iam_role_policy.flow_log_cloudwatch",
+            "label": "aws_iam_role_policy.flow_log_cloudwatch",
+            "type": "aws_iam_role_policy",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/examples/flow-log/main.tf",
+            "start_line": 142,
+            "end_line": 162,
+            "security_issues": []
+        },
+        {
+            "id": "aws_vpc_ipam.this_examples/ipam/main.tf",
+            "simple_name": "aws_vpc_ipam.this",
+            "label": "aws_vpc_ipam.this",
+            "type": "aws_vpc_ipam",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/examples/ipam/main.tf",
+            "start_line": 95,
+            "end_line": 101,
+            "security_issues": []
+        },
+        {
+            "id": "aws_vpc_ipam_pool.this_examples/ipam/main.tf",
+            "simple_name": "aws_vpc_ipam_pool.this",
+            "label": "aws_vpc_ipam_pool.this",
+            "type": "aws_vpc_ipam_pool",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/examples/ipam/main.tf",
+            "start_line": 104,
+            "end_line": 112,
+            "security_issues": []
+        },
+        {
+            "id": "aws_vpc_ipam_pool_cidr.this_examples/ipam/main.tf",
+            "simple_name": "aws_vpc_ipam_pool_cidr.this",
+            "label": "aws_vpc_ipam_pool_cidr.this",
+            "type": "aws_vpc_ipam_pool_cidr",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/examples/ipam/main.tf",
+            "start_line": 114,
+            "end_line": 117,
+            "security_issues": []
+        },
+        {
+            "id": "aws_vpc_ipam_preview_next_cidr.this_examples/ipam/main.tf",
+            "simple_name": "aws_vpc_ipam_preview_next_cidr.this",
+            "label": "aws_vpc_ipam_preview_next_cidr.this",
+            "type": "aws_vpc_ipam_preview_next_cidr",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/examples/ipam/main.tf",
+            "start_line": 119,
+            "end_line": 125,
+            "security_issues": []
+        },
+        {
+            "id": "aws_vpc_ipam_pool.ipv6_examples/ipam/main.tf",
+            "simple_name": "aws_vpc_ipam_pool.ipv6",
+            "label": "aws_vpc_ipam_pool.ipv6",
+            "type": "aws_vpc_ipam_pool",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/examples/ipam/main.tf",
+            "start_line": 128,
+            "end_line": 138,
+            "security_issues": []
+        },
+        {
+            "id": "aws_security_group.rds_examples/complete/main.tf",
+            "simple_name": "aws_security_group.rds",
+            "label": "aws_security_group.rds",
+            "type": "aws_security_group",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/examples/complete/main.tf",
+            "start_line": 211,
+            "end_line": 225,
+            "security_issues": []
+        },
+        {
+            "id": "aws_flow_log.this_modules/flow-log/main.tf",
+            "simple_name": "aws_flow_log.this",
+            "label": "aws_flow_log.this",
+            "type": "aws_flow_log",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/modules/flow-log/main.tf",
+            "start_line": 29,
+            "end_line": 63,
+            "security_issues": []
+        },
+        {
+            "id": "aws_cloudwatch_log_group.this_modules/flow-log/main.tf",
+            "simple_name": "aws_cloudwatch_log_group.this",
+            "label": "aws_cloudwatch_log_group.this",
+            "type": "aws_cloudwatch_log_group",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/modules/flow-log/main.tf",
+            "start_line": 83,
+            "end_line": 98,
+            "security_issues": []
+        },
+        {
+            "id": "aws_iam_role.this_modules/flow-log/main.tf",
+            "simple_name": "aws_iam_role.this",
+            "label": "aws_iam_role.this",
+            "type": "aws_iam_role",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/modules/flow-log/main.tf",
+            "start_line": 207,
+            "end_line": 223,
+            "security_issues": []
+        },
+        {
+            "id": "aws_iam_policy.this_modules/flow-log/main.tf",
+            "simple_name": "aws_iam_policy.this",
+            "label": "aws_iam_policy.this",
+            "type": "aws_iam_policy",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/modules/flow-log/main.tf",
+            "start_line": 229,
+            "end_line": 243,
+            "security_issues": []
+        },
+        {
+            "id": "aws_iam_role_policy_attachment.this_modules/flow-log/main.tf",
+            "simple_name": "aws_iam_role_policy_attachment.this",
+            "label": "aws_iam_role_policy_attachment.this",
+            "type": "aws_iam_role_policy_attachment",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/modules/flow-log/main.tf",
+            "start_line": 323,
+            "end_line": 328,
+            "security_issues": []
+        },
+        {
+            "id": "aws_vpc_endpoint.this_modules/vpc-endpoints/main.tf",
+            "simple_name": "aws_vpc_endpoint.this",
+            "label": "aws_vpc_endpoint.this",
+            "type": "aws_vpc_endpoint",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/modules/vpc-endpoints/main.tf",
+            "start_line": 27,
+            "end_line": 75,
+            "security_issues": []
+        },
+        {
+            "id": "aws_security_group.this_modules/vpc-endpoints/main.tf",
+            "simple_name": "aws_security_group.this",
+            "label": "aws_security_group.this",
+            "type": "aws_security_group",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/modules/vpc-endpoints/main.tf",
+            "start_line": 81,
+            "end_line": 100,
+            "security_issues": []
+        },
+        {
+            "id": "aws_security_group_rule.this_modules/vpc-endpoints/main.tf",
+            "simple_name": "aws_security_group_rule.this",
+            "label": "aws_security_group_rule.this",
+            "type": "aws_security_group_rule",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-vpc/modules/vpc-endpoints/main.tf",
+            "start_line": 102,
+            "end_line": 121,
+            "security_issues": []
+        }
+    ],
+    "edges": [
+        {
+            "from": "aws_vpc_ipv4_cidr_block_association.this_main.tf",
+            "to": "aws_vpc.this_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_vpc_block_public_access_exclusion.this_main.tf",
+            "to": "aws_subnet.public_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_vpc_block_public_access_exclusion.this_main.tf",
+            "to": "aws_subnet.elasticache_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_vpc_block_public_access_exclusion.this_main.tf",
+            "to": "aws_subnet.intra_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_vpc_block_public_access_exclusion.this_main.tf",
+            "to": "aws_subnet.database_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_vpc_block_public_access_exclusion.this_main.tf",
+            "to": "aws_subnet.private_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_vpc_block_public_access_exclusion.this_main.tf",
+            "to": "aws_subnet.outpost_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_vpc_block_public_access_exclusion.this_main.tf",
+            "to": "aws_subnet.redshift_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_vpc_dhcp_options_association.this_main.tf",
+            "to": "aws_vpc_dhcp_options.this_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_subnet.public_main.tf",
+            "to": "aws_vpc.this_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_route_table_association.public_main.tf",
+            "to": "aws_subnet.public_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_route_table_association.public_main.tf",
+            "to": "aws_route_table.public_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_route.public_internet_gateway_main.tf",
+            "to": "aws_route_table.public_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_route.public_internet_gateway_main.tf",
+            "to": "aws_internet_gateway.this_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_route.public_internet_gateway_ipv6_main.tf",
+            "to": "aws_route_table.public_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_route.public_internet_gateway_ipv6_main.tf",
+            "to": "aws_internet_gateway.this_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_network_acl.public_main.tf",
+            "to": "aws_subnet.public_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_network_acl_rule.public_inbound_main.tf",
+            "to": "aws_network_acl.public_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_network_acl_rule.public_outbound_main.tf",
+            "to": "aws_network_acl.public_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_subnet.private_main.tf",
+            "to": "aws_vpc.this_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_route_table_association.private_main.tf",
+            "to": "aws_route_table.private_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_route_table_association.private_main.tf",
+            "to": "aws_subnet.private_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_network_acl.private_main.tf",
+            "to": "aws_subnet.private_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_network_acl_rule.private_inbound_main.tf",
+            "to": "aws_network_acl.private_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_network_acl_rule.private_outbound_main.tf",
+            "to": "aws_network_acl.private_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_subnet.database_main.tf",
+            "to": "aws_vpc.this_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_db_subnet_group.database_main.tf",
+            "to": "aws_subnet.database_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_route_table_association.database_main.tf",
+            "to": "aws_route_table.private_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_route_table_association.database_main.tf",
+            "to": "aws_route_table.database_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_route_table_association.database_main.tf",
+            "to": "aws_subnet.database_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_route.database_internet_gateway_main.tf",
+            "to": "aws_route_table.database_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_route.database_internet_gateway_main.tf",
+            "to": "aws_internet_gateway.this_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_route.database_nat_gateway_main.tf",
+            "to": "aws_nat_gateway.this_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_route.database_nat_gateway_main.tf",
+            "to": "aws_route_table.database_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_route.database_dns64_nat_gateway_main.tf",
+            "to": "aws_route_table.database_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_route.database_dns64_nat_gateway_main.tf",
+            "to": "aws_nat_gateway.this_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_route.database_ipv6_egress_main.tf",
+            "to": "aws_route_table.database_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_route.database_ipv6_egress_main.tf",
+            "to": "aws_egress_only_internet_gateway.this_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_network_acl.database_main.tf",
+            "to": "aws_subnet.database_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_network_acl_rule.database_inbound_main.tf",
+            "to": "aws_network_acl.database_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_network_acl_rule.database_outbound_main.tf",
+            "to": "aws_network_acl.database_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_subnet.redshift_main.tf",
+            "to": "aws_vpc.this_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_redshift_subnet_group.redshift_main.tf",
+            "to": "aws_subnet.redshift_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_route_table_association.redshift_main.tf",
+            "to": "aws_route_table.private_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_route_table_association.redshift_main.tf",
+            "to": "aws_route_table.redshift_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_route_table_association.redshift_main.tf",
+            "to": "aws_subnet.redshift_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_route_table_association.redshift_public_main.tf",
+            "to": "aws_route_table.redshift_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_route_table_association.redshift_public_main.tf",
+            "to": "aws_route_table.public_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_route_table_association.redshift_public_main.tf",
+            "to": "aws_subnet.redshift_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_network_acl.redshift_main.tf",
+            "to": "aws_subnet.redshift_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_network_acl_rule.redshift_inbound_main.tf",
+            "to": "aws_network_acl.redshift_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_network_acl_rule.redshift_outbound_main.tf",
+            "to": "aws_network_acl.redshift_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_subnet.elasticache_main.tf",
+            "to": "aws_vpc.this_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_elasticache_subnet_group.elasticache_main.tf",
+            "to": "aws_subnet.elasticache_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_route_table_association.elasticache_main.tf",
+            "to": "aws_route_table.private_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_route_table_association.elasticache_main.tf",
+            "to": "aws_subnet.elasticache_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_route_table_association.elasticache_main.tf",
+            "to": "aws_route_table.elasticache_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_network_acl.elasticache_main.tf",
+            "to": "aws_subnet.elasticache_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_network_acl_rule.elasticache_inbound_main.tf",
+            "to": "aws_network_acl.elasticache_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_network_acl_rule.elasticache_outbound_main.tf",
+            "to": "aws_network_acl.elasticache_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_subnet.intra_main.tf",
+            "to": "aws_vpc.this_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_route_table_association.intra_main.tf",
+            "to": "aws_subnet.intra_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_route_table_association.intra_main.tf",
+            "to": "aws_route_table.intra_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_network_acl.intra_main.tf",
+            "to": "aws_subnet.intra_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_network_acl_rule.intra_inbound_main.tf",
+            "to": "aws_network_acl.intra_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_network_acl_rule.intra_outbound_main.tf",
+            "to": "aws_network_acl.intra_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_subnet.outpost_main.tf",
+            "to": "aws_vpc.this_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_route_table_association.outpost_main.tf",
+            "to": "aws_route_table.private_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_route_table_association.outpost_main.tf",
+            "to": "aws_subnet.outpost_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_network_acl.outpost_main.tf",
+            "to": "aws_subnet.outpost_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_network_acl_rule.outpost_inbound_main.tf",
+            "to": "aws_network_acl.outpost_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_network_acl_rule.outpost_outbound_main.tf",
+            "to": "aws_network_acl.outpost_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_route.private_ipv6_egress_main.tf",
+            "to": "aws_route_table.private_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_route.private_ipv6_egress_main.tf",
+            "to": "aws_egress_only_internet_gateway.this_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_eip.nat_main.tf",
+            "to": "aws_internet_gateway.this_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_nat_gateway.this_main.tf",
+            "to": "aws_subnet.public_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_nat_gateway.this_main.tf",
+            "to": "aws_internet_gateway.this_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_route.private_nat_gateway_main.tf",
+            "to": "aws_route_table.private_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_route.private_nat_gateway_main.tf",
+            "to": "aws_nat_gateway.this_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_route.private_dns64_nat_gateway_main.tf",
+            "to": "aws_route_table.private_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_route.private_dns64_nat_gateway_main.tf",
+            "to": "aws_nat_gateway.this_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_vpn_gateway_route_propagation.public_main.tf",
+            "to": "aws_vpn_gateway_attachment.this_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_vpn_gateway_route_propagation.public_main.tf",
+            "to": "aws_vpn_gateway.this_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_vpn_gateway_route_propagation.public_main.tf",
+            "to": "aws_route_table.public_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_vpn_gateway_route_propagation.private_main.tf",
+            "to": "aws_route_table.private_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_vpn_gateway_route_propagation.private_main.tf",
+            "to": "aws_vpn_gateway_attachment.this_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_vpn_gateway_route_propagation.private_main.tf",
+            "to": "aws_vpn_gateway.this_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_vpn_gateway_route_propagation.intra_main.tf",
+            "to": "aws_vpn_gateway_attachment.this_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_vpn_gateway_route_propagation.intra_main.tf",
+            "to": "aws_vpn_gateway.this_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_vpn_gateway_route_propagation.intra_main.tf",
+            "to": "aws_route_table.intra_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_default_security_group.this_main.tf",
+            "to": "aws_vpc.this_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_default_network_acl.this_main.tf",
+            "to": "aws_vpc.this_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_default_route_table.default_main.tf",
+            "to": "aws_vpc.this_main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.vpc_flow_log_cloudwatch_vpc-flow-logs.tf",
+            "to": "aws_iam_policy.vpc_flow_log_cloudwatch_vpc-flow-logs.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.vpc_flow_log_cloudwatch_vpc-flow-logs.tf",
+            "to": "aws_iam_role.vpc_flow_log_cloudwatch_vpc-flow-logs.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_iam_role_policy.flow_log_cloudwatch_examples/flow-log/main.tf",
+            "to": "aws_iam_role.flow_log_cloudwatch_examples/flow-log/main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_iam_role_policy.flow_log_cloudwatch_examples/flow-log/main.tf",
+            "to": "aws_cloudwatch_log_group.flow_log_vpc-flow-logs.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_iam_role_policy.flow_log_cloudwatch_examples/flow-log/main.tf",
+            "to": "aws_cloudwatch_log_group.flow_log_examples/flow-log/main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_vpc_ipam_pool.this_examples/ipam/main.tf",
+            "to": "aws_vpc_ipam.this_examples/ipam/main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_vpc_ipam_pool_cidr.this_examples/ipam/main.tf",
+            "to": "aws_vpc_ipam_pool.this_examples/ipam/main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_vpc_ipam_preview_next_cidr.this_examples/ipam/main.tf",
+            "to": "aws_vpc_ipam_pool.this_examples/ipam/main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_vpc_ipam_preview_next_cidr.this_examples/ipam/main.tf",
+            "to": "aws_vpc_ipam_pool_cidr.this_examples/ipam/main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_vpc_ipam_pool.ipv6_examples/ipam/main.tf",
+            "to": "aws_vpc_ipam.this_examples/ipam/main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_flow_log.this_modules/flow-log/main.tf",
+            "to": "aws_cloudwatch_log_group.this_modules/flow-log/main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_flow_log.this_modules/flow-log/main.tf",
+            "to": "aws_iam_role.this_modules/flow-log/main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.this_modules/flow-log/main.tf",
+            "to": "aws_iam_role.this_modules/flow-log/main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.this_modules/flow-log/main.tf",
+            "to": "aws_iam_policy.this_modules/flow-log/main.tf",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_security_group_rule.this_modules/vpc-endpoints/main.tf",
+            "to": "aws_security_group.this_modules/vpc-endpoints/main.tf",
+            "arrows": "to"
+        }
+    ],
+    "unassigned_findings": [],
+    "correlation_metadata": {
+        "assigned_findings": 7,
+        "unassigned_findings_count": 0,
+        "nodes_with_issues_count": 5,
+        "total_unique_findings": 7,
+        "layer_stats": {
+            "1": 21,
+            "2": 0,
+            "3": 0,
+            "0": 0
+        }
+    },
+    "api_metadata": {
+        "status": "success",
+        "message": "Pipeline completado exitosamente para proyecto 'vpc_pr_28'",
+        "project_name": "vpc_pr_28",
+        "project_directory": "./terraform-aws-vpc",
+        "scanners_used": 1,
+        "checkov_success": false,
+        "trivy_success": true,
+        "total_findings_original": 26,
+        "total_findings_unique": 7,
+        "duplicates_removed": 19,
+        "deduplication_method": "CFI_CIS+SARIF_FP",
+        "total_nodes": 96,
+        "total_edges": 108,
+        "correlation_metadata": {
+            "assigned_findings": 7,
+            "unassigned_findings_count": 0,
+            "nodes_with_issues_count": 5,
+            "total_unique_findings": 7,
+            "layer_stats": {
+                "1": 21,
+                "2": 0,
+                "3": 0,
+                "0": 0
+            }
+        },
+        "unassigned_findings_count": 0
+    }
+}
