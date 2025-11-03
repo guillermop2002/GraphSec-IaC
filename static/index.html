@@ -376,7 +376,8 @@
             document.getElementById('total-findings').textContent = unique_findings;
             document.getElementById('vulnerable-nodes').textContent = vulnerableNodesCount;
             
-            if (duplicatesRemoved > 0) {
+            // Añadir información de de-duplicación si está disponible
+            if (duplicates_removed > 0 || scanners_used > 0) {
                 // Crear elemento de información de de-duplicación
                 let dedupInfo = document.getElementById('dedup-info');
                 if (!dedupInfo) {
