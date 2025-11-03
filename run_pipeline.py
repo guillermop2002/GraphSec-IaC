@@ -83,13 +83,21 @@ def get_cached_or_generate_graph(directory: str, project_name: str) -> Dict[str,
     nodes = []
     # Mapa de simple_name -> unique_id para usar en build_edges
     name_to_id_map = {}
+    project_root_abs = os.path.abspath(project_root)
     
     for resource in parsed_resources:
-        # Crear un ID único basado en el nombre Y el fichero,
-        # para diferenciar recursos con el mismo nombre en distintos ficheros.
-        file_name = os.path.basename(resource.get('file', ''))
         simple_name = resource.get('simple_name', '')
-        unique_id = f"{simple_name}_{file_name}" if file_name else simple_name
+        abs_path = resource.get('file', '')
+        
+        # Crear un ID único basado en la ruta relativa completa
+        # ej: 'aws_iam_role.this_modules/my_module/main.tf'
+        try:
+            rel_path = os.path.relpath(abs_path, project_root_abs).replace("\\", "/")
+            unique_id = f"{simple_name}_{rel_path}"
+        except ValueError:
+            # Fallback si las rutas están en discos diferentes (no debería pasar)
+            file_name = os.path.basename(abs_path)
+            unique_id = f"{simple_name}_{file_name}"
         
         # Guardar mapeo para usar en build_edges
         if simple_name not in name_to_id_map:
@@ -101,14 +109,14 @@ def get_cached_or_generate_graph(directory: str, project_name: str) -> Dict[str,
             "simple_name": simple_name,  # Nombre real
             "label": simple_name,
             "type": resource.get('type'),
-            "file": resource.get('file'),
+            "file": abs_path,  # Dejar la ruta absoluta para la correlación
             "start_line": resource.get('start_line'),
             "end_line": resource.get('end_line'),
         }
         nodes.append(node)
     
     # Construir aristas usando los IDs únicos
-    edges = build_edges(parsed_resources, name_to_id_map)
+    edges = build_edges(parsed_resources, name_to_id_map, project_root_abs)
     
     graph_data = {"nodes": nodes, "edges": edges}
     

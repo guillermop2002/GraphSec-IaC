@@ -43,7 +43,7 @@ def enrich_graph_nodes_with_parsed(graph_data: Dict[str, Any], parsed_resources:
     return graph_data
 
 
-def build_edges(parsed_resources: List[Dict[str, Any]], name_to_id_map: Dict[str, list] = None) -> List[Dict[str, Any]]:
+def build_edges(parsed_resources: List[Dict[str, Any]], name_to_id_map: Dict[str, list] = None, project_root: str = None) -> List[Dict[str, Any]]:
     """
     Construye las aristas (edges) del grafo analizando dependencias en Terraform.
     
@@ -55,6 +55,7 @@ def build_edges(parsed_resources: List[Dict[str, Any]], name_to_id_map: Dict[str
         name_to_id_map: Diccionario que mapea simple_name -> [lista de unique_ids]. 
                         Si se proporciona, se usarán los unique_ids en las aristas.
                         Si no se proporciona, se usarán simple_name (comportamiento legacy).
+        project_root: Directorio raíz del proyecto (opcional, para calcular rutas relativas)
     
     Returns:
         Lista de diccionarios representando aristas: [{"from": "unique_id1", "to": "unique_id2"}, ...]
@@ -66,6 +67,13 @@ def build_edges(parsed_resources: List[Dict[str, Any]], name_to_id_map: Dict[str
     # Crear mapa de recursos para búsqueda rápida
     resource_map = {r.get('simple_name'): r for r in parsed_resources}
     
+    # Calcular project_root si no se proporciona (usar el directorio común de los archivos)
+    if not project_root and parsed_resources:
+        first_file = parsed_resources[0].get('file', '')
+        if first_file:
+            # Intentar encontrar el directorio común
+            project_root = os.path.dirname(os.path.abspath(first_file))
+    
     # Función helper para obtener el ID correcto (unique_id o simple_name)
     def get_id_for_name(name: str, resource_file: str) -> str:
         if name_to_id_map and name in name_to_id_map:
@@ -73,11 +81,26 @@ def build_edges(parsed_resources: List[Dict[str, Any]], name_to_id_map: Dict[str
             ids = name_to_id_map[name]
             if len(ids) == 1:
                 return ids[0]
+            
             # Si hay múltiples, intentar encontrar el que corresponda al mismo archivo
+            # Comparar usando la ruta relativa completa
+            if project_root and resource_file:
+                try:
+                    rel_path = os.path.relpath(os.path.abspath(resource_file), os.path.abspath(project_root)).replace("\\", "/")
+                    target_suffix = f"_{rel_path}"
+                    for uid in ids:
+                        if uid.endswith(target_suffix):
+                            return uid
+                except ValueError:
+                    # Fallback si las rutas están en discos diferentes
+                    pass
+            
+            # Fallback: usar el nombre del archivo
             file_name = os.path.basename(resource_file)
             for uid in ids:
                 if uid.endswith(f"_{file_name}"):
                     return uid
+            
             # Si no se encuentra coincidencia, usar el primero
             return ids[0]
         return name
@@ -146,20 +169,31 @@ def build_edges(parsed_resources: List[Dict[str, Any]], name_to_id_map: Dict[str
             # Solo creamos aristas para recursos reales (que empiezan con aws_, google_, etc.)
             if dep_name in resource_map:
                 dependencies_valid += 1
-                # Obtener el ID único para la dependencia (usar el mismo archivo del recurso origen)
                 dep_resource = resource_map[dep_name]
-                dep_id = get_id_for_name(dep_name, dep_resource.get('file', ''))
+                # La dependencia puede tener múltiples instancias (mismo nombre en diferentes archivos)
+                # Crear aristas a TODOS los IDs únicos para ese nombre
+                dep_file = dep_resource.get('file', '')
+                dep_id = get_id_for_name(dep_name, dep_file)
                 
-                # La dirección correcta: resource_id depende de dep_id
-                # Por lo tanto: from = resource_id (el que depende), to = dep_id (el del que depende)
-                # Esto significa: resource_id -> dep_id (resource_id apunta a su dependencia)
-                edges.append({
-                    "from": resource_id,  # El recurso que tiene la dependencia (el que apunta) - usando unique_id
-                    "to": dep_id,  # El recurso del que depende (al que apunta) - usando unique_id
-                    "source": resource_id,
-                    "target": dep_id,
-                })
-                logger.debug(f"Arista encontrada: {resource_id} -> {dep_id}")
+                # Si hay múltiples IDs, crear aristas a todos ellos
+                if name_to_id_map and dep_name in name_to_id_map:
+                    for dep_unique_id in name_to_id_map[dep_name]:
+                        edges.append({
+                            "from": resource_id,  # El recurso que tiene la dependencia (el que apunta) - usando unique_id
+                            "to": dep_unique_id,  # El recurso del que depende (al que apunta) - usando unique_id
+                            "source": resource_id,
+                            "target": dep_unique_id,
+                        })
+                        logger.debug(f"Arista encontrada: {resource_id} -> {dep_unique_id}")
+                else:
+                    # Fallback: usar el ID calculado
+                    edges.append({
+                        "from": resource_id,
+                        "to": dep_id,
+                        "source": resource_id,
+                        "target": dep_id,
+                    })
+                    logger.debug(f"Arista encontrada: {resource_id} -> {dep_id}")
             else:
                 # Es una variable, data source, o recurso que no está en nuestro grafo
                 logger.debug(f"Dependencia '{dep_name}' no encontrada en resource_map (puede ser var, data, o recurso externo)")

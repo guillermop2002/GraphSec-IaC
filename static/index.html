@@ -352,7 +352,40 @@
             // Calcular métricas manualmente si es necesario
             const unique_findings = apiMetadata.total_findings_unique || 0;
             const duplicates_removed = apiMetadata.duplicates_removed || correlationMetadata.duplicates_removed || 0;
-            const scanners_used = apiMetadata.scanners_used || (apiMetadata.checkov_success && apiMetadata.trivy_success ? 2 : (apiMetadata.checkov_success || apiMetadata.trivy_success ? 1 : 0));
+            
+            // Calcular scanners_used de forma robusta
+            let scanners_used = apiMetadata.scanners_used || 0;
+            if (scanners_used === 0) {
+                // Intentar calcular desde los flags de éxito
+                if (apiMetadata.checkov_success && apiMetadata.trivy_success) {
+                    scanners_used = 2;
+                } else if (apiMetadata.checkov_success || apiMetadata.trivy_success) {
+                    scanners_used = 1;
+                } else {
+                    // Fallback: calcular desde los hallazgos (verificar si hay hallazgos de diferentes herramientas)
+                    const all_findings = [];
+                    // Añadir hallazgos no asignados
+                    if (data.unassigned_findings) {
+                        all_findings.push(...data.unassigned_findings);
+                    }
+                    // Añadir hallazgos de nodos
+                    nodes.forEach(n => {
+                        if (n.security_issues) {
+                            all_findings.push(...n.security_issues);
+                        }
+                    });
+                    // Extraer fuentes únicas
+                    const sources = new Set();
+                    all_findings.forEach(f => {
+                        if (f.tool_name) {
+                            sources.add(f.tool_name);
+                        } else if (f.sources && Array.isArray(f.sources)) {
+                            f.sources.forEach(s => sources.add(s));
+                        }
+                    });
+                    scanners_used = sources.size > 0 ? sources.size : 1; // Fallback a 1 si no se puede determinar
+                }
+            }
             
             // Calcular nodos vulnerables manualmente si no está en metadata
             // Un nodo es vulnerable si tiene security_issues con al menos 1 hallazgo
@@ -396,6 +429,12 @@
                     <strong>Duplicados eliminados:</strong> ${duplicates_removed} | 
                     <strong>Escáneres usados:</strong> ${scanners_used}
                 `;
+            }
+            
+            // Actualizar el contador de escáneres si existe
+            const statScanners = document.getElementById('stat-scanners');
+            if (statScanners) {
+                statScanners.textContent = scanners_used;
             }
             
             document.getElementById('stats').style.display = 'grid';
