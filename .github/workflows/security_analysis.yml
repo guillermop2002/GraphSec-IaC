@@ -40,19 +40,17 @@ jobs:
       - name: Instalar dependencias
         run: pip install -r requirements.txt
       
-      # 6. Inicializar Terraform (analizando 'test_infra' como demo)
-      # CAMBIA ESTO por el directorio de tu proyecto real
+      # 6. Inicializar Terraform (analizando 'terraform-aws-eks' para prueba de estrés)
       - name: Terraform Init
         run: terraform init -backend=false
-        working-directory: ./test_infra
+        working-directory: ./terraform-aws-eks
       
-      # 7. Ejecutar el Pipeline (analizando 'test_infra')
-      # CAMBIA ESTO por el directorio de tu proyecto real
+      # 7. Ejecutar el Pipeline (analizando 'terraform-aws-eks')
       - name: Ejecutar Pipeline de GraphSec-IaC
         run: |
           python run_pipeline.py \
-            --directory ./test_infra \
-            --project test_infra_pr_${{ github.event.pull_request.number }} \
+            --directory ./terraform-aws-eks \
+            --project eks_pr_${{ github.event.pull_request.number }} \
             --output graph_data.json
       
       # 8. Renombrar artefacto JSON
