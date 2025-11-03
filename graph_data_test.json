@@ -1,0 +1,284 @@
+{
+    "nodes": [
+        {
+            "id": "aws_s3_bucket.my_test_bucket",
+            "simple_name": "aws_s3_bucket.my_test_bucket",
+            "label": "aws_s3_bucket.my_test_bucket",
+            "type": "aws_s3_bucket",
+            "file": "C:\\Users\\Guillermo\\Documents\\TFG\\GraphSec-IaC\\test_infra\\main.tf",
+            "start_line": 13,
+            "end_line": 16,
+            "security_issues": [
+                {
+                    "cfi": "43a4b1618e61902c2afcfd1f951b5c505d988b53f7fef78fe11b4a1c7faf2d21",
+                    "rule_id": "CKV2_AWS_62",
+                    "normalized_cis": "CKV2_AWS_62",
+                    "resource_id": "aws_s3_bucket.my_test_bucket",
+                    "message": "Ensure S3 buckets should have event notifications enabled",
+                    "level": "error",
+                    "file_path": "test_infra/main.tf",
+                    "start_line": 13,
+                    "tool_name": "Checkov",
+                    "sources": [
+                        "Checkov"
+                    ],
+                    "correlation_layer": 1
+                },
+                {
+                    "cfi": "f7fc94b2c13364efd06fc692cefdf5d5813691a94144911fdd539adbf64cfe5b",
+                    "rule_id": "CKV2_AWS_6",
+                    "normalized_cis": "CIS-AWS-2.1.1",
+                    "resource_id": "aws_s3_bucket.my_test_bucket",
+                    "message": "Ensure that S3 bucket has a Public Access block",
+                    "level": "error",
+                    "file_path": "test_infra/main.tf",
+                    "start_line": 13,
+                    "tool_name": "Checkov",
+                    "sources": [
+                        "Checkov"
+                    ],
+                    "correlation_layer": 1
+                },
+                {
+                    "cfi": "063b15346070d189b7993e85d86b565d9d02d5c9bdee8209e4fc3f0571d130c2",
+                    "rule_id": "CKV2_AWS_61",
+                    "normalized_cis": "CKV2_AWS_61",
+                    "resource_id": "aws_s3_bucket.my_test_bucket",
+                    "message": "Ensure that an S3 bucket has a lifecycle configuration",
+                    "level": "error",
+                    "file_path": "test_infra/main.tf",
+                    "start_line": 13,
+                    "tool_name": "Checkov",
+                    "sources": [
+                        "Checkov"
+                    ],
+                    "correlation_layer": 1
+                },
+                {
+                    "cfi": "5cbea926ecae4edd948a5bd7851da692fa3b41357e1261099aadb10dece70ea0",
+                    "rule_id": "CKV_AWS_21",
+                    "normalized_cis": "CKV_AWS_21",
+                    "resource_id": "aws_s3_bucket.my_test_bucket",
+                    "message": "Ensure all data stored in the S3 bucket have versioning enabled",
+                    "level": "error",
+                    "file_path": "test_infra/main.tf",
+                    "start_line": 13,
+                    "tool_name": "Checkov",
+                    "sources": [
+                        "Checkov"
+                    ],
+                    "correlation_layer": 1
+                },
+                {
+                    "cfi": "05509728331add6871b7f7a82f5d1d6dd2e85fbfee5638f525bc39daad42a3a7",
+                    "rule_id": "CKV_AWS_20",
+                    "normalized_cis": "CIS-AWS-2.1.5-ACL",
+                    "resource_id": "aws_s3_bucket.my_test_bucket",
+                    "message": "S3 Bucket has an ACL defined which allows public READ access.",
+                    "level": "error",
+                    "file_path": "test_infra/main.tf",
+                    "start_line": 13,
+                    "tool_name": "Checkov",
+                    "sources": [
+                        "Checkov"
+                    ],
+                    "correlation_layer": 1
+                },
+                {
+                    "cfi": "788cc0a823105492356bacf7ca20e6cfeb87a0b174641d68907add057073ec96",
+                    "rule_id": "CKV_AWS_144",
+                    "normalized_cis": "CKV_AWS_144",
+                    "resource_id": "aws_s3_bucket.my_test_bucket",
+                    "message": "Ensure that S3 bucket has cross-region replication enabled",
+                    "level": "error",
+                    "file_path": "test_infra/main.tf",
+                    "start_line": 13,
+                    "tool_name": "Checkov",
+                    "sources": [
+                        "Checkov"
+                    ],
+                    "correlation_layer": 1
+                },
+                {
+                    "cfi": "1523adb248370bb3eea6e6b85cb2835033f1028fbf2ad3cfe6afcaccab1c2f67",
+                    "rule_id": "CKV_AWS_145",
+                    "normalized_cis": "CKV_AWS_145",
+                    "resource_id": "aws_s3_bucket.my_test_bucket",
+                    "message": "Ensure that S3 buckets are encrypted with KMS by default",
+                    "level": "error",
+                    "file_path": "test_infra/main.tf",
+                    "start_line": 13,
+                    "tool_name": "Checkov",
+                    "sources": [
+                        "Checkov"
+                    ],
+                    "correlation_layer": 1
+                },
+                {
+                    "cfi": "97a81327d4e1c1905ec4c1de5d01ca5e0042e367d5da99d8e71d0dd6595d374e",
+                    "rule_id": "AVD-AWS-0087",
+                    "normalized_cis": "AVD-AWS-0087",
+                    "resource_id": "aws_s3_bucket.my_test_bucket",
+                    "message": "Artifact: main.tf\nType: terraform\nVulnerability AVD-AWS-0087\nSeverity: HIGH\nMessage: No public access block so not blocking public policies\nLink: [AVD-AWS-0087](https://avd.aquasec.com/misconfig/avd-aws-0087)",
+                    "level": "error",
+                    "file_path": "main.tf",
+                    "start_line": 13,
+                    "tool_name": "Trivy",
+                    "sources": [
+                        "Trivy"
+                    ],
+                    "correlation_layer": 1
+                },
+                {
+                    "cfi": "4167d9637551a1defc1ec0796c3d25bdce3faaa152b63202326714afbf241383",
+                    "rule_id": "AVD-AWS-0090",
+                    "normalized_cis": "CIS-AWS-2.1.6",
+                    "resource_id": "aws_s3_bucket.my_test_bucket",
+                    "message": "Artifact: main.tf\nType: terraform\nVulnerability AVD-AWS-0090\nSeverity: MEDIUM\nMessage: Bucket does not have versioning enabled\nLink: [AVD-AWS-0090](https://avd.aquasec.com/misconfig/avd-aws-0090)",
+                    "level": "warning",
+                    "file_path": "main.tf",
+                    "start_line": 13,
+                    "tool_name": "Trivy",
+                    "sources": [
+                        "Trivy"
+                    ],
+                    "correlation_layer": 1
+                },
+                {
+                    "cfi": "6d6a19828f56bbcc08646e3097a87887e32d4ae29fb0e574c4aff062ff9e8553",
+                    "rule_id": "AVD-AWS-0091",
+                    "normalized_cis": "AVD-AWS-0091",
+                    "resource_id": "aws_s3_bucket.my_test_bucket",
+                    "message": "Artifact: main.tf\nType: terraform\nVulnerability AVD-AWS-0091\nSeverity: HIGH\nMessage: No public access block so not blocking public acls\nLink: [AVD-AWS-0091](https://avd.aquasec.com/misconfig/avd-aws-0091)",
+                    "level": "error",
+                    "file_path": "main.tf",
+                    "start_line": 13,
+                    "tool_name": "Trivy",
+                    "sources": [
+                        "Trivy"
+                    ],
+                    "correlation_layer": 1
+                },
+                {
+                    "cfi": "7cbdd1769c6da8f353e71b389388db31304f32f2b38378e9c518eac59ae3a8ca",
+                    "rule_id": "AVD-AWS-0092",
+                    "normalized_cis": "CIS-AWS-2.1.5",
+                    "resource_id": "aws_s3_bucket.my_test_bucket",
+                    "message": "Artifact: main.tf\nType: terraform\nVulnerability AVD-AWS-0092\nSeverity: HIGH\nMessage: Bucket has a public ACL: \"public-read\"\nLink: [AVD-AWS-0092](https://avd.aquasec.com/misconfig/avd-aws-0092)",
+                    "level": "error",
+                    "file_path": "main.tf",
+                    "start_line": 15,
+                    "tool_name": "Trivy",
+                    "sources": [
+                        "Trivy"
+                    ],
+                    "correlation_layer": 1
+                },
+                {
+                    "cfi": "d9ef7ba6628b2a7f95ebe2e5ee8d8425b9836c3f505399eebfc8f16aa323edff",
+                    "rule_id": "AVD-AWS-0093",
+                    "normalized_cis": "AVD-AWS-0093",
+                    "resource_id": "aws_s3_bucket.my_test_bucket",
+                    "message": "Artifact: main.tf\nType: terraform\nVulnerability AVD-AWS-0093\nSeverity: HIGH\nMessage: No public access block so not restricting public buckets\nLink: [AVD-AWS-0093](https://avd.aquasec.com/misconfig/avd-aws-0093)",
+                    "level": "error",
+                    "file_path": "main.tf",
+                    "start_line": 13,
+                    "tool_name": "Trivy",
+                    "sources": [
+                        "Trivy"
+                    ],
+                    "correlation_layer": 1
+                },
+                {
+                    "cfi": "43a8aaa96eba4e663f45bd8269f8beed407512da0c8e03b1b009262b1338a9b8",
+                    "rule_id": "AVD-AWS-0094",
+                    "normalized_cis": "CIS-AWS-2.2.1",
+                    "resource_id": "aws_s3_bucket.my_test_bucket",
+                    "message": "Artifact: main.tf\nType: terraform\nVulnerability AVD-AWS-0094\nSeverity: LOW\nMessage: Bucket does not have a corresponding public access block.\nLink: [AVD-AWS-0094](https://avd.aquasec.com/misconfig/avd-aws-0094)",
+                    "level": "note",
+                    "file_path": "main.tf",
+                    "start_line": 13,
+                    "tool_name": "Trivy",
+                    "sources": [
+                        "Trivy"
+                    ],
+                    "correlation_layer": 1
+                },
+                {
+                    "cfi": "7a56370c8bbd84e46046691a0e64393b45e96595bf070e03e591d15383d7e0ee",
+                    "rule_id": "AVD-AWS-0132",
+                    "normalized_cis": "CIS-AWS-4.3",
+                    "resource_id": "aws_s3_bucket.my_test_bucket",
+                    "message": "Artifact: main.tf\nType: terraform\nVulnerability AVD-AWS-0132\nSeverity: HIGH\nMessage: Bucket does not encrypt data with a customer managed key.\nLink: [AVD-AWS-0132](https://avd.aquasec.com/misconfig/avd-aws-0132)",
+                    "level": "error",
+                    "file_path": "main.tf",
+                    "start_line": 13,
+                    "tool_name": "Trivy",
+                    "sources": [
+                        "Trivy"
+                    ],
+                    "correlation_layer": 1
+                }
+            ]
+        },
+        {
+            "id": "aws_s3_bucket_logging.logging_config",
+            "simple_name": "aws_s3_bucket_logging.logging_config",
+            "label": "aws_s3_bucket_logging.logging_config",
+            "type": "aws_s3_bucket_logging",
+            "file": "C:\\Users\\Guillermo\\Documents\\TFG\\GraphSec-IaC\\test_infra\\main.tf",
+            "start_line": 18,
+            "end_line": 23,
+            "security_issues": []
+        }
+    ],
+    "edges": [
+        {
+            "from": "aws_s3_bucket_logging.logging_config",
+            "to": "aws_s3_bucket.my_test_bucket",
+            "source": "aws_s3_bucket_logging.logging_config",
+            "target": "aws_s3_bucket.my_test_bucket"
+        }
+    ],
+    "unassigned_findings": [],
+    "correlation_metadata": {
+        "assigned_findings": 14,
+        "unassigned_findings_count": 0,
+        "nodes_with_issues_count": 1,
+        "total_unique_findings": 14,
+        "layer_stats": {
+            "1": 16,
+            "2": 0,
+            "3": 0,
+            "0": 0
+        }
+    },
+    "api_metadata": {
+        "status": "success",
+        "message": "Pipeline completado exitosamente para proyecto 'test_infra_verification'",
+        "project_name": "test_infra_verification",
+        "project_directory": "./test_infra",
+        "scanners_used": 2,
+        "checkov_success": true,
+        "trivy_success": true,
+        "total_findings_original": 16,
+        "total_findings_unique": 14,
+        "duplicates_removed": 2,
+        "deduplication_method": "CFI_CIS+SARIF_FP",
+        "total_nodes": 2,
+        "total_edges": 1,
+        "correlation_metadata": {
+            "assigned_findings": 14,
+            "unassigned_findings_count": 0,
+            "nodes_with_issues_count": 1,
+            "total_unique_findings": 14,
+            "layer_stats": {
+                "1": 16,
+                "2": 0,
+                "3": 0,
+                "0": 0
+            }
+        },
+        "unassigned_findings_count": 0
+    }
+}

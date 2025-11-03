@@ -36,3 +36,4 @@ def check_binary(command: str) -> Dict[str, Any]:
             "command": command
         }
 
+
