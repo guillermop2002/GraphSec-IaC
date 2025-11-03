@@ -385,9 +385,10 @@ if __name__ == "__main__":
     
     try:
         # Ejecutar el pipeline
+        # graph_data ahora contendrá 'nodes', 'edges', Y 'api_metadata'
         graph_data = asyncio.run(run_analysis_pipeline(args.directory, args.project))
         
-        # Escribir el resultado a JSON
+        # Escribir el resultado COMPLETO a JSON (incluyendo api_metadata)
         with open(args.output, 'w', encoding='utf-8') as f:
             json.dump(graph_data, f, indent=4)
         

@@ -149,14 +149,9 @@ def build_edges(parsed_resources: List[Dict[str, Any]], name_to_id_map: Dict[str
         matches_direct = pattern_direct.findall(raw_block_text)
         
         # Combinar y eliminar duplicados
-        # Filtrar matches_direct que no sean recursos (evitar variables comunes, funciones, etc.)
-        # Solo considerar si el primer token parece un tipo de recurso (no var, data, local, etc.)
+        # Incluir todos los matches (interpolación y directos)
         all_matches = list(matches_interpolation)
-        for match in matches_direct:
-            # Excluir variables, locals, data sources comunes que no son recursos
-            first_token = match.split('.')[0] if '.' in match else match
-            if first_token not in ['var', 'local', 'module', 'terraform']:
-                all_matches.append(match)
+        all_matches.extend(matches_direct)
         
         # Convertir a set para eliminar duplicados
         unique_dependencies = set(all_matches)
@@ -164,9 +159,15 @@ def build_edges(parsed_resources: List[Dict[str, Any]], name_to_id_map: Dict[str
         for dep_name in unique_dependencies:
             dependencies_found += 1
             
+            # Filtrar dependencias (ignorar 'var.', 'local.', 'each.', 'count.')
+            if dep_name.startswith("var.") or \
+               dep_name.startswith("local.") or \
+               dep_name.startswith("each.") or \
+               dep_name.startswith("count."):
+                continue
+            
             # Verificar que la dependencia existe en nuestro mapa de recursos
-            # Puede ser un recurso (aws_vpc.main), una variable (var.name), o un data (data.aws_ami.main)
-            # Solo creamos aristas para recursos reales (que empiezan con aws_, google_, etc.)
+            # Puede ser un recurso (aws_vpc.main), un módulo (module.my_module), o un data (data.aws_ami.main)
             if dep_name in resource_map:
                 dependencies_valid += 1
                 dep_resource = resource_map[dep_name]
