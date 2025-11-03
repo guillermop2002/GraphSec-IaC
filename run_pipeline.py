@@ -79,20 +79,50 @@ def get_cached_or_generate_graph(directory: str, project_name: str) -> Dict[str,
     if not parsed_resources:
         raise PipelineError("Error: No se encontraron recursos Terraform para analizar")
     
-    edges = build_edges(parsed_resources)
-    
+    # ===== ETAPA 1: GENERACIÓN DEL GRAFO =====
     nodes = []
+    name_to_id_map = {}
+    project_root_abs = os.path.abspath(project_root)
+    
     for resource in parsed_resources:
+        simple_name = resource.get('simple_name')
+        abs_path = resource.get('file')
+        
+        try:
+            rel_path = os.path.relpath(abs_path, project_root_abs).replace("\\", "/")
+            unique_id = f"{simple_name}_{rel_path}"
+        except ValueError:
+            file_name = os.path.basename(abs_path)
+            unique_id = f"{simple_name}_{file_name}"
+        
         node = {
-            "id": resource.get('simple_name'),
-            "simple_name": resource.get('simple_name'),
-            "label": resource.get('simple_name'),
+            "id": unique_id,
+            "simple_name": simple_name,
+            "label": simple_name,
             "type": resource.get('type'),
-            "file": resource.get('file'),
+            "file": abs_path,
             "start_line": resource.get('start_line'),
             "end_line": resource.get('end_line'),
         }
         nodes.append(node)
+        
+        if simple_name not in name_to_id_map:
+            name_to_id_map[simple_name] = []
+        name_to_id_map[simple_name].append(unique_id)
+    
+    # Añadir el unique_id a cada recurso para que build_edges lo use
+    for resource in parsed_resources:
+        simple_name = resource.get('simple_name')
+        abs_path = resource.get('file')
+        try:
+            rel_path = os.path.relpath(abs_path, project_root_abs).replace("\\", "/")
+            unique_id = f"{simple_name}_{rel_path}"
+        except ValueError:
+            file_name = os.path.basename(abs_path)
+            unique_id = f"{simple_name}_{file_name}"
+        resource['id'] = unique_id
+    
+    edges = build_edges(parsed_resources, name_to_id_map, project_root_abs)
     
     graph_data = {"nodes": nodes, "edges": edges}
     

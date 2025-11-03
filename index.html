@@ -226,20 +226,28 @@
             
             <div id="stats" class="stats" style="display: none;">
                 <div class="stat-card">
-                    <div class="stat-number" id="total-nodes">0</div>
+                    <div class="stat-number" id="stat-nodes">0</div>
                     <div class="stat-label">Nodos</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-number" id="total-edges">0</div>
+                    <div class="stat-number" id="stat-edges">0</div>
                     <div class="stat-label">Dependencias</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-number" id="total-findings">0</div>
+                    <div class="stat-number" id="stat-findings">0</div>
                     <div class="stat-label">Hallazgos</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-number" id="vulnerable-nodes">0</div>
+                    <div class="stat-number" id="stat-vuln-nodes">0</div>
                     <div class="stat-label">Nodos Vulnerables</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="stat-duplicates">0</div>
+                    <div class="stat-label">Duplicados Eliminados</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="stat-scanners">0</div>
+                    <div class="stat-label">Escáneres Usados</div>
                 </div>
             </div>
             
@@ -337,59 +345,36 @@
         }
         
         // Función para actualizar estadísticas
-        function updateStats(data) {
-            const nodes = data.nodes || [];
-            const edges = data.edges || [];
-            const correlationMetadata = data.correlation_metadata || {};
-            const apiMetadata = data.api_metadata || {};
-            
-            // Calcular nodos vulnerables manualmente si no está en metadata
-            // Un nodo es vulnerable si tiene security_issues con al menos 1 hallazgo
-            let vulnerableNodesCount = 0;
-            if (correlationMetadata.nodes_with_issues_count !== undefined) {
-                vulnerableNodesCount = correlationMetadata.nodes_with_issues_count;
-            } else if (correlationMetadata.nodes_with_issues !== undefined) {
-                // Fallback para compatibilidad con versiones antiguas
-                vulnerableNodesCount = correlationMetadata.nodes_with_issues;
-            } else {
-                // Fallback: calcular manualmente contando nodos con security_issues
-                vulnerableNodesCount = nodes.filter(node => {
-                    const issues = node.security_issues || [];
-                    return issues.length > 0;
-                }).length;
-            }
-            
-            // Estadísticas básicas
-            document.getElementById('total-nodes').textContent = nodes.length;
-            document.getElementById('total-edges').textContent = edges.length;
-            document.getElementById('total-findings').textContent = apiMetadata.total_findings_unique || correlationMetadata.total_findings_unique || 0;
-            document.getElementById('vulnerable-nodes').textContent = vulnerableNodesCount;
-            
-            // Añadir información de de-duplicación si está disponible
-            const duplicatesRemoved = apiMetadata.duplicates_removed || correlationMetadata.duplicates_removed || 0;
-            const scannersUsed = apiMetadata.scanners_used || 1;
-            
-            if (duplicatesRemoved > 0) {
-                // Crear elemento de información de de-duplicación
-                let dedupInfo = document.getElementById('dedup-info');
-                if (!dedupInfo) {
-                    dedupInfo = document.createElement('div');
-                    dedupInfo.id = 'dedup-info';
-                    dedupInfo.className = 'stat-item dedup-info';
-                    dedupInfo.style.gridColumn = '1 / -1';
-                    dedupInfo.style.fontSize = '0.9em';
-                    dedupInfo.style.color = '#666';
-                    dedupInfo.style.borderTop = '1px solid #eee';
-                    dedupInfo.style.paddingTop = '8px';
-                    dedupInfo.style.marginTop = '8px';
-                    document.getElementById('stats').appendChild(dedupInfo);
+        function updateStatistics(data) {
+            // 'data' es el objeto JSON completo
+            const metadata = data.api_metadata || {};
+            const correlation = metadata.correlation_metadata || {};
+
+            const unique_findings = metadata.total_findings_unique || 0;
+            const duplicates_removed = metadata.duplicates_removed || 0;
+            let scanners_used = metadata.scanners_used || 0; 
+            if (scanners_used === 0) {
+                if (metadata.checkov_success && metadata.trivy_success) {
+                    scanners_used = 2;
+                } else if (metadata.checkov_success || metadata.trivy_success) {
+                    scanners_used = 1;
+                } else if (data.nodes) {
+                    const all_findings = [...(data.unassigned_findings || [])];
+                    data.nodes.forEach(n => all_findings.push(...(n.security_issues || [])));
+                    const sources = new Set(all_findings.flatMap(f => f.sources || [f.tool_name]));
+                    scanners_used = sources.size > 0 ? sources.size : 1;
+                } else {
+                    scanners_used = 1;
                 }
-                dedupInfo.innerHTML = `
-                    <strong>Duplicados eliminados:</strong> ${duplicatesRemoved} | 
-                    <strong>Escáneres usados:</strong> ${scannersUsed}
-                `;
             }
+            document.getElementById('stat-nodes').textContent = metadata.total_nodes || data.nodes?.length || 0;
+            document.getElementById('stat-edges').textContent = metadata.total_edges || data.edges?.length || 0;
+            document.getElementById('stat-findings').textContent = unique_findings;
+            document.getElementById('stat-vuln-nodes').textContent = correlation.nodes_with_issues_count || 0;
+            document.getElementById('stat-duplicates').textContent = duplicates_removed;
+            document.getElementById('stat-scanners').textContent = scanners_used;
             
+            // Mostrar el panel de estadísticas
             document.getElementById('stats').style.display = 'grid';
         }
         
@@ -706,13 +691,14 @@
                 console.log('Datos del grafo recibidos:', data);
                 
                 // Almacenar datos globalmente
+                window.graphData = data;
                 graphData = data;
                 
                 // Mostrar éxito
                 showSuccess();
                 
                 // Actualizar estadísticas
-                updateStats(data);
+                updateStatistics(data);
                 
                 // Mostrar hallazgos no asignados
                 displayUnassignedFindings(data);

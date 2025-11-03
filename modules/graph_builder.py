@@ -42,102 +42,34 @@ def enrich_graph_nodes_with_parsed(graph_data: Dict[str, Any], parsed_resources:
     return graph_data
 
 
-def build_edges(parsed_resources: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
-    """
-    Construye las aristas (edges) del grafo analizando dependencias en Terraform.
-    
-    Usa expresiones regulares para encontrar interpolaciones de Terraform (${resource.type.name})
-    y construye las relaciones de dependencia entre recursos.
-    
-    Args:
-        parsed_resources: Lista de recursos parseados con metadatos y raw_block_text
-    
-    Returns:
-        Lista de diccionarios representando aristas: [{"from": "resource1", "to": "resource2"}, ...]
-    """
-    if not parsed_resources:
-        logger.warning("Lista de recursos vacía, no se pueden construir aristas")
-        return []
-    
-    # Crear mapa de recursos para búsqueda rápida
-    resource_map = {r.get('simple_name'): r for r in parsed_resources}
-    logger.debug(f"Construyendo aristas desde {len(parsed_resources)} recursos")
+def build_edges(parsed_resources: List[Dict[str, Any]], name_to_id_map: Dict[str, list], project_root: str) -> List[Dict[str, Any]]:
+    """Construye las aristas (edges) del grafo analizando dependencias."""
     
     edges = []
-    
-    # Patrón RegEx para encontrar dependencias de Terraform
-    # Terraform permite dos formas de referenciar recursos:
-    # 1. Con interpolación: ${aws_vpc.main.id} o "prefix_${aws_s3_bucket.my_bucket.arn}_suffix"
-    # 2. Sin interpolación (nueva sintaxis): aws_vpc.main.id (en asignaciones directas)
-    # El patrón captura el resource.type.name (ej: aws_vpc.main de ${aws_vpc.main.id} o aws_vpc.main.id)
-    # También debemos capturar var.name, data.source.name, etc.
-    
-    # Patrón para interpolaciones: ${resource.type.name.attribute}
-    pattern_interpolation = re.compile(
-        r'\$\{([a-zA-Z0-9_]+\.[a-zA-Z0-9_]+)(?:\.[a-zA-Z0-9_]+)*\}'
-    )
-    
-    # Patrón para referencias directas (sin ${}): resource.type.name.attribute
-    # Debe estar al inicio de línea, después de =, o dentro de comillas
-    # Evitar capturar cuando está dentro de strings que ya tienen ${}
-    pattern_direct = re.compile(
-        r'(?:^|\s|=|\()([a-zA-Z0-9_]+\.[a-zA-Z0-9_]+)(?:\.[a-zA-Z0-9_]+)*'
-    )
-    
-    dependencies_found = 0
-    dependencies_valid = 0
+    pattern_direct = re.compile(r'([a-zA-Z0-9_]+\.[a-zA-Z0-9_]+)(?:\.[a-zA-Z0-9_]+)*')
     
     for resource in parsed_resources:
-        resource_name = resource.get('simple_name', '')
-        if not resource_name:
+        resource_id = resource.get('id')  # Este es el ID ÚNICO
+        if not resource_id:
             continue
         
         raw_block_text = resource.get('raw_block_text', '')
-        if not raw_block_text:
-            logger.debug(f"Recurso {resource_name} sin raw_block_text, saltando análisis de dependencias")
-            continue
+        dependencies_found = set(pattern_direct.findall(raw_block_text))
         
-        # Buscar dependencias con ambos patrones
-        matches_interpolation = pattern_interpolation.findall(raw_block_text)
-        matches_direct = pattern_direct.findall(raw_block_text)
-        
-        # Combinar y eliminar duplicados
-        # Filtrar matches_direct que no sean recursos (evitar variables comunes, funciones, etc.)
-        # Solo considerar si el primer token parece un tipo de recurso (no var, data, local, etc.)
-        all_matches = list(matches_interpolation)
-        for match in matches_direct:
-            # Excluir variables, locals, data sources comunes que no son recursos
-            first_token = match.split('.')[0] if '.' in match else match
-            if first_token not in ['var', 'local', 'module', 'terraform']:
-                all_matches.append(match)
-        
-        # Convertir a set para eliminar duplicados
-        unique_dependencies = set(all_matches)
-        
-        for dep_name in unique_dependencies:
-            dependencies_found += 1
+        for dep_name in dependencies_found:
+            if dep_name.startswith("var.") or dep_name.startswith("local.") or \
+               dep_name.startswith("each.") or dep_name.startswith("count."):
+                continue
             
-            # Verificar que la dependencia existe en nuestro mapa de recursos
-            # Puede ser un recurso (aws_vpc.main), una variable (var.name), o un data (data.aws_ami.main)
-            # Solo creamos aristas para recursos reales (que empiezan con aws_, google_, etc.)
-            if dep_name in resource_map:
-                dependencies_valid += 1
-                # La dirección correcta: resource_name depende de dep_name
-                # Por lo tanto: from = resource_name (el que depende), to = dep_name (el del que depende)
-                # Esto significa: resource_name -> dep_name (resource_name apunta a su dependencia)
-                edges.append({
-                    "from": resource_name,  # El recurso que tiene la dependencia (el que apunta)
-                    "to": dep_name,  # El recurso del que depende (al que apunta)
-                    "source": resource_name,
-                    "target": dep_name,
-                })
-                logger.debug(f"Arista encontrada: {resource_name} -> {dep_name}")
-            else:
-                # Es una variable, data source, o recurso que no está en nuestro grafo
-                logger.debug(f"Dependencia '{dep_name}' no encontrada en resource_map (puede ser var, data, o recurso externo)")
-    
-    logger.info(f"Construidas {len(edges)} aristas desde {len(parsed_resources)} recursos "
-                f"({dependencies_valid} dependencias válidas de {dependencies_found} encontradas)")
+            dep_unique_ids = name_to_id_map.get(dep_name)
+            if dep_unique_ids:
+                for dep_id in dep_unique_ids:
+                    edges.append({
+                        "from": resource_id,
+                        "to": dep_id,
+                        "arrows": "to"
+                    })
+                    logger.debug(f"Arista encontrada: {resource_id} -> {dep_id}")
     
     return edges
 
