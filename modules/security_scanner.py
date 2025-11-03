@@ -106,7 +106,6 @@ class CheckovScanner(Scanner):
         # Checkov crea un directorio con el nombre de output_file
         output_dir = output_file
         actual_sarif_file = os.path.join(output_dir, "results_sarif.sarif")
-        
         if os.path.exists(output_dir):
             shutil.rmtree(output_dir)
         
