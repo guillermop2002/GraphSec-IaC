@@ -1431,9 +1431,15 @@
     "edges": [
         {
             "from": "aws_eks_cluster.this_main.tf",
-            "to": "aws_security_group_rule.node_node_groups.tf",
+            "to": "aws_iam_role_policy_attachment.this_main.tf",
             "source": "aws_eks_cluster.this_main.tf",
-            "target": "aws_security_group_rule.node_node_groups.tf"
+            "target": "aws_iam_role_policy_attachment.this_main.tf"
+        },
+        {
+            "from": "aws_eks_cluster.this_main.tf",
+            "to": "aws_security_group_rule.cluster_main.tf",
+            "source": "aws_eks_cluster.this_main.tf",
+            "target": "aws_security_group_rule.cluster_main.tf"
         },
         {
             "from": "aws_eks_cluster.this_main.tf",
@@ -1443,15 +1449,9 @@
         },
         {
             "from": "aws_eks_cluster.this_main.tf",
-            "to": "aws_cloudwatch_log_group.this_main.tf",
+            "to": "aws_security_group_rule.node_node_groups.tf",
             "source": "aws_eks_cluster.this_main.tf",
-            "target": "aws_cloudwatch_log_group.this_main.tf"
-        },
-        {
-            "from": "aws_eks_cluster.this_main.tf",
-            "to": "aws_iam_role_policy_attachment.this_main.tf",
-            "source": "aws_eks_cluster.this_main.tf",
-            "target": "aws_iam_role_policy_attachment.this_main.tf"
+            "target": "aws_security_group_rule.node_node_groups.tf"
         },
         {
             "from": "aws_eks_cluster.this_main.tf",
@@ -1461,9 +1461,9 @@
         },
         {
             "from": "aws_eks_cluster.this_main.tf",
-            "to": "aws_security_group_rule.cluster_main.tf",
+            "to": "aws_cloudwatch_log_group.this_main.tf",
             "source": "aws_eks_cluster.this_main.tf",
-            "target": "aws_security_group_rule.cluster_main.tf"
+            "target": "aws_cloudwatch_log_group.this_main.tf"
         },
         {
             "from": "aws_ec2_tag.cluster_primary_security_group_main.tf",
@@ -1515,14 +1515,20 @@
         },
         {
             "from": "aws_iam_role_policy_attachment.cluster_encryption_main.tf",
+            "to": "aws_iam_role.this_main.tf",
+            "source": "aws_iam_role_policy_attachment.cluster_encryption_main.tf",
+            "target": "aws_iam_role.this_main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.cluster_encryption_main.tf",
             "to": "aws_iam_policy.cluster_encryption_main.tf",
             "source": "aws_iam_role_policy_attachment.cluster_encryption_main.tf",
             "target": "aws_iam_policy.cluster_encryption_main.tf"
         },
         {
-            "from": "aws_iam_role_policy_attachment.cluster_encryption_main.tf",
+            "from": "aws_iam_role_policy_attachment.custom_main.tf",
             "to": "aws_iam_role.this_main.tf",
-            "source": "aws_iam_role_policy_attachment.cluster_encryption_main.tf",
+            "source": "aws_iam_role_policy_attachment.custom_main.tf",
             "target": "aws_iam_role.this_main.tf"
         },
         {
@@ -1530,12 +1536,6 @@
             "to": "aws_iam_policy.custom_main.tf",
             "source": "aws_iam_role_policy_attachment.custom_main.tf",
             "target": "aws_iam_policy.custom_main.tf"
-        },
-        {
-            "from": "aws_iam_role_policy_attachment.custom_main.tf",
-            "to": "aws_iam_role.this_main.tf",
-            "source": "aws_iam_role_policy_attachment.custom_main.tf",
-            "target": "aws_iam_role.this_main.tf"
         },
         {
             "from": "aws_eks_addon.this_main.tf",
@@ -1593,15 +1593,15 @@
         },
         {
             "from": "local_file.join_remote.tf",
-            "to": "aws_ssm_activation.this_remote.tf",
-            "source": "local_file.join_remote.tf",
-            "target": "aws_ssm_activation.this_remote.tf"
-        },
-        {
-            "from": "local_file.join_remote.tf",
             "to": "local_file.key_pem_remote.tf",
             "source": "local_file.join_remote.tf",
             "target": "local_file.key_pem_remote.tf"
+        },
+        {
+            "from": "local_file.join_remote.tf",
+            "to": "aws_ssm_activation.this_remote.tf",
+            "source": "local_file.join_remote.tf",
+            "target": "aws_ssm_activation.this_remote.tf"
         },
         {
             "from": "aws_vpc_security_group_ingress_rule.remote_node_remote.tf",
@@ -1635,9 +1635,9 @@
         },
         {
             "from": "aws_kms_alias.this_main.tf",
-            "to": "aws_kms_replica_external_key.this_main.tf",
+            "to": "aws_kms_key.this_main.tf",
             "source": "aws_kms_alias.this_main.tf",
-            "target": "aws_kms_replica_external_key.this_main.tf"
+            "target": "aws_kms_key.this_main.tf"
         },
         {
             "from": "aws_kms_alias.this_main.tf",
@@ -1647,21 +1647,21 @@
         },
         {
             "from": "aws_kms_alias.this_main.tf",
-            "to": "aws_kms_key.this_main.tf",
-            "source": "aws_kms_alias.this_main.tf",
-            "target": "aws_kms_key.this_main.tf"
-        },
-        {
-            "from": "aws_kms_alias.this_main.tf",
             "to": "aws_kms_replica_key.this_main.tf",
             "source": "aws_kms_alias.this_main.tf",
             "target": "aws_kms_replica_key.this_main.tf"
         },
         {
-            "from": "aws_kms_grant.this_main.tf",
+            "from": "aws_kms_alias.this_main.tf",
             "to": "aws_kms_replica_external_key.this_main.tf",
-            "source": "aws_kms_grant.this_main.tf",
+            "source": "aws_kms_alias.this_main.tf",
             "target": "aws_kms_replica_external_key.this_main.tf"
+        },
+        {
+            "from": "aws_kms_grant.this_main.tf",
+            "to": "aws_kms_key.this_main.tf",
+            "source": "aws_kms_grant.this_main.tf",
+            "target": "aws_kms_key.this_main.tf"
         },
         {
             "from": "aws_kms_grant.this_main.tf",
@@ -1671,21 +1671,21 @@
         },
         {
             "from": "aws_kms_grant.this_main.tf",
-            "to": "aws_kms_key.this_main.tf",
-            "source": "aws_kms_grant.this_main.tf",
-            "target": "aws_kms_key.this_main.tf"
-        },
-        {
-            "from": "aws_kms_grant.this_main.tf",
             "to": "aws_kms_replica_key.this_main.tf",
             "source": "aws_kms_grant.this_main.tf",
             "target": "aws_kms_replica_key.this_main.tf"
+        },
+        {
+            "from": "aws_kms_grant.this_main.tf",
+            "to": "aws_kms_replica_external_key.this_main.tf",
+            "source": "aws_kms_grant.this_main.tf",
+            "target": "aws_kms_replica_external_key.this_main.tf"
         },
         {
             "from": "aws_launch_template.this_main.tf",
-            "to": "aws_iam_role_policy_attachment.this_main.tf",
+            "to": "aws_placement_group.this_main.tf",
             "source": "aws_launch_template.this_main.tf",
-            "target": "aws_iam_role_policy_attachment.this_main.tf"
+            "target": "aws_placement_group.this_main.tf"
         },
         {
             "from": "aws_launch_template.this_main.tf",
@@ -1695,9 +1695,9 @@
         },
         {
             "from": "aws_launch_template.this_main.tf",
-            "to": "aws_placement_group.this_main.tf",
+            "to": "aws_iam_role_policy_attachment.this_main.tf",
             "source": "aws_launch_template.this_main.tf",
-            "target": "aws_placement_group.this_main.tf"
+            "target": "aws_iam_role_policy_attachment.this_main.tf"
         },
         {
             "from": "aws_eks_node_group.this_main.tf",
@@ -1737,15 +1737,9 @@
         },
         {
             "from": "aws_launch_template.this_main.tf",
-            "to": "aws_iam_role_policy_attachment.this_main.tf",
+            "to": "aws_placement_group.this_main.tf",
             "source": "aws_launch_template.this_main.tf",
-            "target": "aws_iam_role_policy_attachment.this_main.tf"
-        },
-        {
-            "from": "aws_launch_template.this_main.tf",
-            "to": "aws_iam_instance_profile.this_main.tf",
-            "source": "aws_launch_template.this_main.tf",
-            "target": "aws_iam_instance_profile.this_main.tf"
+            "target": "aws_placement_group.this_main.tf"
         },
         {
             "from": "aws_launch_template.this_main.tf",
@@ -1755,9 +1749,15 @@
         },
         {
             "from": "aws_launch_template.this_main.tf",
-            "to": "aws_placement_group.this_main.tf",
+            "to": "aws_iam_instance_profile.this_main.tf",
             "source": "aws_launch_template.this_main.tf",
-            "target": "aws_placement_group.this_main.tf"
+            "target": "aws_iam_instance_profile.this_main.tf"
+        },
+        {
+            "from": "aws_launch_template.this_main.tf",
+            "to": "aws_iam_role_policy_attachment.this_main.tf",
+            "source": "aws_launch_template.this_main.tf",
+            "target": "aws_iam_role_policy_attachment.this_main.tf"
         },
         {
             "from": "aws_iam_role_policy_attachment.this_main.tf",
@@ -1827,20 +1827,14 @@
         },
         {
             "from": "aws_iam_role_policy_attachment.this_main.tf",
-            "to": "aws_iam_role.this_main.tf",
-            "source": "aws_iam_role_policy_attachment.this_main.tf",
-            "target": "aws_iam_role.this_main.tf"
-        },
-        {
-            "from": "aws_iam_role_policy_attachment.this_main.tf",
             "to": "aws_iam_policy.this_main.tf",
             "source": "aws_iam_role_policy_attachment.this_main.tf",
             "target": "aws_iam_policy.this_main.tf"
         },
         {
-            "from": "aws_iam_role_policy_attachment.intermediate_main.tf",
+            "from": "aws_iam_role_policy_attachment.this_main.tf",
             "to": "aws_iam_role.this_main.tf",
-            "source": "aws_iam_role_policy_attachment.intermediate_main.tf",
+            "source": "aws_iam_role_policy_attachment.this_main.tf",
             "target": "aws_iam_role.this_main.tf"
         },
         {
@@ -1848,6 +1842,12 @@
             "to": "aws_iam_policy.intermediate_main.tf",
             "source": "aws_iam_role_policy_attachment.intermediate_main.tf",
             "target": "aws_iam_policy.intermediate_main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.intermediate_main.tf",
+            "to": "aws_iam_role.this_main.tf",
+            "source": "aws_iam_role_policy_attachment.intermediate_main.tf",
+            "target": "aws_iam_role.this_main.tf"
         },
         {
             "from": "aws_iam_role_policy.controller_main.tf",
@@ -1911,15 +1911,15 @@
         },
         {
             "from": "aws_eks_access_entry.node_main.tf",
-            "to": "aws_iam_role.node_main.tf",
-            "source": "aws_eks_access_entry.node_main.tf",
-            "target": "aws_iam_role.node_main.tf"
-        },
-        {
-            "from": "aws_eks_access_entry.node_main.tf",
             "to": "aws_sqs_queue_policy.this_main.tf",
             "source": "aws_eks_access_entry.node_main.tf",
             "target": "aws_sqs_queue_policy.this_main.tf"
+        },
+        {
+            "from": "aws_eks_access_entry.node_main.tf",
+            "to": "aws_iam_role.node_main.tf",
+            "source": "aws_eks_access_entry.node_main.tf",
+            "target": "aws_iam_role.node_main.tf"
         },
         {
             "from": "aws_iam_instance_profile.this_main.tf",
