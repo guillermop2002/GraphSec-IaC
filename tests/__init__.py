@@ -1,5 +1,0 @@
-"""
-Tests para GraphSec-IaC
-"""
-
-
