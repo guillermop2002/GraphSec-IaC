@@ -328,7 +328,7 @@
             ]
         },
         {
-            "id": "aws_vpc_peering_connection_accepter.peer_main.tf",
+            "id": "aws_vpc_peering_connection_accepter.peer_examples/eks-hybrid-nodes/main.tf",
             "simple_name": "aws_vpc_peering_connection_accepter.peer",
             "label": "aws_vpc_peering_connection_accepter.peer",
             "type": "aws_vpc_peering_connection_accepter",
@@ -338,7 +338,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_route.peer_main.tf",
+            "id": "aws_route.peer_examples/eks-hybrid-nodes/main.tf",
             "simple_name": "aws_route.peer",
             "label": "aws_route.peer",
             "type": "aws_route",
@@ -348,7 +348,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_ssm_activation.this_remote.tf",
+            "id": "aws_ssm_activation.this_examples/eks-hybrid-nodes/remote.tf",
             "simple_name": "aws_ssm_activation.this",
             "label": "aws_ssm_activation.this",
             "type": "aws_ssm_activation",
@@ -358,7 +358,7 @@
             "security_issues": []
         },
         {
-            "id": "local_file.key_pem_remote.tf",
+            "id": "local_file.key_pem_examples/eks-hybrid-nodes/remote.tf",
             "simple_name": "local_file.key_pem",
             "label": "local_file.key_pem",
             "type": "local_file",
@@ -368,7 +368,7 @@
             "security_issues": []
         },
         {
-            "id": "local_file.key_pub_pem_remote.tf",
+            "id": "local_file.key_pub_pem_examples/eks-hybrid-nodes/remote.tf",
             "simple_name": "local_file.key_pub_pem",
             "label": "local_file.key_pub_pem",
             "type": "local_file",
@@ -378,7 +378,7 @@
             "security_issues": []
         },
         {
-            "id": "local_file.join_remote.tf",
+            "id": "local_file.join_examples/eks-hybrid-nodes/remote.tf",
             "simple_name": "local_file.join",
             "label": "local_file.join",
             "type": "local_file",
@@ -388,7 +388,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_instance.hybrid_node_remote.tf",
+            "id": "aws_instance.hybrid_node_examples/eks-hybrid-nodes/remote.tf",
             "simple_name": "aws_instance.hybrid_node",
             "label": "aws_instance.hybrid_node",
             "type": "aws_instance",
@@ -398,7 +398,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_security_group.remote_node_remote.tf",
+            "id": "aws_security_group.remote_node_examples/eks-hybrid-nodes/remote.tf",
             "simple_name": "aws_security_group.remote_node",
             "label": "aws_security_group.remote_node",
             "type": "aws_security_group",
@@ -408,7 +408,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_vpc_security_group_ingress_rule.remote_node_remote.tf",
+            "id": "aws_vpc_security_group_ingress_rule.remote_node_examples/eks-hybrid-nodes/remote.tf",
             "simple_name": "aws_vpc_security_group_ingress_rule.remote_node",
             "label": "aws_vpc_security_group_ingress_rule.remote_node",
             "type": "aws_vpc_security_group_ingress_rule",
@@ -418,7 +418,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_vpc_security_group_egress_rule.remote_node_remote.tf",
+            "id": "aws_vpc_security_group_egress_rule.remote_node_examples/eks-hybrid-nodes/remote.tf",
             "simple_name": "aws_vpc_security_group_egress_rule.remote_node",
             "label": "aws_vpc_security_group_egress_rule.remote_node",
             "type": "aws_vpc_security_group_egress_rule",
@@ -428,7 +428,7 @@
             "security_issues": []
         },
         {
-            "id": "helm_release.cilium_remote.tf",
+            "id": "helm_release.cilium_examples/eks-hybrid-nodes/remote.tf",
             "simple_name": "helm_release.cilium",
             "label": "helm_release.cilium",
             "type": "helm_release",
@@ -438,7 +438,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_vpc_peering_connection.remote_node_remote.tf",
+            "id": "aws_vpc_peering_connection.remote_node_examples/eks-hybrid-nodes/remote.tf",
             "simple_name": "aws_vpc_peering_connection.remote_node",
             "label": "aws_vpc_peering_connection.remote_node",
             "type": "aws_vpc_peering_connection",
@@ -448,7 +448,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_route.remote_node_private_remote.tf",
+            "id": "aws_route.remote_node_private_examples/eks-hybrid-nodes/remote.tf",
             "simple_name": "aws_route.remote_node_private",
             "label": "aws_route.remote_node_private",
             "type": "aws_route",
@@ -458,7 +458,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_route.remote_node_public_remote.tf",
+            "id": "aws_route.remote_node_public_examples/eks-hybrid-nodes/remote.tf",
             "simple_name": "aws_route.remote_node_public",
             "label": "aws_route.remote_node_public",
             "type": "aws_route",
@@ -468,7 +468,7 @@
             "security_issues": []
         },
         {
-            "id": "helm_release.karpenter_main.tf",
+            "id": "helm_release.karpenter_examples/karpenter/main.tf",
             "simple_name": "helm_release.karpenter",
             "label": "helm_release.karpenter",
             "type": "helm_release",
@@ -478,7 +478,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_security_group.remote_access_main.tf",
+            "id": "aws_security_group.remote_access_tests/eks-managed-node-group/main.tf",
             "simple_name": "aws_security_group.remote_access",
             "label": "aws_security_group.remote_access",
             "type": "aws_security_group",
@@ -488,7 +488,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_iam_policy.node_additional_main.tf",
+            "id": "aws_iam_policy.node_additional_tests/eks-managed-node-group/main.tf",
             "simple_name": "aws_iam_policy.node_additional",
             "label": "aws_iam_policy.node_additional",
             "type": "aws_iam_policy",
@@ -498,7 +498,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_iam_role.this_main.tf",
+            "id": "aws_iam_role.this_tests/eks-managed-node-group/main.tf",
             "simple_name": "aws_iam_role.this",
             "label": "aws_iam_role.this",
             "type": "aws_iam_role",
@@ -508,7 +508,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_iam_policy.additional_main.tf",
+            "id": "aws_iam_policy.additional_tests/self-managed-node-group/main.tf",
             "simple_name": "aws_iam_policy.additional",
             "label": "aws_iam_policy.additional",
             "type": "aws_iam_policy",
@@ -518,7 +518,7 @@
             "security_issues": []
         },
         {
-            "id": "tls_private_key.example_main.tf",
+            "id": "tls_private_key.example_tests/eks-hybrid-nodes/main.tf",
             "simple_name": "tls_private_key.example",
             "label": "tls_private_key.example",
             "type": "tls_private_key",
@@ -528,7 +528,7 @@
             "security_issues": []
         },
         {
-            "id": "tls_self_signed_cert.example_main.tf",
+            "id": "tls_self_signed_cert.example_tests/eks-hybrid-nodes/main.tf",
             "simple_name": "tls_self_signed_cert.example",
             "label": "tls_self_signed_cert.example",
             "type": "tls_self_signed_cert",
@@ -538,7 +538,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_iam_policy.additional_main.tf",
+            "id": "aws_iam_policy.additional_tests/eks-fargate-profile/main.tf",
             "simple_name": "aws_iam_policy.additional",
             "label": "aws_iam_policy.additional",
             "type": "aws_iam_policy",
@@ -548,7 +548,7 @@
             "security_issues": []
         },
         {
-            "id": "local_file.eks_mng_al2_no_op_outputs.tf",
+            "id": "local_file.eks_mng_al2_no_op_tests/user-data/outputs.tf",
             "simple_name": "local_file.eks_mng_al2_no_op",
             "label": "local_file.eks_mng_al2_no_op",
             "type": "local_file",
@@ -558,7 +558,7 @@
             "security_issues": []
         },
         {
-            "id": "local_file.eks_mng_al2_additional_outputs.tf",
+            "id": "local_file.eks_mng_al2_additional_tests/user-data/outputs.tf",
             "simple_name": "local_file.eks_mng_al2_additional",
             "label": "local_file.eks_mng_al2_additional",
             "type": "local_file",
@@ -568,7 +568,7 @@
             "security_issues": []
         },
         {
-            "id": "local_file.eks_mng_al2_custom_ami_outputs.tf",
+            "id": "local_file.eks_mng_al2_custom_ami_tests/user-data/outputs.tf",
             "simple_name": "local_file.eks_mng_al2_custom_ami",
             "label": "local_file.eks_mng_al2_custom_ami",
             "type": "local_file",
@@ -578,7 +578,7 @@
             "security_issues": []
         },
         {
-            "id": "local_file.eks_mng_al2_custom_ami_ipv6_outputs.tf",
+            "id": "local_file.eks_mng_al2_custom_ami_ipv6_tests/user-data/outputs.tf",
             "simple_name": "local_file.eks_mng_al2_custom_ami_ipv6",
             "label": "local_file.eks_mng_al2_custom_ami_ipv6",
             "type": "local_file",
@@ -588,7 +588,7 @@
             "security_issues": []
         },
         {
-            "id": "local_file.eks_mng_al2_custom_template_outputs.tf",
+            "id": "local_file.eks_mng_al2_custom_template_tests/user-data/outputs.tf",
             "simple_name": "local_file.eks_mng_al2_custom_template",
             "label": "local_file.eks_mng_al2_custom_template",
             "type": "local_file",
@@ -598,7 +598,7 @@
             "security_issues": []
         },
         {
-            "id": "local_file.eks_mng_al2023_no_op_outputs.tf",
+            "id": "local_file.eks_mng_al2023_no_op_tests/user-data/outputs.tf",
             "simple_name": "local_file.eks_mng_al2023_no_op",
             "label": "local_file.eks_mng_al2023_no_op",
             "type": "local_file",
@@ -608,7 +608,7 @@
             "security_issues": []
         },
         {
-            "id": "local_file.eks_mng_al2023_additional_outputs.tf",
+            "id": "local_file.eks_mng_al2023_additional_tests/user-data/outputs.tf",
             "simple_name": "local_file.eks_mng_al2023_additional",
             "label": "local_file.eks_mng_al2023_additional",
             "type": "local_file",
@@ -618,7 +618,7 @@
             "security_issues": []
         },
         {
-            "id": "local_file.eks_mng_al2023_custom_ami_outputs.tf",
+            "id": "local_file.eks_mng_al2023_custom_ami_tests/user-data/outputs.tf",
             "simple_name": "local_file.eks_mng_al2023_custom_ami",
             "label": "local_file.eks_mng_al2023_custom_ami",
             "type": "local_file",
@@ -628,7 +628,7 @@
             "security_issues": []
         },
         {
-            "id": "local_file.eks_mng_al2023_custom_template_outputs.tf",
+            "id": "local_file.eks_mng_al2023_custom_template_tests/user-data/outputs.tf",
             "simple_name": "local_file.eks_mng_al2023_custom_template",
             "label": "local_file.eks_mng_al2023_custom_template",
             "type": "local_file",
@@ -638,7 +638,7 @@
             "security_issues": []
         },
         {
-            "id": "local_file.eks_mng_bottlerocket_no_op_outputs.tf",
+            "id": "local_file.eks_mng_bottlerocket_no_op_tests/user-data/outputs.tf",
             "simple_name": "local_file.eks_mng_bottlerocket_no_op",
             "label": "local_file.eks_mng_bottlerocket_no_op",
             "type": "local_file",
@@ -648,7 +648,7 @@
             "security_issues": []
         },
         {
-            "id": "local_file.eks_mng_bottlerocket_additional_outputs.tf",
+            "id": "local_file.eks_mng_bottlerocket_additional_tests/user-data/outputs.tf",
             "simple_name": "local_file.eks_mng_bottlerocket_additional",
             "label": "local_file.eks_mng_bottlerocket_additional",
             "type": "local_file",
@@ -658,7 +658,7 @@
             "security_issues": []
         },
         {
-            "id": "local_file.eks_mng_bottlerocket_custom_ami_outputs.tf",
+            "id": "local_file.eks_mng_bottlerocket_custom_ami_tests/user-data/outputs.tf",
             "simple_name": "local_file.eks_mng_bottlerocket_custom_ami",
             "label": "local_file.eks_mng_bottlerocket_custom_ami",
             "type": "local_file",
@@ -668,7 +668,7 @@
             "security_issues": []
         },
         {
-            "id": "local_file.eks_mng_bottlerocket_custom_template_outputs.tf",
+            "id": "local_file.eks_mng_bottlerocket_custom_template_tests/user-data/outputs.tf",
             "simple_name": "local_file.eks_mng_bottlerocket_custom_template",
             "label": "local_file.eks_mng_bottlerocket_custom_template",
             "type": "local_file",
@@ -678,7 +678,7 @@
             "security_issues": []
         },
         {
-            "id": "local_file.eks_mng_windows_no_op_outputs.tf",
+            "id": "local_file.eks_mng_windows_no_op_tests/user-data/outputs.tf",
             "simple_name": "local_file.eks_mng_windows_no_op",
             "label": "local_file.eks_mng_windows_no_op",
             "type": "local_file",
@@ -688,7 +688,7 @@
             "security_issues": []
         },
         {
-            "id": "local_file.eks_mng_windows_additional_outputs.tf",
+            "id": "local_file.eks_mng_windows_additional_tests/user-data/outputs.tf",
             "simple_name": "local_file.eks_mng_windows_additional",
             "label": "local_file.eks_mng_windows_additional",
             "type": "local_file",
@@ -698,7 +698,7 @@
             "security_issues": []
         },
         {
-            "id": "local_file.eks_mng_windows_custom_ami_outputs.tf",
+            "id": "local_file.eks_mng_windows_custom_ami_tests/user-data/outputs.tf",
             "simple_name": "local_file.eks_mng_windows_custom_ami",
             "label": "local_file.eks_mng_windows_custom_ami",
             "type": "local_file",
@@ -708,7 +708,7 @@
             "security_issues": []
         },
         {
-            "id": "local_file.eks_mng_windows_custom_template_outputs.tf",
+            "id": "local_file.eks_mng_windows_custom_template_tests/user-data/outputs.tf",
             "simple_name": "local_file.eks_mng_windows_custom_template",
             "label": "local_file.eks_mng_windows_custom_template",
             "type": "local_file",
@@ -718,7 +718,7 @@
             "security_issues": []
         },
         {
-            "id": "local_file.self_mng_al2_no_op_outputs.tf",
+            "id": "local_file.self_mng_al2_no_op_tests/user-data/outputs.tf",
             "simple_name": "local_file.self_mng_al2_no_op",
             "label": "local_file.self_mng_al2_no_op",
             "type": "local_file",
@@ -728,7 +728,7 @@
             "security_issues": []
         },
         {
-            "id": "local_file.self_mng_al2_bootstrap_outputs.tf",
+            "id": "local_file.self_mng_al2_bootstrap_tests/user-data/outputs.tf",
             "simple_name": "local_file.self_mng_al2_bootstrap",
             "label": "local_file.self_mng_al2_bootstrap",
             "type": "local_file",
@@ -738,7 +738,7 @@
             "security_issues": []
         },
         {
-            "id": "local_file.self_mng_al2_bootstrap_ipv6_outputs.tf",
+            "id": "local_file.self_mng_al2_bootstrap_ipv6_tests/user-data/outputs.tf",
             "simple_name": "local_file.self_mng_al2_bootstrap_ipv6",
             "label": "local_file.self_mng_al2_bootstrap_ipv6",
             "type": "local_file",
@@ -748,7 +748,7 @@
             "security_issues": []
         },
         {
-            "id": "local_file.self_mng_al2_custom_template_outputs.tf",
+            "id": "local_file.self_mng_al2_custom_template_tests/user-data/outputs.tf",
             "simple_name": "local_file.self_mng_al2_custom_template",
             "label": "local_file.self_mng_al2_custom_template",
             "type": "local_file",
@@ -758,7 +758,7 @@
             "security_issues": []
         },
         {
-            "id": "local_file.self_mng_al2023_no_op_outputs.tf",
+            "id": "local_file.self_mng_al2023_no_op_tests/user-data/outputs.tf",
             "simple_name": "local_file.self_mng_al2023_no_op",
             "label": "local_file.self_mng_al2023_no_op",
             "type": "local_file",
@@ -768,7 +768,7 @@
             "security_issues": []
         },
         {
-            "id": "local_file.self_mng_al2023_bootstrap_outputs.tf",
+            "id": "local_file.self_mng_al2023_bootstrap_tests/user-data/outputs.tf",
             "simple_name": "local_file.self_mng_al2023_bootstrap",
             "label": "local_file.self_mng_al2023_bootstrap",
             "type": "local_file",
@@ -778,7 +778,7 @@
             "security_issues": []
         },
         {
-            "id": "local_file.self_mng_al2023_custom_template_outputs.tf",
+            "id": "local_file.self_mng_al2023_custom_template_tests/user-data/outputs.tf",
             "simple_name": "local_file.self_mng_al2023_custom_template",
             "label": "local_file.self_mng_al2023_custom_template",
             "type": "local_file",
@@ -788,7 +788,7 @@
             "security_issues": []
         },
         {
-            "id": "local_file.self_mng_bottlerocket_no_op_outputs.tf",
+            "id": "local_file.self_mng_bottlerocket_no_op_tests/user-data/outputs.tf",
             "simple_name": "local_file.self_mng_bottlerocket_no_op",
             "label": "local_file.self_mng_bottlerocket_no_op",
             "type": "local_file",
@@ -798,7 +798,7 @@
             "security_issues": []
         },
         {
-            "id": "local_file.self_mng_bottlerocket_bootstrap_outputs.tf",
+            "id": "local_file.self_mng_bottlerocket_bootstrap_tests/user-data/outputs.tf",
             "simple_name": "local_file.self_mng_bottlerocket_bootstrap",
             "label": "local_file.self_mng_bottlerocket_bootstrap",
             "type": "local_file",
@@ -808,7 +808,7 @@
             "security_issues": []
         },
         {
-            "id": "local_file.self_mng_bottlerocket_custom_template_outputs.tf",
+            "id": "local_file.self_mng_bottlerocket_custom_template_tests/user-data/outputs.tf",
             "simple_name": "local_file.self_mng_bottlerocket_custom_template",
             "label": "local_file.self_mng_bottlerocket_custom_template",
             "type": "local_file",
@@ -818,7 +818,7 @@
             "security_issues": []
         },
         {
-            "id": "local_file.self_mng_windows_no_op_outputs.tf",
+            "id": "local_file.self_mng_windows_no_op_tests/user-data/outputs.tf",
             "simple_name": "local_file.self_mng_windows_no_op",
             "label": "local_file.self_mng_windows_no_op",
             "type": "local_file",
@@ -828,7 +828,7 @@
             "security_issues": []
         },
         {
-            "id": "local_file.self_mng_windows_bootstrap_outputs.tf",
+            "id": "local_file.self_mng_windows_bootstrap_tests/user-data/outputs.tf",
             "simple_name": "local_file.self_mng_windows_bootstrap",
             "label": "local_file.self_mng_windows_bootstrap",
             "type": "local_file",
@@ -838,7 +838,7 @@
             "security_issues": []
         },
         {
-            "id": "local_file.self_mng_windows_custom_template_outputs.tf",
+            "id": "local_file.self_mng_windows_custom_template_tests/user-data/outputs.tf",
             "simple_name": "local_file.self_mng_windows_custom_template",
             "label": "local_file.self_mng_windows_custom_template",
             "type": "local_file",
@@ -848,7 +848,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_kms_key.this_main.tf",
+            "id": "aws_kms_key.this_.terraform/modules/kms/main.tf",
             "simple_name": "aws_kms_key.this",
             "label": "aws_kms_key.this",
             "type": "aws_kms_key",
@@ -858,7 +858,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_kms_external_key.this_main.tf",
+            "id": "aws_kms_external_key.this_.terraform/modules/kms/main.tf",
             "simple_name": "aws_kms_external_key.this",
             "label": "aws_kms_external_key.this",
             "type": "aws_kms_external_key",
@@ -868,7 +868,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_kms_replica_key.this_main.tf",
+            "id": "aws_kms_replica_key.this_.terraform/modules/kms/main.tf",
             "simple_name": "aws_kms_replica_key.this",
             "label": "aws_kms_replica_key.this",
             "type": "aws_kms_replica_key",
@@ -878,7 +878,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_kms_replica_external_key.this_main.tf",
+            "id": "aws_kms_replica_external_key.this_.terraform/modules/kms/main.tf",
             "simple_name": "aws_kms_replica_external_key.this",
             "label": "aws_kms_replica_external_key.this",
             "type": "aws_kms_replica_external_key",
@@ -888,7 +888,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_kms_alias.this_main.tf",
+            "id": "aws_kms_alias.this_.terraform/modules/kms/main.tf",
             "simple_name": "aws_kms_alias.this",
             "label": "aws_kms_alias.this",
             "type": "aws_kms_alias",
@@ -898,7 +898,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_kms_grant.this_main.tf",
+            "id": "aws_kms_grant.this_.terraform/modules/kms/main.tf",
             "simple_name": "aws_kms_grant.this",
             "label": "aws_kms_grant.this",
             "type": "aws_kms_grant",
@@ -908,7 +908,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_iam_role.lambda_main.tf",
+            "id": "aws_iam_role.lambda_.terraform/modules/kms/examples/complete/main.tf",
             "simple_name": "aws_iam_role.lambda",
             "label": "aws_iam_role.lambda",
             "type": "aws_iam_role",
@@ -918,7 +918,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_launch_template.this_main.tf",
+            "id": "aws_launch_template.this_modules/eks-managed-node-group/main.tf",
             "simple_name": "aws_launch_template.this",
             "label": "aws_launch_template.this",
             "type": "aws_launch_template",
@@ -928,7 +928,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_eks_node_group.this_main.tf",
+            "id": "aws_eks_node_group.this_modules/eks-managed-node-group/main.tf",
             "simple_name": "aws_eks_node_group.this",
             "label": "aws_eks_node_group.this",
             "type": "aws_eks_node_group",
@@ -938,7 +938,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_iam_role.this_main.tf",
+            "id": "aws_iam_role.this_modules/eks-managed-node-group/main.tf",
             "simple_name": "aws_iam_role.this",
             "label": "aws_iam_role.this",
             "type": "aws_iam_role",
@@ -948,7 +948,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_iam_role_policy_attachment.this_main.tf",
+            "id": "aws_iam_role_policy_attachment.this_modules/eks-managed-node-group/main.tf",
             "simple_name": "aws_iam_role_policy_attachment.this",
             "label": "aws_iam_role_policy_attachment.this",
             "type": "aws_iam_role_policy_attachment",
@@ -958,7 +958,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_iam_role_policy_attachment.additional_main.tf",
+            "id": "aws_iam_role_policy_attachment.additional_modules/eks-managed-node-group/main.tf",
             "simple_name": "aws_iam_role_policy_attachment.additional",
             "label": "aws_iam_role_policy_attachment.additional",
             "type": "aws_iam_role_policy_attachment",
@@ -968,7 +968,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_iam_role_policy.this_main.tf",
+            "id": "aws_iam_role_policy.this_modules/eks-managed-node-group/main.tf",
             "simple_name": "aws_iam_role_policy.this",
             "label": "aws_iam_role_policy.this",
             "type": "aws_iam_role_policy",
@@ -978,7 +978,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_placement_group.this_main.tf",
+            "id": "aws_placement_group.this_modules/eks-managed-node-group/main.tf",
             "simple_name": "aws_placement_group.this",
             "label": "aws_placement_group.this",
             "type": "aws_placement_group",
@@ -988,7 +988,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_security_group.this_main.tf",
+            "id": "aws_security_group.this_modules/eks-managed-node-group/main.tf",
             "simple_name": "aws_security_group.this",
             "label": "aws_security_group.this",
             "type": "aws_security_group",
@@ -998,7 +998,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_vpc_security_group_ingress_rule.this_main.tf",
+            "id": "aws_vpc_security_group_ingress_rule.this_modules/eks-managed-node-group/main.tf",
             "simple_name": "aws_vpc_security_group_ingress_rule.this",
             "label": "aws_vpc_security_group_ingress_rule.this",
             "type": "aws_vpc_security_group_ingress_rule",
@@ -1008,7 +1008,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_vpc_security_group_egress_rule.this_main.tf",
+            "id": "aws_vpc_security_group_egress_rule.this_modules/eks-managed-node-group/main.tf",
             "simple_name": "aws_vpc_security_group_egress_rule.this",
             "label": "aws_vpc_security_group_egress_rule.this",
             "type": "aws_vpc_security_group_egress_rule",
@@ -1018,7 +1018,7 @@
             "security_issues": []
         },
         {
-            "id": "null_resource.validate_cluster_service_cidr_main.tf",
+            "id": "null_resource.validate_cluster_service_cidr_modules/_user_data/main.tf",
             "simple_name": "null_resource.validate_cluster_service_cidr",
             "label": "null_resource.validate_cluster_service_cidr",
             "type": "null_resource",
@@ -1028,7 +1028,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_launch_template.this_main.tf",
+            "id": "aws_launch_template.this_modules/self-managed-node-group/main.tf",
             "simple_name": "aws_launch_template.this",
             "label": "aws_launch_template.this",
             "type": "aws_launch_template",
@@ -1038,7 +1038,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_autoscaling_group.this_main.tf",
+            "id": "aws_autoscaling_group.this_modules/self-managed-node-group/main.tf",
             "simple_name": "aws_autoscaling_group.this",
             "label": "aws_autoscaling_group.this",
             "type": "aws_autoscaling_group",
@@ -1048,7 +1048,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_iam_role.this_main.tf",
+            "id": "aws_iam_role.this_modules/self-managed-node-group/main.tf",
             "simple_name": "aws_iam_role.this",
             "label": "aws_iam_role.this",
             "type": "aws_iam_role",
@@ -1058,7 +1058,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_iam_role_policy_attachment.this_main.tf",
+            "id": "aws_iam_role_policy_attachment.this_modules/self-managed-node-group/main.tf",
             "simple_name": "aws_iam_role_policy_attachment.this",
             "label": "aws_iam_role_policy_attachment.this",
             "type": "aws_iam_role_policy_attachment",
@@ -1068,7 +1068,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_iam_role_policy_attachment.additional_main.tf",
+            "id": "aws_iam_role_policy_attachment.additional_modules/self-managed-node-group/main.tf",
             "simple_name": "aws_iam_role_policy_attachment.additional",
             "label": "aws_iam_role_policy_attachment.additional",
             "type": "aws_iam_role_policy_attachment",
@@ -1078,7 +1078,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_iam_instance_profile.this_main.tf",
+            "id": "aws_iam_instance_profile.this_modules/self-managed-node-group/main.tf",
             "simple_name": "aws_iam_instance_profile.this",
             "label": "aws_iam_instance_profile.this",
             "type": "aws_iam_instance_profile",
@@ -1088,7 +1088,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_iam_role_policy.this_main.tf",
+            "id": "aws_iam_role_policy.this_modules/self-managed-node-group/main.tf",
             "simple_name": "aws_iam_role_policy.this",
             "label": "aws_iam_role_policy.this",
             "type": "aws_iam_role_policy",
@@ -1098,7 +1098,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_placement_group.this_main.tf",
+            "id": "aws_placement_group.this_modules/self-managed-node-group/main.tf",
             "simple_name": "aws_placement_group.this",
             "label": "aws_placement_group.this",
             "type": "aws_placement_group",
@@ -1108,7 +1108,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_eks_access_entry.this_main.tf",
+            "id": "aws_eks_access_entry.this_modules/self-managed-node-group/main.tf",
             "simple_name": "aws_eks_access_entry.this",
             "label": "aws_eks_access_entry.this",
             "type": "aws_eks_access_entry",
@@ -1118,7 +1118,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_security_group.this_main.tf",
+            "id": "aws_security_group.this_modules/self-managed-node-group/main.tf",
             "simple_name": "aws_security_group.this",
             "label": "aws_security_group.this",
             "type": "aws_security_group",
@@ -1128,7 +1128,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_vpc_security_group_ingress_rule.this_main.tf",
+            "id": "aws_vpc_security_group_ingress_rule.this_modules/self-managed-node-group/main.tf",
             "simple_name": "aws_vpc_security_group_ingress_rule.this",
             "label": "aws_vpc_security_group_ingress_rule.this",
             "type": "aws_vpc_security_group_ingress_rule",
@@ -1138,7 +1138,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_vpc_security_group_egress_rule.this_main.tf",
+            "id": "aws_vpc_security_group_egress_rule.this_modules/self-managed-node-group/main.tf",
             "simple_name": "aws_vpc_security_group_egress_rule.this",
             "label": "aws_vpc_security_group_egress_rule.this",
             "type": "aws_vpc_security_group_egress_rule",
@@ -1148,7 +1148,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_iam_role.this_main.tf",
+            "id": "aws_iam_role.this_modules/fargate-profile/main.tf",
             "simple_name": "aws_iam_role.this",
             "label": "aws_iam_role.this",
             "type": "aws_iam_role",
@@ -1158,7 +1158,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_iam_role_policy_attachment.this_main.tf",
+            "id": "aws_iam_role_policy_attachment.this_modules/fargate-profile/main.tf",
             "simple_name": "aws_iam_role_policy_attachment.this",
             "label": "aws_iam_role_policy_attachment.this",
             "type": "aws_iam_role_policy_attachment",
@@ -1168,7 +1168,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_iam_role_policy_attachment.additional_main.tf",
+            "id": "aws_iam_role_policy_attachment.additional_modules/fargate-profile/main.tf",
             "simple_name": "aws_iam_role_policy_attachment.additional",
             "label": "aws_iam_role_policy_attachment.additional",
             "type": "aws_iam_role_policy_attachment",
@@ -1178,7 +1178,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_iam_role_policy.this_main.tf",
+            "id": "aws_iam_role_policy.this_modules/fargate-profile/main.tf",
             "simple_name": "aws_iam_role_policy.this",
             "label": "aws_iam_role_policy.this",
             "type": "aws_iam_role_policy",
@@ -1188,7 +1188,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_eks_fargate_profile.this_main.tf",
+            "id": "aws_eks_fargate_profile.this_modules/fargate-profile/main.tf",
             "simple_name": "aws_eks_fargate_profile.this",
             "label": "aws_eks_fargate_profile.this",
             "type": "aws_eks_fargate_profile",
@@ -1198,7 +1198,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_iam_role.this_main.tf",
+            "id": "aws_iam_role.this_modules/hybrid-node-role/main.tf",
             "simple_name": "aws_iam_role.this",
             "label": "aws_iam_role.this",
             "type": "aws_iam_role",
@@ -1208,7 +1208,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_iam_policy.this_main.tf",
+            "id": "aws_iam_policy.this_modules/hybrid-node-role/main.tf",
             "simple_name": "aws_iam_policy.this",
             "label": "aws_iam_policy.this",
             "type": "aws_iam_policy",
@@ -1218,7 +1218,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_iam_role_policy_attachment.this_main.tf",
+            "id": "aws_iam_role_policy_attachment.this_modules/hybrid-node-role/main.tf",
             "simple_name": "aws_iam_role_policy_attachment.this",
             "label": "aws_iam_role_policy_attachment.this",
             "type": "aws_iam_role_policy_attachment",
@@ -1228,7 +1228,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_rolesanywhere_profile.this_main.tf",
+            "id": "aws_rolesanywhere_profile.this_modules/hybrid-node-role/main.tf",
             "simple_name": "aws_rolesanywhere_profile.this",
             "label": "aws_rolesanywhere_profile.this",
             "type": "aws_rolesanywhere_profile",
@@ -1238,7 +1238,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_rolesanywhere_trust_anchor.this_main.tf",
+            "id": "aws_rolesanywhere_trust_anchor.this_modules/hybrid-node-role/main.tf",
             "simple_name": "aws_rolesanywhere_trust_anchor.this",
             "label": "aws_rolesanywhere_trust_anchor.this",
             "type": "aws_rolesanywhere_trust_anchor",
@@ -1248,7 +1248,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_iam_role.intermediate_main.tf",
+            "id": "aws_iam_role.intermediate_modules/hybrid-node-role/main.tf",
             "simple_name": "aws_iam_role.intermediate",
             "label": "aws_iam_role.intermediate",
             "type": "aws_iam_role",
@@ -1258,7 +1258,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_iam_policy.intermediate_main.tf",
+            "id": "aws_iam_policy.intermediate_modules/hybrid-node-role/main.tf",
             "simple_name": "aws_iam_policy.intermediate",
             "label": "aws_iam_policy.intermediate",
             "type": "aws_iam_policy",
@@ -1268,7 +1268,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_iam_role_policy_attachment.intermediate_main.tf",
+            "id": "aws_iam_role_policy_attachment.intermediate_modules/hybrid-node-role/main.tf",
             "simple_name": "aws_iam_role_policy_attachment.intermediate",
             "label": "aws_iam_role_policy_attachment.intermediate",
             "type": "aws_iam_role_policy_attachment",
@@ -1278,7 +1278,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_iam_role.controller_main.tf",
+            "id": "aws_iam_role.controller_modules/karpenter/main.tf",
             "simple_name": "aws_iam_role.controller",
             "label": "aws_iam_role.controller",
             "type": "aws_iam_role",
@@ -1288,7 +1288,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_iam_role_policy.controller_main.tf",
+            "id": "aws_iam_role_policy.controller_modules/karpenter/main.tf",
             "simple_name": "aws_iam_role_policy.controller",
             "label": "aws_iam_role_policy.controller",
             "type": "aws_iam_role_policy",
@@ -1298,7 +1298,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_iam_policy.controller_main.tf",
+            "id": "aws_iam_policy.controller_modules/karpenter/main.tf",
             "simple_name": "aws_iam_policy.controller",
             "label": "aws_iam_policy.controller",
             "type": "aws_iam_policy",
@@ -1308,7 +1308,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_iam_role_policy_attachment.controller_main.tf",
+            "id": "aws_iam_role_policy_attachment.controller_modules/karpenter/main.tf",
             "simple_name": "aws_iam_role_policy_attachment.controller",
             "label": "aws_iam_role_policy_attachment.controller",
             "type": "aws_iam_role_policy_attachment",
@@ -1318,7 +1318,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_iam_role_policy_attachment.controller_additional_main.tf",
+            "id": "aws_iam_role_policy_attachment.controller_additional_modules/karpenter/main.tf",
             "simple_name": "aws_iam_role_policy_attachment.controller_additional",
             "label": "aws_iam_role_policy_attachment.controller_additional",
             "type": "aws_iam_role_policy_attachment",
@@ -1328,7 +1328,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_eks_pod_identity_association.karpenter_main.tf",
+            "id": "aws_eks_pod_identity_association.karpenter_modules/karpenter/main.tf",
             "simple_name": "aws_eks_pod_identity_association.karpenter",
             "label": "aws_eks_pod_identity_association.karpenter",
             "type": "aws_eks_pod_identity_association",
@@ -1338,7 +1338,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_sqs_queue.this_main.tf",
+            "id": "aws_sqs_queue.this_modules/karpenter/main.tf",
             "simple_name": "aws_sqs_queue.this",
             "label": "aws_sqs_queue.this",
             "type": "aws_sqs_queue",
@@ -1348,7 +1348,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_sqs_queue_policy.this_main.tf",
+            "id": "aws_sqs_queue_policy.this_modules/karpenter/main.tf",
             "simple_name": "aws_sqs_queue_policy.this",
             "label": "aws_sqs_queue_policy.this",
             "type": "aws_sqs_queue_policy",
@@ -1358,7 +1358,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_cloudwatch_event_rule.this_main.tf",
+            "id": "aws_cloudwatch_event_rule.this_modules/karpenter/main.tf",
             "simple_name": "aws_cloudwatch_event_rule.this",
             "label": "aws_cloudwatch_event_rule.this",
             "type": "aws_cloudwatch_event_rule",
@@ -1368,7 +1368,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_cloudwatch_event_target.this_main.tf",
+            "id": "aws_cloudwatch_event_target.this_modules/karpenter/main.tf",
             "simple_name": "aws_cloudwatch_event_target.this",
             "label": "aws_cloudwatch_event_target.this",
             "type": "aws_cloudwatch_event_target",
@@ -1378,7 +1378,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_iam_role.node_main.tf",
+            "id": "aws_iam_role.node_modules/karpenter/main.tf",
             "simple_name": "aws_iam_role.node",
             "label": "aws_iam_role.node",
             "type": "aws_iam_role",
@@ -1388,7 +1388,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_iam_role_policy_attachment.node_main.tf",
+            "id": "aws_iam_role_policy_attachment.node_modules/karpenter/main.tf",
             "simple_name": "aws_iam_role_policy_attachment.node",
             "label": "aws_iam_role_policy_attachment.node",
             "type": "aws_iam_role_policy_attachment",
@@ -1398,7 +1398,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_iam_role_policy_attachment.node_additional_main.tf",
+            "id": "aws_iam_role_policy_attachment.node_additional_modules/karpenter/main.tf",
             "simple_name": "aws_iam_role_policy_attachment.node_additional",
             "label": "aws_iam_role_policy_attachment.node_additional",
             "type": "aws_iam_role_policy_attachment",
@@ -1408,7 +1408,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_eks_access_entry.node_main.tf",
+            "id": "aws_eks_access_entry.node_modules/karpenter/main.tf",
             "simple_name": "aws_eks_access_entry.node",
             "label": "aws_eks_access_entry.node",
             "type": "aws_eks_access_entry",
@@ -1418,7 +1418,7 @@
             "security_issues": []
         },
         {
-            "id": "aws_iam_instance_profile.this_main.tf",
+            "id": "aws_iam_instance_profile.this_modules/karpenter/main.tf",
             "simple_name": "aws_iam_instance_profile.this",
             "label": "aws_iam_instance_profile.this",
             "type": "aws_iam_instance_profile",
@@ -1431,15 +1431,39 @@
     "edges": [
         {
             "from": "aws_eks_cluster.this_main.tf",
-            "to": "aws_iam_policy.cni_ipv6_policy_node_groups.tf",
+            "to": "aws_iam_role.eks_auto_main.tf",
             "source": "aws_eks_cluster.this_main.tf",
-            "target": "aws_iam_policy.cni_ipv6_policy_node_groups.tf"
+            "target": "aws_iam_role.eks_auto_main.tf"
         },
         {
             "from": "aws_eks_cluster.this_main.tf",
-            "to": "aws_cloudwatch_log_group.this_main.tf",
+            "to": "aws_iam_role_policy_attachment.this_main.tf",
             "source": "aws_eks_cluster.this_main.tf",
-            "target": "aws_cloudwatch_log_group.this_main.tf"
+            "target": "aws_iam_role_policy_attachment.this_main.tf"
+        },
+        {
+            "from": "aws_eks_cluster.this_main.tf",
+            "to": "aws_iam_role_policy_attachment.this_modules/eks-managed-node-group/main.tf",
+            "source": "aws_eks_cluster.this_main.tf",
+            "target": "aws_iam_role_policy_attachment.this_modules/eks-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_eks_cluster.this_main.tf",
+            "to": "aws_iam_role_policy_attachment.this_modules/self-managed-node-group/main.tf",
+            "source": "aws_eks_cluster.this_main.tf",
+            "target": "aws_iam_role_policy_attachment.this_modules/self-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_eks_cluster.this_main.tf",
+            "to": "aws_iam_role_policy_attachment.this_modules/fargate-profile/main.tf",
+            "source": "aws_eks_cluster.this_main.tf",
+            "target": "aws_iam_role_policy_attachment.this_modules/fargate-profile/main.tf"
+        },
+        {
+            "from": "aws_eks_cluster.this_main.tf",
+            "to": "aws_iam_role_policy_attachment.this_modules/hybrid-node-role/main.tf",
+            "source": "aws_eks_cluster.this_main.tf",
+            "target": "aws_iam_role_policy_attachment.this_modules/hybrid-node-role/main.tf"
         },
         {
             "from": "aws_eks_cluster.this_main.tf",
@@ -1455,15 +1479,15 @@
         },
         {
             "from": "aws_eks_cluster.this_main.tf",
-            "to": "aws_iam_role.eks_auto_main.tf",
+            "to": "aws_iam_policy.cni_ipv6_policy_node_groups.tf",
             "source": "aws_eks_cluster.this_main.tf",
-            "target": "aws_iam_role.eks_auto_main.tf"
+            "target": "aws_iam_policy.cni_ipv6_policy_node_groups.tf"
         },
         {
             "from": "aws_eks_cluster.this_main.tf",
-            "to": "aws_iam_role_policy_attachment.this_main.tf",
+            "to": "aws_cloudwatch_log_group.this_main.tf",
             "source": "aws_eks_cluster.this_main.tf",
-            "target": "aws_iam_role_policy_attachment.this_main.tf"
+            "target": "aws_cloudwatch_log_group.this_main.tf"
         },
         {
             "from": "aws_ec2_tag.cluster_primary_security_group_main.tf",
@@ -1479,15 +1503,21 @@
         },
         {
             "from": "aws_eks_access_policy_association.this_main.tf",
-            "to": "aws_eks_cluster.this_main.tf",
-            "source": "aws_eks_access_policy_association.this_main.tf",
-            "target": "aws_eks_cluster.this_main.tf"
-        },
-        {
-            "from": "aws_eks_access_policy_association.this_main.tf",
             "to": "aws_eks_access_entry.this_main.tf",
             "source": "aws_eks_access_policy_association.this_main.tf",
             "target": "aws_eks_access_entry.this_main.tf"
+        },
+        {
+            "from": "aws_eks_access_policy_association.this_main.tf",
+            "to": "aws_eks_access_entry.this_modules/self-managed-node-group/main.tf",
+            "source": "aws_eks_access_policy_association.this_main.tf",
+            "target": "aws_eks_access_entry.this_modules/self-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_eks_access_policy_association.this_main.tf",
+            "to": "aws_eks_cluster.this_main.tf",
+            "source": "aws_eks_access_policy_association.this_main.tf",
+            "target": "aws_eks_cluster.this_main.tf"
         },
         {
             "from": "aws_security_group_rule.cluster_main.tf",
@@ -1508,12 +1538,78 @@
             "target": "aws_iam_role.this_main.tf"
         },
         {
+            "from": "aws_iam_role_policy_attachment.this_main.tf",
+            "to": "aws_iam_role.this_tests/eks-managed-node-group/main.tf",
+            "source": "aws_iam_role_policy_attachment.this_main.tf",
+            "target": "aws_iam_role.this_tests/eks-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.this_main.tf",
+            "to": "aws_iam_role.this_modules/eks-managed-node-group/main.tf",
+            "source": "aws_iam_role_policy_attachment.this_main.tf",
+            "target": "aws_iam_role.this_modules/eks-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.this_main.tf",
+            "to": "aws_iam_role.this_modules/self-managed-node-group/main.tf",
+            "source": "aws_iam_role_policy_attachment.this_main.tf",
+            "target": "aws_iam_role.this_modules/self-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.this_main.tf",
+            "to": "aws_iam_role.this_modules/fargate-profile/main.tf",
+            "source": "aws_iam_role_policy_attachment.this_main.tf",
+            "target": "aws_iam_role.this_modules/fargate-profile/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.this_main.tf",
+            "to": "aws_iam_role.this_modules/hybrid-node-role/main.tf",
+            "source": "aws_iam_role_policy_attachment.this_main.tf",
+            "target": "aws_iam_role.this_modules/hybrid-node-role/main.tf"
+        },
+        {
             "from": "aws_iam_role_policy_attachment.additional_main.tf",
             "to": "aws_iam_role.this_main.tf",
             "source": "aws_iam_role_policy_attachment.additional_main.tf",
             "target": "aws_iam_role.this_main.tf"
         },
         {
+            "from": "aws_iam_role_policy_attachment.additional_main.tf",
+            "to": "aws_iam_role.this_tests/eks-managed-node-group/main.tf",
+            "source": "aws_iam_role_policy_attachment.additional_main.tf",
+            "target": "aws_iam_role.this_tests/eks-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.additional_main.tf",
+            "to": "aws_iam_role.this_modules/eks-managed-node-group/main.tf",
+            "source": "aws_iam_role_policy_attachment.additional_main.tf",
+            "target": "aws_iam_role.this_modules/eks-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.additional_main.tf",
+            "to": "aws_iam_role.this_modules/self-managed-node-group/main.tf",
+            "source": "aws_iam_role_policy_attachment.additional_main.tf",
+            "target": "aws_iam_role.this_modules/self-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.additional_main.tf",
+            "to": "aws_iam_role.this_modules/fargate-profile/main.tf",
+            "source": "aws_iam_role_policy_attachment.additional_main.tf",
+            "target": "aws_iam_role.this_modules/fargate-profile/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.additional_main.tf",
+            "to": "aws_iam_role.this_modules/hybrid-node-role/main.tf",
+            "source": "aws_iam_role_policy_attachment.additional_main.tf",
+            "target": "aws_iam_role.this_modules/hybrid-node-role/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.cluster_encryption_main.tf",
+            "to": "aws_iam_policy.cluster_encryption_main.tf",
+            "source": "aws_iam_role_policy_attachment.cluster_encryption_main.tf",
+            "target": "aws_iam_policy.cluster_encryption_main.tf"
+        },
+        {
             "from": "aws_iam_role_policy_attachment.cluster_encryption_main.tf",
             "to": "aws_iam_role.this_main.tf",
             "source": "aws_iam_role_policy_attachment.cluster_encryption_main.tf",
@@ -1521,9 +1617,33 @@
         },
         {
             "from": "aws_iam_role_policy_attachment.cluster_encryption_main.tf",
-            "to": "aws_iam_policy.cluster_encryption_main.tf",
+            "to": "aws_iam_role.this_tests/eks-managed-node-group/main.tf",
             "source": "aws_iam_role_policy_attachment.cluster_encryption_main.tf",
-            "target": "aws_iam_policy.cluster_encryption_main.tf"
+            "target": "aws_iam_role.this_tests/eks-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.cluster_encryption_main.tf",
+            "to": "aws_iam_role.this_modules/eks-managed-node-group/main.tf",
+            "source": "aws_iam_role_policy_attachment.cluster_encryption_main.tf",
+            "target": "aws_iam_role.this_modules/eks-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.cluster_encryption_main.tf",
+            "to": "aws_iam_role.this_modules/self-managed-node-group/main.tf",
+            "source": "aws_iam_role_policy_attachment.cluster_encryption_main.tf",
+            "target": "aws_iam_role.this_modules/self-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.cluster_encryption_main.tf",
+            "to": "aws_iam_role.this_modules/fargate-profile/main.tf",
+            "source": "aws_iam_role_policy_attachment.cluster_encryption_main.tf",
+            "target": "aws_iam_role.this_modules/fargate-profile/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.cluster_encryption_main.tf",
+            "to": "aws_iam_role.this_modules/hybrid-node-role/main.tf",
+            "source": "aws_iam_role_policy_attachment.cluster_encryption_main.tf",
+            "target": "aws_iam_role.this_modules/hybrid-node-role/main.tf"
         },
         {
             "from": "aws_iam_role_policy_attachment.custom_main.tf",
@@ -1536,6 +1656,36 @@
             "to": "aws_iam_role.this_main.tf",
             "source": "aws_iam_role_policy_attachment.custom_main.tf",
             "target": "aws_iam_role.this_main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.custom_main.tf",
+            "to": "aws_iam_role.this_tests/eks-managed-node-group/main.tf",
+            "source": "aws_iam_role_policy_attachment.custom_main.tf",
+            "target": "aws_iam_role.this_tests/eks-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.custom_main.tf",
+            "to": "aws_iam_role.this_modules/eks-managed-node-group/main.tf",
+            "source": "aws_iam_role_policy_attachment.custom_main.tf",
+            "target": "aws_iam_role.this_modules/eks-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.custom_main.tf",
+            "to": "aws_iam_role.this_modules/self-managed-node-group/main.tf",
+            "source": "aws_iam_role_policy_attachment.custom_main.tf",
+            "target": "aws_iam_role.this_modules/self-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.custom_main.tf",
+            "to": "aws_iam_role.this_modules/fargate-profile/main.tf",
+            "source": "aws_iam_role_policy_attachment.custom_main.tf",
+            "target": "aws_iam_role.this_modules/fargate-profile/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.custom_main.tf",
+            "to": "aws_iam_role.this_modules/hybrid-node-role/main.tf",
+            "source": "aws_iam_role_policy_attachment.custom_main.tf",
+            "target": "aws_iam_role.this_modules/hybrid-node-role/main.tf"
         },
         {
             "from": "aws_eks_addon.this_main.tf",
@@ -1580,352 +1730,928 @@
             "target": "aws_security_group.node_node_groups.tf"
         },
         {
-            "from": "aws_vpc_peering_connection_accepter.peer_main.tf",
-            "to": "aws_vpc_peering_connection.remote_node_remote.tf",
-            "source": "aws_vpc_peering_connection_accepter.peer_main.tf",
-            "target": "aws_vpc_peering_connection.remote_node_remote.tf"
+            "from": "aws_vpc_peering_connection_accepter.peer_examples/eks-hybrid-nodes/main.tf",
+            "to": "aws_vpc_peering_connection.remote_node_examples/eks-hybrid-nodes/remote.tf",
+            "source": "aws_vpc_peering_connection_accepter.peer_examples/eks-hybrid-nodes/main.tf",
+            "target": "aws_vpc_peering_connection.remote_node_examples/eks-hybrid-nodes/remote.tf"
         },
         {
-            "from": "aws_route.peer_main.tf",
-            "to": "aws_vpc_peering_connection.remote_node_remote.tf",
-            "source": "aws_route.peer_main.tf",
-            "target": "aws_vpc_peering_connection.remote_node_remote.tf"
+            "from": "aws_route.peer_examples/eks-hybrid-nodes/main.tf",
+            "to": "aws_vpc_peering_connection.remote_node_examples/eks-hybrid-nodes/remote.tf",
+            "source": "aws_route.peer_examples/eks-hybrid-nodes/main.tf",
+            "target": "aws_vpc_peering_connection.remote_node_examples/eks-hybrid-nodes/remote.tf"
         },
         {
-            "from": "local_file.join_remote.tf",
-            "to": "local_file.key_pem_remote.tf",
-            "source": "local_file.join_remote.tf",
-            "target": "local_file.key_pem_remote.tf"
+            "from": "local_file.join_examples/eks-hybrid-nodes/remote.tf",
+            "to": "aws_ssm_activation.this_examples/eks-hybrid-nodes/remote.tf",
+            "source": "local_file.join_examples/eks-hybrid-nodes/remote.tf",
+            "target": "aws_ssm_activation.this_examples/eks-hybrid-nodes/remote.tf"
         },
         {
-            "from": "local_file.join_remote.tf",
-            "to": "aws_ssm_activation.this_remote.tf",
-            "source": "local_file.join_remote.tf",
-            "target": "aws_ssm_activation.this_remote.tf"
+            "from": "local_file.join_examples/eks-hybrid-nodes/remote.tf",
+            "to": "local_file.key_pem_examples/eks-hybrid-nodes/remote.tf",
+            "source": "local_file.join_examples/eks-hybrid-nodes/remote.tf",
+            "target": "local_file.key_pem_examples/eks-hybrid-nodes/remote.tf"
         },
         {
-            "from": "aws_vpc_security_group_ingress_rule.remote_node_remote.tf",
-            "to": "aws_security_group.remote_node_remote.tf",
-            "source": "aws_vpc_security_group_ingress_rule.remote_node_remote.tf",
-            "target": "aws_security_group.remote_node_remote.tf"
+            "from": "aws_vpc_security_group_ingress_rule.remote_node_examples/eks-hybrid-nodes/remote.tf",
+            "to": "aws_security_group.remote_node_examples/eks-hybrid-nodes/remote.tf",
+            "source": "aws_vpc_security_group_ingress_rule.remote_node_examples/eks-hybrid-nodes/remote.tf",
+            "target": "aws_security_group.remote_node_examples/eks-hybrid-nodes/remote.tf"
         },
         {
-            "from": "aws_vpc_security_group_egress_rule.remote_node_remote.tf",
-            "to": "aws_security_group.remote_node_remote.tf",
-            "source": "aws_vpc_security_group_egress_rule.remote_node_remote.tf",
-            "target": "aws_security_group.remote_node_remote.tf"
+            "from": "aws_vpc_security_group_egress_rule.remote_node_examples/eks-hybrid-nodes/remote.tf",
+            "to": "aws_security_group.remote_node_examples/eks-hybrid-nodes/remote.tf",
+            "source": "aws_vpc_security_group_egress_rule.remote_node_examples/eks-hybrid-nodes/remote.tf",
+            "target": "aws_security_group.remote_node_examples/eks-hybrid-nodes/remote.tf"
         },
         {
-            "from": "aws_route.remote_node_private_remote.tf",
-            "to": "aws_vpc_peering_connection.remote_node_remote.tf",
-            "source": "aws_route.remote_node_private_remote.tf",
-            "target": "aws_vpc_peering_connection.remote_node_remote.tf"
+            "from": "aws_route.remote_node_private_examples/eks-hybrid-nodes/remote.tf",
+            "to": "aws_vpc_peering_connection.remote_node_examples/eks-hybrid-nodes/remote.tf",
+            "source": "aws_route.remote_node_private_examples/eks-hybrid-nodes/remote.tf",
+            "target": "aws_vpc_peering_connection.remote_node_examples/eks-hybrid-nodes/remote.tf"
         },
         {
-            "from": "aws_route.remote_node_public_remote.tf",
-            "to": "aws_vpc_peering_connection.remote_node_remote.tf",
-            "source": "aws_route.remote_node_public_remote.tf",
-            "target": "aws_vpc_peering_connection.remote_node_remote.tf"
+            "from": "aws_route.remote_node_public_examples/eks-hybrid-nodes/remote.tf",
+            "to": "aws_vpc_peering_connection.remote_node_examples/eks-hybrid-nodes/remote.tf",
+            "source": "aws_route.remote_node_public_examples/eks-hybrid-nodes/remote.tf",
+            "target": "aws_vpc_peering_connection.remote_node_examples/eks-hybrid-nodes/remote.tf"
         },
         {
-            "from": "tls_self_signed_cert.example_main.tf",
-            "to": "tls_private_key.example_main.tf",
-            "source": "tls_self_signed_cert.example_main.tf",
-            "target": "tls_private_key.example_main.tf"
+            "from": "tls_self_signed_cert.example_tests/eks-hybrid-nodes/main.tf",
+            "to": "tls_private_key.example_tests/eks-hybrid-nodes/main.tf",
+            "source": "tls_self_signed_cert.example_tests/eks-hybrid-nodes/main.tf",
+            "target": "tls_private_key.example_tests/eks-hybrid-nodes/main.tf"
         },
         {
-            "from": "aws_kms_alias.this_main.tf",
-            "to": "aws_kms_key.this_main.tf",
-            "source": "aws_kms_alias.this_main.tf",
-            "target": "aws_kms_key.this_main.tf"
+            "from": "aws_kms_alias.this_.terraform/modules/kms/main.tf",
+            "to": "aws_kms_key.this_.terraform/modules/kms/main.tf",
+            "source": "aws_kms_alias.this_.terraform/modules/kms/main.tf",
+            "target": "aws_kms_key.this_.terraform/modules/kms/main.tf"
         },
         {
-            "from": "aws_kms_alias.this_main.tf",
-            "to": "aws_kms_replica_key.this_main.tf",
-            "source": "aws_kms_alias.this_main.tf",
-            "target": "aws_kms_replica_key.this_main.tf"
+            "from": "aws_kms_alias.this_.terraform/modules/kms/main.tf",
+            "to": "aws_kms_replica_key.this_.terraform/modules/kms/main.tf",
+            "source": "aws_kms_alias.this_.terraform/modules/kms/main.tf",
+            "target": "aws_kms_replica_key.this_.terraform/modules/kms/main.tf"
         },
         {
-            "from": "aws_kms_alias.this_main.tf",
-            "to": "aws_kms_external_key.this_main.tf",
-            "source": "aws_kms_alias.this_main.tf",
-            "target": "aws_kms_external_key.this_main.tf"
+            "from": "aws_kms_alias.this_.terraform/modules/kms/main.tf",
+            "to": "aws_kms_external_key.this_.terraform/modules/kms/main.tf",
+            "source": "aws_kms_alias.this_.terraform/modules/kms/main.tf",
+            "target": "aws_kms_external_key.this_.terraform/modules/kms/main.tf"
         },
         {
-            "from": "aws_kms_alias.this_main.tf",
-            "to": "aws_kms_replica_external_key.this_main.tf",
-            "source": "aws_kms_alias.this_main.tf",
-            "target": "aws_kms_replica_external_key.this_main.tf"
+            "from": "aws_kms_alias.this_.terraform/modules/kms/main.tf",
+            "to": "aws_kms_replica_external_key.this_.terraform/modules/kms/main.tf",
+            "source": "aws_kms_alias.this_.terraform/modules/kms/main.tf",
+            "target": "aws_kms_replica_external_key.this_.terraform/modules/kms/main.tf"
         },
         {
-            "from": "aws_kms_grant.this_main.tf",
-            "to": "aws_kms_key.this_main.tf",
-            "source": "aws_kms_grant.this_main.tf",
-            "target": "aws_kms_key.this_main.tf"
+            "from": "aws_kms_grant.this_.terraform/modules/kms/main.tf",
+            "to": "aws_kms_key.this_.terraform/modules/kms/main.tf",
+            "source": "aws_kms_grant.this_.terraform/modules/kms/main.tf",
+            "target": "aws_kms_key.this_.terraform/modules/kms/main.tf"
         },
         {
-            "from": "aws_kms_grant.this_main.tf",
-            "to": "aws_kms_replica_key.this_main.tf",
-            "source": "aws_kms_grant.this_main.tf",
-            "target": "aws_kms_replica_key.this_main.tf"
+            "from": "aws_kms_grant.this_.terraform/modules/kms/main.tf",
+            "to": "aws_kms_replica_key.this_.terraform/modules/kms/main.tf",
+            "source": "aws_kms_grant.this_.terraform/modules/kms/main.tf",
+            "target": "aws_kms_replica_key.this_.terraform/modules/kms/main.tf"
         },
         {
-            "from": "aws_kms_grant.this_main.tf",
-            "to": "aws_kms_external_key.this_main.tf",
-            "source": "aws_kms_grant.this_main.tf",
-            "target": "aws_kms_external_key.this_main.tf"
+            "from": "aws_kms_grant.this_.terraform/modules/kms/main.tf",
+            "to": "aws_kms_external_key.this_.terraform/modules/kms/main.tf",
+            "source": "aws_kms_grant.this_.terraform/modules/kms/main.tf",
+            "target": "aws_kms_external_key.this_.terraform/modules/kms/main.tf"
         },
         {
-            "from": "aws_kms_grant.this_main.tf",
-            "to": "aws_kms_replica_external_key.this_main.tf",
-            "source": "aws_kms_grant.this_main.tf",
-            "target": "aws_kms_replica_external_key.this_main.tf"
+            "from": "aws_kms_grant.this_.terraform/modules/kms/main.tf",
+            "to": "aws_kms_replica_external_key.this_.terraform/modules/kms/main.tf",
+            "source": "aws_kms_grant.this_.terraform/modules/kms/main.tf",
+            "target": "aws_kms_replica_external_key.this_.terraform/modules/kms/main.tf"
         },
         {
-            "from": "aws_launch_template.this_main.tf",
-            "to": "aws_iam_role_policy_attachment.additional_main.tf",
-            "source": "aws_launch_template.this_main.tf",
-            "target": "aws_iam_role_policy_attachment.additional_main.tf"
-        },
-        {
-            "from": "aws_launch_template.this_main.tf",
-            "to": "aws_placement_group.this_main.tf",
-            "source": "aws_launch_template.this_main.tf",
-            "target": "aws_placement_group.this_main.tf"
-        },
-        {
-            "from": "aws_launch_template.this_main.tf",
+            "from": "aws_launch_template.this_modules/eks-managed-node-group/main.tf",
             "to": "aws_iam_role_policy_attachment.this_main.tf",
-            "source": "aws_launch_template.this_main.tf",
+            "source": "aws_launch_template.this_modules/eks-managed-node-group/main.tf",
             "target": "aws_iam_role_policy_attachment.this_main.tf"
         },
         {
-            "from": "aws_eks_node_group.this_main.tf",
-            "to": "aws_iam_role.this_main.tf",
-            "source": "aws_eks_node_group.this_main.tf",
-            "target": "aws_iam_role.this_main.tf"
+            "from": "aws_launch_template.this_modules/eks-managed-node-group/main.tf",
+            "to": "aws_iam_role_policy_attachment.this_modules/eks-managed-node-group/main.tf",
+            "source": "aws_launch_template.this_modules/eks-managed-node-group/main.tf",
+            "target": "aws_iam_role_policy_attachment.this_modules/eks-managed-node-group/main.tf"
         },
         {
-            "from": "aws_iam_role_policy_attachment.this_main.tf",
-            "to": "aws_iam_role.this_main.tf",
-            "source": "aws_iam_role_policy_attachment.this_main.tf",
-            "target": "aws_iam_role.this_main.tf"
+            "from": "aws_launch_template.this_modules/eks-managed-node-group/main.tf",
+            "to": "aws_iam_role_policy_attachment.this_modules/self-managed-node-group/main.tf",
+            "source": "aws_launch_template.this_modules/eks-managed-node-group/main.tf",
+            "target": "aws_iam_role_policy_attachment.this_modules/self-managed-node-group/main.tf"
         },
         {
-            "from": "aws_iam_role_policy_attachment.additional_main.tf",
-            "to": "aws_iam_role.this_main.tf",
-            "source": "aws_iam_role_policy_attachment.additional_main.tf",
-            "target": "aws_iam_role.this_main.tf"
+            "from": "aws_launch_template.this_modules/eks-managed-node-group/main.tf",
+            "to": "aws_iam_role_policy_attachment.this_modules/fargate-profile/main.tf",
+            "source": "aws_launch_template.this_modules/eks-managed-node-group/main.tf",
+            "target": "aws_iam_role_policy_attachment.this_modules/fargate-profile/main.tf"
         },
         {
-            "from": "aws_iam_role_policy.this_main.tf",
-            "to": "aws_iam_role.this_main.tf",
-            "source": "aws_iam_role_policy.this_main.tf",
-            "target": "aws_iam_role.this_main.tf"
+            "from": "aws_launch_template.this_modules/eks-managed-node-group/main.tf",
+            "to": "aws_iam_role_policy_attachment.this_modules/hybrid-node-role/main.tf",
+            "source": "aws_launch_template.this_modules/eks-managed-node-group/main.tf",
+            "target": "aws_iam_role_policy_attachment.this_modules/hybrid-node-role/main.tf"
         },
         {
-            "from": "aws_vpc_security_group_ingress_rule.this_main.tf",
-            "to": "aws_security_group.this_main.tf",
-            "source": "aws_vpc_security_group_ingress_rule.this_main.tf",
-            "target": "aws_security_group.this_main.tf"
-        },
-        {
-            "from": "aws_vpc_security_group_egress_rule.this_main.tf",
-            "to": "aws_security_group.this_main.tf",
-            "source": "aws_vpc_security_group_egress_rule.this_main.tf",
-            "target": "aws_security_group.this_main.tf"
-        },
-        {
-            "from": "aws_launch_template.this_main.tf",
-            "to": "aws_iam_instance_profile.this_main.tf",
-            "source": "aws_launch_template.this_main.tf",
-            "target": "aws_iam_instance_profile.this_main.tf"
-        },
-        {
-            "from": "aws_launch_template.this_main.tf",
+            "from": "aws_launch_template.this_modules/eks-managed-node-group/main.tf",
             "to": "aws_iam_role_policy_attachment.additional_main.tf",
-            "source": "aws_launch_template.this_main.tf",
+            "source": "aws_launch_template.this_modules/eks-managed-node-group/main.tf",
             "target": "aws_iam_role_policy_attachment.additional_main.tf"
         },
         {
-            "from": "aws_launch_template.this_main.tf",
+            "from": "aws_launch_template.this_modules/eks-managed-node-group/main.tf",
+            "to": "aws_iam_role_policy_attachment.additional_modules/eks-managed-node-group/main.tf",
+            "source": "aws_launch_template.this_modules/eks-managed-node-group/main.tf",
+            "target": "aws_iam_role_policy_attachment.additional_modules/eks-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_launch_template.this_modules/eks-managed-node-group/main.tf",
+            "to": "aws_iam_role_policy_attachment.additional_modules/self-managed-node-group/main.tf",
+            "source": "aws_launch_template.this_modules/eks-managed-node-group/main.tf",
+            "target": "aws_iam_role_policy_attachment.additional_modules/self-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_launch_template.this_modules/eks-managed-node-group/main.tf",
+            "to": "aws_iam_role_policy_attachment.additional_modules/fargate-profile/main.tf",
+            "source": "aws_launch_template.this_modules/eks-managed-node-group/main.tf",
+            "target": "aws_iam_role_policy_attachment.additional_modules/fargate-profile/main.tf"
+        },
+        {
+            "from": "aws_launch_template.this_modules/eks-managed-node-group/main.tf",
+            "to": "aws_placement_group.this_modules/eks-managed-node-group/main.tf",
+            "source": "aws_launch_template.this_modules/eks-managed-node-group/main.tf",
+            "target": "aws_placement_group.this_modules/eks-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_launch_template.this_modules/eks-managed-node-group/main.tf",
+            "to": "aws_placement_group.this_modules/self-managed-node-group/main.tf",
+            "source": "aws_launch_template.this_modules/eks-managed-node-group/main.tf",
+            "target": "aws_placement_group.this_modules/self-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_eks_node_group.this_modules/eks-managed-node-group/main.tf",
+            "to": "aws_iam_role.this_main.tf",
+            "source": "aws_eks_node_group.this_modules/eks-managed-node-group/main.tf",
+            "target": "aws_iam_role.this_main.tf"
+        },
+        {
+            "from": "aws_eks_node_group.this_modules/eks-managed-node-group/main.tf",
+            "to": "aws_iam_role.this_tests/eks-managed-node-group/main.tf",
+            "source": "aws_eks_node_group.this_modules/eks-managed-node-group/main.tf",
+            "target": "aws_iam_role.this_tests/eks-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_eks_node_group.this_modules/eks-managed-node-group/main.tf",
+            "to": "aws_iam_role.this_modules/eks-managed-node-group/main.tf",
+            "source": "aws_eks_node_group.this_modules/eks-managed-node-group/main.tf",
+            "target": "aws_iam_role.this_modules/eks-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_eks_node_group.this_modules/eks-managed-node-group/main.tf",
+            "to": "aws_iam_role.this_modules/self-managed-node-group/main.tf",
+            "source": "aws_eks_node_group.this_modules/eks-managed-node-group/main.tf",
+            "target": "aws_iam_role.this_modules/self-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_eks_node_group.this_modules/eks-managed-node-group/main.tf",
+            "to": "aws_iam_role.this_modules/fargate-profile/main.tf",
+            "source": "aws_eks_node_group.this_modules/eks-managed-node-group/main.tf",
+            "target": "aws_iam_role.this_modules/fargate-profile/main.tf"
+        },
+        {
+            "from": "aws_eks_node_group.this_modules/eks-managed-node-group/main.tf",
+            "to": "aws_iam_role.this_modules/hybrid-node-role/main.tf",
+            "source": "aws_eks_node_group.this_modules/eks-managed-node-group/main.tf",
+            "target": "aws_iam_role.this_modules/hybrid-node-role/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.this_modules/eks-managed-node-group/main.tf",
+            "to": "aws_iam_role.this_main.tf",
+            "source": "aws_iam_role_policy_attachment.this_modules/eks-managed-node-group/main.tf",
+            "target": "aws_iam_role.this_main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.this_modules/eks-managed-node-group/main.tf",
+            "to": "aws_iam_role.this_tests/eks-managed-node-group/main.tf",
+            "source": "aws_iam_role_policy_attachment.this_modules/eks-managed-node-group/main.tf",
+            "target": "aws_iam_role.this_tests/eks-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.this_modules/eks-managed-node-group/main.tf",
+            "to": "aws_iam_role.this_modules/eks-managed-node-group/main.tf",
+            "source": "aws_iam_role_policy_attachment.this_modules/eks-managed-node-group/main.tf",
+            "target": "aws_iam_role.this_modules/eks-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.this_modules/eks-managed-node-group/main.tf",
+            "to": "aws_iam_role.this_modules/self-managed-node-group/main.tf",
+            "source": "aws_iam_role_policy_attachment.this_modules/eks-managed-node-group/main.tf",
+            "target": "aws_iam_role.this_modules/self-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.this_modules/eks-managed-node-group/main.tf",
+            "to": "aws_iam_role.this_modules/fargate-profile/main.tf",
+            "source": "aws_iam_role_policy_attachment.this_modules/eks-managed-node-group/main.tf",
+            "target": "aws_iam_role.this_modules/fargate-profile/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.this_modules/eks-managed-node-group/main.tf",
+            "to": "aws_iam_role.this_modules/hybrid-node-role/main.tf",
+            "source": "aws_iam_role_policy_attachment.this_modules/eks-managed-node-group/main.tf",
+            "target": "aws_iam_role.this_modules/hybrid-node-role/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.additional_modules/eks-managed-node-group/main.tf",
+            "to": "aws_iam_role.this_main.tf",
+            "source": "aws_iam_role_policy_attachment.additional_modules/eks-managed-node-group/main.tf",
+            "target": "aws_iam_role.this_main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.additional_modules/eks-managed-node-group/main.tf",
+            "to": "aws_iam_role.this_tests/eks-managed-node-group/main.tf",
+            "source": "aws_iam_role_policy_attachment.additional_modules/eks-managed-node-group/main.tf",
+            "target": "aws_iam_role.this_tests/eks-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.additional_modules/eks-managed-node-group/main.tf",
+            "to": "aws_iam_role.this_modules/eks-managed-node-group/main.tf",
+            "source": "aws_iam_role_policy_attachment.additional_modules/eks-managed-node-group/main.tf",
+            "target": "aws_iam_role.this_modules/eks-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.additional_modules/eks-managed-node-group/main.tf",
+            "to": "aws_iam_role.this_modules/self-managed-node-group/main.tf",
+            "source": "aws_iam_role_policy_attachment.additional_modules/eks-managed-node-group/main.tf",
+            "target": "aws_iam_role.this_modules/self-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.additional_modules/eks-managed-node-group/main.tf",
+            "to": "aws_iam_role.this_modules/fargate-profile/main.tf",
+            "source": "aws_iam_role_policy_attachment.additional_modules/eks-managed-node-group/main.tf",
+            "target": "aws_iam_role.this_modules/fargate-profile/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.additional_modules/eks-managed-node-group/main.tf",
+            "to": "aws_iam_role.this_modules/hybrid-node-role/main.tf",
+            "source": "aws_iam_role_policy_attachment.additional_modules/eks-managed-node-group/main.tf",
+            "target": "aws_iam_role.this_modules/hybrid-node-role/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy.this_modules/eks-managed-node-group/main.tf",
+            "to": "aws_iam_role.this_main.tf",
+            "source": "aws_iam_role_policy.this_modules/eks-managed-node-group/main.tf",
+            "target": "aws_iam_role.this_main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy.this_modules/eks-managed-node-group/main.tf",
+            "to": "aws_iam_role.this_tests/eks-managed-node-group/main.tf",
+            "source": "aws_iam_role_policy.this_modules/eks-managed-node-group/main.tf",
+            "target": "aws_iam_role.this_tests/eks-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy.this_modules/eks-managed-node-group/main.tf",
+            "to": "aws_iam_role.this_modules/eks-managed-node-group/main.tf",
+            "source": "aws_iam_role_policy.this_modules/eks-managed-node-group/main.tf",
+            "target": "aws_iam_role.this_modules/eks-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy.this_modules/eks-managed-node-group/main.tf",
+            "to": "aws_iam_role.this_modules/self-managed-node-group/main.tf",
+            "source": "aws_iam_role_policy.this_modules/eks-managed-node-group/main.tf",
+            "target": "aws_iam_role.this_modules/self-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy.this_modules/eks-managed-node-group/main.tf",
+            "to": "aws_iam_role.this_modules/fargate-profile/main.tf",
+            "source": "aws_iam_role_policy.this_modules/eks-managed-node-group/main.tf",
+            "target": "aws_iam_role.this_modules/fargate-profile/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy.this_modules/eks-managed-node-group/main.tf",
+            "to": "aws_iam_role.this_modules/hybrid-node-role/main.tf",
+            "source": "aws_iam_role_policy.this_modules/eks-managed-node-group/main.tf",
+            "target": "aws_iam_role.this_modules/hybrid-node-role/main.tf"
+        },
+        {
+            "from": "aws_vpc_security_group_ingress_rule.this_modules/eks-managed-node-group/main.tf",
+            "to": "aws_security_group.this_modules/eks-managed-node-group/main.tf",
+            "source": "aws_vpc_security_group_ingress_rule.this_modules/eks-managed-node-group/main.tf",
+            "target": "aws_security_group.this_modules/eks-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_vpc_security_group_ingress_rule.this_modules/eks-managed-node-group/main.tf",
+            "to": "aws_security_group.this_modules/self-managed-node-group/main.tf",
+            "source": "aws_vpc_security_group_ingress_rule.this_modules/eks-managed-node-group/main.tf",
+            "target": "aws_security_group.this_modules/self-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_vpc_security_group_egress_rule.this_modules/eks-managed-node-group/main.tf",
+            "to": "aws_security_group.this_modules/eks-managed-node-group/main.tf",
+            "source": "aws_vpc_security_group_egress_rule.this_modules/eks-managed-node-group/main.tf",
+            "target": "aws_security_group.this_modules/eks-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_vpc_security_group_egress_rule.this_modules/eks-managed-node-group/main.tf",
+            "to": "aws_security_group.this_modules/self-managed-node-group/main.tf",
+            "source": "aws_vpc_security_group_egress_rule.this_modules/eks-managed-node-group/main.tf",
+            "target": "aws_security_group.this_modules/self-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_launch_template.this_modules/self-managed-node-group/main.tf",
             "to": "aws_iam_role_policy_attachment.this_main.tf",
-            "source": "aws_launch_template.this_main.tf",
+            "source": "aws_launch_template.this_modules/self-managed-node-group/main.tf",
             "target": "aws_iam_role_policy_attachment.this_main.tf"
         },
         {
-            "from": "aws_launch_template.this_main.tf",
-            "to": "aws_placement_group.this_main.tf",
-            "source": "aws_launch_template.this_main.tf",
-            "target": "aws_placement_group.this_main.tf"
+            "from": "aws_launch_template.this_modules/self-managed-node-group/main.tf",
+            "to": "aws_iam_role_policy_attachment.this_modules/eks-managed-node-group/main.tf",
+            "source": "aws_launch_template.this_modules/self-managed-node-group/main.tf",
+            "target": "aws_iam_role_policy_attachment.this_modules/eks-managed-node-group/main.tf"
         },
         {
-            "from": "aws_iam_role_policy_attachment.this_main.tf",
+            "from": "aws_launch_template.this_modules/self-managed-node-group/main.tf",
+            "to": "aws_iam_role_policy_attachment.this_modules/self-managed-node-group/main.tf",
+            "source": "aws_launch_template.this_modules/self-managed-node-group/main.tf",
+            "target": "aws_iam_role_policy_attachment.this_modules/self-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_launch_template.this_modules/self-managed-node-group/main.tf",
+            "to": "aws_iam_role_policy_attachment.this_modules/fargate-profile/main.tf",
+            "source": "aws_launch_template.this_modules/self-managed-node-group/main.tf",
+            "target": "aws_iam_role_policy_attachment.this_modules/fargate-profile/main.tf"
+        },
+        {
+            "from": "aws_launch_template.this_modules/self-managed-node-group/main.tf",
+            "to": "aws_iam_role_policy_attachment.this_modules/hybrid-node-role/main.tf",
+            "source": "aws_launch_template.this_modules/self-managed-node-group/main.tf",
+            "target": "aws_iam_role_policy_attachment.this_modules/hybrid-node-role/main.tf"
+        },
+        {
+            "from": "aws_launch_template.this_modules/self-managed-node-group/main.tf",
+            "to": "aws_iam_instance_profile.this_modules/self-managed-node-group/main.tf",
+            "source": "aws_launch_template.this_modules/self-managed-node-group/main.tf",
+            "target": "aws_iam_instance_profile.this_modules/self-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_launch_template.this_modules/self-managed-node-group/main.tf",
+            "to": "aws_iam_instance_profile.this_modules/karpenter/main.tf",
+            "source": "aws_launch_template.this_modules/self-managed-node-group/main.tf",
+            "target": "aws_iam_instance_profile.this_modules/karpenter/main.tf"
+        },
+        {
+            "from": "aws_launch_template.this_modules/self-managed-node-group/main.tf",
+            "to": "aws_iam_role_policy_attachment.additional_main.tf",
+            "source": "aws_launch_template.this_modules/self-managed-node-group/main.tf",
+            "target": "aws_iam_role_policy_attachment.additional_main.tf"
+        },
+        {
+            "from": "aws_launch_template.this_modules/self-managed-node-group/main.tf",
+            "to": "aws_iam_role_policy_attachment.additional_modules/eks-managed-node-group/main.tf",
+            "source": "aws_launch_template.this_modules/self-managed-node-group/main.tf",
+            "target": "aws_iam_role_policy_attachment.additional_modules/eks-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_launch_template.this_modules/self-managed-node-group/main.tf",
+            "to": "aws_iam_role_policy_attachment.additional_modules/self-managed-node-group/main.tf",
+            "source": "aws_launch_template.this_modules/self-managed-node-group/main.tf",
+            "target": "aws_iam_role_policy_attachment.additional_modules/self-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_launch_template.this_modules/self-managed-node-group/main.tf",
+            "to": "aws_iam_role_policy_attachment.additional_modules/fargate-profile/main.tf",
+            "source": "aws_launch_template.this_modules/self-managed-node-group/main.tf",
+            "target": "aws_iam_role_policy_attachment.additional_modules/fargate-profile/main.tf"
+        },
+        {
+            "from": "aws_launch_template.this_modules/self-managed-node-group/main.tf",
+            "to": "aws_placement_group.this_modules/eks-managed-node-group/main.tf",
+            "source": "aws_launch_template.this_modules/self-managed-node-group/main.tf",
+            "target": "aws_placement_group.this_modules/eks-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_launch_template.this_modules/self-managed-node-group/main.tf",
+            "to": "aws_placement_group.this_modules/self-managed-node-group/main.tf",
+            "source": "aws_launch_template.this_modules/self-managed-node-group/main.tf",
+            "target": "aws_placement_group.this_modules/self-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.this_modules/self-managed-node-group/main.tf",
             "to": "aws_iam_role.this_main.tf",
-            "source": "aws_iam_role_policy_attachment.this_main.tf",
+            "source": "aws_iam_role_policy_attachment.this_modules/self-managed-node-group/main.tf",
             "target": "aws_iam_role.this_main.tf"
         },
         {
-            "from": "aws_iam_role_policy_attachment.additional_main.tf",
+            "from": "aws_iam_role_policy_attachment.this_modules/self-managed-node-group/main.tf",
+            "to": "aws_iam_role.this_tests/eks-managed-node-group/main.tf",
+            "source": "aws_iam_role_policy_attachment.this_modules/self-managed-node-group/main.tf",
+            "target": "aws_iam_role.this_tests/eks-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.this_modules/self-managed-node-group/main.tf",
+            "to": "aws_iam_role.this_modules/eks-managed-node-group/main.tf",
+            "source": "aws_iam_role_policy_attachment.this_modules/self-managed-node-group/main.tf",
+            "target": "aws_iam_role.this_modules/eks-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.this_modules/self-managed-node-group/main.tf",
+            "to": "aws_iam_role.this_modules/self-managed-node-group/main.tf",
+            "source": "aws_iam_role_policy_attachment.this_modules/self-managed-node-group/main.tf",
+            "target": "aws_iam_role.this_modules/self-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.this_modules/self-managed-node-group/main.tf",
+            "to": "aws_iam_role.this_modules/fargate-profile/main.tf",
+            "source": "aws_iam_role_policy_attachment.this_modules/self-managed-node-group/main.tf",
+            "target": "aws_iam_role.this_modules/fargate-profile/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.this_modules/self-managed-node-group/main.tf",
+            "to": "aws_iam_role.this_modules/hybrid-node-role/main.tf",
+            "source": "aws_iam_role_policy_attachment.this_modules/self-managed-node-group/main.tf",
+            "target": "aws_iam_role.this_modules/hybrid-node-role/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.additional_modules/self-managed-node-group/main.tf",
             "to": "aws_iam_role.this_main.tf",
-            "source": "aws_iam_role_policy_attachment.additional_main.tf",
+            "source": "aws_iam_role_policy_attachment.additional_modules/self-managed-node-group/main.tf",
             "target": "aws_iam_role.this_main.tf"
         },
         {
-            "from": "aws_iam_instance_profile.this_main.tf",
+            "from": "aws_iam_role_policy_attachment.additional_modules/self-managed-node-group/main.tf",
+            "to": "aws_iam_role.this_tests/eks-managed-node-group/main.tf",
+            "source": "aws_iam_role_policy_attachment.additional_modules/self-managed-node-group/main.tf",
+            "target": "aws_iam_role.this_tests/eks-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.additional_modules/self-managed-node-group/main.tf",
+            "to": "aws_iam_role.this_modules/eks-managed-node-group/main.tf",
+            "source": "aws_iam_role_policy_attachment.additional_modules/self-managed-node-group/main.tf",
+            "target": "aws_iam_role.this_modules/eks-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.additional_modules/self-managed-node-group/main.tf",
+            "to": "aws_iam_role.this_modules/self-managed-node-group/main.tf",
+            "source": "aws_iam_role_policy_attachment.additional_modules/self-managed-node-group/main.tf",
+            "target": "aws_iam_role.this_modules/self-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.additional_modules/self-managed-node-group/main.tf",
+            "to": "aws_iam_role.this_modules/fargate-profile/main.tf",
+            "source": "aws_iam_role_policy_attachment.additional_modules/self-managed-node-group/main.tf",
+            "target": "aws_iam_role.this_modules/fargate-profile/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.additional_modules/self-managed-node-group/main.tf",
+            "to": "aws_iam_role.this_modules/hybrid-node-role/main.tf",
+            "source": "aws_iam_role_policy_attachment.additional_modules/self-managed-node-group/main.tf",
+            "target": "aws_iam_role.this_modules/hybrid-node-role/main.tf"
+        },
+        {
+            "from": "aws_iam_instance_profile.this_modules/self-managed-node-group/main.tf",
             "to": "aws_iam_role.this_main.tf",
-            "source": "aws_iam_instance_profile.this_main.tf",
+            "source": "aws_iam_instance_profile.this_modules/self-managed-node-group/main.tf",
             "target": "aws_iam_role.this_main.tf"
         },
         {
-            "from": "aws_iam_role_policy.this_main.tf",
+            "from": "aws_iam_instance_profile.this_modules/self-managed-node-group/main.tf",
+            "to": "aws_iam_role.this_tests/eks-managed-node-group/main.tf",
+            "source": "aws_iam_instance_profile.this_modules/self-managed-node-group/main.tf",
+            "target": "aws_iam_role.this_tests/eks-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_iam_instance_profile.this_modules/self-managed-node-group/main.tf",
+            "to": "aws_iam_role.this_modules/eks-managed-node-group/main.tf",
+            "source": "aws_iam_instance_profile.this_modules/self-managed-node-group/main.tf",
+            "target": "aws_iam_role.this_modules/eks-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_iam_instance_profile.this_modules/self-managed-node-group/main.tf",
+            "to": "aws_iam_role.this_modules/self-managed-node-group/main.tf",
+            "source": "aws_iam_instance_profile.this_modules/self-managed-node-group/main.tf",
+            "target": "aws_iam_role.this_modules/self-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_iam_instance_profile.this_modules/self-managed-node-group/main.tf",
+            "to": "aws_iam_role.this_modules/fargate-profile/main.tf",
+            "source": "aws_iam_instance_profile.this_modules/self-managed-node-group/main.tf",
+            "target": "aws_iam_role.this_modules/fargate-profile/main.tf"
+        },
+        {
+            "from": "aws_iam_instance_profile.this_modules/self-managed-node-group/main.tf",
+            "to": "aws_iam_role.this_modules/hybrid-node-role/main.tf",
+            "source": "aws_iam_instance_profile.this_modules/self-managed-node-group/main.tf",
+            "target": "aws_iam_role.this_modules/hybrid-node-role/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy.this_modules/self-managed-node-group/main.tf",
             "to": "aws_iam_role.this_main.tf",
-            "source": "aws_iam_role_policy.this_main.tf",
+            "source": "aws_iam_role_policy.this_modules/self-managed-node-group/main.tf",
             "target": "aws_iam_role.this_main.tf"
         },
         {
-            "from": "aws_eks_access_entry.this_main.tf",
+            "from": "aws_iam_role_policy.this_modules/self-managed-node-group/main.tf",
+            "to": "aws_iam_role.this_tests/eks-managed-node-group/main.tf",
+            "source": "aws_iam_role_policy.this_modules/self-managed-node-group/main.tf",
+            "target": "aws_iam_role.this_tests/eks-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy.this_modules/self-managed-node-group/main.tf",
+            "to": "aws_iam_role.this_modules/eks-managed-node-group/main.tf",
+            "source": "aws_iam_role_policy.this_modules/self-managed-node-group/main.tf",
+            "target": "aws_iam_role.this_modules/eks-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy.this_modules/self-managed-node-group/main.tf",
+            "to": "aws_iam_role.this_modules/self-managed-node-group/main.tf",
+            "source": "aws_iam_role_policy.this_modules/self-managed-node-group/main.tf",
+            "target": "aws_iam_role.this_modules/self-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy.this_modules/self-managed-node-group/main.tf",
+            "to": "aws_iam_role.this_modules/fargate-profile/main.tf",
+            "source": "aws_iam_role_policy.this_modules/self-managed-node-group/main.tf",
+            "target": "aws_iam_role.this_modules/fargate-profile/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy.this_modules/self-managed-node-group/main.tf",
+            "to": "aws_iam_role.this_modules/hybrid-node-role/main.tf",
+            "source": "aws_iam_role_policy.this_modules/self-managed-node-group/main.tf",
+            "target": "aws_iam_role.this_modules/hybrid-node-role/main.tf"
+        },
+        {
+            "from": "aws_eks_access_entry.this_modules/self-managed-node-group/main.tf",
             "to": "aws_iam_role.this_main.tf",
-            "source": "aws_eks_access_entry.this_main.tf",
+            "source": "aws_eks_access_entry.this_modules/self-managed-node-group/main.tf",
             "target": "aws_iam_role.this_main.tf"
         },
         {
-            "from": "aws_vpc_security_group_ingress_rule.this_main.tf",
-            "to": "aws_security_group.this_main.tf",
-            "source": "aws_vpc_security_group_ingress_rule.this_main.tf",
-            "target": "aws_security_group.this_main.tf"
+            "from": "aws_eks_access_entry.this_modules/self-managed-node-group/main.tf",
+            "to": "aws_iam_role.this_tests/eks-managed-node-group/main.tf",
+            "source": "aws_eks_access_entry.this_modules/self-managed-node-group/main.tf",
+            "target": "aws_iam_role.this_tests/eks-managed-node-group/main.tf"
         },
         {
-            "from": "aws_vpc_security_group_egress_rule.this_main.tf",
-            "to": "aws_security_group.this_main.tf",
-            "source": "aws_vpc_security_group_egress_rule.this_main.tf",
-            "target": "aws_security_group.this_main.tf"
+            "from": "aws_eks_access_entry.this_modules/self-managed-node-group/main.tf",
+            "to": "aws_iam_role.this_modules/eks-managed-node-group/main.tf",
+            "source": "aws_eks_access_entry.this_modules/self-managed-node-group/main.tf",
+            "target": "aws_iam_role.this_modules/eks-managed-node-group/main.tf"
         },
         {
-            "from": "aws_iam_role_policy_attachment.this_main.tf",
+            "from": "aws_eks_access_entry.this_modules/self-managed-node-group/main.tf",
+            "to": "aws_iam_role.this_modules/self-managed-node-group/main.tf",
+            "source": "aws_eks_access_entry.this_modules/self-managed-node-group/main.tf",
+            "target": "aws_iam_role.this_modules/self-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_eks_access_entry.this_modules/self-managed-node-group/main.tf",
+            "to": "aws_iam_role.this_modules/fargate-profile/main.tf",
+            "source": "aws_eks_access_entry.this_modules/self-managed-node-group/main.tf",
+            "target": "aws_iam_role.this_modules/fargate-profile/main.tf"
+        },
+        {
+            "from": "aws_eks_access_entry.this_modules/self-managed-node-group/main.tf",
+            "to": "aws_iam_role.this_modules/hybrid-node-role/main.tf",
+            "source": "aws_eks_access_entry.this_modules/self-managed-node-group/main.tf",
+            "target": "aws_iam_role.this_modules/hybrid-node-role/main.tf"
+        },
+        {
+            "from": "aws_vpc_security_group_ingress_rule.this_modules/self-managed-node-group/main.tf",
+            "to": "aws_security_group.this_modules/eks-managed-node-group/main.tf",
+            "source": "aws_vpc_security_group_ingress_rule.this_modules/self-managed-node-group/main.tf",
+            "target": "aws_security_group.this_modules/eks-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_vpc_security_group_ingress_rule.this_modules/self-managed-node-group/main.tf",
+            "to": "aws_security_group.this_modules/self-managed-node-group/main.tf",
+            "source": "aws_vpc_security_group_ingress_rule.this_modules/self-managed-node-group/main.tf",
+            "target": "aws_security_group.this_modules/self-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_vpc_security_group_egress_rule.this_modules/self-managed-node-group/main.tf",
+            "to": "aws_security_group.this_modules/eks-managed-node-group/main.tf",
+            "source": "aws_vpc_security_group_egress_rule.this_modules/self-managed-node-group/main.tf",
+            "target": "aws_security_group.this_modules/eks-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_vpc_security_group_egress_rule.this_modules/self-managed-node-group/main.tf",
+            "to": "aws_security_group.this_modules/self-managed-node-group/main.tf",
+            "source": "aws_vpc_security_group_egress_rule.this_modules/self-managed-node-group/main.tf",
+            "target": "aws_security_group.this_modules/self-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.this_modules/fargate-profile/main.tf",
             "to": "aws_iam_role.this_main.tf",
-            "source": "aws_iam_role_policy_attachment.this_main.tf",
+            "source": "aws_iam_role_policy_attachment.this_modules/fargate-profile/main.tf",
             "target": "aws_iam_role.this_main.tf"
         },
         {
-            "from": "aws_iam_role_policy_attachment.additional_main.tf",
+            "from": "aws_iam_role_policy_attachment.this_modules/fargate-profile/main.tf",
+            "to": "aws_iam_role.this_tests/eks-managed-node-group/main.tf",
+            "source": "aws_iam_role_policy_attachment.this_modules/fargate-profile/main.tf",
+            "target": "aws_iam_role.this_tests/eks-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.this_modules/fargate-profile/main.tf",
+            "to": "aws_iam_role.this_modules/eks-managed-node-group/main.tf",
+            "source": "aws_iam_role_policy_attachment.this_modules/fargate-profile/main.tf",
+            "target": "aws_iam_role.this_modules/eks-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.this_modules/fargate-profile/main.tf",
+            "to": "aws_iam_role.this_modules/self-managed-node-group/main.tf",
+            "source": "aws_iam_role_policy_attachment.this_modules/fargate-profile/main.tf",
+            "target": "aws_iam_role.this_modules/self-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.this_modules/fargate-profile/main.tf",
+            "to": "aws_iam_role.this_modules/fargate-profile/main.tf",
+            "source": "aws_iam_role_policy_attachment.this_modules/fargate-profile/main.tf",
+            "target": "aws_iam_role.this_modules/fargate-profile/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.this_modules/fargate-profile/main.tf",
+            "to": "aws_iam_role.this_modules/hybrid-node-role/main.tf",
+            "source": "aws_iam_role_policy_attachment.this_modules/fargate-profile/main.tf",
+            "target": "aws_iam_role.this_modules/hybrid-node-role/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.additional_modules/fargate-profile/main.tf",
             "to": "aws_iam_role.this_main.tf",
-            "source": "aws_iam_role_policy_attachment.additional_main.tf",
+            "source": "aws_iam_role_policy_attachment.additional_modules/fargate-profile/main.tf",
             "target": "aws_iam_role.this_main.tf"
         },
         {
-            "from": "aws_iam_role_policy.this_main.tf",
+            "from": "aws_iam_role_policy_attachment.additional_modules/fargate-profile/main.tf",
+            "to": "aws_iam_role.this_tests/eks-managed-node-group/main.tf",
+            "source": "aws_iam_role_policy_attachment.additional_modules/fargate-profile/main.tf",
+            "target": "aws_iam_role.this_tests/eks-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.additional_modules/fargate-profile/main.tf",
+            "to": "aws_iam_role.this_modules/eks-managed-node-group/main.tf",
+            "source": "aws_iam_role_policy_attachment.additional_modules/fargate-profile/main.tf",
+            "target": "aws_iam_role.this_modules/eks-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.additional_modules/fargate-profile/main.tf",
+            "to": "aws_iam_role.this_modules/self-managed-node-group/main.tf",
+            "source": "aws_iam_role_policy_attachment.additional_modules/fargate-profile/main.tf",
+            "target": "aws_iam_role.this_modules/self-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.additional_modules/fargate-profile/main.tf",
+            "to": "aws_iam_role.this_modules/fargate-profile/main.tf",
+            "source": "aws_iam_role_policy_attachment.additional_modules/fargate-profile/main.tf",
+            "target": "aws_iam_role.this_modules/fargate-profile/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.additional_modules/fargate-profile/main.tf",
+            "to": "aws_iam_role.this_modules/hybrid-node-role/main.tf",
+            "source": "aws_iam_role_policy_attachment.additional_modules/fargate-profile/main.tf",
+            "target": "aws_iam_role.this_modules/hybrid-node-role/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy.this_modules/fargate-profile/main.tf",
             "to": "aws_iam_role.this_main.tf",
-            "source": "aws_iam_role_policy.this_main.tf",
+            "source": "aws_iam_role_policy.this_modules/fargate-profile/main.tf",
             "target": "aws_iam_role.this_main.tf"
         },
         {
-            "from": "aws_eks_fargate_profile.this_main.tf",
+            "from": "aws_iam_role_policy.this_modules/fargate-profile/main.tf",
+            "to": "aws_iam_role.this_tests/eks-managed-node-group/main.tf",
+            "source": "aws_iam_role_policy.this_modules/fargate-profile/main.tf",
+            "target": "aws_iam_role.this_tests/eks-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy.this_modules/fargate-profile/main.tf",
+            "to": "aws_iam_role.this_modules/eks-managed-node-group/main.tf",
+            "source": "aws_iam_role_policy.this_modules/fargate-profile/main.tf",
+            "target": "aws_iam_role.this_modules/eks-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy.this_modules/fargate-profile/main.tf",
+            "to": "aws_iam_role.this_modules/self-managed-node-group/main.tf",
+            "source": "aws_iam_role_policy.this_modules/fargate-profile/main.tf",
+            "target": "aws_iam_role.this_modules/self-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy.this_modules/fargate-profile/main.tf",
+            "to": "aws_iam_role.this_modules/fargate-profile/main.tf",
+            "source": "aws_iam_role_policy.this_modules/fargate-profile/main.tf",
+            "target": "aws_iam_role.this_modules/fargate-profile/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy.this_modules/fargate-profile/main.tf",
+            "to": "aws_iam_role.this_modules/hybrid-node-role/main.tf",
+            "source": "aws_iam_role_policy.this_modules/fargate-profile/main.tf",
+            "target": "aws_iam_role.this_modules/hybrid-node-role/main.tf"
+        },
+        {
+            "from": "aws_eks_fargate_profile.this_modules/fargate-profile/main.tf",
             "to": "aws_iam_role.this_main.tf",
-            "source": "aws_eks_fargate_profile.this_main.tf",
+            "source": "aws_eks_fargate_profile.this_modules/fargate-profile/main.tf",
             "target": "aws_iam_role.this_main.tf"
         },
         {
-            "from": "aws_iam_role_policy_attachment.this_main.tf",
+            "from": "aws_eks_fargate_profile.this_modules/fargate-profile/main.tf",
+            "to": "aws_iam_role.this_tests/eks-managed-node-group/main.tf",
+            "source": "aws_eks_fargate_profile.this_modules/fargate-profile/main.tf",
+            "target": "aws_iam_role.this_tests/eks-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_eks_fargate_profile.this_modules/fargate-profile/main.tf",
+            "to": "aws_iam_role.this_modules/eks-managed-node-group/main.tf",
+            "source": "aws_eks_fargate_profile.this_modules/fargate-profile/main.tf",
+            "target": "aws_iam_role.this_modules/eks-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_eks_fargate_profile.this_modules/fargate-profile/main.tf",
+            "to": "aws_iam_role.this_modules/self-managed-node-group/main.tf",
+            "source": "aws_eks_fargate_profile.this_modules/fargate-profile/main.tf",
+            "target": "aws_iam_role.this_modules/self-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_eks_fargate_profile.this_modules/fargate-profile/main.tf",
+            "to": "aws_iam_role.this_modules/fargate-profile/main.tf",
+            "source": "aws_eks_fargate_profile.this_modules/fargate-profile/main.tf",
+            "target": "aws_iam_role.this_modules/fargate-profile/main.tf"
+        },
+        {
+            "from": "aws_eks_fargate_profile.this_modules/fargate-profile/main.tf",
+            "to": "aws_iam_role.this_modules/hybrid-node-role/main.tf",
+            "source": "aws_eks_fargate_profile.this_modules/fargate-profile/main.tf",
+            "target": "aws_iam_role.this_modules/hybrid-node-role/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.this_modules/hybrid-node-role/main.tf",
+            "to": "aws_iam_policy.this_modules/hybrid-node-role/main.tf",
+            "source": "aws_iam_role_policy_attachment.this_modules/hybrid-node-role/main.tf",
+            "target": "aws_iam_policy.this_modules/hybrid-node-role/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.this_modules/hybrid-node-role/main.tf",
             "to": "aws_iam_role.this_main.tf",
-            "source": "aws_iam_role_policy_attachment.this_main.tf",
+            "source": "aws_iam_role_policy_attachment.this_modules/hybrid-node-role/main.tf",
             "target": "aws_iam_role.this_main.tf"
         },
         {
-            "from": "aws_iam_role_policy_attachment.this_main.tf",
-            "to": "aws_iam_policy.this_main.tf",
-            "source": "aws_iam_role_policy_attachment.this_main.tf",
-            "target": "aws_iam_policy.this_main.tf"
+            "from": "aws_iam_role_policy_attachment.this_modules/hybrid-node-role/main.tf",
+            "to": "aws_iam_role.this_tests/eks-managed-node-group/main.tf",
+            "source": "aws_iam_role_policy_attachment.this_modules/hybrid-node-role/main.tf",
+            "target": "aws_iam_role.this_tests/eks-managed-node-group/main.tf"
         },
         {
-            "from": "aws_iam_role_policy_attachment.intermediate_main.tf",
+            "from": "aws_iam_role_policy_attachment.this_modules/hybrid-node-role/main.tf",
+            "to": "aws_iam_role.this_modules/eks-managed-node-group/main.tf",
+            "source": "aws_iam_role_policy_attachment.this_modules/hybrid-node-role/main.tf",
+            "target": "aws_iam_role.this_modules/eks-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.this_modules/hybrid-node-role/main.tf",
+            "to": "aws_iam_role.this_modules/self-managed-node-group/main.tf",
+            "source": "aws_iam_role_policy_attachment.this_modules/hybrid-node-role/main.tf",
+            "target": "aws_iam_role.this_modules/self-managed-node-group/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.this_modules/hybrid-node-role/main.tf",
+            "to": "aws_iam_role.this_modules/fargate-profile/main.tf",
+            "source": "aws_iam_role_policy_attachment.this_modules/hybrid-node-role/main.tf",
+            "target": "aws_iam_role.this_modules/fargate-profile/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.this_modules/hybrid-node-role/main.tf",
+            "to": "aws_iam_role.this_modules/hybrid-node-role/main.tf",
+            "source": "aws_iam_role_policy_attachment.this_modules/hybrid-node-role/main.tf",
+            "target": "aws_iam_role.this_modules/hybrid-node-role/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.intermediate_modules/hybrid-node-role/main.tf",
             "to": "aws_iam_role.this_main.tf",
-            "source": "aws_iam_role_policy_attachment.intermediate_main.tf",
+            "source": "aws_iam_role_policy_attachment.intermediate_modules/hybrid-node-role/main.tf",
             "target": "aws_iam_role.this_main.tf"
         },
         {
-            "from": "aws_iam_role_policy_attachment.intermediate_main.tf",
-            "to": "aws_iam_policy.intermediate_main.tf",
-            "source": "aws_iam_role_policy_attachment.intermediate_main.tf",
-            "target": "aws_iam_policy.intermediate_main.tf"
+            "from": "aws_iam_role_policy_attachment.intermediate_modules/hybrid-node-role/main.tf",
+            "to": "aws_iam_role.this_tests/eks-managed-node-group/main.tf",
+            "source": "aws_iam_role_policy_attachment.intermediate_modules/hybrid-node-role/main.tf",
+            "target": "aws_iam_role.this_tests/eks-managed-node-group/main.tf"
         },
         {
-            "from": "aws_iam_role_policy.controller_main.tf",
-            "to": "aws_iam_role.controller_main.tf",
-            "source": "aws_iam_role_policy.controller_main.tf",
-            "target": "aws_iam_role.controller_main.tf"
+            "from": "aws_iam_role_policy_attachment.intermediate_modules/hybrid-node-role/main.tf",
+            "to": "aws_iam_role.this_modules/eks-managed-node-group/main.tf",
+            "source": "aws_iam_role_policy_attachment.intermediate_modules/hybrid-node-role/main.tf",
+            "target": "aws_iam_role.this_modules/eks-managed-node-group/main.tf"
         },
         {
-            "from": "aws_iam_role_policy_attachment.controller_main.tf",
-            "to": "aws_iam_role.controller_main.tf",
-            "source": "aws_iam_role_policy_attachment.controller_main.tf",
-            "target": "aws_iam_role.controller_main.tf"
+            "from": "aws_iam_role_policy_attachment.intermediate_modules/hybrid-node-role/main.tf",
+            "to": "aws_iam_role.this_modules/self-managed-node-group/main.tf",
+            "source": "aws_iam_role_policy_attachment.intermediate_modules/hybrid-node-role/main.tf",
+            "target": "aws_iam_role.this_modules/self-managed-node-group/main.tf"
         },
         {
-            "from": "aws_iam_role_policy_attachment.controller_main.tf",
-            "to": "aws_iam_policy.controller_main.tf",
-            "source": "aws_iam_role_policy_attachment.controller_main.tf",
-            "target": "aws_iam_policy.controller_main.tf"
+            "from": "aws_iam_role_policy_attachment.intermediate_modules/hybrid-node-role/main.tf",
+            "to": "aws_iam_role.this_modules/fargate-profile/main.tf",
+            "source": "aws_iam_role_policy_attachment.intermediate_modules/hybrid-node-role/main.tf",
+            "target": "aws_iam_role.this_modules/fargate-profile/main.tf"
         },
         {
-            "from": "aws_iam_role_policy_attachment.controller_additional_main.tf",
-            "to": "aws_iam_role.controller_main.tf",
-            "source": "aws_iam_role_policy_attachment.controller_additional_main.tf",
-            "target": "aws_iam_role.controller_main.tf"
+            "from": "aws_iam_role_policy_attachment.intermediate_modules/hybrid-node-role/main.tf",
+            "to": "aws_iam_role.this_modules/hybrid-node-role/main.tf",
+            "source": "aws_iam_role_policy_attachment.intermediate_modules/hybrid-node-role/main.tf",
+            "target": "aws_iam_role.this_modules/hybrid-node-role/main.tf"
         },
         {
-            "from": "aws_eks_pod_identity_association.karpenter_main.tf",
-            "to": "aws_iam_role.controller_main.tf",
-            "source": "aws_eks_pod_identity_association.karpenter_main.tf",
-            "target": "aws_iam_role.controller_main.tf"
+            "from": "aws_iam_role_policy_attachment.intermediate_modules/hybrid-node-role/main.tf",
+            "to": "aws_iam_policy.intermediate_modules/hybrid-node-role/main.tf",
+            "source": "aws_iam_role_policy_attachment.intermediate_modules/hybrid-node-role/main.tf",
+            "target": "aws_iam_policy.intermediate_modules/hybrid-node-role/main.tf"
         },
         {
-            "from": "aws_sqs_queue_policy.this_main.tf",
-            "to": "aws_sqs_queue.this_main.tf",
-            "source": "aws_sqs_queue_policy.this_main.tf",
-            "target": "aws_sqs_queue.this_main.tf"
+            "from": "aws_iam_role_policy.controller_modules/karpenter/main.tf",
+            "to": "aws_iam_role.controller_modules/karpenter/main.tf",
+            "source": "aws_iam_role_policy.controller_modules/karpenter/main.tf",
+            "target": "aws_iam_role.controller_modules/karpenter/main.tf"
         },
         {
-            "from": "aws_cloudwatch_event_target.this_main.tf",
-            "to": "aws_sqs_queue.this_main.tf",
-            "source": "aws_cloudwatch_event_target.this_main.tf",
-            "target": "aws_sqs_queue.this_main.tf"
+            "from": "aws_iam_role_policy_attachment.controller_modules/karpenter/main.tf",
+            "to": "aws_iam_role.controller_modules/karpenter/main.tf",
+            "source": "aws_iam_role_policy_attachment.controller_modules/karpenter/main.tf",
+            "target": "aws_iam_role.controller_modules/karpenter/main.tf"
         },
         {
-            "from": "aws_cloudwatch_event_target.this_main.tf",
-            "to": "aws_cloudwatch_event_rule.this_main.tf",
-            "source": "aws_cloudwatch_event_target.this_main.tf",
-            "target": "aws_cloudwatch_event_rule.this_main.tf"
+            "from": "aws_iam_role_policy_attachment.controller_modules/karpenter/main.tf",
+            "to": "aws_iam_policy.controller_modules/karpenter/main.tf",
+            "source": "aws_iam_role_policy_attachment.controller_modules/karpenter/main.tf",
+            "target": "aws_iam_policy.controller_modules/karpenter/main.tf"
         },
         {
-            "from": "aws_iam_role_policy_attachment.node_main.tf",
-            "to": "aws_iam_role.node_main.tf",
-            "source": "aws_iam_role_policy_attachment.node_main.tf",
-            "target": "aws_iam_role.node_main.tf"
+            "from": "aws_iam_role_policy_attachment.controller_additional_modules/karpenter/main.tf",
+            "to": "aws_iam_role.controller_modules/karpenter/main.tf",
+            "source": "aws_iam_role_policy_attachment.controller_additional_modules/karpenter/main.tf",
+            "target": "aws_iam_role.controller_modules/karpenter/main.tf"
         },
         {
-            "from": "aws_iam_role_policy_attachment.node_additional_main.tf",
-            "to": "aws_iam_role.node_main.tf",
-            "source": "aws_iam_role_policy_attachment.node_additional_main.tf",
-            "target": "aws_iam_role.node_main.tf"
+            "from": "aws_eks_pod_identity_association.karpenter_modules/karpenter/main.tf",
+            "to": "aws_iam_role.controller_modules/karpenter/main.tf",
+            "source": "aws_eks_pod_identity_association.karpenter_modules/karpenter/main.tf",
+            "target": "aws_iam_role.controller_modules/karpenter/main.tf"
         },
         {
-            "from": "aws_eks_access_entry.node_main.tf",
-            "to": "aws_sqs_queue_policy.this_main.tf",
-            "source": "aws_eks_access_entry.node_main.tf",
-            "target": "aws_sqs_queue_policy.this_main.tf"
+            "from": "aws_sqs_queue_policy.this_modules/karpenter/main.tf",
+            "to": "aws_sqs_queue.this_modules/karpenter/main.tf",
+            "source": "aws_sqs_queue_policy.this_modules/karpenter/main.tf",
+            "target": "aws_sqs_queue.this_modules/karpenter/main.tf"
         },
         {
-            "from": "aws_eks_access_entry.node_main.tf",
-            "to": "aws_iam_role.node_main.tf",
-            "source": "aws_eks_access_entry.node_main.tf",
-            "target": "aws_iam_role.node_main.tf"
+            "from": "aws_cloudwatch_event_target.this_modules/karpenter/main.tf",
+            "to": "aws_cloudwatch_event_rule.this_modules/karpenter/main.tf",
+            "source": "aws_cloudwatch_event_target.this_modules/karpenter/main.tf",
+            "target": "aws_cloudwatch_event_rule.this_modules/karpenter/main.tf"
         },
         {
-            "from": "aws_iam_instance_profile.this_main.tf",
-            "to": "aws_iam_role.node_main.tf",
-            "source": "aws_iam_instance_profile.this_main.tf",
-            "target": "aws_iam_role.node_main.tf"
+            "from": "aws_cloudwatch_event_target.this_modules/karpenter/main.tf",
+            "to": "aws_sqs_queue.this_modules/karpenter/main.tf",
+            "source": "aws_cloudwatch_event_target.this_modules/karpenter/main.tf",
+            "target": "aws_sqs_queue.this_modules/karpenter/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.node_modules/karpenter/main.tf",
+            "to": "aws_iam_role.node_modules/karpenter/main.tf",
+            "source": "aws_iam_role_policy_attachment.node_modules/karpenter/main.tf",
+            "target": "aws_iam_role.node_modules/karpenter/main.tf"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.node_additional_modules/karpenter/main.tf",
+            "to": "aws_iam_role.node_modules/karpenter/main.tf",
+            "source": "aws_iam_role_policy_attachment.node_additional_modules/karpenter/main.tf",
+            "target": "aws_iam_role.node_modules/karpenter/main.tf"
+        },
+        {
+            "from": "aws_eks_access_entry.node_modules/karpenter/main.tf",
+            "to": "aws_iam_role.node_modules/karpenter/main.tf",
+            "source": "aws_eks_access_entry.node_modules/karpenter/main.tf",
+            "target": "aws_iam_role.node_modules/karpenter/main.tf"
+        },
+        {
+            "from": "aws_eks_access_entry.node_modules/karpenter/main.tf",
+            "to": "aws_sqs_queue_policy.this_modules/karpenter/main.tf",
+            "source": "aws_eks_access_entry.node_modules/karpenter/main.tf",
+            "target": "aws_sqs_queue_policy.this_modules/karpenter/main.tf"
+        },
+        {
+            "from": "aws_iam_instance_profile.this_modules/karpenter/main.tf",
+            "to": "aws_iam_role.node_modules/karpenter/main.tf",
+            "source": "aws_iam_instance_profile.this_modules/karpenter/main.tf",
+            "target": "aws_iam_role.node_modules/karpenter/main.tf"
         }
     ],
     "unassigned_findings": [
@@ -1970,7 +2696,7 @@
         "duplicates_removed": 95,
         "deduplication_method": "CFI_CIS+SARIF_FP",
         "total_nodes": 135,
-        "total_edges": 83,
+        "total_edges": 204,
         "correlation_metadata": {
             "assigned_findings": 5,
             "unassigned_findings_count": 1,
