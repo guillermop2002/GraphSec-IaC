@@ -323,6 +323,8 @@ python -m pytest tests/unit/test_correlation_engine.py
 
 Este es un proyecto de TFG (Trabajo de Fin de Grado). Para contribuir, por favor contacta con el autor.
 
+> **Nota**: Este proyecto utiliza GitHub Actions para análisis automático de seguridad en Pull Requests.
+
 ## Licencia
 #   U n   c a m b i o   d e   p r u e b a 
  
