@@ -1,0 +1,75 @@
+# Entorno virtual de Python
+venv/
+env/
+ENV/
+
+# Archivos de Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Archivos de Terraform
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.lock.hcl
+*.tfplan
+*.tfvars
+*.tfvars.json
+
+# Archivos temporales
+*.tmp
+*.temp
+*.log
+*.dot
+terraform_graph.json
+
+# Caché de GraphSec-IaC
+.graphsec_cache/
+
+# Resultados de escáneres temporales
+checkov_output_*.sarif/
+trivy_output_*.sarif
+checkov_results_*.sarif/
+trivy_results_*.sarif
+
+# Informes temporales de análisis
+ANALISIS_FINAL.md
+RESULTADOS_*.md
+
+# Ignorar directorios de prueba de Terraform
+/terraform-aws-vpc/
+/terraform-aws-eks/
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# IDEs
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Archivos de configuración local
+.env
+.env.local

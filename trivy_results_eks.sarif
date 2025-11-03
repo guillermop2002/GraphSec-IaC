@@ -1,0 +1,3428 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://raw.githubusercontent.com/oasis-tcs/sarif-spec/main/sarif-2.1/schema/sarif-schema-2.1.0.json",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "fullName": "Trivy Vulnerability Scanner",
+          "informationUri": "https://github.com/aquasecurity/trivy",
+          "name": "Trivy",
+          "rules": [
+            {
+              "id": "KSV001",
+              "name": "Misconfiguration",
+              "shortDescription": {
+                "text": "Can elevate its own privileges"
+              },
+              "fullDescription": {
+                "text": "A program inside the container can elevate its own privileges and run as root, which might give the program control over the container and node."
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "helpUri": "https://avd.aquasec.com/misconfig/ksv001",
+              "help": {
+                "text": "Misconfiguration KSV001\nType: Kubernetes Security Check\nSeverity: MEDIUM\nCheck: Can elevate its own privileges\nMessage: Container 'inflate' of Deployment 'inflate' should set 'securityContext.allowPrivilegeEscalation' to false\nLink: [KSV001](https://avd.aquasec.com/misconfig/ksv001)\nA program inside the container can elevate its own privileges and run as root, which might give the program control over the container and node.",
+                "markdown": "**Misconfiguration KSV001**\n| Type | Severity | Check | Message | Link |\n| --- | --- | --- | --- | --- |\n|Kubernetes Security Check|MEDIUM|Can elevate its own privileges|Container 'inflate' of Deployment 'inflate' should set 'securityContext.allowPrivilegeEscalation' to false|[KSV001](https://avd.aquasec.com/misconfig/ksv001)|\n\nA program inside the container can elevate its own privileges and run as root, which might give the program control over the container and node."
+              },
+              "properties": {
+                "precision": "very-high",
+                "security-severity": "5.5",
+                "tags": [
+                  "misconfiguration",
+                  "security",
+                  "MEDIUM"
+                ]
+              }
+            },
+            {
+              "id": "KSV003",
+              "name": "Misconfiguration",
+              "shortDescription": {
+                "text": "Default capabilities: some containers do not drop all"
+              },
+              "fullDescription": {
+                "text": "The container should drop all default capabilities and add only those that are needed for its execution."
+              },
+              "defaultConfiguration": {
+                "level": "note"
+              },
+              "helpUri": "https://avd.aquasec.com/misconfig/ksv003",
+              "help": {
+                "text": "Misconfiguration KSV003\nType: Kubernetes Security Check\nSeverity: LOW\nCheck: Default capabilities: some containers do not drop all\nMessage: Container 'inflate' of Deployment 'inflate' should add 'ALL' to 'securityContext.capabilities.drop'\nLink: [KSV003](https://avd.aquasec.com/misconfig/ksv003)\nThe container should drop all default capabilities and add only those that are needed for its execution.",
+                "markdown": "**Misconfiguration KSV003**\n| Type | Severity | Check | Message | Link |\n| --- | --- | --- | --- | --- |\n|Kubernetes Security Check|LOW|Default capabilities: some containers do not drop all|Container 'inflate' of Deployment 'inflate' should add 'ALL' to 'securityContext.capabilities.drop'|[KSV003](https://avd.aquasec.com/misconfig/ksv003)|\n\nThe container should drop all default capabilities and add only those that are needed for its execution."
+              },
+              "properties": {
+                "precision": "very-high",
+                "security-severity": "2.0",
+                "tags": [
+                  "misconfiguration",
+                  "security",
+                  "LOW"
+                ]
+              }
+            },
+            {
+              "id": "KSV004",
+              "name": "Misconfiguration",
+              "shortDescription": {
+                "text": "Default capabilities: some containers do not drop any"
+              },
+              "fullDescription": {
+                "text": "Security best practices require containers to run with minimal required capabilities."
+              },
+              "defaultConfiguration": {
+                "level": "note"
+              },
+              "helpUri": "https://avd.aquasec.com/misconfig/ksv004",
+              "help": {
+                "text": "Misconfiguration KSV004\nType: Kubernetes Security Check\nSeverity: LOW\nCheck: Default capabilities: some containers do not drop any\nMessage: Container 'inflate' of 'deployment' 'inflate' in 'default' namespace should set securityContext.capabilities.drop\nLink: [KSV004](https://avd.aquasec.com/misconfig/ksv004)\nSecurity best practices require containers to run with minimal required capabilities.",
+                "markdown": "**Misconfiguration KSV004**\n| Type | Severity | Check | Message | Link |\n| --- | --- | --- | --- | --- |\n|Kubernetes Security Check|LOW|Default capabilities: some containers do not drop any|Container 'inflate' of 'deployment' 'inflate' in 'default' namespace should set securityContext.capabilities.drop|[KSV004](https://avd.aquasec.com/misconfig/ksv004)|\n\nSecurity best practices require containers to run with minimal required capabilities."
+              },
+              "properties": {
+                "precision": "very-high",
+                "security-severity": "2.0",
+                "tags": [
+                  "misconfiguration",
+                  "security",
+                  "LOW"
+                ]
+              }
+            },
+            {
+              "id": "KSV011",
+              "name": "Misconfiguration",
+              "shortDescription": {
+                "text": "CPU not limited"
+              },
+              "fullDescription": {
+                "text": "Enforcing CPU limits prevents DoS via resource exhaustion."
+              },
+              "defaultConfiguration": {
+                "level": "note"
+              },
+              "helpUri": "https://avd.aquasec.com/misconfig/ksv011",
+              "help": {
+                "text": "Misconfiguration KSV011\nType: Kubernetes Security Check\nSeverity: LOW\nCheck: CPU not limited\nMessage: Container 'inflate' of Deployment 'inflate' should set 'resources.limits.cpu'\nLink: [KSV011](https://avd.aquasec.com/misconfig/ksv011)\nEnforcing CPU limits prevents DoS via resource exhaustion.",
+                "markdown": "**Misconfiguration KSV011**\n| Type | Severity | Check | Message | Link |\n| --- | --- | --- | --- | --- |\n|Kubernetes Security Check|LOW|CPU not limited|Container 'inflate' of Deployment 'inflate' should set 'resources.limits.cpu'|[KSV011](https://avd.aquasec.com/misconfig/ksv011)|\n\nEnforcing CPU limits prevents DoS via resource exhaustion."
+              },
+              "properties": {
+                "precision": "very-high",
+                "security-severity": "2.0",
+                "tags": [
+                  "misconfiguration",
+                  "security",
+                  "LOW"
+                ]
+              }
+            },
+            {
+              "id": "KSV012",
+              "name": "Misconfiguration",
+              "shortDescription": {
+                "text": "Runs as root user"
+              },
+              "fullDescription": {
+                "text": "Force the running image to run as a non-root user to ensure least privileges."
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "helpUri": "https://avd.aquasec.com/misconfig/ksv012",
+              "help": {
+                "text": "Misconfiguration KSV012\nType: Kubernetes Security Check\nSeverity: MEDIUM\nCheck: Runs as root user\nMessage: Container 'inflate' of Deployment 'inflate' should set 'securityContext.runAsNonRoot' to true\nLink: [KSV012](https://avd.aquasec.com/misconfig/ksv012)\nForce the running image to run as a non-root user to ensure least privileges.",
+                "markdown": "**Misconfiguration KSV012**\n| Type | Severity | Check | Message | Link |\n| --- | --- | --- | --- | --- |\n|Kubernetes Security Check|MEDIUM|Runs as root user|Container 'inflate' of Deployment 'inflate' should set 'securityContext.runAsNonRoot' to true|[KSV012](https://avd.aquasec.com/misconfig/ksv012)|\n\nForce the running image to run as a non-root user to ensure least privileges."
+              },
+              "properties": {
+                "precision": "very-high",
+                "security-severity": "5.5",
+                "tags": [
+                  "misconfiguration",
+                  "security",
+                  "MEDIUM"
+                ]
+              }
+            },
+            {
+              "id": "KSV014",
+              "name": "Misconfiguration",
+              "shortDescription": {
+                "text": "Root file system is not read-only"
+              },
+              "fullDescription": {
+                "text": "An immutable root file system prevents applications from writing to their local disk. This can limit intrusions, as attackers will not be able to tamper with the file system or write foreign executables to disk."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "helpUri": "https://avd.aquasec.com/misconfig/ksv014",
+              "help": {
+                "text": "Misconfiguration KSV014\nType: Kubernetes Security Check\nSeverity: HIGH\nCheck: Root file system is not read-only\nMessage: Container 'inflate' of Deployment 'inflate' should set 'securityContext.readOnlyRootFilesystem' to true\nLink: [KSV014](https://avd.aquasec.com/misconfig/ksv014)\nAn immutable root file system prevents applications from writing to their local disk. This can limit intrusions, as attackers will not be able to tamper with the file system or write foreign executables to disk.",
+                "markdown": "**Misconfiguration KSV014**\n| Type | Severity | Check | Message | Link |\n| --- | --- | --- | --- | --- |\n|Kubernetes Security Check|HIGH|Root file system is not read-only|Container 'inflate' of Deployment 'inflate' should set 'securityContext.readOnlyRootFilesystem' to true|[KSV014](https://avd.aquasec.com/misconfig/ksv014)|\n\nAn immutable root file system prevents applications from writing to their local disk. This can limit intrusions, as attackers will not be able to tamper with the file system or write foreign executables to disk."
+              },
+              "properties": {
+                "precision": "very-high",
+                "security-severity": "8.0",
+                "tags": [
+                  "misconfiguration",
+                  "security",
+                  "HIGH"
+                ]
+              }
+            },
+            {
+              "id": "KSV016",
+              "name": "Misconfiguration",
+              "shortDescription": {
+                "text": "Memory requests not specified"
+              },
+              "fullDescription": {
+                "text": "When containers have memory requests specified, the scheduler can make better decisions about which nodes to place pods on, and how to deal with resource contention."
+              },
+              "defaultConfiguration": {
+                "level": "note"
+              },
+              "helpUri": "https://avd.aquasec.com/misconfig/ksv016",
+              "help": {
+                "text": "Misconfiguration KSV016\nType: Kubernetes Security Check\nSeverity: LOW\nCheck: Memory requests not specified\nMessage: Container 'inflate' of Deployment 'inflate' should set 'resources.requests.memory'\nLink: [KSV016](https://avd.aquasec.com/misconfig/ksv016)\nWhen containers have memory requests specified, the scheduler can make better decisions about which nodes to place pods on, and how to deal with resource contention.",
+                "markdown": "**Misconfiguration KSV016**\n| Type | Severity | Check | Message | Link |\n| --- | --- | --- | --- | --- |\n|Kubernetes Security Check|LOW|Memory requests not specified|Container 'inflate' of Deployment 'inflate' should set 'resources.requests.memory'|[KSV016](https://avd.aquasec.com/misconfig/ksv016)|\n\nWhen containers have memory requests specified, the scheduler can make better decisions about which nodes to place pods on, and how to deal with resource contention."
+              },
+              "properties": {
+                "precision": "very-high",
+                "security-severity": "2.0",
+                "tags": [
+                  "misconfiguration",
+                  "security",
+                  "LOW"
+                ]
+              }
+            },
+            {
+              "id": "KSV018",
+              "name": "Misconfiguration",
+              "shortDescription": {
+                "text": "Memory not limited"
+              },
+              "fullDescription": {
+                "text": "Enforcing memory limits prevents DoS via resource exhaustion."
+              },
+              "defaultConfiguration": {
+                "level": "note"
+              },
+              "helpUri": "https://avd.aquasec.com/misconfig/ksv018",
+              "help": {
+                "text": "Misconfiguration KSV018\nType: Kubernetes Security Check\nSeverity: LOW\nCheck: Memory not limited\nMessage: Container 'inflate' of Deployment 'inflate' should set 'resources.limits.memory'\nLink: [KSV018](https://avd.aquasec.com/misconfig/ksv018)\nEnforcing memory limits prevents DoS via resource exhaustion.",
+                "markdown": "**Misconfiguration KSV018**\n| Type | Severity | Check | Message | Link |\n| --- | --- | --- | --- | --- |\n|Kubernetes Security Check|LOW|Memory not limited|Container 'inflate' of Deployment 'inflate' should set 'resources.limits.memory'|[KSV018](https://avd.aquasec.com/misconfig/ksv018)|\n\nEnforcing memory limits prevents DoS via resource exhaustion."
+              },
+              "properties": {
+                "precision": "very-high",
+                "security-severity": "2.0",
+                "tags": [
+                  "misconfiguration",
+                  "security",
+                  "LOW"
+                ]
+              }
+            },
+            {
+              "id": "KSV020",
+              "name": "Misconfiguration",
+              "shortDescription": {
+                "text": "Runs with UID \u003c= 10000"
+              },
+              "fullDescription": {
+                "text": "Force the container to run with user ID \u003e 10000 to avoid conflicts with the host’s user table."
+              },
+              "defaultConfiguration": {
+                "level": "note"
+              },
+              "helpUri": "https://avd.aquasec.com/misconfig/ksv020",
+              "help": {
+                "text": "Misconfiguration KSV020\nType: Kubernetes Security Check\nSeverity: LOW\nCheck: Runs with UID \u003c= 10000\nMessage: Container 'inflate' of Deployment 'inflate' should set 'securityContext.runAsUser' \u003e 10000\nLink: [KSV020](https://avd.aquasec.com/misconfig/ksv020)\nForce the container to run with user ID \u003e 10000 to avoid conflicts with the host’s user table.",
+                "markdown": "**Misconfiguration KSV020**\n| Type | Severity | Check | Message | Link |\n| --- | --- | --- | --- | --- |\n|Kubernetes Security Check|LOW|Runs with UID \u003c= 10000|Container 'inflate' of Deployment 'inflate' should set 'securityContext.runAsUser' \u003e 10000|[KSV020](https://avd.aquasec.com/misconfig/ksv020)|\n\nForce the container to run with user ID \u003e 10000 to avoid conflicts with the host’s user table."
+              },
+              "properties": {
+                "precision": "very-high",
+                "security-severity": "2.0",
+                "tags": [
+                  "misconfiguration",
+                  "security",
+                  "LOW"
+                ]
+              }
+            },
+            {
+              "id": "KSV021",
+              "name": "Misconfiguration",
+              "shortDescription": {
+                "text": "Runs with GID \u003c= 10000"
+              },
+              "fullDescription": {
+                "text": "Force the container to run with group ID \u003e 10000 to avoid conflicts with the host’s user table."
+              },
+              "defaultConfiguration": {
+                "level": "note"
+              },
+              "helpUri": "https://avd.aquasec.com/misconfig/ksv021",
+              "help": {
+                "text": "Misconfiguration KSV021\nType: Kubernetes Security Check\nSeverity: LOW\nCheck: Runs with GID \u003c= 10000\nMessage: Container 'inflate' of Deployment 'inflate' should set 'securityContext.runAsGroup' \u003e 10000\nLink: [KSV021](https://avd.aquasec.com/misconfig/ksv021)\nForce the container to run with group ID \u003e 10000 to avoid conflicts with the host’s user table.",
+                "markdown": "**Misconfiguration KSV021**\n| Type | Severity | Check | Message | Link |\n| --- | --- | --- | --- | --- |\n|Kubernetes Security Check|LOW|Runs with GID \u003c= 10000|Container 'inflate' of Deployment 'inflate' should set 'securityContext.runAsGroup' \u003e 10000|[KSV021](https://avd.aquasec.com/misconfig/ksv021)|\n\nForce the container to run with group ID \u003e 10000 to avoid conflicts with the host’s user table."
+              },
+              "properties": {
+                "precision": "very-high",
+                "security-severity": "2.0",
+                "tags": [
+                  "misconfiguration",
+                  "security",
+                  "LOW"
+                ]
+              }
+            },
+            {
+              "id": "KSV030",
+              "name": "Misconfiguration",
+              "shortDescription": {
+                "text": "Runtime/Default Seccomp profile not set"
+              },
+              "fullDescription": {
+                "text": "According to pod security standard 'Seccomp', the RuntimeDefault seccomp profile must be required, or allow specific additional profiles."
+              },
+              "defaultConfiguration": {
+                "level": "note"
+              },
+              "helpUri": "https://avd.aquasec.com/misconfig/ksv030",
+              "help": {
+                "text": "Misconfiguration KSV030\nType: Kubernetes Security Check\nSeverity: LOW\nCheck: Runtime/Default Seccomp profile not set\nMessage: Either Pod or Container should set 'securityContext.seccompProfile.type' to 'RuntimeDefault'\nLink: [KSV030](https://avd.aquasec.com/misconfig/ksv030)\nAccording to pod security standard 'Seccomp', the RuntimeDefault seccomp profile must be required, or allow specific additional profiles.",
+                "markdown": "**Misconfiguration KSV030**\n| Type | Severity | Check | Message | Link |\n| --- | --- | --- | --- | --- |\n|Kubernetes Security Check|LOW|Runtime/Default Seccomp profile not set|Either Pod or Container should set 'securityContext.seccompProfile.type' to 'RuntimeDefault'|[KSV030](https://avd.aquasec.com/misconfig/ksv030)|\n\nAccording to pod security standard 'Seccomp', the RuntimeDefault seccomp profile must be required, or allow specific additional profiles."
+              },
+              "properties": {
+                "precision": "very-high",
+                "security-severity": "2.0",
+                "tags": [
+                  "misconfiguration",
+                  "security",
+                  "LOW"
+                ]
+              }
+            },
+            {
+              "id": "KSV104",
+              "name": "Misconfiguration",
+              "shortDescription": {
+                "text": "Seccomp policies disabled"
+              },
+              "fullDescription": {
+                "text": "A program inside the container can bypass Seccomp protection policies."
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "helpUri": "https://avd.aquasec.com/misconfig/ksv104",
+              "help": {
+                "text": "Misconfiguration KSV104\nType: Kubernetes Security Check\nSeverity: MEDIUM\nCheck: Seccomp policies disabled\nMessage: container \"inflate\" of deployment \"inflate\" in \"default\" namespace should specify a seccomp profile\nLink: [KSV104](https://avd.aquasec.com/misconfig/ksv104)\nA program inside the container can bypass Seccomp protection policies.",
+                "markdown": "**Misconfiguration KSV104**\n| Type | Severity | Check | Message | Link |\n| --- | --- | --- | --- | --- |\n|Kubernetes Security Check|MEDIUM|Seccomp policies disabled|container \"inflate\" of deployment \"inflate\" in \"default\" namespace should specify a seccomp profile|[KSV104](https://avd.aquasec.com/misconfig/ksv104)|\n\nA program inside the container can bypass Seccomp protection policies."
+              },
+              "properties": {
+                "precision": "very-high",
+                "security-severity": "5.5",
+                "tags": [
+                  "misconfiguration",
+                  "security",
+                  "MEDIUM"
+                ]
+              }
+            },
+            {
+              "id": "KSV106",
+              "name": "Misconfiguration",
+              "shortDescription": {
+                "text": "Container capabilities must only include NET_BIND_SERVICE"
+              },
+              "fullDescription": {
+                "text": "Containers must drop ALL capabilities, and are only permitted to add back the NET_BIND_SERVICE capability."
+              },
+              "defaultConfiguration": {
+                "level": "note"
+              },
+              "helpUri": "https://avd.aquasec.com/misconfig/ksv106",
+              "help": {
+                "text": "Misconfiguration KSV106\nType: Kubernetes Security Check\nSeverity: LOW\nCheck: Container capabilities must only include NET_BIND_SERVICE\nMessage: container should drop all\nLink: [KSV106](https://avd.aquasec.com/misconfig/ksv106)\nContainers must drop ALL capabilities, and are only permitted to add back the NET_BIND_SERVICE capability.",
+                "markdown": "**Misconfiguration KSV106**\n| Type | Severity | Check | Message | Link |\n| --- | --- | --- | --- | --- |\n|Kubernetes Security Check|LOW|Container capabilities must only include NET_BIND_SERVICE|container should drop all|[KSV106](https://avd.aquasec.com/misconfig/ksv106)|\n\nContainers must drop ALL capabilities, and are only permitted to add back the NET_BIND_SERVICE capability."
+              },
+              "properties": {
+                "precision": "very-high",
+                "security-severity": "2.0",
+                "tags": [
+                  "misconfiguration",
+                  "security",
+                  "LOW"
+                ]
+              }
+            },
+            {
+              "id": "KSV110",
+              "name": "Misconfiguration",
+              "shortDescription": {
+                "text": "Workloads in the default namespace"
+              },
+              "fullDescription": {
+                "text": "Checks whether a workload is running in the default namespace."
+              },
+              "defaultConfiguration": {
+                "level": "note"
+              },
+              "helpUri": "https://avd.aquasec.com/misconfig/ksv110",
+              "help": {
+                "text": "Misconfiguration KSV110\nType: Kubernetes Security Check\nSeverity: LOW\nCheck: Workloads in the default namespace\nMessage: deployment inflate in default namespace should set metadata.namespace to a non-default namespace\nLink: [KSV110](https://avd.aquasec.com/misconfig/ksv110)\nChecks whether a workload is running in the default namespace.",
+                "markdown": "**Misconfiguration KSV110**\n| Type | Severity | Check | Message | Link |\n| --- | --- | --- | --- | --- |\n|Kubernetes Security Check|LOW|Workloads in the default namespace|deployment inflate in default namespace should set metadata.namespace to a non-default namespace|[KSV110](https://avd.aquasec.com/misconfig/ksv110)|\n\nChecks whether a workload is running in the default namespace."
+              },
+              "properties": {
+                "precision": "very-high",
+                "security-severity": "2.0",
+                "tags": [
+                  "misconfiguration",
+                  "security",
+                  "LOW"
+                ]
+              }
+            },
+            {
+              "id": "KSV118",
+              "name": "Misconfiguration",
+              "shortDescription": {
+                "text": "Default security context configured"
+              },
+              "fullDescription": {
+                "text": "Security context controls the allocation of security parameters for the pod/container/volume, ensuring the appropriate level of protection. Relying on default security context may expose vulnerabilities to potential attacks that rely on privileged access."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "helpUri": "https://avd.aquasec.com/misconfig/ksv118",
+              "help": {
+                "text": "Misconfiguration KSV118\nType: Kubernetes Security Check\nSeverity: HIGH\nCheck: Default security context configured\nMessage: deployment inflate in default namespace is using the default security context, which allows root privileges\nLink: [KSV118](https://avd.aquasec.com/misconfig/ksv118)\nSecurity context controls the allocation of security parameters for the pod/container/volume, ensuring the appropriate level of protection. Relying on default security context may expose vulnerabilities to potential attacks that rely on privileged access.",
+                "markdown": "**Misconfiguration KSV118**\n| Type | Severity | Check | Message | Link |\n| --- | --- | --- | --- | --- |\n|Kubernetes Security Check|HIGH|Default security context configured|deployment inflate in default namespace is using the default security context, which allows root privileges|[KSV118](https://avd.aquasec.com/misconfig/ksv118)|\n\nSecurity context controls the allocation of security parameters for the pod/container/volume, ensuring the appropriate level of protection. Relying on default security context may expose vulnerabilities to potential attacks that rely on privileged access."
+              },
+              "properties": {
+                "precision": "very-high",
+                "security-severity": "8.0",
+                "tags": [
+                  "misconfiguration",
+                  "security",
+                  "HIGH"
+                ]
+              }
+            },
+            {
+              "id": "KSV0125",
+              "name": "Misconfiguration",
+              "shortDescription": {
+                "text": "Restrict container images to trusted registries"
+              },
+              "fullDescription": {
+                "text": "Ensure that all containers use images only from trusted registry domains."
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "helpUri": "https://avd.aquasec.com/misconfig/ksv0125",
+              "help": {
+                "text": "Misconfiguration KSV0125\nType: Kubernetes Security Check\nSeverity: MEDIUM\nCheck: Restrict container images to trusted registries\nMessage: Container inflate in deployment inflate (namespace: default) uses an image from an untrusted registry.\nLink: [KSV0125](https://avd.aquasec.com/misconfig/ksv0125)\nEnsure that all containers use images only from trusted registry domains.",
+                "markdown": "**Misconfiguration KSV0125**\n| Type | Severity | Check | Message | Link |\n| --- | --- | --- | --- | --- |\n|Kubernetes Security Check|MEDIUM|Restrict container images to trusted registries|Container inflate in deployment inflate (namespace: default) uses an image from an untrusted registry.|[KSV0125](https://avd.aquasec.com/misconfig/ksv0125)|\n\nEnsure that all containers use images only from trusted registry domains."
+              },
+              "properties": {
+                "precision": "very-high",
+                "security-severity": "5.5",
+                "tags": [
+                  "misconfiguration",
+                  "security",
+                  "MEDIUM"
+                ]
+              }
+            },
+            {
+              "id": "aws-vpc-add-description-to-security-group",
+              "name": "Misconfiguration",
+              "shortDescription": {
+                "text": "Missing description for security group."
+              },
+              "fullDescription": {
+                "text": "Security groups should include a description for auditing purposes.\n\nSimplifies auditing, debugging, and managing security groups.\n"
+              },
+              "defaultConfiguration": {
+                "level": "note"
+              },
+              "helpUri": "https://avd.aquasec.com/misconfig/aws-vpc-add-description-to-security-group",
+              "help": {
+                "text": "Misconfiguration aws-vpc-add-description-to-security-group\nType: Terraform Security Check\nSeverity: LOW\nCheck: Missing description for security group.\nMessage: Security group explicitly uses the default description.\nLink: [aws-vpc-add-description-to-security-group](https://avd.aquasec.com/misconfig/aws-vpc-add-description-to-security-group)\nSecurity groups should include a description for auditing purposes.\n\nSimplifies auditing, debugging, and managing security groups.\n",
+                "markdown": "**Misconfiguration aws-vpc-add-description-to-security-group**\n| Type | Severity | Check | Message | Link |\n| --- | --- | --- | --- | --- |\n|Terraform Security Check|LOW|Missing description for security group.|Security group explicitly uses the default description.|[aws-vpc-add-description-to-security-group](https://avd.aquasec.com/misconfig/aws-vpc-add-description-to-security-group)|\n\nSecurity groups should include a description for auditing purposes.\n\nSimplifies auditing, debugging, and managing security groups.\n"
+              },
+              "properties": {
+                "precision": "very-high",
+                "security-severity": "2.0",
+                "tags": [
+                  "misconfiguration",
+                  "security",
+                  "LOW"
+                ]
+              }
+            },
+            {
+              "id": "aws-vpc-no-public-egress-sgr",
+              "name": "Misconfiguration",
+              "shortDescription": {
+                "text": "A security group rule should not allow unrestricted egress to any IP address."
+              },
+              "fullDescription": {
+                "text": "Opening up ports to connect out to the public internet is generally to be avoided. You should restrict access to IP addresses or ranges that are explicitly required where possible.\n"
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "helpUri": "https://avd.aquasec.com/misconfig/aws-vpc-no-public-egress-sgr",
+              "help": {
+                "text": "Misconfiguration aws-vpc-no-public-egress-sgr\nType: Terraform Security Check\nSeverity: CRITICAL\nCheck: A security group rule should not allow unrestricted egress to any IP address.\nMessage: Security group rule allows unrestricted egress to any IP address.\nLink: [aws-vpc-no-public-egress-sgr](https://avd.aquasec.com/misconfig/aws-vpc-no-public-egress-sgr)\nOpening up ports to connect out to the public internet is generally to be avoided. You should restrict access to IP addresses or ranges that are explicitly required where possible.\n",
+                "markdown": "**Misconfiguration aws-vpc-no-public-egress-sgr**\n| Type | Severity | Check | Message | Link |\n| --- | --- | --- | --- | --- |\n|Terraform Security Check|CRITICAL|A security group rule should not allow unrestricted egress to any IP address.|Security group rule allows unrestricted egress to any IP address.|[aws-vpc-no-public-egress-sgr](https://avd.aquasec.com/misconfig/aws-vpc-no-public-egress-sgr)|\n\nOpening up ports to connect out to the public internet is generally to be avoided. You should restrict access to IP addresses or ranges that are explicitly required where possible.\n"
+              },
+              "properties": {
+                "precision": "very-high",
+                "security-severity": "9.5",
+                "tags": [
+                  "misconfiguration",
+                  "security",
+                  "CRITICAL"
+                ]
+              }
+            },
+            {
+              "id": "aws-vpc-add-description-to-security-group-rule",
+              "name": "Misconfiguration",
+              "shortDescription": {
+                "text": "Missing description for security group rule."
+              },
+              "fullDescription": {
+                "text": "Security group rules should include a description for auditing purposes.\n\nSimplifies auditing, debugging, and managing security groups.\n"
+              },
+              "defaultConfiguration": {
+                "level": "note"
+              },
+              "helpUri": "https://avd.aquasec.com/misconfig/aws-vpc-add-description-to-security-group-rule",
+              "help": {
+                "text": "Misconfiguration aws-vpc-add-description-to-security-group-rule\nType: Terraform Security Check\nSeverity: LOW\nCheck: Missing description for security group rule.\nMessage: Security group rule does not have a description.\nLink: [aws-vpc-add-description-to-security-group-rule](https://avd.aquasec.com/misconfig/aws-vpc-add-description-to-security-group-rule)\nSecurity group rules should include a description for auditing purposes.\n\nSimplifies auditing, debugging, and managing security groups.\n",
+                "markdown": "**Misconfiguration aws-vpc-add-description-to-security-group-rule**\n| Type | Severity | Check | Message | Link |\n| --- | --- | --- | --- | --- |\n|Terraform Security Check|LOW|Missing description for security group rule.|Security group rule does not have a description.|[aws-vpc-add-description-to-security-group-rule](https://avd.aquasec.com/misconfig/aws-vpc-add-description-to-security-group-rule)|\n\nSecurity group rules should include a description for auditing purposes.\n\nSimplifies auditing, debugging, and managing security groups.\n"
+              },
+              "properties": {
+                "precision": "very-high",
+                "security-severity": "2.0",
+                "tags": [
+                  "misconfiguration",
+                  "security",
+                  "LOW"
+                ]
+              }
+            },
+            {
+              "id": "AVD-AWS-0131",
+              "name": "Misconfiguration",
+              "shortDescription": {
+                "text": "Instance with unencrypted block device."
+              },
+              "fullDescription": {
+                "text": "Block devices should be encrypted to ensure sensitive data is held securely at rest.\n"
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "helpUri": "https://avd.aquasec.com/misconfig/avd-aws-0131",
+              "help": {
+                "text": "Misconfiguration AVD-AWS-0131\nType: Terraform Security Check\nSeverity: HIGH\nCheck: Instance with unencrypted block device.\nMessage: Root block device is not encrypted.\nLink: [AVD-AWS-0131](https://avd.aquasec.com/misconfig/avd-aws-0131)\nBlock devices should be encrypted to ensure sensitive data is held securely at rest.\n",
+                "markdown": "**Misconfiguration AVD-AWS-0131**\n| Type | Severity | Check | Message | Link |\n| --- | --- | --- | --- | --- |\n|Terraform Security Check|HIGH|Instance with unencrypted block device.|Root block device is not encrypted.|[AVD-AWS-0131](https://avd.aquasec.com/misconfig/avd-aws-0131)|\n\nBlock devices should be encrypted to ensure sensitive data is held securely at rest.\n"
+              },
+              "properties": {
+                "precision": "very-high",
+                "security-severity": "8.0",
+                "tags": [
+                  "misconfiguration",
+                  "security",
+                  "HIGH"
+                ]
+              }
+            },
+            {
+              "id": "AVD-AWS-0038",
+              "name": "Misconfiguration",
+              "shortDescription": {
+                "text": "EKS Clusters should have cluster control plane logging turned on"
+              },
+              "fullDescription": {
+                "text": "By default cluster control plane logging is not turned on. Logging is available for audit, api, authenticator, controllerManager and scheduler. All logging should be turned on for cluster control plane.\n"
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "helpUri": "https://avd.aquasec.com/misconfig/avd-aws-0038",
+              "help": {
+                "text": "Misconfiguration AVD-AWS-0038\nType: Terraform Security Check\nSeverity: MEDIUM\nCheck: EKS Clusters should have cluster control plane logging turned on\nMessage: Control plane scheduler logging is not enabled.\nLink: [AVD-AWS-0038](https://avd.aquasec.com/misconfig/avd-aws-0038)\nBy default cluster control plane logging is not turned on. Logging is available for audit, api, authenticator, controllerManager and scheduler. All logging should be turned on for cluster control plane.\n",
+                "markdown": "**Misconfiguration AVD-AWS-0038**\n| Type | Severity | Check | Message | Link |\n| --- | --- | --- | --- | --- |\n|Terraform Security Check|MEDIUM|EKS Clusters should have cluster control plane logging turned on|Control plane scheduler logging is not enabled.|[AVD-AWS-0038](https://avd.aquasec.com/misconfig/avd-aws-0038)|\n\nBy default cluster control plane logging is not turned on. Logging is available for audit, api, authenticator, controllerManager and scheduler. All logging should be turned on for cluster control plane.\n"
+              },
+              "properties": {
+                "precision": "very-high",
+                "security-severity": "5.5",
+                "tags": [
+                  "misconfiguration",
+                  "security",
+                  "MEDIUM"
+                ]
+              }
+            },
+            {
+              "id": "AVD-AWS-0040",
+              "name": "Misconfiguration",
+              "shortDescription": {
+                "text": "EKS Clusters should have the public access disabled"
+              },
+              "fullDescription": {
+                "text": "EKS clusters are available publicly by default, this should be explicitly disabled in the vpc_config of the EKS cluster resource.\n"
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "helpUri": "https://avd.aquasec.com/misconfig/avd-aws-0040",
+              "help": {
+                "text": "Misconfiguration AVD-AWS-0040\nType: Terraform Security Check\nSeverity: CRITICAL\nCheck: EKS Clusters should have the public access disabled\nMessage: Public cluster access is enabled.\nLink: [AVD-AWS-0040](https://avd.aquasec.com/misconfig/avd-aws-0040)\nEKS clusters are available publicly by default, this should be explicitly disabled in the vpc_config of the EKS cluster resource.\n",
+                "markdown": "**Misconfiguration AVD-AWS-0040**\n| Type | Severity | Check | Message | Link |\n| --- | --- | --- | --- | --- |\n|Terraform Security Check|CRITICAL|EKS Clusters should have the public access disabled|Public cluster access is enabled.|[AVD-AWS-0040](https://avd.aquasec.com/misconfig/avd-aws-0040)|\n\nEKS clusters are available publicly by default, this should be explicitly disabled in the vpc_config of the EKS cluster resource.\n"
+              },
+              "properties": {
+                "precision": "very-high",
+                "security-severity": "9.5",
+                "tags": [
+                  "misconfiguration",
+                  "security",
+                  "CRITICAL"
+                ]
+              }
+            },
+            {
+              "id": "AVD-AWS-0041",
+              "name": "Misconfiguration",
+              "shortDescription": {
+                "text": "EKS cluster should not have open CIDR range for public access"
+              },
+              "fullDescription": {
+                "text": "EKS Clusters have public access cidrs set to 0.0.0.0/0 by default which is wide open to the internet. This should be explicitly set to a more specific private CIDR range\n"
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "helpUri": "https://avd.aquasec.com/misconfig/avd-aws-0041",
+              "help": {
+                "text": "Misconfiguration AVD-AWS-0041\nType: Terraform Security Check\nSeverity: CRITICAL\nCheck: EKS cluster should not have open CIDR range for public access\nMessage: Cluster allows access from a public CIDR: 0.0.0.0/0\nLink: [AVD-AWS-0041](https://avd.aquasec.com/misconfig/avd-aws-0041)\nEKS Clusters have public access cidrs set to 0.0.0.0/0 by default which is wide open to the internet. This should be explicitly set to a more specific private CIDR range\n",
+                "markdown": "**Misconfiguration AVD-AWS-0041**\n| Type | Severity | Check | Message | Link |\n| --- | --- | --- | --- | --- |\n|Terraform Security Check|CRITICAL|EKS cluster should not have open CIDR range for public access|Cluster allows access from a public CIDR: 0.0.0.0/0|[AVD-AWS-0041](https://avd.aquasec.com/misconfig/avd-aws-0041)|\n\nEKS Clusters have public access cidrs set to 0.0.0.0/0 by default which is wide open to the internet. This should be explicitly set to a more specific private CIDR range\n"
+              },
+              "properties": {
+                "precision": "very-high",
+                "security-severity": "9.5",
+                "tags": [
+                  "misconfiguration",
+                  "security",
+                  "CRITICAL"
+                ]
+              }
+            },
+            {
+              "id": "AVD-AWS-0342",
+              "name": "Misconfiguration",
+              "shortDescription": {
+                "text": "IAM Pass Role Filtering"
+              },
+              "fullDescription": {
+                "text": "Ensures any IAM pass role attached to roles are flagged and warned."
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "helpUri": "https://avd.aquasec.com/misconfig/avd-aws-0342",
+              "help": {
+                "text": "Misconfiguration AVD-AWS-0342\nType: Terraform Security Check\nSeverity: MEDIUM\nCheck: IAM Pass Role Filtering\nMessage: IAM policy allows 'iam:PassRole' action\nLink: [AVD-AWS-0342](https://avd.aquasec.com/misconfig/avd-aws-0342)\nEnsures any IAM pass role attached to roles are flagged and warned.",
+                "markdown": "**Misconfiguration AVD-AWS-0342**\n| Type | Severity | Check | Message | Link |\n| --- | --- | --- | --- | --- |\n|Terraform Security Check|MEDIUM|IAM Pass Role Filtering|IAM policy allows 'iam:PassRole' action|[AVD-AWS-0342](https://avd.aquasec.com/misconfig/avd-aws-0342)|\n\nEnsures any IAM pass role attached to roles are flagged and warned."
+              },
+              "properties": {
+                "precision": "very-high",
+                "security-severity": "5.5",
+                "tags": [
+                  "misconfiguration",
+                  "security",
+                  "MEDIUM"
+                ]
+              }
+            },
+            {
+              "id": "aws-autoscaling-enable-at-rest-encryption",
+              "name": "Misconfiguration",
+              "shortDescription": {
+                "text": "VPC Flow Logs is a feature that enables you to capture information about the IP traffic going to and from network interfaces in your VPC. After you've created a flow log, you can view and retrieve its data in Amazon CloudWatch Logs. It is recommended that VPC Flow Logs be enabled for packet \"Rejects\" for VPCs."
+              },
+              "fullDescription": {
+                "text": "VPC Flow Logs provide visibility into network traffic that traverses the VPC and can be used to detect anomalous traffic or insight during security workflows.\n"
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "helpUri": "https://avd.aquasec.com/misconfig/aws-autoscaling-enable-at-rest-encryption",
+              "help": {
+                "text": "Misconfiguration aws-autoscaling-enable-at-rest-encryption\nType: Terraform Security Check\nSeverity: MEDIUM\nCheck: VPC Flow Logs is a feature that enables you to capture information about the IP traffic going to and from network interfaces in your VPC. After you've created a flow log, you can view and retrieve its data in Amazon CloudWatch Logs. It is recommended that VPC Flow Logs be enabled for packet \"Rejects\" for VPCs.\nMessage: VPC does not have VPC Flow Logs enabled.\nLink: [aws-autoscaling-enable-at-rest-encryption](https://avd.aquasec.com/misconfig/aws-autoscaling-enable-at-rest-encryption)\nVPC Flow Logs provide visibility into network traffic that traverses the VPC and can be used to detect anomalous traffic or insight during security workflows.\n",
+                "markdown": "**Misconfiguration aws-autoscaling-enable-at-rest-encryption**\n| Type | Severity | Check | Message | Link |\n| --- | --- | --- | --- | --- |\n|Terraform Security Check|MEDIUM|VPC Flow Logs is a feature that enables you to capture information about the IP traffic going to and from network interfaces in your VPC. After you've created a flow log, you can view and retrieve its data in Amazon CloudWatch Logs. It is recommended that VPC Flow Logs be enabled for packet \"Rejects\" for VPCs.|VPC does not have VPC Flow Logs enabled.|[aws-autoscaling-enable-at-rest-encryption](https://avd.aquasec.com/misconfig/aws-autoscaling-enable-at-rest-encryption)|\n\nVPC Flow Logs provide visibility into network traffic that traverses the VPC and can be used to detect anomalous traffic or insight during security workflows.\n"
+              },
+              "properties": {
+                "precision": "very-high",
+                "security-severity": "5.5",
+                "tags": [
+                  "misconfiguration",
+                  "security",
+                  "MEDIUM"
+                ]
+              }
+            }
+          ],
+          "version": "0.67.2"
+        }
+      },
+      "results": [
+        {
+          "ruleId": "KSV001",
+          "ruleIndex": 0,
+          "level": "warning",
+          "message": {
+            "text": "Artifact: examples/eks-auto-mode/deployment.yaml\nType: kubernetes\nVulnerability KSV001\nSeverity: MEDIUM\nMessage: Container 'inflate' of Deployment 'inflate' should set 'securityContext.allowPrivilegeEscalation' to false\nLink: [KSV001](https://avd.aquasec.com/misconfig/ksv001)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/eks-auto-mode/deployment.yaml",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 17,
+                  "startColumn": 1,
+                  "endLine": 21,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "examples/eks-auto-mode/deployment.yaml"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "KSV003",
+          "ruleIndex": 1,
+          "level": "note",
+          "message": {
+            "text": "Artifact: examples/eks-auto-mode/deployment.yaml\nType: kubernetes\nVulnerability KSV003\nSeverity: LOW\nMessage: Container 'inflate' of Deployment 'inflate' should add 'ALL' to 'securityContext.capabilities.drop'\nLink: [KSV003](https://avd.aquasec.com/misconfig/ksv003)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/eks-auto-mode/deployment.yaml",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 17,
+                  "startColumn": 1,
+                  "endLine": 21,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "examples/eks-auto-mode/deployment.yaml"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "KSV004",
+          "ruleIndex": 2,
+          "level": "note",
+          "message": {
+            "text": "Artifact: examples/eks-auto-mode/deployment.yaml\nType: kubernetes\nVulnerability KSV004\nSeverity: LOW\nMessage: Container 'inflate' of 'deployment' 'inflate' in 'default' namespace should set securityContext.capabilities.drop\nLink: [KSV004](https://avd.aquasec.com/misconfig/ksv004)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/eks-auto-mode/deployment.yaml",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 17,
+                  "startColumn": 1,
+                  "endLine": 21,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "examples/eks-auto-mode/deployment.yaml"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "KSV011",
+          "ruleIndex": 3,
+          "level": "note",
+          "message": {
+            "text": "Artifact: examples/eks-auto-mode/deployment.yaml\nType: kubernetes\nVulnerability KSV011\nSeverity: LOW\nMessage: Container 'inflate' of Deployment 'inflate' should set 'resources.limits.cpu'\nLink: [KSV011](https://avd.aquasec.com/misconfig/ksv011)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/eks-auto-mode/deployment.yaml",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 17,
+                  "startColumn": 1,
+                  "endLine": 21,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "examples/eks-auto-mode/deployment.yaml"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "KSV012",
+          "ruleIndex": 4,
+          "level": "warning",
+          "message": {
+            "text": "Artifact: examples/eks-auto-mode/deployment.yaml\nType: kubernetes\nVulnerability KSV012\nSeverity: MEDIUM\nMessage: Container 'inflate' of Deployment 'inflate' should set 'securityContext.runAsNonRoot' to true\nLink: [KSV012](https://avd.aquasec.com/misconfig/ksv012)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/eks-auto-mode/deployment.yaml",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 17,
+                  "startColumn": 1,
+                  "endLine": 21,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "examples/eks-auto-mode/deployment.yaml"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "KSV014",
+          "ruleIndex": 5,
+          "level": "error",
+          "message": {
+            "text": "Artifact: examples/eks-auto-mode/deployment.yaml\nType: kubernetes\nVulnerability KSV014\nSeverity: HIGH\nMessage: Container 'inflate' of Deployment 'inflate' should set 'securityContext.readOnlyRootFilesystem' to true\nLink: [KSV014](https://avd.aquasec.com/misconfig/ksv014)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/eks-auto-mode/deployment.yaml",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 17,
+                  "startColumn": 1,
+                  "endLine": 21,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "examples/eks-auto-mode/deployment.yaml"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "KSV016",
+          "ruleIndex": 6,
+          "level": "note",
+          "message": {
+            "text": "Artifact: examples/eks-auto-mode/deployment.yaml\nType: kubernetes\nVulnerability KSV016\nSeverity: LOW\nMessage: Container 'inflate' of Deployment 'inflate' should set 'resources.requests.memory'\nLink: [KSV016](https://avd.aquasec.com/misconfig/ksv016)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/eks-auto-mode/deployment.yaml",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 17,
+                  "startColumn": 1,
+                  "endLine": 21,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "examples/eks-auto-mode/deployment.yaml"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "KSV018",
+          "ruleIndex": 7,
+          "level": "note",
+          "message": {
+            "text": "Artifact: examples/eks-auto-mode/deployment.yaml\nType: kubernetes\nVulnerability KSV018\nSeverity: LOW\nMessage: Container 'inflate' of Deployment 'inflate' should set 'resources.limits.memory'\nLink: [KSV018](https://avd.aquasec.com/misconfig/ksv018)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/eks-auto-mode/deployment.yaml",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 17,
+                  "startColumn": 1,
+                  "endLine": 21,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "examples/eks-auto-mode/deployment.yaml"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "KSV020",
+          "ruleIndex": 8,
+          "level": "note",
+          "message": {
+            "text": "Artifact: examples/eks-auto-mode/deployment.yaml\nType: kubernetes\nVulnerability KSV020\nSeverity: LOW\nMessage: Container 'inflate' of Deployment 'inflate' should set 'securityContext.runAsUser' \u003e 10000\nLink: [KSV020](https://avd.aquasec.com/misconfig/ksv020)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/eks-auto-mode/deployment.yaml",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 17,
+                  "startColumn": 1,
+                  "endLine": 21,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "examples/eks-auto-mode/deployment.yaml"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "KSV021",
+          "ruleIndex": 9,
+          "level": "note",
+          "message": {
+            "text": "Artifact: examples/eks-auto-mode/deployment.yaml\nType: kubernetes\nVulnerability KSV021\nSeverity: LOW\nMessage: Container 'inflate' of Deployment 'inflate' should set 'securityContext.runAsGroup' \u003e 10000\nLink: [KSV021](https://avd.aquasec.com/misconfig/ksv021)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/eks-auto-mode/deployment.yaml",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 17,
+                  "startColumn": 1,
+                  "endLine": 21,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "examples/eks-auto-mode/deployment.yaml"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "KSV030",
+          "ruleIndex": 10,
+          "level": "note",
+          "message": {
+            "text": "Artifact: examples/eks-auto-mode/deployment.yaml\nType: kubernetes\nVulnerability KSV030\nSeverity: LOW\nMessage: Either Pod or Container should set 'securityContext.seccompProfile.type' to 'RuntimeDefault'\nLink: [KSV030](https://avd.aquasec.com/misconfig/ksv030)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/eks-auto-mode/deployment.yaml",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 17,
+                  "startColumn": 1,
+                  "endLine": 21,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "examples/eks-auto-mode/deployment.yaml"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "KSV104",
+          "ruleIndex": 11,
+          "level": "warning",
+          "message": {
+            "text": "Artifact: examples/eks-auto-mode/deployment.yaml\nType: kubernetes\nVulnerability KSV104\nSeverity: MEDIUM\nMessage: container \"inflate\" of deployment \"inflate\" in \"default\" namespace should specify a seccomp profile\nLink: [KSV104](https://avd.aquasec.com/misconfig/ksv104)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/eks-auto-mode/deployment.yaml",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 17,
+                  "startColumn": 1,
+                  "endLine": 21,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "examples/eks-auto-mode/deployment.yaml"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "KSV106",
+          "ruleIndex": 12,
+          "level": "note",
+          "message": {
+            "text": "Artifact: examples/eks-auto-mode/deployment.yaml\nType: kubernetes\nVulnerability KSV106\nSeverity: LOW\nMessage: container should drop all\nLink: [KSV106](https://avd.aquasec.com/misconfig/ksv106)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/eks-auto-mode/deployment.yaml",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 17,
+                  "startColumn": 1,
+                  "endLine": 21,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "examples/eks-auto-mode/deployment.yaml"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "KSV110",
+          "ruleIndex": 13,
+          "level": "note",
+          "message": {
+            "text": "Artifact: examples/eks-auto-mode/deployment.yaml\nType: kubernetes\nVulnerability KSV110\nSeverity: LOW\nMessage: deployment inflate in default namespace should set metadata.namespace to a non-default namespace\nLink: [KSV110](https://avd.aquasec.com/misconfig/ksv110)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/eks-auto-mode/deployment.yaml",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 4,
+                  "startColumn": 1,
+                  "endLine": 4,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "examples/eks-auto-mode/deployment.yaml"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "KSV118",
+          "ruleIndex": 14,
+          "level": "error",
+          "message": {
+            "text": "Artifact: examples/eks-auto-mode/deployment.yaml\nType: kubernetes\nVulnerability KSV118\nSeverity: HIGH\nMessage: container inflate in default namespace is using the default security context\nLink: [KSV118](https://avd.aquasec.com/misconfig/ksv118)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/eks-auto-mode/deployment.yaml",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 17,
+                  "startColumn": 1,
+                  "endLine": 21,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "examples/eks-auto-mode/deployment.yaml"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "KSV118",
+          "ruleIndex": 14,
+          "level": "error",
+          "message": {
+            "text": "Artifact: examples/eks-auto-mode/deployment.yaml\nType: kubernetes\nVulnerability KSV118\nSeverity: HIGH\nMessage: deployment inflate in default namespace is using the default security context, which allows root privileges\nLink: [KSV118](https://avd.aquasec.com/misconfig/ksv118)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/eks-auto-mode/deployment.yaml",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 15,
+                  "startColumn": 1,
+                  "endLine": 21,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "examples/eks-auto-mode/deployment.yaml"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "KSV0125",
+          "ruleIndex": 15,
+          "level": "warning",
+          "message": {
+            "text": "Artifact: examples/eks-auto-mode/deployment.yaml\nType: kubernetes\nVulnerability KSV0125\nSeverity: MEDIUM\nMessage: Container inflate in deployment inflate (namespace: default) uses an image from an untrusted registry.\nLink: [KSV0125](https://avd.aquasec.com/misconfig/ksv0125)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/eks-auto-mode/deployment.yaml",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 17,
+                  "startColumn": 1,
+                  "endLine": 21,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "examples/eks-auto-mode/deployment.yaml"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "aws-vpc-add-description-to-security-group",
+          "ruleIndex": 16,
+          "level": "note",
+          "message": {
+            "text": "Artifact: examples/eks-hybrid-nodes/remote.tf\nType: terraform\nVulnerability aws-vpc-add-description-to-security-group\nSeverity: LOW\nMessage: Security group explicitly uses the default description.\nLink: [aws-vpc-add-description-to-security-group](https://avd.aquasec.com/misconfig/aws-vpc-add-description-to-security-group)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/eks-hybrid-nodes/remote.tf",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 130,
+                  "startColumn": 1,
+                  "endLine": 141,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "examples/eks-hybrid-nodes/remote.tf"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "aws-vpc-no-public-egress-sgr",
+          "ruleIndex": 17,
+          "level": "error",
+          "message": {
+            "text": "Artifact: examples/eks-hybrid-nodes/remote.tf\nType: terraform\nVulnerability aws-vpc-no-public-egress-sgr\nSeverity: CRITICAL\nMessage: Security group rule allows unrestricted egress to any IP address.\nLink: [aws-vpc-no-public-egress-sgr](https://avd.aquasec.com/misconfig/aws-vpc-no-public-egress-sgr)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/eks-hybrid-nodes/remote.tf",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 190,
+                  "startColumn": 1,
+                  "endLine": 190,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "examples/eks-hybrid-nodes/remote.tf"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "aws-vpc-add-description-to-security-group-rule",
+          "ruleIndex": 18,
+          "level": "note",
+          "message": {
+            "text": "Artifact: examples/eks-hybrid-nodes/remote.tf\nType: terraform\nVulnerability aws-vpc-add-description-to-security-group-rule\nSeverity: LOW\nMessage: Security group rule does not have a description.\nLink: [aws-vpc-add-description-to-security-group-rule](https://avd.aquasec.com/misconfig/aws-vpc-add-description-to-security-group-rule)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/eks-hybrid-nodes/remote.tf",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 179,
+                  "startColumn": 1,
+                  "endLine": 201,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "examples/eks-hybrid-nodes/remote.tf"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "aws-vpc-add-description-to-security-group-rule",
+          "ruleIndex": 18,
+          "level": "note",
+          "message": {
+            "text": "Artifact: examples/eks-hybrid-nodes/remote.tf\nType: terraform\nVulnerability aws-vpc-add-description-to-security-group-rule\nSeverity: LOW\nMessage: Security group rule does not have a description.\nLink: [aws-vpc-add-description-to-security-group-rule](https://avd.aquasec.com/misconfig/aws-vpc-add-description-to-security-group-rule)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/eks-hybrid-nodes/remote.tf",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 143,
+                  "startColumn": 1,
+                  "endLine": 177,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "examples/eks-hybrid-nodes/remote.tf"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "aws-vpc-add-description-to-security-group-rule",
+          "ruleIndex": 18,
+          "level": "note",
+          "message": {
+            "text": "Artifact: examples/eks-hybrid-nodes/remote.tf\nType: terraform\nVulnerability aws-vpc-add-description-to-security-group-rule\nSeverity: LOW\nMessage: Security group rule does not have a description.\nLink: [aws-vpc-add-description-to-security-group-rule](https://avd.aquasec.com/misconfig/aws-vpc-add-description-to-security-group-rule)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/eks-hybrid-nodes/remote.tf",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 143,
+                  "startColumn": 1,
+                  "endLine": 177,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "examples/eks-hybrid-nodes/remote.tf"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "aws-vpc-add-description-to-security-group-rule",
+          "ruleIndex": 18,
+          "level": "note",
+          "message": {
+            "text": "Artifact: examples/eks-hybrid-nodes/remote.tf\nType: terraform\nVulnerability aws-vpc-add-description-to-security-group-rule\nSeverity: LOW\nMessage: Security group rule does not have a description.\nLink: [aws-vpc-add-description-to-security-group-rule](https://avd.aquasec.com/misconfig/aws-vpc-add-description-to-security-group-rule)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/eks-hybrid-nodes/remote.tf",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 143,
+                  "startColumn": 1,
+                  "endLine": 177,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "examples/eks-hybrid-nodes/remote.tf"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AVD-AWS-0131",
+          "ruleIndex": 19,
+          "level": "error",
+          "message": {
+            "text": "Artifact: examples/eks-hybrid-nodes/remote.tf\nType: terraform\nVulnerability AVD-AWS-0131\nSeverity: HIGH\nMessage: Root block device is not encrypted.\nLink: [AVD-AWS-0131](https://avd.aquasec.com/misconfig/avd-aws-0131)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/eks-hybrid-nodes/remote.tf",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 97,
+                  "startColumn": 1,
+                  "endLine": 118,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "examples/eks-hybrid-nodes/remote.tf"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AVD-AWS-0131",
+          "ruleIndex": 19,
+          "level": "error",
+          "message": {
+            "text": "Artifact: examples/eks-hybrid-nodes/remote.tf\nType: terraform\nVulnerability AVD-AWS-0131\nSeverity: HIGH\nMessage: Root block device is not encrypted.\nLink: [AVD-AWS-0131](https://avd.aquasec.com/misconfig/avd-aws-0131)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/eks-hybrid-nodes/remote.tf",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 97,
+                  "startColumn": 1,
+                  "endLine": 118,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "examples/eks-hybrid-nodes/remote.tf"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "KSV001",
+          "ruleIndex": 0,
+          "level": "warning",
+          "message": {
+            "text": "Artifact: examples/karpenter/inflate.yaml\nType: kubernetes\nVulnerability KSV001\nSeverity: MEDIUM\nMessage: Container 'inflate' of Deployment 'inflate' should set 'securityContext.allowPrivilegeEscalation' to false\nLink: [KSV001](https://avd.aquasec.com/misconfig/ksv001)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/karpenter/inflate.yaml",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 17,
+                  "startColumn": 1,
+                  "endLine": 21,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "examples/karpenter/inflate.yaml"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "KSV003",
+          "ruleIndex": 1,
+          "level": "note",
+          "message": {
+            "text": "Artifact: examples/karpenter/inflate.yaml\nType: kubernetes\nVulnerability KSV003\nSeverity: LOW\nMessage: Container 'inflate' of Deployment 'inflate' should add 'ALL' to 'securityContext.capabilities.drop'\nLink: [KSV003](https://avd.aquasec.com/misconfig/ksv003)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/karpenter/inflate.yaml",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 17,
+                  "startColumn": 1,
+                  "endLine": 21,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "examples/karpenter/inflate.yaml"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "KSV004",
+          "ruleIndex": 2,
+          "level": "note",
+          "message": {
+            "text": "Artifact: examples/karpenter/inflate.yaml\nType: kubernetes\nVulnerability KSV004\nSeverity: LOW\nMessage: Container 'inflate' of 'deployment' 'inflate' in 'default' namespace should set securityContext.capabilities.drop\nLink: [KSV004](https://avd.aquasec.com/misconfig/ksv004)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/karpenter/inflate.yaml",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 17,
+                  "startColumn": 1,
+                  "endLine": 21,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "examples/karpenter/inflate.yaml"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "KSV011",
+          "ruleIndex": 3,
+          "level": "note",
+          "message": {
+            "text": "Artifact: examples/karpenter/inflate.yaml\nType: kubernetes\nVulnerability KSV011\nSeverity: LOW\nMessage: Container 'inflate' of Deployment 'inflate' should set 'resources.limits.cpu'\nLink: [KSV011](https://avd.aquasec.com/misconfig/ksv011)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/karpenter/inflate.yaml",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 17,
+                  "startColumn": 1,
+                  "endLine": 21,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "examples/karpenter/inflate.yaml"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "KSV012",
+          "ruleIndex": 4,
+          "level": "warning",
+          "message": {
+            "text": "Artifact: examples/karpenter/inflate.yaml\nType: kubernetes\nVulnerability KSV012\nSeverity: MEDIUM\nMessage: Container 'inflate' of Deployment 'inflate' should set 'securityContext.runAsNonRoot' to true\nLink: [KSV012](https://avd.aquasec.com/misconfig/ksv012)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/karpenter/inflate.yaml",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 17,
+                  "startColumn": 1,
+                  "endLine": 21,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "examples/karpenter/inflate.yaml"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "KSV014",
+          "ruleIndex": 5,
+          "level": "error",
+          "message": {
+            "text": "Artifact: examples/karpenter/inflate.yaml\nType: kubernetes\nVulnerability KSV014\nSeverity: HIGH\nMessage: Container 'inflate' of Deployment 'inflate' should set 'securityContext.readOnlyRootFilesystem' to true\nLink: [KSV014](https://avd.aquasec.com/misconfig/ksv014)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/karpenter/inflate.yaml",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 17,
+                  "startColumn": 1,
+                  "endLine": 21,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "examples/karpenter/inflate.yaml"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "KSV016",
+          "ruleIndex": 6,
+          "level": "note",
+          "message": {
+            "text": "Artifact: examples/karpenter/inflate.yaml\nType: kubernetes\nVulnerability KSV016\nSeverity: LOW\nMessage: Container 'inflate' of Deployment 'inflate' should set 'resources.requests.memory'\nLink: [KSV016](https://avd.aquasec.com/misconfig/ksv016)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/karpenter/inflate.yaml",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 17,
+                  "startColumn": 1,
+                  "endLine": 21,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "examples/karpenter/inflate.yaml"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "KSV018",
+          "ruleIndex": 7,
+          "level": "note",
+          "message": {
+            "text": "Artifact: examples/karpenter/inflate.yaml\nType: kubernetes\nVulnerability KSV018\nSeverity: LOW\nMessage: Container 'inflate' of Deployment 'inflate' should set 'resources.limits.memory'\nLink: [KSV018](https://avd.aquasec.com/misconfig/ksv018)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/karpenter/inflate.yaml",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 17,
+                  "startColumn": 1,
+                  "endLine": 21,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "examples/karpenter/inflate.yaml"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "KSV020",
+          "ruleIndex": 8,
+          "level": "note",
+          "message": {
+            "text": "Artifact: examples/karpenter/inflate.yaml\nType: kubernetes\nVulnerability KSV020\nSeverity: LOW\nMessage: Container 'inflate' of Deployment 'inflate' should set 'securityContext.runAsUser' \u003e 10000\nLink: [KSV020](https://avd.aquasec.com/misconfig/ksv020)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/karpenter/inflate.yaml",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 17,
+                  "startColumn": 1,
+                  "endLine": 21,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "examples/karpenter/inflate.yaml"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "KSV021",
+          "ruleIndex": 9,
+          "level": "note",
+          "message": {
+            "text": "Artifact: examples/karpenter/inflate.yaml\nType: kubernetes\nVulnerability KSV021\nSeverity: LOW\nMessage: Container 'inflate' of Deployment 'inflate' should set 'securityContext.runAsGroup' \u003e 10000\nLink: [KSV021](https://avd.aquasec.com/misconfig/ksv021)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/karpenter/inflate.yaml",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 17,
+                  "startColumn": 1,
+                  "endLine": 21,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "examples/karpenter/inflate.yaml"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "KSV030",
+          "ruleIndex": 10,
+          "level": "note",
+          "message": {
+            "text": "Artifact: examples/karpenter/inflate.yaml\nType: kubernetes\nVulnerability KSV030\nSeverity: LOW\nMessage: Either Pod or Container should set 'securityContext.seccompProfile.type' to 'RuntimeDefault'\nLink: [KSV030](https://avd.aquasec.com/misconfig/ksv030)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/karpenter/inflate.yaml",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 17,
+                  "startColumn": 1,
+                  "endLine": 21,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "examples/karpenter/inflate.yaml"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "KSV104",
+          "ruleIndex": 11,
+          "level": "warning",
+          "message": {
+            "text": "Artifact: examples/karpenter/inflate.yaml\nType: kubernetes\nVulnerability KSV104\nSeverity: MEDIUM\nMessage: container \"inflate\" of deployment \"inflate\" in \"default\" namespace should specify a seccomp profile\nLink: [KSV104](https://avd.aquasec.com/misconfig/ksv104)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/karpenter/inflate.yaml",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 17,
+                  "startColumn": 1,
+                  "endLine": 21,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "examples/karpenter/inflate.yaml"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "KSV106",
+          "ruleIndex": 12,
+          "level": "note",
+          "message": {
+            "text": "Artifact: examples/karpenter/inflate.yaml\nType: kubernetes\nVulnerability KSV106\nSeverity: LOW\nMessage: container should drop all\nLink: [KSV106](https://avd.aquasec.com/misconfig/ksv106)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/karpenter/inflate.yaml",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 17,
+                  "startColumn": 1,
+                  "endLine": 21,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "examples/karpenter/inflate.yaml"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "KSV110",
+          "ruleIndex": 13,
+          "level": "note",
+          "message": {
+            "text": "Artifact: examples/karpenter/inflate.yaml\nType: kubernetes\nVulnerability KSV110\nSeverity: LOW\nMessage: deployment inflate in default namespace should set metadata.namespace to a non-default namespace\nLink: [KSV110](https://avd.aquasec.com/misconfig/ksv110)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/karpenter/inflate.yaml",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 4,
+                  "startColumn": 1,
+                  "endLine": 4,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "examples/karpenter/inflate.yaml"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "KSV118",
+          "ruleIndex": 14,
+          "level": "error",
+          "message": {
+            "text": "Artifact: examples/karpenter/inflate.yaml\nType: kubernetes\nVulnerability KSV118\nSeverity: HIGH\nMessage: container inflate in default namespace is using the default security context\nLink: [KSV118](https://avd.aquasec.com/misconfig/ksv118)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/karpenter/inflate.yaml",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 17,
+                  "startColumn": 1,
+                  "endLine": 21,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "examples/karpenter/inflate.yaml"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "KSV118",
+          "ruleIndex": 14,
+          "level": "error",
+          "message": {
+            "text": "Artifact: examples/karpenter/inflate.yaml\nType: kubernetes\nVulnerability KSV118\nSeverity: HIGH\nMessage: deployment inflate in default namespace is using the default security context, which allows root privileges\nLink: [KSV118](https://avd.aquasec.com/misconfig/ksv118)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/karpenter/inflate.yaml",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 15,
+                  "startColumn": 1,
+                  "endLine": 21,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "examples/karpenter/inflate.yaml"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "KSV0125",
+          "ruleIndex": 15,
+          "level": "warning",
+          "message": {
+            "text": "Artifact: examples/karpenter/inflate.yaml\nType: kubernetes\nVulnerability KSV0125\nSeverity: MEDIUM\nMessage: Container inflate in deployment inflate (namespace: default) uses an image from an untrusted registry.\nLink: [KSV0125](https://avd.aquasec.com/misconfig/ksv0125)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/karpenter/inflate.yaml",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 17,
+                  "startColumn": 1,
+                  "endLine": 21,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "examples/karpenter/inflate.yaml"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AVD-AWS-0038",
+          "ruleIndex": 20,
+          "level": "warning",
+          "message": {
+            "text": "Artifact: main.tf\nType: terraform\nVulnerability AVD-AWS-0038\nSeverity: MEDIUM\nMessage: Control plane controller manager logging is not enabled.\nLink: [AVD-AWS-0038](https://avd.aquasec.com/misconfig/avd-aws-0038)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "main.tf",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 36,
+                  "startColumn": 1,
+                  "endLine": 206,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "main.tf"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AVD-AWS-0038",
+          "ruleIndex": 20,
+          "level": "warning",
+          "message": {
+            "text": "Artifact: main.tf\nType: terraform\nVulnerability AVD-AWS-0038\nSeverity: MEDIUM\nMessage: Control plane controller manager logging is not enabled.\nLink: [AVD-AWS-0038](https://avd.aquasec.com/misconfig/avd-aws-0038)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "main.tf",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 36,
+                  "startColumn": 1,
+                  "endLine": 206,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "main.tf"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AVD-AWS-0038",
+          "ruleIndex": 20,
+          "level": "warning",
+          "message": {
+            "text": "Artifact: main.tf\nType: terraform\nVulnerability AVD-AWS-0038\nSeverity: MEDIUM\nMessage: Control plane controller manager logging is not enabled.\nLink: [AVD-AWS-0038](https://avd.aquasec.com/misconfig/avd-aws-0038)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "main.tf",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 36,
+                  "startColumn": 1,
+                  "endLine": 206,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "main.tf"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AVD-AWS-0038",
+          "ruleIndex": 20,
+          "level": "warning",
+          "message": {
+            "text": "Artifact: main.tf\nType: terraform\nVulnerability AVD-AWS-0038\nSeverity: MEDIUM\nMessage: Control plane controller manager logging is not enabled.\nLink: [AVD-AWS-0038](https://avd.aquasec.com/misconfig/avd-aws-0038)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "main.tf",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 36,
+                  "startColumn": 1,
+                  "endLine": 206,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "main.tf"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AVD-AWS-0038",
+          "ruleIndex": 20,
+          "level": "warning",
+          "message": {
+            "text": "Artifact: main.tf\nType: terraform\nVulnerability AVD-AWS-0038\nSeverity: MEDIUM\nMessage: Control plane controller manager logging is not enabled.\nLink: [AVD-AWS-0038](https://avd.aquasec.com/misconfig/avd-aws-0038)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "main.tf",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 36,
+                  "startColumn": 1,
+                  "endLine": 206,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "main.tf"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AVD-AWS-0038",
+          "ruleIndex": 20,
+          "level": "warning",
+          "message": {
+            "text": "Artifact: main.tf\nType: terraform\nVulnerability AVD-AWS-0038\nSeverity: MEDIUM\nMessage: Control plane controller manager logging is not enabled.\nLink: [AVD-AWS-0038](https://avd.aquasec.com/misconfig/avd-aws-0038)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "main.tf",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 36,
+                  "startColumn": 1,
+                  "endLine": 206,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "main.tf"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AVD-AWS-0038",
+          "ruleIndex": 20,
+          "level": "warning",
+          "message": {
+            "text": "Artifact: main.tf\nType: terraform\nVulnerability AVD-AWS-0038\nSeverity: MEDIUM\nMessage: Control plane scheduler logging is not enabled.\nLink: [AVD-AWS-0038](https://avd.aquasec.com/misconfig/avd-aws-0038)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "main.tf",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 36,
+                  "startColumn": 1,
+                  "endLine": 206,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "main.tf"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AVD-AWS-0038",
+          "ruleIndex": 20,
+          "level": "warning",
+          "message": {
+            "text": "Artifact: main.tf\nType: terraform\nVulnerability AVD-AWS-0038\nSeverity: MEDIUM\nMessage: Control plane scheduler logging is not enabled.\nLink: [AVD-AWS-0038](https://avd.aquasec.com/misconfig/avd-aws-0038)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "main.tf",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 36,
+                  "startColumn": 1,
+                  "endLine": 206,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "main.tf"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AVD-AWS-0038",
+          "ruleIndex": 20,
+          "level": "warning",
+          "message": {
+            "text": "Artifact: main.tf\nType: terraform\nVulnerability AVD-AWS-0038\nSeverity: MEDIUM\nMessage: Control plane scheduler logging is not enabled.\nLink: [AVD-AWS-0038](https://avd.aquasec.com/misconfig/avd-aws-0038)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "main.tf",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 36,
+                  "startColumn": 1,
+                  "endLine": 206,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "main.tf"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AVD-AWS-0038",
+          "ruleIndex": 20,
+          "level": "warning",
+          "message": {
+            "text": "Artifact: main.tf\nType: terraform\nVulnerability AVD-AWS-0038\nSeverity: MEDIUM\nMessage: Control plane scheduler logging is not enabled.\nLink: [AVD-AWS-0038](https://avd.aquasec.com/misconfig/avd-aws-0038)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "main.tf",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 36,
+                  "startColumn": 1,
+                  "endLine": 206,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "main.tf"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AVD-AWS-0038",
+          "ruleIndex": 20,
+          "level": "warning",
+          "message": {
+            "text": "Artifact: main.tf\nType: terraform\nVulnerability AVD-AWS-0038\nSeverity: MEDIUM\nMessage: Control plane scheduler logging is not enabled.\nLink: [AVD-AWS-0038](https://avd.aquasec.com/misconfig/avd-aws-0038)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "main.tf",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 36,
+                  "startColumn": 1,
+                  "endLine": 206,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "main.tf"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AVD-AWS-0038",
+          "ruleIndex": 20,
+          "level": "warning",
+          "message": {
+            "text": "Artifact: main.tf\nType: terraform\nVulnerability AVD-AWS-0038\nSeverity: MEDIUM\nMessage: Control plane scheduler logging is not enabled.\nLink: [AVD-AWS-0038](https://avd.aquasec.com/misconfig/avd-aws-0038)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "main.tf",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 36,
+                  "startColumn": 1,
+                  "endLine": 206,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "main.tf"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AVD-AWS-0038",
+          "ruleIndex": 20,
+          "level": "warning",
+          "message": {
+            "text": "Artifact: main.tf\nType: terraform\nVulnerability AVD-AWS-0038\nSeverity: MEDIUM\nMessage: Control plane controller manager logging is not enabled.\nLink: [AVD-AWS-0038](https://avd.aquasec.com/misconfig/avd-aws-0038)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "main.tf",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 36,
+                  "startColumn": 1,
+                  "endLine": 206,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "main.tf"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AVD-AWS-0038",
+          "ruleIndex": 20,
+          "level": "warning",
+          "message": {
+            "text": "Artifact: main.tf\nType: terraform\nVulnerability AVD-AWS-0038\nSeverity: MEDIUM\nMessage: Control plane scheduler logging is not enabled.\nLink: [AVD-AWS-0038](https://avd.aquasec.com/misconfig/avd-aws-0038)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "main.tf",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 36,
+                  "startColumn": 1,
+                  "endLine": 206,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "main.tf"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AVD-AWS-0040",
+          "ruleIndex": 21,
+          "level": "error",
+          "message": {
+            "text": "Artifact: main.tf\nType: terraform\nVulnerability AVD-AWS-0040\nSeverity: CRITICAL\nMessage: Public cluster access is enabled.\nLink: [AVD-AWS-0040](https://avd.aquasec.com/misconfig/avd-aws-0040)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "main.tf",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 74,
+                  "startColumn": 1,
+                  "endLine": 74,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "main.tf"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AVD-AWS-0040",
+          "ruleIndex": 21,
+          "level": "error",
+          "message": {
+            "text": "Artifact: main.tf\nType: terraform\nVulnerability AVD-AWS-0040\nSeverity: CRITICAL\nMessage: Public cluster access is enabled.\nLink: [AVD-AWS-0040](https://avd.aquasec.com/misconfig/avd-aws-0040)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "main.tf",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 74,
+                  "startColumn": 1,
+                  "endLine": 74,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "main.tf"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AVD-AWS-0040",
+          "ruleIndex": 21,
+          "level": "error",
+          "message": {
+            "text": "Artifact: main.tf\nType: terraform\nVulnerability AVD-AWS-0040\nSeverity: CRITICAL\nMessage: Public cluster access is enabled.\nLink: [AVD-AWS-0040](https://avd.aquasec.com/misconfig/avd-aws-0040)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "main.tf",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 74,
+                  "startColumn": 1,
+                  "endLine": 74,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "main.tf"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AVD-AWS-0040",
+          "ruleIndex": 21,
+          "level": "error",
+          "message": {
+            "text": "Artifact: main.tf\nType: terraform\nVulnerability AVD-AWS-0040\nSeverity: CRITICAL\nMessage: Public cluster access is enabled.\nLink: [AVD-AWS-0040](https://avd.aquasec.com/misconfig/avd-aws-0040)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "main.tf",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 74,
+                  "startColumn": 1,
+                  "endLine": 74,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "main.tf"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AVD-AWS-0040",
+          "ruleIndex": 21,
+          "level": "error",
+          "message": {
+            "text": "Artifact: main.tf\nType: terraform\nVulnerability AVD-AWS-0040\nSeverity: CRITICAL\nMessage: Public cluster access is enabled.\nLink: [AVD-AWS-0040](https://avd.aquasec.com/misconfig/avd-aws-0040)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "main.tf",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 74,
+                  "startColumn": 1,
+                  "endLine": 74,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "main.tf"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AVD-AWS-0040",
+          "ruleIndex": 21,
+          "level": "error",
+          "message": {
+            "text": "Artifact: main.tf\nType: terraform\nVulnerability AVD-AWS-0040\nSeverity: CRITICAL\nMessage: Public cluster access is enabled.\nLink: [AVD-AWS-0040](https://avd.aquasec.com/misconfig/avd-aws-0040)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "main.tf",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 74,
+                  "startColumn": 1,
+                  "endLine": 74,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "main.tf"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AVD-AWS-0040",
+          "ruleIndex": 21,
+          "level": "error",
+          "message": {
+            "text": "Artifact: main.tf\nType: terraform\nVulnerability AVD-AWS-0040\nSeverity: CRITICAL\nMessage: Public cluster access is enabled.\nLink: [AVD-AWS-0040](https://avd.aquasec.com/misconfig/avd-aws-0040)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "main.tf",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 74,
+                  "startColumn": 1,
+                  "endLine": 74,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "main.tf"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AVD-AWS-0041",
+          "ruleIndex": 22,
+          "level": "error",
+          "message": {
+            "text": "Artifact: main.tf\nType: terraform\nVulnerability AVD-AWS-0041\nSeverity: CRITICAL\nMessage: Cluster allows access from a public CIDR: 0.0.0.0/0\nLink: [AVD-AWS-0041](https://avd.aquasec.com/misconfig/avd-aws-0041)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "main.tf",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 75,
+                  "startColumn": 1,
+                  "endLine": 75,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "main.tf"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AVD-AWS-0041",
+          "ruleIndex": 22,
+          "level": "error",
+          "message": {
+            "text": "Artifact: main.tf\nType: terraform\nVulnerability AVD-AWS-0041\nSeverity: CRITICAL\nMessage: Cluster allows access from a public CIDR: 0.0.0.0/0\nLink: [AVD-AWS-0041](https://avd.aquasec.com/misconfig/avd-aws-0041)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "main.tf",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 75,
+                  "startColumn": 1,
+                  "endLine": 75,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "main.tf"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AVD-AWS-0041",
+          "ruleIndex": 22,
+          "level": "error",
+          "message": {
+            "text": "Artifact: main.tf\nType: terraform\nVulnerability AVD-AWS-0041\nSeverity: CRITICAL\nMessage: Cluster allows access from a public CIDR: 0.0.0.0/0\nLink: [AVD-AWS-0041](https://avd.aquasec.com/misconfig/avd-aws-0041)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "main.tf",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 75,
+                  "startColumn": 1,
+                  "endLine": 75,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "main.tf"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AVD-AWS-0041",
+          "ruleIndex": 22,
+          "level": "error",
+          "message": {
+            "text": "Artifact: main.tf\nType: terraform\nVulnerability AVD-AWS-0041\nSeverity: CRITICAL\nMessage: Cluster allows access from a public CIDR: 0.0.0.0/0\nLink: [AVD-AWS-0041](https://avd.aquasec.com/misconfig/avd-aws-0041)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "main.tf",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 75,
+                  "startColumn": 1,
+                  "endLine": 75,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "main.tf"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AVD-AWS-0041",
+          "ruleIndex": 22,
+          "level": "error",
+          "message": {
+            "text": "Artifact: main.tf\nType: terraform\nVulnerability AVD-AWS-0041\nSeverity: CRITICAL\nMessage: Cluster allows access from a public CIDR: 0.0.0.0/0\nLink: [AVD-AWS-0041](https://avd.aquasec.com/misconfig/avd-aws-0041)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "main.tf",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 75,
+                  "startColumn": 1,
+                  "endLine": 75,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "main.tf"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AVD-AWS-0041",
+          "ruleIndex": 22,
+          "level": "error",
+          "message": {
+            "text": "Artifact: main.tf\nType: terraform\nVulnerability AVD-AWS-0041\nSeverity: CRITICAL\nMessage: Cluster allows access from a public CIDR: 0.0.0.0/0\nLink: [AVD-AWS-0041](https://avd.aquasec.com/misconfig/avd-aws-0041)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "main.tf",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 75,
+                  "startColumn": 1,
+                  "endLine": 75,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "main.tf"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AVD-AWS-0041",
+          "ruleIndex": 22,
+          "level": "error",
+          "message": {
+            "text": "Artifact: main.tf\nType: terraform\nVulnerability AVD-AWS-0041\nSeverity: CRITICAL\nMessage: Cluster allows access from a public CIDR: 0.0.0.0/0\nLink: [AVD-AWS-0041](https://avd.aquasec.com/misconfig/avd-aws-0041)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "main.tf",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 75,
+                  "startColumn": 1,
+                  "endLine": 75,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "main.tf"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AVD-AWS-0342",
+          "ruleIndex": 23,
+          "level": "warning",
+          "message": {
+            "text": "Artifact: modules/karpenter/policy.tf\nType: terraform\nVulnerability AVD-AWS-0342\nSeverity: MEDIUM\nMessage: IAM policy allows 'iam:PassRole' action\nLink: [AVD-AWS-0342](https://avd.aquasec.com/misconfig/avd-aws-0342)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "modules/karpenter/policy.tf",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 405,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "modules/karpenter/policy.tf"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "aws-vpc-no-public-egress-sgr",
+          "ruleIndex": 17,
+          "level": "error",
+          "message": {
+            "text": "Artifact: node_groups.tf\nType: terraform\nVulnerability aws-vpc-no-public-egress-sgr\nSeverity: CRITICAL\nMessage: Security group rule allows unrestricted egress to any IP address.\nLink: [aws-vpc-no-public-egress-sgr](https://avd.aquasec.com/misconfig/aws-vpc-no-public-egress-sgr)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "node_groups.tf",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 216,
+                  "startColumn": 1,
+                  "endLine": 216,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "node_groups.tf"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "aws-vpc-no-public-egress-sgr",
+          "ruleIndex": 17,
+          "level": "error",
+          "message": {
+            "text": "Artifact: node_groups.tf\nType: terraform\nVulnerability aws-vpc-no-public-egress-sgr\nSeverity: CRITICAL\nMessage: Security group rule allows unrestricted egress to any IP address.\nLink: [aws-vpc-no-public-egress-sgr](https://avd.aquasec.com/misconfig/aws-vpc-no-public-egress-sgr)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "node_groups.tf",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 216,
+                  "startColumn": 1,
+                  "endLine": 216,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "node_groups.tf"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "aws-vpc-no-public-egress-sgr",
+          "ruleIndex": 17,
+          "level": "error",
+          "message": {
+            "text": "Artifact: node_groups.tf\nType: terraform\nVulnerability aws-vpc-no-public-egress-sgr\nSeverity: CRITICAL\nMessage: Security group rule allows unrestricted egress to any IP address.\nLink: [aws-vpc-no-public-egress-sgr](https://avd.aquasec.com/misconfig/aws-vpc-no-public-egress-sgr)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "node_groups.tf",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 216,
+                  "startColumn": 1,
+                  "endLine": 216,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "node_groups.tf"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "aws-vpc-no-public-egress-sgr",
+          "ruleIndex": 17,
+          "level": "error",
+          "message": {
+            "text": "Artifact: node_groups.tf\nType: terraform\nVulnerability aws-vpc-no-public-egress-sgr\nSeverity: CRITICAL\nMessage: Security group rule allows unrestricted egress to any IP address.\nLink: [aws-vpc-no-public-egress-sgr](https://avd.aquasec.com/misconfig/aws-vpc-no-public-egress-sgr)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "node_groups.tf",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 217,
+                  "startColumn": 1,
+                  "endLine": 217,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "node_groups.tf"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "aws-vpc-no-public-egress-sgr",
+          "ruleIndex": 17,
+          "level": "error",
+          "message": {
+            "text": "Artifact: node_groups.tf\nType: terraform\nVulnerability aws-vpc-no-public-egress-sgr\nSeverity: CRITICAL\nMessage: Security group rule allows unrestricted egress to any IP address.\nLink: [aws-vpc-no-public-egress-sgr](https://avd.aquasec.com/misconfig/aws-vpc-no-public-egress-sgr)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "node_groups.tf",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 216,
+                  "startColumn": 1,
+                  "endLine": 216,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "node_groups.tf"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "aws-vpc-no-public-egress-sgr",
+          "ruleIndex": 17,
+          "level": "error",
+          "message": {
+            "text": "Artifact: node_groups.tf\nType: terraform\nVulnerability aws-vpc-no-public-egress-sgr\nSeverity: CRITICAL\nMessage: Security group rule allows unrestricted egress to any IP address.\nLink: [aws-vpc-no-public-egress-sgr](https://avd.aquasec.com/misconfig/aws-vpc-no-public-egress-sgr)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "node_groups.tf",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 216,
+                  "startColumn": 1,
+                  "endLine": 216,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "node_groups.tf"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AVD-AWS-0038",
+          "ruleIndex": 20,
+          "level": "warning",
+          "message": {
+            "text": "Artifact: terraform-aws-modules/eks/aws/main.tf\nType: terraform\nVulnerability AVD-AWS-0038\nSeverity: MEDIUM\nMessage: Control plane controller manager logging is not enabled.\nLink: [AVD-AWS-0038](https://avd.aquasec.com/misconfig/avd-aws-0038)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "terraform-aws-modules/eks/aws/main.tf",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 36,
+                  "startColumn": 1,
+                  "endLine": 206,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "terraform-aws-modules/eks/aws/main.tf"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AVD-AWS-0038",
+          "ruleIndex": 20,
+          "level": "warning",
+          "message": {
+            "text": "Artifact: terraform-aws-modules/eks/aws/main.tf\nType: terraform\nVulnerability AVD-AWS-0038\nSeverity: MEDIUM\nMessage: Control plane controller manager logging is not enabled.\nLink: [AVD-AWS-0038](https://avd.aquasec.com/misconfig/avd-aws-0038)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "terraform-aws-modules/eks/aws/main.tf",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 36,
+                  "startColumn": 1,
+                  "endLine": 206,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "terraform-aws-modules/eks/aws/main.tf"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AVD-AWS-0038",
+          "ruleIndex": 20,
+          "level": "warning",
+          "message": {
+            "text": "Artifact: terraform-aws-modules/eks/aws/main.tf\nType: terraform\nVulnerability AVD-AWS-0038\nSeverity: MEDIUM\nMessage: Control plane scheduler logging is not enabled.\nLink: [AVD-AWS-0038](https://avd.aquasec.com/misconfig/avd-aws-0038)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "terraform-aws-modules/eks/aws/main.tf",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 36,
+                  "startColumn": 1,
+                  "endLine": 206,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "terraform-aws-modules/eks/aws/main.tf"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AVD-AWS-0038",
+          "ruleIndex": 20,
+          "level": "warning",
+          "message": {
+            "text": "Artifact: terraform-aws-modules/eks/aws/main.tf\nType: terraform\nVulnerability AVD-AWS-0038\nSeverity: MEDIUM\nMessage: Control plane scheduler logging is not enabled.\nLink: [AVD-AWS-0038](https://avd.aquasec.com/misconfig/avd-aws-0038)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "terraform-aws-modules/eks/aws/main.tf",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 36,
+                  "startColumn": 1,
+                  "endLine": 206,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "terraform-aws-modules/eks/aws/main.tf"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AVD-AWS-0038",
+          "ruleIndex": 20,
+          "level": "warning",
+          "message": {
+            "text": "Artifact: terraform-aws-modules/eks/aws/main.tf\nType: terraform\nVulnerability AVD-AWS-0038\nSeverity: MEDIUM\nMessage: Control plane controller manager logging is not enabled.\nLink: [AVD-AWS-0038](https://avd.aquasec.com/misconfig/avd-aws-0038)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "terraform-aws-modules/eks/aws/main.tf",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 36,
+                  "startColumn": 1,
+                  "endLine": 206,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "terraform-aws-modules/eks/aws/main.tf"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AVD-AWS-0038",
+          "ruleIndex": 20,
+          "level": "warning",
+          "message": {
+            "text": "Artifact: terraform-aws-modules/eks/aws/main.tf\nType: terraform\nVulnerability AVD-AWS-0038\nSeverity: MEDIUM\nMessage: Control plane controller manager logging is not enabled.\nLink: [AVD-AWS-0038](https://avd.aquasec.com/misconfig/avd-aws-0038)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "terraform-aws-modules/eks/aws/main.tf",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 36,
+                  "startColumn": 1,
+                  "endLine": 206,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "terraform-aws-modules/eks/aws/main.tf"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AVD-AWS-0038",
+          "ruleIndex": 20,
+          "level": "warning",
+          "message": {
+            "text": "Artifact: terraform-aws-modules/eks/aws/main.tf\nType: terraform\nVulnerability AVD-AWS-0038\nSeverity: MEDIUM\nMessage: Control plane scheduler logging is not enabled.\nLink: [AVD-AWS-0038](https://avd.aquasec.com/misconfig/avd-aws-0038)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "terraform-aws-modules/eks/aws/main.tf",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 36,
+                  "startColumn": 1,
+                  "endLine": 206,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "terraform-aws-modules/eks/aws/main.tf"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AVD-AWS-0038",
+          "ruleIndex": 20,
+          "level": "warning",
+          "message": {
+            "text": "Artifact: terraform-aws-modules/eks/aws/main.tf\nType: terraform\nVulnerability AVD-AWS-0038\nSeverity: MEDIUM\nMessage: Control plane scheduler logging is not enabled.\nLink: [AVD-AWS-0038](https://avd.aquasec.com/misconfig/avd-aws-0038)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "terraform-aws-modules/eks/aws/main.tf",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 36,
+                  "startColumn": 1,
+                  "endLine": 206,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "terraform-aws-modules/eks/aws/main.tf"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "aws-vpc-no-public-egress-sgr",
+          "ruleIndex": 17,
+          "level": "error",
+          "message": {
+            "text": "Artifact: terraform-aws-modules/eks/aws/node_groups.tf\nType: terraform\nVulnerability aws-vpc-no-public-egress-sgr\nSeverity: CRITICAL\nMessage: Security group rule allows unrestricted egress to any IP address.\nLink: [aws-vpc-no-public-egress-sgr](https://avd.aquasec.com/misconfig/aws-vpc-no-public-egress-sgr)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "terraform-aws-modules/eks/aws/node_groups.tf",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 216,
+                  "startColumn": 1,
+                  "endLine": 216,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "terraform-aws-modules/eks/aws/node_groups.tf"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "aws-vpc-no-public-egress-sgr",
+          "ruleIndex": 17,
+          "level": "error",
+          "message": {
+            "text": "Artifact: terraform-aws-modules/eks/aws/node_groups.tf\nType: terraform\nVulnerability aws-vpc-no-public-egress-sgr\nSeverity: CRITICAL\nMessage: Security group rule allows unrestricted egress to any IP address.\nLink: [aws-vpc-no-public-egress-sgr](https://avd.aquasec.com/misconfig/aws-vpc-no-public-egress-sgr)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "terraform-aws-modules/eks/aws/node_groups.tf",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 216,
+                  "startColumn": 1,
+                  "endLine": 216,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "terraform-aws-modules/eks/aws/node_groups.tf"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "aws-vpc-no-public-egress-sgr",
+          "ruleIndex": 17,
+          "level": "error",
+          "message": {
+            "text": "Artifact: terraform-aws-modules/eks/aws/node_groups.tf\nType: terraform\nVulnerability aws-vpc-no-public-egress-sgr\nSeverity: CRITICAL\nMessage: Security group rule allows unrestricted egress to any IP address.\nLink: [aws-vpc-no-public-egress-sgr](https://avd.aquasec.com/misconfig/aws-vpc-no-public-egress-sgr)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "terraform-aws-modules/eks/aws/node_groups.tf",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 216,
+                  "startColumn": 1,
+                  "endLine": 216,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "terraform-aws-modules/eks/aws/node_groups.tf"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "aws-vpc-no-public-egress-sgr",
+          "ruleIndex": 17,
+          "level": "error",
+          "message": {
+            "text": "Artifact: terraform-aws-modules/eks/aws/node_groups.tf\nType: terraform\nVulnerability aws-vpc-no-public-egress-sgr\nSeverity: CRITICAL\nMessage: Security group rule allows unrestricted egress to any IP address.\nLink: [aws-vpc-no-public-egress-sgr](https://avd.aquasec.com/misconfig/aws-vpc-no-public-egress-sgr)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "terraform-aws-modules/eks/aws/node_groups.tf",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 216,
+                  "startColumn": 1,
+                  "endLine": 216,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "terraform-aws-modules/eks/aws/node_groups.tf"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "aws-autoscaling-enable-at-rest-encryption",
+          "ruleIndex": 24,
+          "level": "warning",
+          "message": {
+            "text": "Artifact: terraform-aws-modules/vpc/aws/main.tf\nType: terraform\nVulnerability aws-autoscaling-enable-at-rest-encryption\nSeverity: MEDIUM\nMessage: VPC does not have VPC Flow Logs enabled.\nLink: [aws-autoscaling-enable-at-rest-encryption](https://avd.aquasec.com/misconfig/aws-autoscaling-enable-at-rest-encryption)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "terraform-aws-modules/vpc/aws/main.tf",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 28,
+                  "startColumn": 1,
+                  "endLine": 53,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "terraform-aws-modules/vpc/aws/main.tf"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "aws-autoscaling-enable-at-rest-encryption",
+          "ruleIndex": 24,
+          "level": "warning",
+          "message": {
+            "text": "Artifact: terraform-aws-modules/vpc/aws/main.tf\nType: terraform\nVulnerability aws-autoscaling-enable-at-rest-encryption\nSeverity: MEDIUM\nMessage: VPC does not have VPC Flow Logs enabled.\nLink: [aws-autoscaling-enable-at-rest-encryption](https://avd.aquasec.com/misconfig/aws-autoscaling-enable-at-rest-encryption)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "terraform-aws-modules/vpc/aws/main.tf",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 28,
+                  "startColumn": 1,
+                  "endLine": 53,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "terraform-aws-modules/vpc/aws/main.tf"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "aws-autoscaling-enable-at-rest-encryption",
+          "ruleIndex": 24,
+          "level": "warning",
+          "message": {
+            "text": "Artifact: terraform-aws-modules/vpc/aws/main.tf\nType: terraform\nVulnerability aws-autoscaling-enable-at-rest-encryption\nSeverity: MEDIUM\nMessage: VPC does not have VPC Flow Logs enabled.\nLink: [aws-autoscaling-enable-at-rest-encryption](https://avd.aquasec.com/misconfig/aws-autoscaling-enable-at-rest-encryption)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "terraform-aws-modules/vpc/aws/main.tf",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 28,
+                  "startColumn": 1,
+                  "endLine": 53,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "terraform-aws-modules/vpc/aws/main.tf"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "aws-autoscaling-enable-at-rest-encryption",
+          "ruleIndex": 24,
+          "level": "warning",
+          "message": {
+            "text": "Artifact: terraform-aws-modules/vpc/aws/main.tf\nType: terraform\nVulnerability aws-autoscaling-enable-at-rest-encryption\nSeverity: MEDIUM\nMessage: VPC does not have VPC Flow Logs enabled.\nLink: [aws-autoscaling-enable-at-rest-encryption](https://avd.aquasec.com/misconfig/aws-autoscaling-enable-at-rest-encryption)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "terraform-aws-modules/vpc/aws/main.tf",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 28,
+                  "startColumn": 1,
+                  "endLine": 53,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "terraform-aws-modules/vpc/aws/main.tf"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "aws-autoscaling-enable-at-rest-encryption",
+          "ruleIndex": 24,
+          "level": "warning",
+          "message": {
+            "text": "Artifact: terraform-aws-modules/vpc/aws/main.tf\nType: terraform\nVulnerability aws-autoscaling-enable-at-rest-encryption\nSeverity: MEDIUM\nMessage: VPC does not have VPC Flow Logs enabled.\nLink: [aws-autoscaling-enable-at-rest-encryption](https://avd.aquasec.com/misconfig/aws-autoscaling-enable-at-rest-encryption)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "terraform-aws-modules/vpc/aws/main.tf",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 28,
+                  "startColumn": 1,
+                  "endLine": 53,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "terraform-aws-modules/vpc/aws/main.tf"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "aws-autoscaling-enable-at-rest-encryption",
+          "ruleIndex": 24,
+          "level": "warning",
+          "message": {
+            "text": "Artifact: terraform-aws-modules/vpc/aws/main.tf\nType: terraform\nVulnerability aws-autoscaling-enable-at-rest-encryption\nSeverity: MEDIUM\nMessage: VPC does not have VPC Flow Logs enabled.\nLink: [aws-autoscaling-enable-at-rest-encryption](https://avd.aquasec.com/misconfig/aws-autoscaling-enable-at-rest-encryption)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "terraform-aws-modules/vpc/aws/main.tf",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 28,
+                  "startColumn": 1,
+                  "endLine": 53,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "terraform-aws-modules/vpc/aws/main.tf"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "aws-autoscaling-enable-at-rest-encryption",
+          "ruleIndex": 24,
+          "level": "warning",
+          "message": {
+            "text": "Artifact: terraform-aws-modules/vpc/aws/main.tf\nType: terraform\nVulnerability aws-autoscaling-enable-at-rest-encryption\nSeverity: MEDIUM\nMessage: VPC does not have VPC Flow Logs enabled.\nLink: [aws-autoscaling-enable-at-rest-encryption](https://avd.aquasec.com/misconfig/aws-autoscaling-enable-at-rest-encryption)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "terraform-aws-modules/vpc/aws/main.tf",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 28,
+                  "startColumn": 1,
+                  "endLine": 53,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "terraform-aws-modules/vpc/aws/main.tf"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "aws-autoscaling-enable-at-rest-encryption",
+          "ruleIndex": 24,
+          "level": "warning",
+          "message": {
+            "text": "Artifact: terraform-aws-modules/vpc/aws/main.tf\nType: terraform\nVulnerability aws-autoscaling-enable-at-rest-encryption\nSeverity: MEDIUM\nMessage: VPC does not have VPC Flow Logs enabled.\nLink: [aws-autoscaling-enable-at-rest-encryption](https://avd.aquasec.com/misconfig/aws-autoscaling-enable-at-rest-encryption)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "terraform-aws-modules/vpc/aws/main.tf",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 28,
+                  "startColumn": 1,
+                  "endLine": 53,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "terraform-aws-modules/vpc/aws/main.tf"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "aws-autoscaling-enable-at-rest-encryption",
+          "ruleIndex": 24,
+          "level": "warning",
+          "message": {
+            "text": "Artifact: terraform-aws-modules/vpc/aws/main.tf\nType: terraform\nVulnerability aws-autoscaling-enable-at-rest-encryption\nSeverity: MEDIUM\nMessage: VPC does not have VPC Flow Logs enabled.\nLink: [aws-autoscaling-enable-at-rest-encryption](https://avd.aquasec.com/misconfig/aws-autoscaling-enable-at-rest-encryption)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "terraform-aws-modules/vpc/aws/main.tf",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 28,
+                  "startColumn": 1,
+                  "endLine": 53,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "terraform-aws-modules/vpc/aws/main.tf"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "aws-vpc-no-public-egress-sgr",
+          "ruleIndex": 17,
+          "level": "error",
+          "message": {
+            "text": "Artifact: tests/eks-managed-node-group/main.tf\nType: terraform\nVulnerability aws-vpc-no-public-egress-sgr\nSeverity: CRITICAL\nMessage: Security group rule allows unrestricted egress to any IP address.\nLink: [aws-vpc-no-public-egress-sgr](https://avd.aquasec.com/misconfig/aws-vpc-no-public-egress-sgr)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/eks-managed-node-group/main.tf",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 565,
+                  "startColumn": 1,
+                  "endLine": 565,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "tests/eks-managed-node-group/main.tf"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "aws-vpc-no-public-egress-sgr",
+          "ruleIndex": 17,
+          "level": "error",
+          "message": {
+            "text": "Artifact: tests/eks-managed-node-group/main.tf\nType: terraform\nVulnerability aws-vpc-no-public-egress-sgr\nSeverity: CRITICAL\nMessage: Security group rule allows unrestricted egress to any IP address.\nLink: [aws-vpc-no-public-egress-sgr](https://avd.aquasec.com/misconfig/aws-vpc-no-public-egress-sgr)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/eks-managed-node-group/main.tf",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 566,
+                  "startColumn": 1,
+                  "endLine": 566,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "tests/eks-managed-node-group/main.tf"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "aws-vpc-add-description-to-security-group-rule",
+          "ruleIndex": 18,
+          "level": "note",
+          "message": {
+            "text": "Artifact: tests/eks-managed-node-group/main.tf\nType: terraform\nVulnerability aws-vpc-add-description-to-security-group-rule\nSeverity: LOW\nMessage: Security group rule does not have a description.\nLink: [aws-vpc-add-description-to-security-group-rule](https://avd.aquasec.com/misconfig/aws-vpc-add-description-to-security-group-rule)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/eks-managed-node-group/main.tf",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 561,
+                  "startColumn": 1,
+                  "endLine": 567,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "tests/eks-managed-node-group/main.tf"
+              }
+            }
+          ]
+        }
+      ],
+      "columnKind": "utf16CodeUnits",
+      "originalUriBaseIds": {
+        "ROOTPATH": {
+          "uri": "file://C:\\Users\\Guillermo\\Documents\\TFG\\GraphSec-IaC\\terraform-aws-eks/"
+        }
+      }
+    }
+  ]
+}
