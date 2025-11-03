@@ -54,6 +54,10 @@ trivy_results_*.sarif
 ANALISIS_FINAL.md
 RESULTADOS_*.md
 
+# Ignorar directorios de prueba de Terraform
+/terraform-aws-vpc/
+/terraform-aws-eks/
+
 # Archivos del sistema
 .DS_Store
 Thumbs.db
