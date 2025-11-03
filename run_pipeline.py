@@ -83,24 +83,21 @@ def get_cached_or_generate_graph(directory: str, project_name: str) -> Dict[str,
     nodes = []
     name_to_id_map = {}
     project_root_abs = os.path.abspath(project_root)
+    id_counter = 0
     
     for resource in parsed_resources:
         simple_name = resource.get('simple_name')
-        abs_path = resource.get('file')
         
-        try:
-            rel_path = os.path.relpath(abs_path, project_root_abs).replace("\\", "/")
-            unique_id = f"{simple_name}_{rel_path}"
-        except ValueError:
-            file_name = os.path.basename(abs_path)
-            unique_id = f"{simple_name}_{file_name}"
+        # ID ÚNICO GARANTIZADO
+        unique_id = f"{simple_name}_{id_counter}"
+        id_counter += 1
         
         node = {
-            "id": unique_id,
-            "simple_name": simple_name,
+            "id": unique_id,  # ID único para vis.js
+            "simple_name": simple_name,  # Nombre real
             "label": simple_name,
             "type": resource.get('type'),
-            "file": abs_path,
+            "file": resource.get('file'),  # Ruta absoluta
             "start_line": resource.get('start_line'),
             "end_line": resource.get('end_line'),
         }
@@ -111,18 +108,15 @@ def get_cached_or_generate_graph(directory: str, project_name: str) -> Dict[str,
         name_to_id_map[simple_name].append(unique_id)
     
     # Añadir el unique_id a cada recurso para que build_edges lo use
+    id_counter = 0
     for resource in parsed_resources:
         simple_name = resource.get('simple_name')
-        abs_path = resource.get('file')
-        try:
-            rel_path = os.path.relpath(abs_path, project_root_abs).replace("\\", "/")
-            unique_id = f"{simple_name}_{rel_path}"
-        except ValueError:
-            file_name = os.path.basename(abs_path)
-            unique_id = f"{simple_name}_{file_name}"
+        unique_id = f"{simple_name}_{id_counter}"
+        id_counter += 1
         resource['id'] = unique_id
     
-    edges = build_edges(parsed_resources, name_to_id_map, project_root_abs)
+    # Construir aristas (edges)
+    edges = build_edges(parsed_resources, name_to_id_map, project_root_abs, nodes)
     
     graph_data = {"nodes": nodes, "edges": edges}
     

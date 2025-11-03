@@ -7,6 +7,7 @@ Este módulo proporciona:
 """
 
 from typing import Dict, Any, List
+from collections import defaultdict
 import re
 import logging
 
@@ -42,18 +43,30 @@ def enrich_graph_nodes_with_parsed(graph_data: Dict[str, Any], parsed_resources:
     return graph_data
 
 
-def build_edges(parsed_resources: List[Dict[str, Any]], name_to_id_map: Dict[str, list], project_root: str) -> List[Dict[str, Any]]:
+def build_edges(parsed_resources: List[Dict[str, Any]], name_to_id_map: Dict[str, list], project_root: str, nodes: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
     """Construye las aristas (edges) del grafo analizando dependencias."""
     
     edges = []
     pattern_direct = re.compile(r'([a-zA-Z0-9_]+\.[a-zA-Z0-9_]+)(?:\.[a-zA-Z0-9_]+)*')
     
-    for resource in parsed_resources:
-        resource_id = resource.get('id')  # Este es el ID ÚNICO
+    # Crear un mapa de simple_name -> lista de nodos
+    nodes_by_simple_name = defaultdict(list)
+    for n in nodes:
+        nodes_by_simple_name[n['simple_name']].append(n)
+    
+    for resource_node in nodes:
+        resource_id = resource_node.get('id')  # ID ÚNICO (ej. 'aws_iam_role.this_0')
+        resource_simple_name = resource_node.get('simple_name')
         if not resource_id:
             continue
         
-        raw_block_text = resource.get('raw_block_text', '')
+        # Encontrar el 'parsed_resource' original
+        # Esta es una búsqueda ineficiente, pero necesaria por el refactor
+        parsed_resource = next((p for p in parsed_resources if p['file'] == resource_node['file'] and p['start_line'] == resource_node['start_line']), None)
+        if not parsed_resource:
+            continue
+        
+        raw_block_text = parsed_resource.get('raw_block_text', '')
         dependencies_found = set(pattern_direct.findall(raw_block_text))
         
         for dep_name in dependencies_found:
@@ -61,8 +74,10 @@ def build_edges(parsed_resources: List[Dict[str, Any]], name_to_id_map: Dict[str
                dep_name.startswith("each.") or dep_name.startswith("count."):
                 continue
             
+            # Verificar si la dependencia es un recurso real
             dep_unique_ids = name_to_id_map.get(dep_name)
             if dep_unique_ids:
+                # Éxito: Encontrada una dependencia
                 for dep_id in dep_unique_ids:
                     edges.append({
                         "from": resource_id,
