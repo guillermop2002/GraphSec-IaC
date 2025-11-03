@@ -40,12 +40,17 @@ jobs:
       - name: Instalar dependencias
         run: pip install -r requirements.txt
       
-      # 6. Inicializar Terraform (analizando 'terraform-aws-eks' para prueba de estrés)
+      # 6. Clonar el repositorio de EKS (para prueba)
+      - name: Clonar el repositorio de EKS (para prueba)
+        run: |
+          git clone https://github.com/terraform-aws-modules/terraform-aws-eks.git --depth 1
+      
+      # 7. Inicializar Terraform (analizando 'terraform-aws-eks' para prueba de estrés)
       - name: Terraform Init
         run: terraform init -backend=false
         working-directory: ./terraform-aws-eks
       
-      # 7. Ejecutar el Pipeline (analizando 'terraform-aws-eks')
+      # 8. Ejecutar el Pipeline (analizando 'terraform-aws-eks')
       - name: Ejecutar Pipeline de GraphSec-IaC
         run: |
           python run_pipeline.py \
@@ -53,25 +58,25 @@ jobs:
             --project eks_pr_${{ github.event.pull_request.number }} \
             --output graph_data.json
       
-      # 8. Renombrar artefacto JSON
+      # 9. Renombrar artefacto JSON
       - name: Renombrar artefacto JSON
         run: mv graph_data.json pr-${{ github.event.pull_request.number }}.json
       
-      # 9. Copiar index.html a la raíz para GitHub Pages
+      # 10. Copiar index.html a la raíz para GitHub Pages
       - name: Copiar index.html a la raíz
         run: cp static/index.html index.html
       
-      # 10. Preparar directorio de despliegue
+      # 11. Preparar directorio de despliegue
       - name: Preparar directorio de despliegue
         run: mkdir deploy_dir
       
-      # 11. Mover artefactos al directorio de despliegue
+      # 12. Mover artefactos al directorio de despliegue
       - name: Mover artefactos al directorio de despliegue
         run: |
           mv pr-${{ github.event.pull_request.number }}.json ./deploy_dir/
           mv index.html ./deploy_dir/
       
-      # 12. Desplegar informe en GitHub Pages
+      # 13. Desplegar informe en GitHub Pages
       - name: Desplegar informe en GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
