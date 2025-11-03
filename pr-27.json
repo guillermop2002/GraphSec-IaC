@@ -1,0 +1,1988 @@
+{
+    "nodes": [
+        {
+            "id": "aws_eks_cluster.this",
+            "simple_name": "aws_eks_cluster.this",
+            "label": "aws_eks_cluster.this",
+            "type": "aws_eks_cluster",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/main.tf",
+            "start_line": 36,
+            "end_line": 206,
+            "security_issues": [
+                {
+                    "cfi": "ae84471399a774a807cdca760dd145f03ceea97be0a806d971f656749eff8604",
+                    "rule_id": "AVD-AWS-0038",
+                    "normalized_cis": "CIS-AWS-2.3.2",
+                    "resource_id": "aws_eks_cluster.this",
+                    "message": "Artifact: main.tf\nType: terraform\nVulnerability AVD-AWS-0038\nSeverity: MEDIUM\nMessage: Control plane controller manager logging is not enabled.\nLink: [AVD-AWS-0038](https://avd.aquasec.com/misconfig/avd-aws-0038)",
+                    "level": "warning",
+                    "file_path": "main.tf",
+                    "start_line": 36,
+                    "tool_name": "Trivy",
+                    "sources": [
+                        "Trivy"
+                    ],
+                    "correlation_layer": 1
+                },
+                {
+                    "cfi": "8ccbd07088f079a796818b21840c30d4409c788f0e4aff22079c4ad002b67c89",
+                    "rule_id": "AVD-AWS-0040",
+                    "normalized_cis": "AVD-AWS-0040",
+                    "resource_id": "aws_eks_cluster.this",
+                    "message": "Artifact: main.tf\nType: terraform\nVulnerability AVD-AWS-0040\nSeverity: CRITICAL\nMessage: Public cluster access is enabled.\nLink: [AVD-AWS-0040](https://avd.aquasec.com/misconfig/avd-aws-0040)",
+                    "level": "error",
+                    "file_path": "main.tf",
+                    "start_line": 74,
+                    "tool_name": "Trivy",
+                    "sources": [
+                        "Trivy"
+                    ],
+                    "correlation_layer": 1
+                },
+                {
+                    "cfi": "f76b82ac346687ce33a0cda44e10968e2479d3c180648d9c4a2f9f3731b69455",
+                    "rule_id": "AVD-AWS-0041",
+                    "normalized_cis": "AVD-AWS-0041",
+                    "resource_id": "aws_eks_cluster.this",
+                    "message": "Artifact: main.tf\nType: terraform\nVulnerability AVD-AWS-0041\nSeverity: CRITICAL\nMessage: Cluster allows access from a public CIDR: 0.0.0.0/0\nLink: [AVD-AWS-0041](https://avd.aquasec.com/misconfig/avd-aws-0041)",
+                    "level": "error",
+                    "file_path": "main.tf",
+                    "start_line": 75,
+                    "tool_name": "Trivy",
+                    "sources": [
+                        "Trivy"
+                    ],
+                    "correlation_layer": 1
+                }
+            ]
+        },
+        {
+            "id": "aws_ec2_tag.cluster_primary_security_group",
+            "simple_name": "aws_ec2_tag.cluster_primary_security_group",
+            "label": "aws_ec2_tag.cluster_primary_security_group",
+            "type": "aws_ec2_tag",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/main.tf",
+            "start_line": 208,
+            "end_line": 221,
+            "security_issues": []
+        },
+        {
+            "id": "aws_cloudwatch_log_group.this",
+            "simple_name": "aws_cloudwatch_log_group.this",
+            "label": "aws_cloudwatch_log_group.this",
+            "type": "aws_cloudwatch_log_group",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/main.tf",
+            "start_line": 223,
+            "end_line": 238,
+            "security_issues": []
+        },
+        {
+            "id": "aws_eks_access_entry.this",
+            "simple_name": "aws_eks_access_entry.this",
+            "label": "aws_eks_access_entry.this",
+            "type": "aws_eks_access_entry",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/main.tf",
+            "start_line": 290,
+            "end_line": 305,
+            "security_issues": []
+        },
+        {
+            "id": "aws_eks_access_policy_association.this",
+            "simple_name": "aws_eks_access_policy_association.this",
+            "label": "aws_eks_access_policy_association.this",
+            "type": "aws_eks_access_policy_association",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/main.tf",
+            "start_line": 307,
+            "end_line": 325,
+            "security_issues": []
+        },
+        {
+            "id": "aws_security_group.cluster",
+            "simple_name": "aws_security_group.cluster",
+            "label": "aws_security_group.cluster",
+            "type": "aws_security_group",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/main.tf",
+            "start_line": 391,
+            "end_line": 410,
+            "security_issues": []
+        },
+        {
+            "id": "aws_security_group_rule.cluster",
+            "simple_name": "aws_security_group_rule.cluster",
+            "label": "aws_security_group_rule.cluster",
+            "type": "aws_security_group_rule",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/main.tf",
+            "start_line": 412,
+            "end_line": 431,
+            "security_issues": []
+        },
+        {
+            "id": "aws_iam_openid_connect_provider.oidc_provider",
+            "simple_name": "aws_iam_openid_connect_provider.oidc_provider",
+            "label": "aws_iam_openid_connect_provider.oidc_provider",
+            "type": "aws_iam_openid_connect_provider",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/main.tf",
+            "start_line": 452,
+            "end_line": 464,
+            "security_issues": []
+        },
+        {
+            "id": "aws_iam_role.this",
+            "simple_name": "aws_iam_role.this",
+            "label": "aws_iam_role.this",
+            "type": "aws_iam_role",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/main.tf",
+            "start_line": 523,
+            "end_line": 536,
+            "security_issues": []
+        },
+        {
+            "id": "aws_iam_role_policy_attachment.this",
+            "simple_name": "aws_iam_role_policy_attachment.this",
+            "label": "aws_iam_role_policy_attachment.this",
+            "type": "aws_iam_role_policy_attachment",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/main.tf",
+            "start_line": 539,
+            "end_line": 548,
+            "security_issues": []
+        },
+        {
+            "id": "aws_iam_role_policy_attachment.additional",
+            "simple_name": "aws_iam_role_policy_attachment.additional",
+            "label": "aws_iam_role_policy_attachment.additional",
+            "type": "aws_iam_role_policy_attachment",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/main.tf",
+            "start_line": 550,
+            "end_line": 555,
+            "security_issues": []
+        },
+        {
+            "id": "aws_iam_role_policy_attachment.cluster_encryption",
+            "simple_name": "aws_iam_role_policy_attachment.cluster_encryption",
+            "label": "aws_iam_role_policy_attachment.cluster_encryption",
+            "type": "aws_iam_role_policy_attachment",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/main.tf",
+            "start_line": 558,
+            "end_line": 564,
+            "security_issues": []
+        },
+        {
+            "id": "aws_iam_policy.cluster_encryption",
+            "simple_name": "aws_iam_policy.cluster_encryption",
+            "label": "aws_iam_policy.cluster_encryption",
+            "type": "aws_iam_policy",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/main.tf",
+            "start_line": 566,
+            "end_line": 592,
+            "security_issues": []
+        },
+        {
+            "id": "aws_iam_policy.custom",
+            "simple_name": "aws_iam_policy.custom",
+            "label": "aws_iam_policy.custom",
+            "type": "aws_iam_policy",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/main.tf",
+            "start_line": 728,
+            "end_line": 739,
+            "security_issues": []
+        },
+        {
+            "id": "aws_iam_role_policy_attachment.custom",
+            "simple_name": "aws_iam_role_policy_attachment.custom",
+            "label": "aws_iam_role_policy_attachment.custom",
+            "type": "aws_iam_role_policy_attachment",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/main.tf",
+            "start_line": 741,
+            "end_line": 746,
+            "security_issues": []
+        },
+        {
+            "id": "aws_eks_addon.this",
+            "simple_name": "aws_eks_addon.this",
+            "label": "aws_eks_addon.this",
+            "type": "aws_eks_addon",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/main.tf",
+            "start_line": 762,
+            "end_line": 805,
+            "security_issues": []
+        },
+        {
+            "id": "aws_eks_addon.before_compute",
+            "simple_name": "aws_eks_addon.before_compute",
+            "label": "aws_eks_addon.before_compute",
+            "type": "aws_eks_addon",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/main.tf",
+            "start_line": 807,
+            "end_line": 843,
+            "security_issues": []
+        },
+        {
+            "id": "aws_eks_identity_provider_config.this",
+            "simple_name": "aws_eks_identity_provider_config.this",
+            "label": "aws_eks_identity_provider_config.this",
+            "type": "aws_eks_identity_provider_config",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/main.tf",
+            "start_line": 850,
+            "end_line": 872,
+            "security_issues": []
+        },
+        {
+            "id": "aws_iam_role.eks_auto",
+            "simple_name": "aws_iam_role.eks_auto",
+            "label": "aws_iam_role.eks_auto",
+            "type": "aws_iam_role",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/main.tf",
+            "start_line": 900,
+            "end_line": 913,
+            "security_issues": []
+        },
+        {
+            "id": "aws_iam_role_policy_attachment.eks_auto",
+            "simple_name": "aws_iam_role_policy_attachment.eks_auto",
+            "label": "aws_iam_role_policy_attachment.eks_auto",
+            "type": "aws_iam_role_policy_attachment",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/main.tf",
+            "start_line": 916,
+            "end_line": 924,
+            "security_issues": []
+        },
+        {
+            "id": "aws_iam_role_policy_attachment.eks_auto_additional",
+            "simple_name": "aws_iam_role_policy_attachment.eks_auto_additional",
+            "label": "aws_iam_role_policy_attachment.eks_auto_additional",
+            "type": "aws_iam_role_policy_attachment",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/main.tf",
+            "start_line": 926,
+            "end_line": 931,
+            "security_issues": []
+        },
+        {
+            "id": "time_sleep.this",
+            "simple_name": "time_sleep.this",
+            "label": "time_sleep.this",
+            "type": "time_sleep",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/node_groups.tf",
+            "start_line": 10,
+            "end_line": 23,
+            "security_issues": []
+        },
+        {
+            "id": "aws_iam_policy.cni_ipv6_policy",
+            "simple_name": "aws_iam_policy.cni_ipv6_policy",
+            "label": "aws_iam_policy.cni_ipv6_policy",
+            "type": "aws_iam_policy",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/node_groups.tf",
+            "start_line": 53,
+            "end_line": 62,
+            "security_issues": []
+        },
+        {
+            "id": "aws_security_group.node",
+            "simple_name": "aws_security_group.node",
+            "label": "aws_security_group.node",
+            "type": "aws_security_group",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/node_groups.tf",
+            "start_line": 177,
+            "end_line": 199,
+            "security_issues": []
+        },
+        {
+            "id": "aws_security_group_rule.node",
+            "simple_name": "aws_security_group_rule.node",
+            "label": "aws_security_group_rule.node",
+            "type": "aws_security_group_rule",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/node_groups.tf",
+            "start_line": 201,
+            "end_line": 221,
+            "security_issues": [
+                {
+                    "cfi": "23b5edd44e4dba5385d1234553da9f787a0be3299581d75fb4eedd127a2d56bf",
+                    "rule_id": "aws-vpc-no-public-egress-sgr",
+                    "normalized_cis": "CIS-AWS-4.2.3",
+                    "resource_id": "aws_security_group_rule.node",
+                    "message": "Artifact: node_groups.tf\nType: terraform\nVulnerability aws-vpc-no-public-egress-sgr\nSeverity: CRITICAL\nMessage: Security group rule allows unrestricted egress to any IP address.\nLink: [aws-vpc-no-public-egress-sgr](https://avd.aquasec.com/misconfig/aws-vpc-no-public-egress-sgr)",
+                    "level": "error",
+                    "file_path": "node_groups.tf",
+                    "start_line": 216,
+                    "tool_name": "Trivy",
+                    "sources": [
+                        "Trivy"
+                    ],
+                    "correlation_layer": 1
+                },
+                {
+                    "cfi": "ef50108768657ec921458b5942de23ff733f665075f3a88befacc43d3443b389",
+                    "rule_id": "aws-vpc-no-public-egress-sgr",
+                    "normalized_cis": "CIS-AWS-4.2.3",
+                    "resource_id": "aws_security_group_rule.node",
+                    "message": "Artifact: node_groups.tf\nType: terraform\nVulnerability aws-vpc-no-public-egress-sgr\nSeverity: CRITICAL\nMessage: Security group rule allows unrestricted egress to any IP address.\nLink: [aws-vpc-no-public-egress-sgr](https://avd.aquasec.com/misconfig/aws-vpc-no-public-egress-sgr)",
+                    "level": "error",
+                    "file_path": "node_groups.tf",
+                    "start_line": 217,
+                    "tool_name": "Trivy",
+                    "sources": [
+                        "Trivy"
+                    ],
+                    "correlation_layer": 1
+                }
+            ]
+        },
+        {
+            "id": "aws_vpc_peering_connection_accepter.peer",
+            "simple_name": "aws_vpc_peering_connection_accepter.peer",
+            "label": "aws_vpc_peering_connection_accepter.peer",
+            "type": "aws_vpc_peering_connection_accepter",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/examples/eks-hybrid-nodes/main.tf",
+            "start_line": 137,
+            "end_line": 142,
+            "security_issues": []
+        },
+        {
+            "id": "aws_route.peer",
+            "simple_name": "aws_route.peer",
+            "label": "aws_route.peer",
+            "type": "aws_route",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/examples/eks-hybrid-nodes/main.tf",
+            "start_line": 144,
+            "end_line": 148,
+            "security_issues": []
+        },
+        {
+            "id": "aws_ssm_activation.this",
+            "simple_name": "aws_ssm_activation.this",
+            "label": "aws_ssm_activation.this",
+            "type": "aws_ssm_activation",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/examples/eks-hybrid-nodes/remote.tf",
+            "start_line": 22,
+            "end_line": 28,
+            "security_issues": []
+        },
+        {
+            "id": "local_file.key_pem",
+            "simple_name": "local_file.key_pem",
+            "label": "local_file.key_pem",
+            "type": "local_file",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/examples/eks-hybrid-nodes/remote.tf",
+            "start_line": 44,
+            "end_line": 48,
+            "security_issues": []
+        },
+        {
+            "id": "local_file.key_pub_pem",
+            "simple_name": "local_file.key_pub_pem",
+            "label": "local_file.key_pub_pem",
+            "type": "local_file",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/examples/eks-hybrid-nodes/remote.tf",
+            "start_line": 50,
+            "end_line": 54,
+            "security_issues": []
+        },
+        {
+            "id": "local_file.join",
+            "simple_name": "local_file.join",
+            "label": "local_file.join",
+            "type": "local_file",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/examples/eks-hybrid-nodes/remote.tf",
+            "start_line": 56,
+            "end_line": 86,
+            "security_issues": []
+        },
+        {
+            "id": "aws_instance.hybrid_node",
+            "simple_name": "aws_instance.hybrid_node",
+            "label": "aws_instance.hybrid_node",
+            "type": "aws_instance",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/examples/eks-hybrid-nodes/remote.tf",
+            "start_line": 97,
+            "end_line": 118,
+            "security_issues": []
+        },
+        {
+            "id": "aws_security_group.remote_node",
+            "simple_name": "aws_security_group.remote_node",
+            "label": "aws_security_group.remote_node",
+            "type": "aws_security_group",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/examples/eks-hybrid-nodes/remote.tf",
+            "start_line": 130,
+            "end_line": 141,
+            "security_issues": []
+        },
+        {
+            "id": "aws_vpc_security_group_ingress_rule.remote_node",
+            "simple_name": "aws_vpc_security_group_ingress_rule.remote_node",
+            "label": "aws_vpc_security_group_ingress_rule.remote_node",
+            "type": "aws_vpc_security_group_ingress_rule",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/examples/eks-hybrid-nodes/remote.tf",
+            "start_line": 143,
+            "end_line": 177,
+            "security_issues": []
+        },
+        {
+            "id": "aws_vpc_security_group_egress_rule.remote_node",
+            "simple_name": "aws_vpc_security_group_egress_rule.remote_node",
+            "label": "aws_vpc_security_group_egress_rule.remote_node",
+            "type": "aws_vpc_security_group_egress_rule",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/examples/eks-hybrid-nodes/remote.tf",
+            "start_line": 179,
+            "end_line": 201,
+            "security_issues": []
+        },
+        {
+            "id": "helm_release.cilium",
+            "simple_name": "helm_release.cilium",
+            "label": "helm_release.cilium",
+            "type": "helm_release",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/examples/eks-hybrid-nodes/remote.tf",
+            "start_line": 207,
+            "end_line": 230,
+            "security_issues": []
+        },
+        {
+            "id": "aws_vpc_peering_connection.remote_node",
+            "simple_name": "aws_vpc_peering_connection.remote_node",
+            "label": "aws_vpc_peering_connection.remote_node",
+            "type": "aws_vpc_peering_connection",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/examples/eks-hybrid-nodes/remote.tf",
+            "start_line": 284,
+            "end_line": 298,
+            "security_issues": []
+        },
+        {
+            "id": "aws_route.remote_node_private",
+            "simple_name": "aws_route.remote_node_private",
+            "label": "aws_route.remote_node_private",
+            "type": "aws_route",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/examples/eks-hybrid-nodes/remote.tf",
+            "start_line": 300,
+            "end_line": 306,
+            "security_issues": []
+        },
+        {
+            "id": "aws_route.remote_node_public",
+            "simple_name": "aws_route.remote_node_public",
+            "label": "aws_route.remote_node_public",
+            "type": "aws_route",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/examples/eks-hybrid-nodes/remote.tf",
+            "start_line": 308,
+            "end_line": 314,
+            "security_issues": []
+        },
+        {
+            "id": "helm_release.karpenter",
+            "simple_name": "helm_release.karpenter",
+            "label": "helm_release.karpenter",
+            "type": "helm_release",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/examples/karpenter/main.tf",
+            "start_line": 134,
+            "end_line": 157,
+            "security_issues": []
+        },
+        {
+            "id": "aws_security_group.remote_access",
+            "simple_name": "aws_security_group.remote_access",
+            "label": "aws_security_group.remote_access",
+            "type": "aws_security_group",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/tests/eks-managed-node-group/main.tf",
+            "start_line": 548,
+            "end_line": 570,
+            "security_issues": []
+        },
+        {
+            "id": "aws_iam_policy.node_additional",
+            "simple_name": "aws_iam_policy.node_additional",
+            "label": "aws_iam_policy.node_additional",
+            "type": "aws_iam_policy",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/tests/eks-managed-node-group/main.tf",
+            "start_line": 572,
+            "end_line": 590,
+            "security_issues": []
+        },
+        {
+            "id": "aws_iam_role.this",
+            "simple_name": "aws_iam_role.this",
+            "label": "aws_iam_role.this",
+            "type": "aws_iam_role",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/tests/eks-managed-node-group/main.tf",
+            "start_line": 622,
+            "end_line": 643,
+            "security_issues": []
+        },
+        {
+            "id": "aws_iam_policy.additional",
+            "simple_name": "aws_iam_policy.additional",
+            "label": "aws_iam_policy.additional",
+            "type": "aws_iam_policy",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/tests/self-managed-node-group/main.tf",
+            "start_line": 483,
+            "end_line": 501,
+            "security_issues": []
+        },
+        {
+            "id": "tls_private_key.example",
+            "simple_name": "tls_private_key.example",
+            "label": "tls_private_key.example",
+            "type": "tls_private_key",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/tests/eks-hybrid-nodes/main.tf",
+            "start_line": 61,
+            "end_line": 64,
+            "security_issues": []
+        },
+        {
+            "id": "tls_self_signed_cert.example",
+            "simple_name": "tls_self_signed_cert.example",
+            "label": "tls_self_signed_cert.example",
+            "type": "tls_self_signed_cert",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/tests/eks-hybrid-nodes/main.tf",
+            "start_line": 66,
+            "end_line": 80,
+            "security_issues": []
+        },
+        {
+            "id": "aws_iam_policy.additional",
+            "simple_name": "aws_iam_policy.additional",
+            "label": "aws_iam_policy.additional",
+            "type": "aws_iam_policy",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/tests/eks-fargate-profile/main.tf",
+            "start_line": 150,
+            "end_line": 165,
+            "security_issues": []
+        },
+        {
+            "id": "local_file.eks_mng_al2_no_op",
+            "simple_name": "local_file.eks_mng_al2_no_op",
+            "label": "local_file.eks_mng_al2_no_op",
+            "type": "local_file",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/tests/user-data/outputs.tf",
+            "start_line": 13,
+            "end_line": 16,
+            "security_issues": []
+        },
+        {
+            "id": "local_file.eks_mng_al2_additional",
+            "simple_name": "local_file.eks_mng_al2_additional",
+            "label": "local_file.eks_mng_al2_additional",
+            "type": "local_file",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/tests/user-data/outputs.tf",
+            "start_line": 18,
+            "end_line": 21,
+            "security_issues": []
+        },
+        {
+            "id": "local_file.eks_mng_al2_custom_ami",
+            "simple_name": "local_file.eks_mng_al2_custom_ami",
+            "label": "local_file.eks_mng_al2_custom_ami",
+            "type": "local_file",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/tests/user-data/outputs.tf",
+            "start_line": 23,
+            "end_line": 26,
+            "security_issues": []
+        },
+        {
+            "id": "local_file.eks_mng_al2_custom_ami_ipv6",
+            "simple_name": "local_file.eks_mng_al2_custom_ami_ipv6",
+            "label": "local_file.eks_mng_al2_custom_ami_ipv6",
+            "type": "local_file",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/tests/user-data/outputs.tf",
+            "start_line": 28,
+            "end_line": 31,
+            "security_issues": []
+        },
+        {
+            "id": "local_file.eks_mng_al2_custom_template",
+            "simple_name": "local_file.eks_mng_al2_custom_template",
+            "label": "local_file.eks_mng_al2_custom_template",
+            "type": "local_file",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/tests/user-data/outputs.tf",
+            "start_line": 33,
+            "end_line": 36,
+            "security_issues": []
+        },
+        {
+            "id": "local_file.eks_mng_al2023_no_op",
+            "simple_name": "local_file.eks_mng_al2023_no_op",
+            "label": "local_file.eks_mng_al2023_no_op",
+            "type": "local_file",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/tests/user-data/outputs.tf",
+            "start_line": 42,
+            "end_line": 45,
+            "security_issues": []
+        },
+        {
+            "id": "local_file.eks_mng_al2023_additional",
+            "simple_name": "local_file.eks_mng_al2023_additional",
+            "label": "local_file.eks_mng_al2023_additional",
+            "type": "local_file",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/tests/user-data/outputs.tf",
+            "start_line": 47,
+            "end_line": 50,
+            "security_issues": []
+        },
+        {
+            "id": "local_file.eks_mng_al2023_custom_ami",
+            "simple_name": "local_file.eks_mng_al2023_custom_ami",
+            "label": "local_file.eks_mng_al2023_custom_ami",
+            "type": "local_file",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/tests/user-data/outputs.tf",
+            "start_line": 52,
+            "end_line": 55,
+            "security_issues": []
+        },
+        {
+            "id": "local_file.eks_mng_al2023_custom_template",
+            "simple_name": "local_file.eks_mng_al2023_custom_template",
+            "label": "local_file.eks_mng_al2023_custom_template",
+            "type": "local_file",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/tests/user-data/outputs.tf",
+            "start_line": 57,
+            "end_line": 60,
+            "security_issues": []
+        },
+        {
+            "id": "local_file.eks_mng_bottlerocket_no_op",
+            "simple_name": "local_file.eks_mng_bottlerocket_no_op",
+            "label": "local_file.eks_mng_bottlerocket_no_op",
+            "type": "local_file",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/tests/user-data/outputs.tf",
+            "start_line": 66,
+            "end_line": 69,
+            "security_issues": []
+        },
+        {
+            "id": "local_file.eks_mng_bottlerocket_additional",
+            "simple_name": "local_file.eks_mng_bottlerocket_additional",
+            "label": "local_file.eks_mng_bottlerocket_additional",
+            "type": "local_file",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/tests/user-data/outputs.tf",
+            "start_line": 71,
+            "end_line": 74,
+            "security_issues": []
+        },
+        {
+            "id": "local_file.eks_mng_bottlerocket_custom_ami",
+            "simple_name": "local_file.eks_mng_bottlerocket_custom_ami",
+            "label": "local_file.eks_mng_bottlerocket_custom_ami",
+            "type": "local_file",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/tests/user-data/outputs.tf",
+            "start_line": 76,
+            "end_line": 79,
+            "security_issues": []
+        },
+        {
+            "id": "local_file.eks_mng_bottlerocket_custom_template",
+            "simple_name": "local_file.eks_mng_bottlerocket_custom_template",
+            "label": "local_file.eks_mng_bottlerocket_custom_template",
+            "type": "local_file",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/tests/user-data/outputs.tf",
+            "start_line": 81,
+            "end_line": 84,
+            "security_issues": []
+        },
+        {
+            "id": "local_file.eks_mng_windows_no_op",
+            "simple_name": "local_file.eks_mng_windows_no_op",
+            "label": "local_file.eks_mng_windows_no_op",
+            "type": "local_file",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/tests/user-data/outputs.tf",
+            "start_line": 90,
+            "end_line": 93,
+            "security_issues": []
+        },
+        {
+            "id": "local_file.eks_mng_windows_additional",
+            "simple_name": "local_file.eks_mng_windows_additional",
+            "label": "local_file.eks_mng_windows_additional",
+            "type": "local_file",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/tests/user-data/outputs.tf",
+            "start_line": 95,
+            "end_line": 98,
+            "security_issues": []
+        },
+        {
+            "id": "local_file.eks_mng_windows_custom_ami",
+            "simple_name": "local_file.eks_mng_windows_custom_ami",
+            "label": "local_file.eks_mng_windows_custom_ami",
+            "type": "local_file",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/tests/user-data/outputs.tf",
+            "start_line": 100,
+            "end_line": 103,
+            "security_issues": []
+        },
+        {
+            "id": "local_file.eks_mng_windows_custom_template",
+            "simple_name": "local_file.eks_mng_windows_custom_template",
+            "label": "local_file.eks_mng_windows_custom_template",
+            "type": "local_file",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/tests/user-data/outputs.tf",
+            "start_line": 105,
+            "end_line": 108,
+            "security_issues": []
+        },
+        {
+            "id": "local_file.self_mng_al2_no_op",
+            "simple_name": "local_file.self_mng_al2_no_op",
+            "label": "local_file.self_mng_al2_no_op",
+            "type": "local_file",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/tests/user-data/outputs.tf",
+            "start_line": 114,
+            "end_line": 117,
+            "security_issues": []
+        },
+        {
+            "id": "local_file.self_mng_al2_bootstrap",
+            "simple_name": "local_file.self_mng_al2_bootstrap",
+            "label": "local_file.self_mng_al2_bootstrap",
+            "type": "local_file",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/tests/user-data/outputs.tf",
+            "start_line": 119,
+            "end_line": 122,
+            "security_issues": []
+        },
+        {
+            "id": "local_file.self_mng_al2_bootstrap_ipv6",
+            "simple_name": "local_file.self_mng_al2_bootstrap_ipv6",
+            "label": "local_file.self_mng_al2_bootstrap_ipv6",
+            "type": "local_file",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/tests/user-data/outputs.tf",
+            "start_line": 124,
+            "end_line": 127,
+            "security_issues": []
+        },
+        {
+            "id": "local_file.self_mng_al2_custom_template",
+            "simple_name": "local_file.self_mng_al2_custom_template",
+            "label": "local_file.self_mng_al2_custom_template",
+            "type": "local_file",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/tests/user-data/outputs.tf",
+            "start_line": 129,
+            "end_line": 132,
+            "security_issues": []
+        },
+        {
+            "id": "local_file.self_mng_al2023_no_op",
+            "simple_name": "local_file.self_mng_al2023_no_op",
+            "label": "local_file.self_mng_al2023_no_op",
+            "type": "local_file",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/tests/user-data/outputs.tf",
+            "start_line": 138,
+            "end_line": 141,
+            "security_issues": []
+        },
+        {
+            "id": "local_file.self_mng_al2023_bootstrap",
+            "simple_name": "local_file.self_mng_al2023_bootstrap",
+            "label": "local_file.self_mng_al2023_bootstrap",
+            "type": "local_file",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/tests/user-data/outputs.tf",
+            "start_line": 143,
+            "end_line": 146,
+            "security_issues": []
+        },
+        {
+            "id": "local_file.self_mng_al2023_custom_template",
+            "simple_name": "local_file.self_mng_al2023_custom_template",
+            "label": "local_file.self_mng_al2023_custom_template",
+            "type": "local_file",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/tests/user-data/outputs.tf",
+            "start_line": 148,
+            "end_line": 151,
+            "security_issues": []
+        },
+        {
+            "id": "local_file.self_mng_bottlerocket_no_op",
+            "simple_name": "local_file.self_mng_bottlerocket_no_op",
+            "label": "local_file.self_mng_bottlerocket_no_op",
+            "type": "local_file",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/tests/user-data/outputs.tf",
+            "start_line": 157,
+            "end_line": 160,
+            "security_issues": []
+        },
+        {
+            "id": "local_file.self_mng_bottlerocket_bootstrap",
+            "simple_name": "local_file.self_mng_bottlerocket_bootstrap",
+            "label": "local_file.self_mng_bottlerocket_bootstrap",
+            "type": "local_file",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/tests/user-data/outputs.tf",
+            "start_line": 162,
+            "end_line": 165,
+            "security_issues": []
+        },
+        {
+            "id": "local_file.self_mng_bottlerocket_custom_template",
+            "simple_name": "local_file.self_mng_bottlerocket_custom_template",
+            "label": "local_file.self_mng_bottlerocket_custom_template",
+            "type": "local_file",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/tests/user-data/outputs.tf",
+            "start_line": 167,
+            "end_line": 170,
+            "security_issues": []
+        },
+        {
+            "id": "local_file.self_mng_windows_no_op",
+            "simple_name": "local_file.self_mng_windows_no_op",
+            "label": "local_file.self_mng_windows_no_op",
+            "type": "local_file",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/tests/user-data/outputs.tf",
+            "start_line": 176,
+            "end_line": 179,
+            "security_issues": []
+        },
+        {
+            "id": "local_file.self_mng_windows_bootstrap",
+            "simple_name": "local_file.self_mng_windows_bootstrap",
+            "label": "local_file.self_mng_windows_bootstrap",
+            "type": "local_file",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/tests/user-data/outputs.tf",
+            "start_line": 181,
+            "end_line": 184,
+            "security_issues": []
+        },
+        {
+            "id": "local_file.self_mng_windows_custom_template",
+            "simple_name": "local_file.self_mng_windows_custom_template",
+            "label": "local_file.self_mng_windows_custom_template",
+            "type": "local_file",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/tests/user-data/outputs.tf",
+            "start_line": 186,
+            "end_line": 189,
+            "security_issues": []
+        },
+        {
+            "id": "aws_kms_key.this",
+            "simple_name": "aws_kms_key.this",
+            "label": "aws_kms_key.this",
+            "type": "aws_kms_key",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/.terraform/modules/kms/main.tf",
+            "start_line": 18,
+            "end_line": 36,
+            "security_issues": []
+        },
+        {
+            "id": "aws_kms_external_key.this",
+            "simple_name": "aws_kms_external_key.this",
+            "label": "aws_kms_external_key.this",
+            "type": "aws_kms_external_key",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/.terraform/modules/kms/main.tf",
+            "start_line": 42,
+            "end_line": 57,
+            "security_issues": []
+        },
+        {
+            "id": "aws_kms_replica_key.this",
+            "simple_name": "aws_kms_replica_key.this",
+            "label": "aws_kms_replica_key.this",
+            "type": "aws_kms_replica_key",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/.terraform/modules/kms/main.tf",
+            "start_line": 63,
+            "end_line": 76,
+            "security_issues": []
+        },
+        {
+            "id": "aws_kms_replica_external_key.this",
+            "simple_name": "aws_kms_replica_external_key.this",
+            "label": "aws_kms_replica_external_key.this",
+            "type": "aws_kms_replica_external_key",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/.terraform/modules/kms/main.tf",
+            "start_line": 82,
+            "end_line": 97,
+            "security_issues": []
+        },
+        {
+            "id": "aws_kms_alias.this",
+            "simple_name": "aws_kms_alias.this",
+            "label": "aws_kms_alias.this",
+            "type": "aws_kms_alias",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/.terraform/modules/kms/main.tf",
+            "start_line": 461,
+            "end_line": 469,
+            "security_issues": []
+        },
+        {
+            "id": "aws_kms_grant.this",
+            "simple_name": "aws_kms_grant.this",
+            "label": "aws_kms_grant.this",
+            "type": "aws_kms_grant",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/.terraform/modules/kms/main.tf",
+            "start_line": 475,
+            "end_line": 496,
+            "security_issues": []
+        },
+        {
+            "id": "aws_iam_role.lambda",
+            "simple_name": "aws_iam_role.lambda",
+            "label": "aws_iam_role.lambda",
+            "type": "aws_iam_role",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/.terraform/modules/kms/examples/complete/main.tf",
+            "start_line": 278,
+            "end_line": 293,
+            "security_issues": []
+        },
+        {
+            "id": "aws_launch_template.this",
+            "simple_name": "aws_launch_template.this",
+            "label": "aws_launch_template.this",
+            "type": "aws_launch_template",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/eks-managed-node-group/main.tf",
+            "start_line": 98,
+            "end_line": 380,
+            "security_issues": []
+        },
+        {
+            "id": "aws_eks_node_group.this",
+            "simple_name": "aws_eks_node_group.this",
+            "label": "aws_eks_node_group.this",
+            "type": "aws_eks_node_group",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/eks-managed-node-group/main.tf",
+            "start_line": 447,
+            "end_line": 545,
+            "security_issues": []
+        },
+        {
+            "id": "aws_iam_role.this",
+            "simple_name": "aws_iam_role.this",
+            "label": "aws_iam_role.this",
+            "type": "aws_iam_role",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/eks-managed-node-group/main.tf",
+            "start_line": 579,
+            "end_line": 592,
+            "security_issues": []
+        },
+        {
+            "id": "aws_iam_role_policy_attachment.this",
+            "simple_name": "aws_iam_role_policy_attachment.this",
+            "label": "aws_iam_role_policy_attachment.this",
+            "type": "aws_iam_role_policy_attachment",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/eks-managed-node-group/main.tf",
+            "start_line": 595,
+            "end_line": 607,
+            "security_issues": []
+        },
+        {
+            "id": "aws_iam_role_policy_attachment.additional",
+            "simple_name": "aws_iam_role_policy_attachment.additional",
+            "label": "aws_iam_role_policy_attachment.additional",
+            "type": "aws_iam_role_policy_attachment",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/eks-managed-node-group/main.tf",
+            "start_line": 609,
+            "end_line": 614,
+            "security_issues": []
+        },
+        {
+            "id": "aws_iam_role_policy.this",
+            "simple_name": "aws_iam_role_policy.this",
+            "label": "aws_iam_role_policy.this",
+            "type": "aws_iam_role_policy",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/eks-managed-node-group/main.tf",
+            "start_line": 669,
+            "end_line": 676,
+            "security_issues": []
+        },
+        {
+            "id": "aws_placement_group.this",
+            "simple_name": "aws_placement_group.this",
+            "label": "aws_placement_group.this",
+            "type": "aws_placement_group",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/eks-managed-node-group/main.tf",
+            "start_line": 686,
+            "end_line": 695,
+            "security_issues": []
+        },
+        {
+            "id": "aws_security_group.this",
+            "simple_name": "aws_security_group.this",
+            "label": "aws_security_group.this",
+            "type": "aws_security_group",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/eks-managed-node-group/main.tf",
+            "start_line": 753,
+            "end_line": 772,
+            "security_issues": []
+        },
+        {
+            "id": "aws_vpc_security_group_ingress_rule.this",
+            "simple_name": "aws_vpc_security_group_ingress_rule.this",
+            "label": "aws_vpc_security_group_ingress_rule.this",
+            "type": "aws_vpc_security_group_ingress_rule",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/eks-managed-node-group/main.tf",
+            "start_line": 774,
+            "end_line": 794,
+            "security_issues": []
+        },
+        {
+            "id": "aws_vpc_security_group_egress_rule.this",
+            "simple_name": "aws_vpc_security_group_egress_rule.this",
+            "label": "aws_vpc_security_group_egress_rule.this",
+            "type": "aws_vpc_security_group_egress_rule",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/eks-managed-node-group/main.tf",
+            "start_line": 796,
+            "end_line": 816,
+            "security_issues": []
+        },
+        {
+            "id": "null_resource.validate_cluster_service_cidr",
+            "simple_name": "null_resource.validate_cluster_service_cidr",
+            "label": "null_resource.validate_cluster_service_cidr",
+            "type": "null_resource",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/_user_data/main.tf",
+            "start_line": 5,
+            "end_line": 14,
+            "security_issues": []
+        },
+        {
+            "id": "aws_launch_template.this",
+            "simple_name": "aws_launch_template.this",
+            "label": "aws_launch_template.this",
+            "type": "aws_launch_template",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/self-managed-node-group/main.tf",
+            "start_line": 139,
+            "end_line": 495,
+            "security_issues": []
+        },
+        {
+            "id": "aws_autoscaling_group.this",
+            "simple_name": "aws_autoscaling_group.this",
+            "label": "aws_autoscaling_group.this",
+            "type": "aws_autoscaling_group",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/self-managed-node-group/main.tf",
+            "start_line": 507,
+            "end_line": 801,
+            "security_issues": []
+        },
+        {
+            "id": "aws_iam_role.this",
+            "simple_name": "aws_iam_role.this",
+            "label": "aws_iam_role.this",
+            "type": "aws_iam_role",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/self-managed-node-group/main.tf",
+            "start_line": 835,
+            "end_line": 848,
+            "security_issues": []
+        },
+        {
+            "id": "aws_iam_role_policy_attachment.this",
+            "simple_name": "aws_iam_role_policy_attachment.this",
+            "label": "aws_iam_role_policy_attachment.this",
+            "type": "aws_iam_role_policy_attachment",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/self-managed-node-group/main.tf",
+            "start_line": 851,
+            "end_line": 863,
+            "security_issues": []
+        },
+        {
+            "id": "aws_iam_role_policy_attachment.additional",
+            "simple_name": "aws_iam_role_policy_attachment.additional",
+            "label": "aws_iam_role_policy_attachment.additional",
+            "type": "aws_iam_role_policy_attachment",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/self-managed-node-group/main.tf",
+            "start_line": 865,
+            "end_line": 870,
+            "security_issues": []
+        },
+        {
+            "id": "aws_iam_instance_profile.this",
+            "simple_name": "aws_iam_instance_profile.this",
+            "label": "aws_iam_instance_profile.this",
+            "type": "aws_iam_instance_profile",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/self-managed-node-group/main.tf",
+            "start_line": 872,
+            "end_line": 886,
+            "security_issues": []
+        },
+        {
+            "id": "aws_iam_role_policy.this",
+            "simple_name": "aws_iam_role_policy.this",
+            "label": "aws_iam_role_policy.this",
+            "type": "aws_iam_role_policy",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/self-managed-node-group/main.tf",
+            "start_line": 941,
+            "end_line": 948,
+            "security_issues": []
+        },
+        {
+            "id": "aws_placement_group.this",
+            "simple_name": "aws_placement_group.this",
+            "label": "aws_placement_group.this",
+            "type": "aws_placement_group",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/self-managed-node-group/main.tf",
+            "start_line": 958,
+            "end_line": 967,
+            "security_issues": []
+        },
+        {
+            "id": "aws_eks_access_entry.this",
+            "simple_name": "aws_eks_access_entry.this",
+            "label": "aws_eks_access_entry.this",
+            "type": "aws_eks_access_entry",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/self-managed-node-group/main.tf",
+            "start_line": 973,
+            "end_line": 983,
+            "security_issues": []
+        },
+        {
+            "id": "aws_security_group.this",
+            "simple_name": "aws_security_group.this",
+            "label": "aws_security_group.this",
+            "type": "aws_security_group",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/self-managed-node-group/main.tf",
+            "start_line": 1041,
+            "end_line": 1060,
+            "security_issues": []
+        },
+        {
+            "id": "aws_vpc_security_group_ingress_rule.this",
+            "simple_name": "aws_vpc_security_group_ingress_rule.this",
+            "label": "aws_vpc_security_group_ingress_rule.this",
+            "type": "aws_vpc_security_group_ingress_rule",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/self-managed-node-group/main.tf",
+            "start_line": 1062,
+            "end_line": 1082,
+            "security_issues": []
+        },
+        {
+            "id": "aws_vpc_security_group_egress_rule.this",
+            "simple_name": "aws_vpc_security_group_egress_rule.this",
+            "label": "aws_vpc_security_group_egress_rule.this",
+            "type": "aws_vpc_security_group_egress_rule",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/self-managed-node-group/main.tf",
+            "start_line": 1084,
+            "end_line": 1104,
+            "security_issues": []
+        },
+        {
+            "id": "aws_iam_role.this",
+            "simple_name": "aws_iam_role.this",
+            "label": "aws_iam_role.this",
+            "type": "aws_iam_role",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/fargate-profile/main.tf",
+            "start_line": 60,
+            "end_line": 73,
+            "security_issues": []
+        },
+        {
+            "id": "aws_iam_role_policy_attachment.this",
+            "simple_name": "aws_iam_role_policy_attachment.this",
+            "label": "aws_iam_role_policy_attachment.this",
+            "type": "aws_iam_role_policy_attachment",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/fargate-profile/main.tf",
+            "start_line": 75,
+            "end_line": 86,
+            "security_issues": []
+        },
+        {
+            "id": "aws_iam_role_policy_attachment.additional",
+            "simple_name": "aws_iam_role_policy_attachment.additional",
+            "label": "aws_iam_role_policy_attachment.additional",
+            "type": "aws_iam_role_policy_attachment",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/fargate-profile/main.tf",
+            "start_line": 88,
+            "end_line": 93,
+            "security_issues": []
+        },
+        {
+            "id": "aws_iam_role_policy.this",
+            "simple_name": "aws_iam_role_policy.this",
+            "label": "aws_iam_role_policy.this",
+            "type": "aws_iam_role_policy",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/fargate-profile/main.tf",
+            "start_line": 148,
+            "end_line": 155,
+            "security_issues": []
+        },
+        {
+            "id": "aws_eks_fargate_profile.this",
+            "simple_name": "aws_eks_fargate_profile.this",
+            "label": "aws_eks_fargate_profile.this",
+            "type": "aws_eks_fargate_profile",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/fargate-profile/main.tf",
+            "start_line": 161,
+            "end_line": 190,
+            "security_issues": []
+        },
+        {
+            "id": "aws_iam_role.this",
+            "simple_name": "aws_iam_role.this",
+            "label": "aws_iam_role.this",
+            "type": "aws_iam_role",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/hybrid-node-role/main.tf",
+            "start_line": 73,
+            "end_line": 87,
+            "security_issues": []
+        },
+        {
+            "id": "aws_iam_policy.this",
+            "simple_name": "aws_iam_policy.this",
+            "label": "aws_iam_policy.this",
+            "type": "aws_iam_policy",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/hybrid-node-role/main.tf",
+            "start_line": 161,
+            "end_line": 171,
+            "security_issues": []
+        },
+        {
+            "id": "aws_iam_role_policy_attachment.this",
+            "simple_name": "aws_iam_role_policy_attachment.this",
+            "label": "aws_iam_role_policy_attachment.this",
+            "type": "aws_iam_role_policy_attachment",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/hybrid-node-role/main.tf",
+            "start_line": 173,
+            "end_line": 185,
+            "security_issues": []
+        },
+        {
+            "id": "aws_rolesanywhere_profile.this",
+            "simple_name": "aws_rolesanywhere_profile.this",
+            "label": "aws_rolesanywhere_profile.this",
+            "type": "aws_rolesanywhere_profile",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/hybrid-node-role/main.tf",
+            "start_line": 195,
+            "end_line": 206,
+            "security_issues": []
+        },
+        {
+            "id": "aws_rolesanywhere_trust_anchor.this",
+            "simple_name": "aws_rolesanywhere_trust_anchor.this",
+            "label": "aws_rolesanywhere_trust_anchor.this",
+            "type": "aws_rolesanywhere_trust_anchor",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/hybrid-node-role/main.tf",
+            "start_line": 212,
+            "end_line": 237,
+            "security_issues": []
+        },
+        {
+            "id": "aws_iam_role.intermediate",
+            "simple_name": "aws_iam_role.intermediate",
+            "label": "aws_iam_role.intermediate",
+            "type": "aws_iam_role",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/hybrid-node-role/main.tf",
+            "start_line": 271,
+            "end_line": 285,
+            "security_issues": []
+        },
+        {
+            "id": "aws_iam_policy.intermediate",
+            "simple_name": "aws_iam_policy.intermediate",
+            "label": "aws_iam_policy.intermediate",
+            "type": "aws_iam_policy",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/hybrid-node-role/main.tf",
+            "start_line": 346,
+            "end_line": 356,
+            "security_issues": []
+        },
+        {
+            "id": "aws_iam_role_policy_attachment.intermediate",
+            "simple_name": "aws_iam_role_policy_attachment.intermediate",
+            "label": "aws_iam_role_policy_attachment.intermediate",
+            "type": "aws_iam_role_policy_attachment",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/hybrid-node-role/main.tf",
+            "start_line": 358,
+            "end_line": 369,
+            "security_issues": []
+        },
+        {
+            "id": "aws_iam_role.controller",
+            "simple_name": "aws_iam_role.controller",
+            "label": "aws_iam_role.controller",
+            "type": "aws_iam_role",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/karpenter/main.tf",
+            "start_line": 57,
+            "end_line": 71,
+            "security_issues": []
+        },
+        {
+            "id": "aws_iam_role_policy.controller",
+            "simple_name": "aws_iam_role_policy.controller",
+            "label": "aws_iam_role_policy.controller",
+            "type": "aws_iam_role_policy",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/karpenter/main.tf",
+            "start_line": 73,
+            "end_line": 80,
+            "security_issues": []
+        },
+        {
+            "id": "aws_iam_policy.controller",
+            "simple_name": "aws_iam_policy.controller",
+            "label": "aws_iam_policy.controller",
+            "type": "aws_iam_policy",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/karpenter/main.tf",
+            "start_line": 82,
+            "end_line": 92,
+            "security_issues": []
+        },
+        {
+            "id": "aws_iam_role_policy_attachment.controller",
+            "simple_name": "aws_iam_role_policy_attachment.controller",
+            "label": "aws_iam_role_policy_attachment.controller",
+            "type": "aws_iam_role_policy_attachment",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/karpenter/main.tf",
+            "start_line": 94,
+            "end_line": 99,
+            "security_issues": []
+        },
+        {
+            "id": "aws_iam_role_policy_attachment.controller_additional",
+            "simple_name": "aws_iam_role_policy_attachment.controller_additional",
+            "label": "aws_iam_role_policy_attachment.controller_additional",
+            "type": "aws_iam_role_policy_attachment",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/karpenter/main.tf",
+            "start_line": 101,
+            "end_line": 106,
+            "security_issues": []
+        },
+        {
+            "id": "aws_eks_pod_identity_association.karpenter",
+            "simple_name": "aws_eks_pod_identity_association.karpenter",
+            "label": "aws_eks_pod_identity_association.karpenter",
+            "type": "aws_eks_pod_identity_association",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/karpenter/main.tf",
+            "start_line": 112,
+            "end_line": 123,
+            "security_issues": []
+        },
+        {
+            "id": "aws_sqs_queue.this",
+            "simple_name": "aws_sqs_queue.this",
+            "label": "aws_sqs_queue.this",
+            "type": "aws_sqs_queue",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/karpenter/main.tf",
+            "start_line": 135,
+            "end_line": 147,
+            "security_issues": []
+        },
+        {
+            "id": "aws_sqs_queue_policy.this",
+            "simple_name": "aws_sqs_queue_policy.this",
+            "label": "aws_sqs_queue_policy.this",
+            "type": "aws_sqs_queue_policy",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/karpenter/main.tf",
+            "start_line": 230,
+            "end_line": 237,
+            "security_issues": []
+        },
+        {
+            "id": "aws_cloudwatch_event_rule.this",
+            "simple_name": "aws_cloudwatch_event_rule.this",
+            "label": "aws_cloudwatch_event_rule.this",
+            "type": "aws_cloudwatch_event_rule",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/karpenter/main.tf",
+            "start_line": 280,
+            "end_line": 293,
+            "security_issues": []
+        },
+        {
+            "id": "aws_cloudwatch_event_target.this",
+            "simple_name": "aws_cloudwatch_event_target.this",
+            "label": "aws_cloudwatch_event_target.this",
+            "type": "aws_cloudwatch_event_target",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/karpenter/main.tf",
+            "start_line": 295,
+            "end_line": 303,
+            "security_issues": []
+        },
+        {
+            "id": "aws_iam_role.node",
+            "simple_name": "aws_iam_role.node",
+            "label": "aws_iam_role.node",
+            "type": "aws_iam_role",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/karpenter/main.tf",
+            "start_line": 338,
+            "end_line": 352,
+            "security_issues": []
+        },
+        {
+            "id": "aws_iam_role_policy_attachment.node",
+            "simple_name": "aws_iam_role_policy_attachment.node",
+            "label": "aws_iam_role_policy_attachment.node",
+            "type": "aws_iam_role_policy_attachment",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/karpenter/main.tf",
+            "start_line": 355,
+            "end_line": 367,
+            "security_issues": []
+        },
+        {
+            "id": "aws_iam_role_policy_attachment.node_additional",
+            "simple_name": "aws_iam_role_policy_attachment.node_additional",
+            "label": "aws_iam_role_policy_attachment.node_additional",
+            "type": "aws_iam_role_policy_attachment",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/karpenter/main.tf",
+            "start_line": 369,
+            "end_line": 374,
+            "security_issues": []
+        },
+        {
+            "id": "aws_eks_access_entry.node",
+            "simple_name": "aws_eks_access_entry.node",
+            "label": "aws_eks_access_entry.node",
+            "type": "aws_eks_access_entry",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/karpenter/main.tf",
+            "start_line": 380,
+            "end_line": 395,
+            "security_issues": []
+        },
+        {
+            "id": "aws_iam_instance_profile.this",
+            "simple_name": "aws_iam_instance_profile.this",
+            "label": "aws_iam_instance_profile.this",
+            "type": "aws_iam_instance_profile",
+            "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/karpenter/main.tf",
+            "start_line": 408,
+            "end_line": 417,
+            "security_issues": []
+        }
+    ],
+    "edges": [
+        {
+            "from": "aws_eks_cluster.this",
+            "to": "aws_iam_role.eks_auto",
+            "source": "aws_eks_cluster.this",
+            "target": "aws_iam_role.eks_auto"
+        },
+        {
+            "from": "aws_eks_cluster.this",
+            "to": "aws_iam_role_policy_attachment.this",
+            "source": "aws_eks_cluster.this",
+            "target": "aws_iam_role_policy_attachment.this"
+        },
+        {
+            "from": "aws_eks_cluster.this",
+            "to": "aws_security_group_rule.cluster",
+            "source": "aws_eks_cluster.this",
+            "target": "aws_security_group_rule.cluster"
+        },
+        {
+            "from": "aws_eks_cluster.this",
+            "to": "aws_security_group_rule.node",
+            "source": "aws_eks_cluster.this",
+            "target": "aws_security_group_rule.node"
+        },
+        {
+            "from": "aws_eks_cluster.this",
+            "to": "aws_iam_policy.cni_ipv6_policy",
+            "source": "aws_eks_cluster.this",
+            "target": "aws_iam_policy.cni_ipv6_policy"
+        },
+        {
+            "from": "aws_eks_cluster.this",
+            "to": "aws_cloudwatch_log_group.this",
+            "source": "aws_eks_cluster.this",
+            "target": "aws_cloudwatch_log_group.this"
+        },
+        {
+            "from": "aws_ec2_tag.cluster_primary_security_group",
+            "to": "aws_eks_cluster.this",
+            "source": "aws_ec2_tag.cluster_primary_security_group",
+            "target": "aws_eks_cluster.this"
+        },
+        {
+            "from": "aws_eks_access_entry.this",
+            "to": "aws_eks_cluster.this",
+            "source": "aws_eks_access_entry.this",
+            "target": "aws_eks_cluster.this"
+        },
+        {
+            "from": "aws_eks_access_policy_association.this",
+            "to": "aws_eks_access_entry.this",
+            "source": "aws_eks_access_policy_association.this",
+            "target": "aws_eks_access_entry.this"
+        },
+        {
+            "from": "aws_eks_access_policy_association.this",
+            "to": "aws_eks_cluster.this",
+            "source": "aws_eks_access_policy_association.this",
+            "target": "aws_eks_cluster.this"
+        },
+        {
+            "from": "aws_security_group_rule.cluster",
+            "to": "aws_security_group.cluster",
+            "source": "aws_security_group_rule.cluster",
+            "target": "aws_security_group.cluster"
+        },
+        {
+            "from": "aws_iam_openid_connect_provider.oidc_provider",
+            "to": "aws_eks_cluster.this",
+            "source": "aws_iam_openid_connect_provider.oidc_provider",
+            "target": "aws_eks_cluster.this"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.this",
+            "to": "aws_iam_role.this",
+            "source": "aws_iam_role_policy_attachment.this",
+            "target": "aws_iam_role.this"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.additional",
+            "to": "aws_iam_role.this",
+            "source": "aws_iam_role_policy_attachment.additional",
+            "target": "aws_iam_role.this"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.cluster_encryption",
+            "to": "aws_iam_role.this",
+            "source": "aws_iam_role_policy_attachment.cluster_encryption",
+            "target": "aws_iam_role.this"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.cluster_encryption",
+            "to": "aws_iam_policy.cluster_encryption",
+            "source": "aws_iam_role_policy_attachment.cluster_encryption",
+            "target": "aws_iam_policy.cluster_encryption"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.custom",
+            "to": "aws_iam_role.this",
+            "source": "aws_iam_role_policy_attachment.custom",
+            "target": "aws_iam_role.this"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.custom",
+            "to": "aws_iam_policy.custom",
+            "source": "aws_iam_role_policy_attachment.custom",
+            "target": "aws_iam_policy.custom"
+        },
+        {
+            "from": "aws_eks_addon.this",
+            "to": "aws_eks_cluster.this",
+            "source": "aws_eks_addon.this",
+            "target": "aws_eks_cluster.this"
+        },
+        {
+            "from": "aws_eks_addon.before_compute",
+            "to": "aws_eks_cluster.this",
+            "source": "aws_eks_addon.before_compute",
+            "target": "aws_eks_cluster.this"
+        },
+        {
+            "from": "aws_eks_identity_provider_config.this",
+            "to": "aws_eks_cluster.this",
+            "source": "aws_eks_identity_provider_config.this",
+            "target": "aws_eks_cluster.this"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.eks_auto",
+            "to": "aws_iam_role.eks_auto",
+            "source": "aws_iam_role_policy_attachment.eks_auto",
+            "target": "aws_iam_role.eks_auto"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.eks_auto_additional",
+            "to": "aws_iam_role.eks_auto",
+            "source": "aws_iam_role_policy_attachment.eks_auto_additional",
+            "target": "aws_iam_role.eks_auto"
+        },
+        {
+            "from": "time_sleep.this",
+            "to": "aws_eks_cluster.this",
+            "source": "time_sleep.this",
+            "target": "aws_eks_cluster.this"
+        },
+        {
+            "from": "aws_security_group_rule.node",
+            "to": "aws_security_group.node",
+            "source": "aws_security_group_rule.node",
+            "target": "aws_security_group.node"
+        },
+        {
+            "from": "aws_vpc_peering_connection_accepter.peer",
+            "to": "aws_vpc_peering_connection.remote_node",
+            "source": "aws_vpc_peering_connection_accepter.peer",
+            "target": "aws_vpc_peering_connection.remote_node"
+        },
+        {
+            "from": "aws_route.peer",
+            "to": "aws_vpc_peering_connection.remote_node",
+            "source": "aws_route.peer",
+            "target": "aws_vpc_peering_connection.remote_node"
+        },
+        {
+            "from": "local_file.join",
+            "to": "local_file.key_pem",
+            "source": "local_file.join",
+            "target": "local_file.key_pem"
+        },
+        {
+            "from": "local_file.join",
+            "to": "aws_ssm_activation.this",
+            "source": "local_file.join",
+            "target": "aws_ssm_activation.this"
+        },
+        {
+            "from": "aws_vpc_security_group_ingress_rule.remote_node",
+            "to": "aws_security_group.remote_node",
+            "source": "aws_vpc_security_group_ingress_rule.remote_node",
+            "target": "aws_security_group.remote_node"
+        },
+        {
+            "from": "aws_vpc_security_group_egress_rule.remote_node",
+            "to": "aws_security_group.remote_node",
+            "source": "aws_vpc_security_group_egress_rule.remote_node",
+            "target": "aws_security_group.remote_node"
+        },
+        {
+            "from": "aws_route.remote_node_private",
+            "to": "aws_vpc_peering_connection.remote_node",
+            "source": "aws_route.remote_node_private",
+            "target": "aws_vpc_peering_connection.remote_node"
+        },
+        {
+            "from": "aws_route.remote_node_public",
+            "to": "aws_vpc_peering_connection.remote_node",
+            "source": "aws_route.remote_node_public",
+            "target": "aws_vpc_peering_connection.remote_node"
+        },
+        {
+            "from": "tls_self_signed_cert.example",
+            "to": "tls_private_key.example",
+            "source": "tls_self_signed_cert.example",
+            "target": "tls_private_key.example"
+        },
+        {
+            "from": "aws_kms_alias.this",
+            "to": "aws_kms_key.this",
+            "source": "aws_kms_alias.this",
+            "target": "aws_kms_key.this"
+        },
+        {
+            "from": "aws_kms_alias.this",
+            "to": "aws_kms_external_key.this",
+            "source": "aws_kms_alias.this",
+            "target": "aws_kms_external_key.this"
+        },
+        {
+            "from": "aws_kms_alias.this",
+            "to": "aws_kms_replica_external_key.this",
+            "source": "aws_kms_alias.this",
+            "target": "aws_kms_replica_external_key.this"
+        },
+        {
+            "from": "aws_kms_alias.this",
+            "to": "aws_kms_replica_key.this",
+            "source": "aws_kms_alias.this",
+            "target": "aws_kms_replica_key.this"
+        },
+        {
+            "from": "aws_kms_grant.this",
+            "to": "aws_kms_key.this",
+            "source": "aws_kms_grant.this",
+            "target": "aws_kms_key.this"
+        },
+        {
+            "from": "aws_kms_grant.this",
+            "to": "aws_kms_external_key.this",
+            "source": "aws_kms_grant.this",
+            "target": "aws_kms_external_key.this"
+        },
+        {
+            "from": "aws_kms_grant.this",
+            "to": "aws_kms_replica_external_key.this",
+            "source": "aws_kms_grant.this",
+            "target": "aws_kms_replica_external_key.this"
+        },
+        {
+            "from": "aws_kms_grant.this",
+            "to": "aws_kms_replica_key.this",
+            "source": "aws_kms_grant.this",
+            "target": "aws_kms_replica_key.this"
+        },
+        {
+            "from": "aws_launch_template.this",
+            "to": "aws_iam_role_policy_attachment.this",
+            "source": "aws_launch_template.this",
+            "target": "aws_iam_role_policy_attachment.this"
+        },
+        {
+            "from": "aws_launch_template.this",
+            "to": "aws_iam_role_policy_attachment.additional",
+            "source": "aws_launch_template.this",
+            "target": "aws_iam_role_policy_attachment.additional"
+        },
+        {
+            "from": "aws_launch_template.this",
+            "to": "aws_placement_group.this",
+            "source": "aws_launch_template.this",
+            "target": "aws_placement_group.this"
+        },
+        {
+            "from": "aws_eks_node_group.this",
+            "to": "aws_iam_role.this",
+            "source": "aws_eks_node_group.this",
+            "target": "aws_iam_role.this"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.this",
+            "to": "aws_iam_role.this",
+            "source": "aws_iam_role_policy_attachment.this",
+            "target": "aws_iam_role.this"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.additional",
+            "to": "aws_iam_role.this",
+            "source": "aws_iam_role_policy_attachment.additional",
+            "target": "aws_iam_role.this"
+        },
+        {
+            "from": "aws_iam_role_policy.this",
+            "to": "aws_iam_role.this",
+            "source": "aws_iam_role_policy.this",
+            "target": "aws_iam_role.this"
+        },
+        {
+            "from": "aws_vpc_security_group_ingress_rule.this",
+            "to": "aws_security_group.this",
+            "source": "aws_vpc_security_group_ingress_rule.this",
+            "target": "aws_security_group.this"
+        },
+        {
+            "from": "aws_vpc_security_group_egress_rule.this",
+            "to": "aws_security_group.this",
+            "source": "aws_vpc_security_group_egress_rule.this",
+            "target": "aws_security_group.this"
+        },
+        {
+            "from": "aws_launch_template.this",
+            "to": "aws_iam_role_policy_attachment.this",
+            "source": "aws_launch_template.this",
+            "target": "aws_iam_role_policy_attachment.this"
+        },
+        {
+            "from": "aws_launch_template.this",
+            "to": "aws_iam_instance_profile.this",
+            "source": "aws_launch_template.this",
+            "target": "aws_iam_instance_profile.this"
+        },
+        {
+            "from": "aws_launch_template.this",
+            "to": "aws_iam_role_policy_attachment.additional",
+            "source": "aws_launch_template.this",
+            "target": "aws_iam_role_policy_attachment.additional"
+        },
+        {
+            "from": "aws_launch_template.this",
+            "to": "aws_placement_group.this",
+            "source": "aws_launch_template.this",
+            "target": "aws_placement_group.this"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.this",
+            "to": "aws_iam_role.this",
+            "source": "aws_iam_role_policy_attachment.this",
+            "target": "aws_iam_role.this"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.additional",
+            "to": "aws_iam_role.this",
+            "source": "aws_iam_role_policy_attachment.additional",
+            "target": "aws_iam_role.this"
+        },
+        {
+            "from": "aws_iam_instance_profile.this",
+            "to": "aws_iam_role.this",
+            "source": "aws_iam_instance_profile.this",
+            "target": "aws_iam_role.this"
+        },
+        {
+            "from": "aws_iam_role_policy.this",
+            "to": "aws_iam_role.this",
+            "source": "aws_iam_role_policy.this",
+            "target": "aws_iam_role.this"
+        },
+        {
+            "from": "aws_eks_access_entry.this",
+            "to": "aws_iam_role.this",
+            "source": "aws_eks_access_entry.this",
+            "target": "aws_iam_role.this"
+        },
+        {
+            "from": "aws_vpc_security_group_ingress_rule.this",
+            "to": "aws_security_group.this",
+            "source": "aws_vpc_security_group_ingress_rule.this",
+            "target": "aws_security_group.this"
+        },
+        {
+            "from": "aws_vpc_security_group_egress_rule.this",
+            "to": "aws_security_group.this",
+            "source": "aws_vpc_security_group_egress_rule.this",
+            "target": "aws_security_group.this"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.this",
+            "to": "aws_iam_role.this",
+            "source": "aws_iam_role_policy_attachment.this",
+            "target": "aws_iam_role.this"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.additional",
+            "to": "aws_iam_role.this",
+            "source": "aws_iam_role_policy_attachment.additional",
+            "target": "aws_iam_role.this"
+        },
+        {
+            "from": "aws_iam_role_policy.this",
+            "to": "aws_iam_role.this",
+            "source": "aws_iam_role_policy.this",
+            "target": "aws_iam_role.this"
+        },
+        {
+            "from": "aws_eks_fargate_profile.this",
+            "to": "aws_iam_role.this",
+            "source": "aws_eks_fargate_profile.this",
+            "target": "aws_iam_role.this"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.this",
+            "to": "aws_iam_role.this",
+            "source": "aws_iam_role_policy_attachment.this",
+            "target": "aws_iam_role.this"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.this",
+            "to": "aws_iam_policy.this",
+            "source": "aws_iam_role_policy_attachment.this",
+            "target": "aws_iam_policy.this"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.intermediate",
+            "to": "aws_iam_role.this",
+            "source": "aws_iam_role_policy_attachment.intermediate",
+            "target": "aws_iam_role.this"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.intermediate",
+            "to": "aws_iam_policy.intermediate",
+            "source": "aws_iam_role_policy_attachment.intermediate",
+            "target": "aws_iam_policy.intermediate"
+        },
+        {
+            "from": "aws_iam_role_policy.controller",
+            "to": "aws_iam_role.controller",
+            "source": "aws_iam_role_policy.controller",
+            "target": "aws_iam_role.controller"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.controller",
+            "to": "aws_iam_policy.controller",
+            "source": "aws_iam_role_policy_attachment.controller",
+            "target": "aws_iam_policy.controller"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.controller",
+            "to": "aws_iam_role.controller",
+            "source": "aws_iam_role_policy_attachment.controller",
+            "target": "aws_iam_role.controller"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.controller_additional",
+            "to": "aws_iam_role.controller",
+            "source": "aws_iam_role_policy_attachment.controller_additional",
+            "target": "aws_iam_role.controller"
+        },
+        {
+            "from": "aws_eks_pod_identity_association.karpenter",
+            "to": "aws_iam_role.controller",
+            "source": "aws_eks_pod_identity_association.karpenter",
+            "target": "aws_iam_role.controller"
+        },
+        {
+            "from": "aws_sqs_queue_policy.this",
+            "to": "aws_sqs_queue.this",
+            "source": "aws_sqs_queue_policy.this",
+            "target": "aws_sqs_queue.this"
+        },
+        {
+            "from": "aws_cloudwatch_event_target.this",
+            "to": "aws_cloudwatch_event_rule.this",
+            "source": "aws_cloudwatch_event_target.this",
+            "target": "aws_cloudwatch_event_rule.this"
+        },
+        {
+            "from": "aws_cloudwatch_event_target.this",
+            "to": "aws_sqs_queue.this",
+            "source": "aws_cloudwatch_event_target.this",
+            "target": "aws_sqs_queue.this"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.node",
+            "to": "aws_iam_role.node",
+            "source": "aws_iam_role_policy_attachment.node",
+            "target": "aws_iam_role.node"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.node_additional",
+            "to": "aws_iam_role.node",
+            "source": "aws_iam_role_policy_attachment.node_additional",
+            "target": "aws_iam_role.node"
+        },
+        {
+            "from": "aws_eks_access_entry.node",
+            "to": "aws_sqs_queue_policy.this",
+            "source": "aws_eks_access_entry.node",
+            "target": "aws_sqs_queue_policy.this"
+        },
+        {
+            "from": "aws_eks_access_entry.node",
+            "to": "aws_iam_role.node",
+            "source": "aws_eks_access_entry.node",
+            "target": "aws_iam_role.node"
+        },
+        {
+            "from": "aws_iam_instance_profile.this",
+            "to": "aws_iam_role.node",
+            "source": "aws_iam_instance_profile.this",
+            "target": "aws_iam_role.node"
+        }
+    ],
+    "unassigned_findings": [
+        {
+            "cfi": "80b449ecc46dafce134aa3ae681abcac8b9e32b904044053dcc55cd53c674faf",
+            "rule_id": "AVD-AWS-0342",
+            "normalized_cis": "CIS-AWS-1.3.3",
+            "resource_id": "unknown_resource",
+            "message": "Artifact: modules/karpenter/policy.tf\nType: terraform\nVulnerability AVD-AWS-0342\nSeverity: MEDIUM\nMessage: IAM policy allows 'iam:PassRole' action\nLink: [AVD-AWS-0342](https://avd.aquasec.com/misconfig/avd-aws-0342)",
+            "level": "warning",
+            "file_path": "modules/karpenter/policy.tf",
+            "start_line": 1,
+            "tool_name": "Trivy",
+            "sources": [
+                "Trivy"
+            ],
+            "correlation_layer": 0
+        }
+    ],
+    "correlation_metadata": {
+        "assigned_findings": 5,
+        "unassigned_findings_count": 1,
+        "nodes_with_issues_count": 2,
+        "total_unique_findings": 6,
+        "layer_stats": {
+            "1": 34,
+            "2": 0,
+            "3": 0,
+            "0": 1
+        }
+    },
+    "api_metadata": {
+        "status": "success",
+        "message": "Pipeline completado exitosamente para proyecto 'eks_pr_27'",
+        "project_name": "eks_pr_27",
+        "project_directory": "./terraform-aws-eks",
+        "scanners_used": 1,
+        "checkov_success": false,
+        "trivy_success": true,
+        "total_findings_original": 101,
+        "total_findings_unique": 6,
+        "duplicates_removed": 95,
+        "deduplication_method": "CFI_CIS+SARIF_FP",
+        "total_nodes": 135,
+        "total_edges": 83,
+        "correlation_metadata": {
+            "assigned_findings": 5,
+            "unassigned_findings_count": 1,
+            "nodes_with_issues_count": 2,
+            "total_unique_findings": 6,
+            "layer_stats": {
+                "1": 34,
+                "2": 0,
+                "3": 0,
+                "0": 1
+            }
+        },
+        "unassigned_findings_count": 1
+    }
+}
