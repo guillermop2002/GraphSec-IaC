@@ -58,63 +58,55 @@ class CheckovScanner(Scanner):
     
     def __init__(self):
         super().__init__("Checkov")
-        # Detectar y usar el intérprete correcto (priorizar venv del proyecto)
-        self.python_exec = self._find_python_executable()
+        self.timeout = 300  # Timeout de 5 minutos
     
     def _find_python_executable(self) -> str:
         """
         Encuentra el intérprete de Python correcto.
         Prioriza el venv del proyecto, luego el intérprete actual.
-        Usa rutas absolutas para garantizar portabilidad después de reiniciar.
+        Compatible con Windows y Linux.
         """
-        # Paso 1: Si ya estamos en un venv, verificar que sea el del proyecto
+        # Paso 1: Si ya estamos en un venv, usar el intérprete actual
         current_exec = os.path.abspath(sys.executable)
         if hasattr(sys, 'real_prefix') or (hasattr(sys, 'base_prefix') and sys.prefix != sys.base_prefix):
-            # Estamos en un venv, verificar si es el del proyecto
-            module_dir = os.path.dirname(os.path.abspath(__file__))
-            project_root = os.path.dirname(module_dir)
-            venv_scripts = os.path.join(project_root, 'venv', 'Scripts')
-            venv_python = os.path.join(venv_scripts, 'python.exe')
-            
-            # Normalizar rutas para comparación
-            if os.path.normpath(os.path.dirname(current_exec)) == os.path.normpath(venv_scripts):
-                logger.info(f"Python ejecutándose en venv del proyecto: {current_exec}")
-                return current_exec
+            # Estamos en un venv
+            logger.info(f"Python ejecutándose en venv: {current_exec}")
+            return current_exec
         
-        # Paso 2: Buscar el venv del proyecto usando rutas absolutas
+        # Paso 2: Buscar el venv del proyecto (compatible con Windows y Linux)
         module_dir = os.path.dirname(os.path.abspath(__file__))
         project_root = os.path.dirname(module_dir)  # Subir un nivel desde modules/
-        venv_python = os.path.abspath(os.path.join(project_root, 'venv', 'Scripts', 'python.exe'))
         
-        if os.path.exists(venv_python):
-            logger.info(f"Usando Python del venv del proyecto: {venv_python}")
-            return venv_python
+        # Intentar Windows primero (venv/Scripts/python.exe)
+        venv_python_windows = os.path.join(project_root, 'venv', 'Scripts', 'python.exe')
+        if os.path.exists(venv_python_windows):
+            logger.info(f"Usando Python del venv del proyecto (Windows): {venv_python_windows}")
+            return os.path.abspath(venv_python_windows)
+        
+        # Intentar Linux/Mac (venv/bin/python)
+        venv_python_unix = os.path.join(project_root, 'venv', 'bin', 'python')
+        if os.path.exists(venv_python_unix):
+            logger.info(f"Usando Python del venv del proyecto (Linux/Mac): {venv_python_unix}")
+            return os.path.abspath(venv_python_unix)
         
         # Paso 3: Fallback: usar el intérprete actual (pero avisar)
-        logger.warning(f"Venv del proyecto no encontrado en {venv_python}, usando Python actual: {sys.executable}")
+        logger.warning(f"Venv del proyecto no encontrado, usando Python actual: {sys.executable}")
         return os.path.abspath(sys.executable)
     
     async def scan(self, directory_path: str, output_file: str) -> bool:
         """
-        Ejecuta un escaneo de seguridad usando Checkov sobre un directorio de Terraform
-        y guarda los resultados en formato SARIF (asíncrono).
-        
-        Args:
-            directory_path (str): Ruta al directorio que contiene los archivos de Terraform
-            output_file (str): Ruta del archivo donde guardar el reporte SARIF
-            
-        Returns:
-            bool: True si el escaneo es exitoso, False si falla
+        Ejecuta Checkov usando 'python -m checkov', que es agnóstico al SO.
         """
+        # Obtener el ejecutable de Python correcto (el del venv o el global)
+        python_exec = self._find_python_executable()
         
         # Verificar intérprete activo
-        if not os.path.exists(self.python_exec):
-            logger.error("Intérprete de Python no encontrado.")
+        if not os.path.exists(python_exec):
+            logger.error(f"Intérprete de Python no encontrado: {python_exec}")
             return False
         
         # Convertir a ruta absoluta
         directory_path = os.path.abspath(directory_path)
-        output_file = os.path.abspath(output_file)
         
         # Verificar que el directorio existe
         if not os.path.exists(directory_path):
@@ -127,143 +119,76 @@ class CheckovScanner(Scanner):
             logger.error(f"No se encontraron archivos .tf en {directory_path}")
             return False
         
-        # Construir el comando Checkov
-        # Método más robusto: usar 'python -m checkov' que garantiza usar el módulo del venv correcto
-        # Esto funciona incluso después de reiniciar porque usa rutas absolutas
+        # Definir el directorio de salida (Checkov crea un subdirectorio)
+        output_dir = os.path.abspath(output_file)
+        # El archivo SARIF real estará dentro de este directorio
+        actual_sarif_file = os.path.join(output_dir, "results_sarif.sarif")
         
-        # Verificar primero si checkov está disponible como módulo
-        venv_scripts_dir = os.path.dirname(self.python_exec)
-        checkov_cmd_path = os.path.join(venv_scripts_dir, "checkov.exe")
-        checkov_cmd_alt = os.path.join(venv_scripts_dir, "checkov.cmd")
+        # Limpiar el directorio de salida si ya existe
+        if os.path.exists(output_dir):
+            import shutil
+            shutil.rmtree(output_dir)
         
-        # Preparar variables de entorno
+        cmd = [
+            python_exec,
+            "-m", "checkov",
+            "--directory", directory_path,
+            "--output", "sarif",
+            "--output-file-path", actual_sarif_file  # Apuntar al fichero SARIF real
+        ]
+        
+        # Forzar UTF-8 para que Checkov lea ficheros correctamente
         env = os.environ.copy()
         env['PYTHONIOENCODING'] = 'utf-8'
         env['PYTHONUTF8'] = '1'
         
-        if os.path.exists(checkov_cmd_path):
-            # Usar el ejecutable .exe directamente (más portable)
-            cmd = [
-                checkov_cmd_path,
-                "--directory", directory_path,
-                "--output", "sarif",
-                "--output-file-path", output_file
-            ]
-        elif os.path.exists(checkov_cmd_alt):
-            # Usar el wrapper .cmd pero modificar PATH para que use nuestro Python
-            cmd = [
-                checkov_cmd_alt,
-                "--directory", directory_path,
-                "--output", "sarif",
-                "--output-file-path", output_file
-            ]
-            # Modificar PATH para que checkov.cmd encuentre nuestro Python del venv primero
-            env['PATH'] = venv_scripts_dir + os.pathsep + env.get('PATH', '')
-        else:
-            # Fallback más robusto: usar 'python -m checkov' (recomendado)
-            # Esto garantiza que use el módulo checkov del venv correcto
-            cmd = [
-                self.python_exec,
-                "-m", "checkov",
-                "--directory", directory_path,
-                "--output", "sarif",
-                "--output-file-path", output_file
-            ]
+        import time as time_module
+        scan_start = time_module.time()
+        logger.info(f"[{time_module.strftime('%H:%M:%S')}] Ejecutando escaneo de seguridad con {self.name}: {' '.join(cmd[:5])} ...")
         
         try:
-            import time as time_module
-            scan_start = time_module.time()
-            logger.info(f"[{time_module.strftime('%H:%M:%S')}] Ejecutando escaneo de seguridad con {self.name}: {' '.join(cmd[:3])} ...")
-            
-            # Ejecutar el comando de forma asíncrona usando asyncio.create_subprocess_exec
             process = await asyncio.create_subprocess_exec(
                 *cmd,
                 stdout=asyncio.subprocess.PIPE,
                 stderr=asyncio.subprocess.PIPE,
-                cwd=os.path.dirname(__file__),
                 env=env
             )
             
-            # Esperar a que termine y capturar salida (con timeout)
-            try:
-                stdout, stderr = await asyncio.wait_for(
-                    process.communicate(),
-                    timeout=300  # Timeout de 5 minutos
-                )
-            except asyncio.TimeoutError:
-                logger.error(f"{self.name} excedió el timeout de 5 minutos")
-                process.kill()
-                await process.wait()
+            stdout, stderr = await asyncio.wait_for(process.communicate(), timeout=self.timeout if hasattr(self, 'timeout') else 300)
+            
+            stdout_decoded = stdout.decode('utf-8', errors='ignore')
+            stderr_decoded = stderr.decode('utf-8', errors='ignore')
+            
+            if process.returncode != 0 and process.returncode != 1:
+                # Checkov devuelve código 1 cuando encuentra vulnerabilidades (normal)
+                logger.error(f"Error al ejecutar {self.name}. Código de retorno: {process.returncode}")
+                logger.error(f"Salida de Checkov: {stdout_decoded[-500:]}")
+                logger.error(f"Error de Checkov: {stderr_decoded[-500:]}")
                 return False
             
-            # Decodificar salida
-            stdout_text = stdout.decode('utf-8', errors='ignore')
-            stderr_text = stderr.decode('utf-8', errors='ignore')
-            
-            # Crear un objeto similar a subprocess.run para compatibilidad
-            class ProcessResult:
-                def __init__(self, returncode, stdout, stderr):
-                    self.returncode = returncode
-                    self.stdout = stdout
-                    self.stderr = stderr
-            
-            result = ProcessResult(process.returncode, stdout_text, stderr_text)
-            
-            # Checkov devuelve código de salida 1 cuando encuentra vulnerabilidades
-            # Esto es normal, no es un error
-            if result.returncode not in [0, 1]:
-                logger.error(f"{self.name} falló con código de salida {result.returncode}")
-                logger.error(f"Error: {result.stderr}")
-                return False
-            
-            # Checkov puede crear el archivo directamente o en un subdirectorio
-            # Intentar varias ubicaciones posibles
-            actual_output_file = None
-            
-            # 1. Buscar en el subdirectorio (comportamiento antiguo de Checkov)
-            potential_dir_file = os.path.join(output_file, 'results_sarif.sarif')
-            if os.path.exists(potential_dir_file):
-                actual_output_file = potential_dir_file
-            # 2. Buscar el archivo directamente (comportamiento nuevo de Checkov)
-            elif os.path.exists(output_file):
-                actual_output_file = output_file
-            else:
-                logger.error(f"El archivo de salida {output_file} no se creó")
-                logger.error(f"Salida de {self.name}: {result.stdout[-500:] if result.stdout else '(sin salida)'}")
-                logger.error(f"Error de {self.name}: {result.stderr[-500:] if result.stderr else '(sin errores)'}")
+            # Verificar que el archivo SARIF se creó
+            if not os.path.exists(actual_sarif_file):
+                logger.error(f"Checkov se ejecutó pero el archivo SARIF no se encontró en: {actual_sarif_file}")
+                logger.error(f"Logs de Checkov: {stdout_decoded[-500:]}")
+                logger.error(f"Errores de Checkov: {stderr_decoded[-500:]}")
                 return False
             
             # Verificar que el archivo no está vacío
-            if os.path.getsize(actual_output_file) == 0:
-                logger.error(f"El archivo de salida {actual_output_file} está vacío")
+            if os.path.getsize(actual_sarif_file) == 0:
+                logger.error(f"El archivo SARIF {actual_sarif_file} está vacío")
                 return False
             
-            # El archivo está en actual_output_file, que es la ubicación real donde Checkov lo guardó
             scan_elapsed = time_module.time() - scan_start
-            logger.info(f"[{time_module.strftime('%H:%M:%S')}] ¡Éxito! Escaneo de seguridad con {self.name} completado en {scan_elapsed:.2f}s. El informe se ha guardado en {actual_output_file}")
+            logger.info(f"[{time_module.strftime('%H:%M:%S')}] ¡Éxito! Escaneo con {self.name} completado en {scan_elapsed:.2f}s. Informe guardado en {actual_sarif_file}")
             return True
             
-        except FileNotFoundError:
-            logger.error(f"{self.name} no está instalado o no se encuentra en el PATH")
+        except asyncio.TimeoutError:
+            logger.error(f"Timeout de {self.name} después de 300 segundos.")
             return False
         except Exception as e:
             logger.error(f"Error inesperado con {self.name}: {e}")
             import traceback
             logger.error(traceback.format_exc())
-            return False
-            
-        except subprocess.TimeoutExpired:
-            logger.error(f"El comando {self.name} excedió el tiempo límite de 2 minutos")
-            return False
-            
-        except subprocess.CalledProcessError as e:
-            logger.error(f"Error al ejecutar {self.name}: {e}")
-            logger.error(f"Salida: {e.stdout}")
-            logger.error(f"Error: {e.stderr}")
-            return False
-            
-        except Exception as e:
-            logger.error(f"Error inesperado con {self.name}: {e}")
             return False
     
     def get_results_summary(self, results_file: str) -> dict:
