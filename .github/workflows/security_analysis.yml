@@ -43,6 +43,9 @@ jobs:
           python -m pip install -r requirements.txt
           # Forzar instalación de checkov explícitamente
           python -m pip install checkov
+          # Verificar que checkov está instalado y disponible
+          which checkov || echo "Checkov no encontrado en PATH"
+          checkov --version || echo "Checkov no se puede ejecutar"
       
       # 6. Clonar el repositorio de VPC (para prueba)
       - name: Clonar el repositorio de VPC (para prueba)

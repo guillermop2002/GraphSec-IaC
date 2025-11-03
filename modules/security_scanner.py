@@ -124,6 +124,9 @@ class CheckovScanner(Scanner):
         output_dir = os.path.dirname(actual_sarif_file)
         # Asegurarse de que el directorio de salida exista
         os.makedirs(output_dir, exist_ok=True)
+        logger.info(f"Directorio de salida SARIF: {output_dir}")
+        logger.info(f"Archivo SARIF esperado: {actual_sarif_file}")
+        
         # Limpiar el *archivo* antiguo si existe, no el directorio
         if os.path.exists(actual_sarif_file):
             os.remove(actual_sarif_file)
@@ -133,6 +136,7 @@ class CheckovScanner(Scanner):
         if os.path.isdir(old_dir_style):
             shutil.rmtree(old_dir_style)
         
+        # Usar ruta absoluta para el output-file-path
         cmd = [
             checkov_cmd,
             "--directory", ".",  # <- Ejecutar desde el CWD
@@ -140,6 +144,7 @@ class CheckovScanner(Scanner):
             "--output-file-path", actual_sarif_file,
             "--skip-path", ".git"
         ]
+        logger.info(f"Comando Checkov completo: {' '.join(cmd)}")
         
         env = os.environ.copy()
         env['PYTHONIOENCODING'] = 'utf-8'
@@ -160,14 +165,28 @@ class CheckovScanner(Scanner):
             
             stdout_decoded = stdout.decode('utf-8', errors='ignore')
             stderr_decoded = stderr.decode('utf-8', errors='ignore')
-            if process.returncode != 0:
+            
+            # Checkov devuelve código 1 cuando encuentra vulnerabilidades (éxito)
+            # Solo considerar error si el código es diferente de 0 y 1
+            if process.returncode != 0 and process.returncode != 1:
                 logger.error(f"Error al ejecutar Checkov. Código: {process.returncode}")
-                logger.error(f"Error de Checkov: {stderr_decoded}")
+                logger.error(f"Error de Checkov (stderr): {stderr_decoded}")
+                logger.error(f"Salida de Checkov (stdout): {stdout_decoded}")
                 return False
+            
+            # Verificar si el archivo SARIF se creó (incluso si el código fue 1)
             if not os.path.exists(actual_sarif_file):
-                logger.error(f"Checkov se ejecutó pero el SARIF no se encontró en: {actual_sarif_file}")
-                logger.error(f"Logs de Checkov: {stdout_decoded}")
+                logger.error(f"Checkov se ejecutó (código {process.returncode}) pero el SARIF no se encontró en: {actual_sarif_file}")
+                logger.error(f"Logs de Checkov (stdout): {stdout_decoded}")
+                logger.error(f"Logs de Checkov (stderr): {stderr_decoded}")
+                # Debug: listar archivos en el directorio de salida
+                if os.path.exists(output_dir):
+                    logger.error(f"Archivos en directorio de salida: {os.listdir(output_dir)}")
                 return False
+            
+            # Si llegamos aquí, Checkov tuvo éxito (código 0 o 1) y el archivo existe
+            if process.returncode == 1:
+                logger.info(f"Checkov encontró vulnerabilidades (código 1), pero el SARIF se generó correctamente")
             scan_elapsed = time_module.time() - scan_start
             logger.info(f"[{time_module.strftime('%H:%M:%S')}] ¡Éxito! Checkov completado en {scan_elapsed:.2f}s.")
             return True
