@@ -95,7 +95,9 @@ class CheckovScanner(Scanner):
     
     async def scan(self, directory_path: str, output_file: str) -> bool:
         """
-        Ejecuta Checkov usando 'python -m checkov', que es agnóstico al SO.
+        Ejecuta Checkov llamando al binario directamente (agnóstico al SO).
+        En modo local/VENV: busca el binario en la carpeta del venv.
+        En modo CI: usa el binario del PATH (instalado por el workflow).
         """
         # Obtener el ejecutable de Python correcto (el del venv o el global)
         python_exec = self._find_python_executable()
