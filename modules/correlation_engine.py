@@ -984,6 +984,40 @@ def attach_findings_to_graph(graph_data: Dict[str, Any], unique_findings: List[D
     # Calcular nodos vulnerables (nodos que tienen al menos 1 hallazgo)
     nodes_with_issues_count = sum(1 for n in nodes if len(n.get("security_issues", [])) > 0)
     
+    # LOGGING DETALLADO: Mostrar información completa de cada hallazgo no asignado
+    if unassigned:
+        logger.warning("=" * 80)
+        logger.warning(f"[DIAGNÓSTICO] HALLAZGOS NO ASIGNADOS: {len(unassigned)} hallazgos no pudieron ser correlacionados")
+        logger.warning("=" * 80)
+        for i, uf in enumerate(unassigned, 1):
+            logger.warning(f"\n[DIAGNÓSTICO] Hallazgo No Asignado #{i}:")
+            logger.warning(f"  📋 Rule ID: {uf.get('rule_id', 'N/A')}")
+            logger.warning(f"  📊 Normalized CIS: {uf.get('normalized_cis', 'N/A')}")
+            logger.warning(f"  🔧 Tool: {uf.get('tool_name', 'N/A')}")
+            logger.warning(f"  📁 Archivo: {uf.get('file_path', 'N/A')}")
+            logger.warning(f"  📍 Línea: {uf.get('start_line', 'N/A')}")
+            logger.warning(f"  ⚠️ Severidad: {uf.get('level', 'N/A')}")
+            logger.warning(f"  🔗 Capa de correlación intentada: {uf.get('correlation_layer', 'N/A')}")
+            logger.warning(f"  🆔 Resource ID buscado: {uf.get('resource_id', 'N/A')}")
+            
+            # Mensaje del hallazgo (truncado si es muy largo)
+            message = uf.get('message', 'N/A')
+            if len(message) > 200:
+                message = message[:200] + "..."
+            logger.warning(f"  💬 Mensaje: {message}")
+            
+            # Verificar si hay nodos en el mismo archivo
+            if project_root:
+                finding_path_abs = normalize_file_path(uf.get('file_path', ''), project_root)
+                nodes_in_same_file = [n for n in nodes if normalize_file_path(n.get('file', ''), project_root) == finding_path_abs]
+                if nodes_in_same_file:
+                    logger.warning(f"  ℹ️  Hay {len(nodes_in_same_file)} nodo(s) en este archivo, pero ninguno coincidió:")
+                    for node in nodes_in_same_file[:3]:
+                        logger.warning(f"      - {node.get('id')} (tipo: {node.get('block_type', 'N/A')}, líneas: {node.get('start_line')}-{node.get('end_line')})")
+                else:
+                    logger.warning(f"  ❌ NO HAY NODOS en este archivo (el parser no encontró recursos en este archivo)")
+        logger.warning("=" * 80)
+    
     enriched_graph["unassigned_findings"] = unassigned
     enriched_graph["correlation_metadata"] = {
         "assigned_findings": assigned_count,
