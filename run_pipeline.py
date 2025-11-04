@@ -30,7 +30,7 @@ os.makedirs(CACHE_DIR, exist_ok=True)
 
 # Versión del pipeline (incrementar cuando cambie la lógica de generación de grafo/filtrado)
 # Esto invalida el caché automáticamente cuando cambiamos la lógica
-PIPELINE_VERSION = "v19.3"  # Removido filtro os.path.exists que eliminaba hallazgos válidos
+PIPELINE_VERSION = "v19.3"  # Añadido logging detallado para diagnóstico
 
 
 class PipelineError(Exception):
@@ -127,6 +127,11 @@ def get_cached_or_generate_graph(directory: str, project_name: str) -> Dict[str,
         resource['id'] = unique_id
     
     edges = build_edges(parsed_resources, name_to_id_map, project_root_abs, nodes)
+    
+    # Log de diagnóstico
+    logger.info(f"[DIAGNÓSTICO] Grafo generado: {len(nodes)} nodos, {len(edges)} aristas")
+    logger.info(f"[DIAGNÓSTICO] Ejemplos de IDs de nodos: {[n.get('id') for n in nodes[:5]]}")
+    logger.info(f"[DIAGNÓSTICO] Ejemplos de simple_name: {[n.get('simple_name') for n in nodes[:5]]}")
     
     # VALIDACIÓN: Verificar que todos los IDs sean únicos
     node_ids = [n.get("id") for n in nodes]
@@ -314,6 +319,8 @@ async def run_analysis_pipeline(directory: str, project_name: str) -> Dict[str, 
         
         all_raw_findings = []
         scanners_used = 0
+        checkov_findings = []
+        trivy_findings = []
         
         if checkov_success and checkov_output_path:
             # Si checkov_output_path es un directorio (formato antiguo de Checkov), buscar el archivo SARIF dentro
@@ -326,7 +333,11 @@ async def run_analysis_pipeline(directory: str, project_name: str) -> Dict[str, 
                 checkov_findings = load_sarif_results(checkov_sarif_file)
                 all_raw_findings.extend(checkov_findings)
                 scanners_used += 1
-                logger.info(f"Cargados {len(checkov_findings)} hallazgos desde Checkov")
+                logger.info(f"[DIAGNÓSTICO] Checkov: {len(checkov_findings)} hallazgos cargados desde {checkov_sarif_file}")
+                # Log de ejemplo de hallazgos
+                if checkov_findings:
+                    sample = checkov_findings[0]
+                    logger.info(f"[DIAGNÓSTICO] Ejemplo hallazgo Checkov: rule_id={sample.get('rule_id')}, file={sample.get('file_path')}, line={sample.get('start_line')}")
             else:
                 logger.warning(f"Archivo SARIF de Checkov no encontrado: {checkov_sarif_file}")
         
@@ -335,14 +346,19 @@ async def run_analysis_pipeline(directory: str, project_name: str) -> Dict[str, 
                 trivy_findings = load_sarif_results(trivy_output_path)
                 all_raw_findings.extend(trivy_findings)
                 scanners_used += 1
-                logger.info(f"Cargados {len(trivy_findings)} hallazgos desde Trivy")
+                logger.info(f"[DIAGNÓSTICO] Trivy: {len(trivy_findings)} hallazgos cargados desde {trivy_output_path}")
+                # Log de ejemplo de hallazgos
+                if trivy_findings:
+                    sample = trivy_findings[0]
+                    logger.info(f"[DIAGNÓSTICO] Ejemplo hallazgo Trivy: rule_id={sample.get('rule_id')}, file={sample.get('file_path')}, line={sample.get('start_line')}")
             else:
                 logger.warning(f"Archivo SARIF de Trivy no encontrado: {trivy_output_path}")
         
         if not all_raw_findings:
             raise PipelineError("Error: No se pudieron cargar los hallazgos de seguridad")
         
-        logger.info(f"Total de hallazgos cargados: {len(all_raw_findings)} desde {scanners_used} escáneres")
+        logger.info(f"[DIAGNÓSTICO] Total de hallazgos cargados: {len(all_raw_findings)} desde {scanners_used} escáneres")
+        logger.info(f"[DIAGNÓSTICO] Distribución por escáner: Checkov={len(checkov_findings)}, Trivy={len(trivy_findings)}")
         
         # ===== ETAPA 4: DE-DUPLICACIÓN Y CORRELACIÓN =====
         logger.info("Ejecutando Etapa 4: Procesado y de-duplicación (CFI)...")

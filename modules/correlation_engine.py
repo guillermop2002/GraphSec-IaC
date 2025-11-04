@@ -710,9 +710,10 @@ def _should_filter_finding(finding: Dict[str, Any], project_root: Optional[str] 
     # Normalizar a ruta absoluta para análisis
     file_path_abs = normalize_file_path(file_path, project_root)
     
-    # COMENTADO: Este filtro estaba eliminando hallazgos válidos en módulos remotos
-    # Los escáneres reportan hallazgos en módulos remotos que están en .terraform/modules/
-    # pero no en el código fuente. Sin embargo, estos hallazgos son válidos y deben procesarse.
+    # Verificar si el archivo existe físicamente (CRÍTICO para módulos remotos)
+    # Los escáneres pueden reportar hallazgos en módulos de Terraform Registry que están en cache
+    # pero no existen en el código fuente del usuario
+    # COMENTADO: Este filtro estaba eliminando hallazgos válidos
     # if file_path_abs and project_root:
     #     if not os.path.exists(file_path_abs):
     #         # El archivo no existe físicamente - probablemente es un módulo remoto en cache
@@ -775,13 +776,26 @@ def process_and_deduplicate_findings(findings: List[Dict[str, Any]], graph_data:
     # FILTRAR HALLAZGOS: Eliminar ruido antes del procesamiento
     filtered_findings = []
     filtered_count = 0
+    filter_reasons = {"yaml": 0, "examples": 0, "tests": 0, "terraform_cache": 0, "other": 0}
+    
     for finding in findings:
         if _should_filter_finding(finding, project_root):
             filtered_count += 1
+            file_path_norm = finding.get("file_path", "").lower()
+            if file_path_norm.endswith((".yml", ".yaml")):
+                filter_reasons["yaml"] += 1
+            elif "/examples/" in file_path_norm or "\\examples\\" in file_path_norm:
+                filter_reasons["examples"] += 1
+            elif "/tests/" in file_path_norm or "\\tests\\" in file_path_norm:
+                filter_reasons["tests"] += 1
+            elif "/.terraform/" in file_path_norm or "\\.terraform\\" in file_path_norm:
+                filter_reasons["terraform_cache"] += 1
+            else:
+                filter_reasons["other"] += 1
             continue
         filtered_findings.append(finding)
     
-    logger.info(f"Filtrado de hallazgos: {filtered_count} hallazgos ignorados (examples/, tests/, .yml), {len(filtered_findings)} procesados")
+    logger.info(f"Filtrado de hallazgos: {filtered_count} ignorados (YAML: {filter_reasons['yaml']}, Examples: {filter_reasons['examples']}, Tests: {filter_reasons['tests']}, .terraform: {filter_reasons['terraform_cache']}, Otros: {filter_reasons['other']}), {len(filtered_findings)} procesados")
 
     # Por CFI global (independiente del nodo) no forzamos dedup; el CFI incluye resource_id
     seen_cfi: Set[str] = set()
@@ -811,12 +825,19 @@ def process_and_deduplicate_findings(findings: List[Dict[str, Any]], graph_data:
         # Contar por capa
         layer_stats[correlation_layer] = layer_stats.get(correlation_layer, 0) + 1
         
-        # Logging para auditoría (solo si no es Capa 1, que es la mayoría)
+        # Logging detallado para diagnóstico
         if correlation_layer != 1:
             logger.info(
-                f"Hallazgo {finding.get('rule_id')} asignado por Capa {correlation_layer} "
-                f"({layer_reason}) -> {resource_id}"
+                f"Hallazgo {finding.get('rule_id')} en {finding.get('file_path')}:{finding.get('start_line')} "
+                f"asignado por Capa {correlation_layer} ({layer_reason}) -> {resource_id}"
             )
+        else:
+            # Log cada 10 hallazgos de Capa 1 para no saturar
+            if layer_stats[1] % 10 == 0:
+                logger.debug(
+                    f"Hallazgo {finding.get('rule_id')} en {finding.get('file_path')}:{finding.get('start_line')} "
+                    f"-> {resource_id} (Capa 1)"
+                )
         cfi = create_canonical_finding_identifier(finding, resource_id)
         if cfi in seen_cfi:
             continue
@@ -859,13 +880,32 @@ def attach_findings_to_graph(graph_data: Dict[str, Any], unique_findings: List[D
     nodes = enriched_graph.get("nodes", [])
     # Usar ID único como clave (no simple_name)
     nodes_by_id = {n.get("id", ""): n for n in nodes}
+    
+    # Log de diagnóstico: mostrar algunos IDs de nodos
+    sample_node_ids = list(nodes_by_id.keys())[:5]
+    logger.info(f"attach_findings_to_graph: {len(nodes)} nodos totales. Ejemplos de IDs: {sample_node_ids}")
+    
     for node in nodes:
         node["security_issues"] = []
 
+    assigned_count_by_id = {}
+    unassigned_resource_ids = []
+    
     for uf in unique_findings:
         rid = uf.get("resource_id")
         if rid in nodes_by_id:
             nodes_by_id[rid]["security_issues"].append(uf)
+            assigned_count_by_id[rid] = assigned_count_by_id.get(rid, 0) + 1
+        else:
+            unassigned_resource_ids.append(rid)
+    
+    # Log de diagnóstico
+    logger.info(f"attach_findings_to_graph: {len(unique_findings)} hallazgos únicos procesados")
+    logger.info(f"attach_findings_to_graph: {len(assigned_count_by_id)} nodos únicos recibieron hallazgos")
+    logger.info(f"attach_findings_to_graph: {len(unassigned_resource_ids)} hallazgos no asignados")
+    if unassigned_resource_ids:
+        sample_unassigned = list(set(unassigned_resource_ids))[:10]
+        logger.warning(f"Ejemplos de resource_ids no encontrados: {sample_unassigned}")
 
     # Calcular asignados y no asignados
     assigned_count = sum(len(n.get("security_issues", [])) for n in nodes)
