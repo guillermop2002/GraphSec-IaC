@@ -2,6 +2,8 @@
 Script CLI para ejecutar el pipeline de análisis de GraphSec-IaC.
 
 Este script puede ser ejecutado desde la línea de comandos o desde una GitHub Action.
+
+# Forzando validación de CI
 """
 
 import os
@@ -30,7 +32,7 @@ os.makedirs(CACHE_DIR, exist_ok=True)
 
 # Versión del pipeline (incrementar cuando cambie la lógica de generación de grafo/filtrado)
 # Esto invalida el caché automáticamente cuando cambiamos la lógica
-PIPELINE_VERSION = "v19.9"  # Debug: Añadir logging detallado de dependencias no encontradas
+PIPELINE_VERSION = "v20.0"  # Forzando validación de CI sobre main
 
 
 class PipelineError(Exception):
