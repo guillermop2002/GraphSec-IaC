@@ -32,7 +32,7 @@ os.makedirs(CACHE_DIR, exist_ok=True)
 
 # Versión del pipeline (incrementar cuando cambie la lógica de generación de grafo/filtrado)
 # Esto invalida el caché automáticamente cuando cambiamos la lógica
-PIPELINE_VERSION = "v20.2"  # Fix: Añadir filtro para módulos vendored (terraform-aws-modules/)
+PIPELINE_VERSION = "v20.2"  # Fix: Normalizar rutas de SARIF y ejecutar escáneres desde project_root
 
 
 class PipelineError(Exception):
@@ -319,6 +319,9 @@ async def run_analysis_pipeline(directory: str, project_name: str) -> Dict[str, 
         # ===== ETAPA 3: CARGA Y COMBINACIÓN =====
         logger.info("Ejecutando Etapa 3: Carga y combinación de resultados...")
         
+        # Obtener project_root para normalizar rutas en los SARIF
+        project_root = os.path.abspath(directory)
+        
         all_raw_findings = []
         scanners_used = 0
         checkov_findings = []
@@ -332,7 +335,8 @@ async def run_analysis_pipeline(directory: str, project_name: str) -> Dict[str, 
                 checkov_sarif_file = checkov_output_path
             
             if os.path.exists(checkov_sarif_file):
-                checkov_findings = load_sarif_results(checkov_sarif_file)
+                # Pasar project_root para normalizar rutas al cargar
+                checkov_findings = load_sarif_results(checkov_sarif_file, project_root=project_root)
                 all_raw_findings.extend(checkov_findings)
                 scanners_used += 1
                 logger.info(f"[DIAGNÓSTICO] Checkov: {len(checkov_findings)} hallazgos cargados desde {checkov_sarif_file}")
@@ -345,7 +349,8 @@ async def run_analysis_pipeline(directory: str, project_name: str) -> Dict[str, 
         
         if trivy_success and trivy_output_path:
             if os.path.exists(trivy_output_path):
-                trivy_findings = load_sarif_results(trivy_output_path)
+                # Pasar project_root para normalizar rutas al cargar
+                trivy_findings = load_sarif_results(trivy_output_path, project_root=project_root)
                 all_raw_findings.extend(trivy_findings)
                 scanners_used += 1
                 logger.info(f"[DIAGNÓSTICO] Trivy: {len(trivy_findings)} hallazgos cargados desde {trivy_output_path}")
@@ -365,7 +370,7 @@ async def run_analysis_pipeline(directory: str, project_name: str) -> Dict[str, 
         # ===== ETAPA 4: DE-DUPLICACIÓN Y CORRELACIÓN =====
         logger.info("Ejecutando Etapa 4: Procesado y de-duplicación (CFI)...")
         
-        project_root = os.path.abspath(directory)
+        # project_root ya está definido arriba, reutilizarlo
         dedup_results = process_and_deduplicate_findings(all_raw_findings, graph_data, project_root=project_root)
         unique_findings = dedup_results.get("unique_findings", [])
         duplicates_removed = dedup_results.get("duplicates_removed", 0)

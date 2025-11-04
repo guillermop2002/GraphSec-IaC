@@ -197,21 +197,29 @@ def normalize_file_path(file_path: str, project_root: Optional[str] = None) -> s
             logger.debug(f"Ruta ya absoluta: '{file_path}' -> '{abs_file_path}'")
             return abs_file_path
         
-        # Si es relativa, puede venir en varios formatos:
-        # - "main.tf" (relativa desde el directorio actual)
-        # - "terraform-aws-eks/main.tf" (incluye el nombre del directorio raíz)
+        # Si es relativa, puede venir en varios formatos desde los SARIF:
+        # - "main.tf" (relativa desde project_root donde se ejecutó el escáner)
+        # - "terraform-aws-modules/eks/aws/main.tf" (relativa desde project_root)
+        # - "terraform-aws-eks/main.tf" (incluye el nombre del directorio raíz - raro)
         
-        # Eliminar el prefijo del directorio raíz si existe
-        root_basename = os.path.basename(root)
+        # Normalizar separadores
         file_path_clean = file_path.replace("\\", "/")
         
+        # Eliminar el prefijo del directorio raíz si existe (caso raro)
+        root_basename = os.path.basename(root)
         if file_path_clean.startswith(f"{root_basename}/"):
             file_path_clean = file_path_clean[len(root_basename) + 1:]
         elif file_path_clean.startswith(f"{root_basename}\\"):
             file_path_clean = file_path_clean[len(root_basename) + 1:]
         
-        # Construir la ruta absoluta desde el directorio raíz
+        # CRÍTICO: Los escáneres se ejecutan desde project_root, así que las rutas
+        # en los SARIF son relativas desde project_root. Construir la ruta absoluta directamente.
         abs_file_path = os.path.normpath(os.path.join(root, file_path_clean))
+        
+        # Verificar que la ruta normalizada existe (para debugging)
+        if not os.path.exists(abs_file_path):
+            # Log de advertencia pero continuar (puede ser un archivo en módulos remotos)
+            logger.debug(f"Ruta normalizada no existe físicamente: '{abs_file_path}' (original: '{file_path}')")
         
         logger.debug(f"Ruta normalizada a absoluta: '{file_path}' -> '{abs_file_path}'")
         return abs_file_path
@@ -264,12 +272,15 @@ def create_canonical_finding_identifier(finding: Dict[str, Any], resource_id: st
     composite_key = f"cis:{cis_id}:{resource_id}:{normalized_file}:{start_line}"
     return hashlib.sha256(composite_key.encode("utf-8")).hexdigest()
 
-def load_sarif_results(sarif_path: str) -> List[Dict[str, Any]]:
+def load_sarif_results(sarif_path: str, project_root: Optional[str] = None) -> List[Dict[str, Any]]:
     """
     Carga y parsea los resultados de un archivo SARIF.
     
+    Normaliza las rutas de archivo al cargar para que sean consistentes con el parser.
+    
     Args:
         sarif_path (str): Ruta al archivo SARIF
+        project_root (str, optional): Directorio raíz del proyecto para normalizar rutas
         
     Returns:
         List[Dict[str, Any]]: Lista de hallazgos de seguridad simplificados
@@ -332,7 +343,10 @@ def load_sarif_results(sarif_path: str) -> List[Dict[str, Any]]:
                 artifact_location = physical_location.get("artifactLocation", {})
                 region = physical_location.get("region", {})
                 
-                finding["file_path"] = artifact_location.get("uri", "")
+                # Extraer ruta del archivo y normalizarla inmediatamente
+                raw_file_path = artifact_location.get("uri", "")
+                # Normalizar la ruta usando project_root si está disponible
+                finding["file_path"] = normalize_file_path(raw_file_path, project_root) if project_root else raw_file_path
                 finding["start_line"] = region.get("startLine", 0)
                 finding["end_line"] = region.get("endLine", 0)
             
@@ -361,12 +375,13 @@ def load_sarif_results(sarif_path: str) -> List[Dict[str, Any]]:
         return []
 
 
-def load_multiple_sarif_results(sarif_paths: List[str]) -> List[Dict[str, Any]]:
+def load_multiple_sarif_results(sarif_paths: List[str], project_root: Optional[str] = None) -> List[Dict[str, Any]]:
     """
     Carga y combina los resultados de múltiples archivos SARIF.
     
     Args:
         sarif_paths (List[str]): Lista de rutas a archivos SARIF
+        project_root (str, optional): Directorio raíz del proyecto para normalizar rutas
         
     Returns:
         List[Dict[str, Any]]: Lista combinada de hallazgos de seguridad
@@ -375,7 +390,7 @@ def load_multiple_sarif_results(sarif_paths: List[str]) -> List[Dict[str, Any]]:
     all_findings = []
     
     for sarif_path in sarif_paths:
-        findings = load_sarif_results(sarif_path)
+        findings = load_sarif_results(sarif_path, project_root=project_root)
         all_findings.extend(findings)
     
     logger.info(f"Total de hallazgos cargados de {len(sarif_paths)} archivos: {len(all_findings)}")
@@ -739,15 +754,16 @@ def _should_filter_finding(finding: Dict[str, Any], project_root: Optional[str] 
         logger.debug(f"Filtrando hallazgo en directorio tests/: {file_path}")
         return True
     
+    # Filtrar módulos remotos de Terraform Registry (están en cache pero no en el proyecto)
+    # Estos aparecen como terraform-aws-modules/... pero no existen físicamente
+    # COMENTADO: Este filtro estaba eliminando hallazgos válidos
+    # if "terraform-aws-modules/" in file_path_normalized:
+    #     logger.debug(f"Filtrando hallazgo en módulo remoto terraform-aws-modules/: {file_path}")
+    #     return True
+    
     # Filtrar directorio de cache de Terraform
     if "/.terraform/" in file_path_normalized or "\\.terraform\\" in file_path_normalized:
         logger.debug(f"Filtrando hallazgo en cache .terraform/: {file_path}")
-        return True
-    
-    # Filtrar módulos "vendored" (código fuente de módulos dentro del repo)
-    # Estos módulos están incluidos directamente en el repositorio pero no son parte del código principal
-    if "/terraform-aws-modules/" in file_path_normalized or "\\terraform-aws-modules\\" in file_path_normalized:
-        logger.debug(f"Filtrando hallazgo en módulo vendored: {file_path}")
         return True
     
     return False

@@ -338,11 +338,12 @@ class TrivyScanner(Scanner):
             logger.info(f"[{time_module.strftime('%H:%M:%S')}] Ejecutando escaneo de seguridad con {self.name}: {' '.join(cmd)}")
             
             # Ejecutar el comando de forma asíncrona usando asyncio.create_subprocess_exec
+            # CRÍTICO: Ejecutar desde directory_path para que las rutas en SARIF sean consistentes
             process = await asyncio.create_subprocess_exec(
                 *cmd,
                 stdout=asyncio.subprocess.PIPE,
                 stderr=asyncio.subprocess.PIPE,
-                cwd=os.path.dirname(__file__)
+                cwd=directory_path  # <-- Ejecutar desde el project_root para rutas consistentes
             )
             
             # Esperar a que termine y capturar salida (con timeout)
