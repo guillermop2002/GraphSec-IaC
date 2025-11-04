@@ -739,16 +739,15 @@ def _should_filter_finding(finding: Dict[str, Any], project_root: Optional[str] 
         logger.debug(f"Filtrando hallazgo en directorio tests/: {file_path}")
         return True
     
-    # Filtrar módulos remotos de Terraform Registry (están en cache pero no en el proyecto)
-    # Estos aparecen como terraform-aws-modules/... pero no existen físicamente
-    # COMENTADO: Este filtro estaba eliminando hallazgos válidos
-    # if "terraform-aws-modules/" in file_path_normalized:
-    #     logger.debug(f"Filtrando hallazgo en módulo remoto terraform-aws-modules/: {file_path}")
-    #     return True
-    
     # Filtrar directorio de cache de Terraform
     if "/.terraform/" in file_path_normalized or "\\.terraform\\" in file_path_normalized:
         logger.debug(f"Filtrando hallazgo en cache .terraform/: {file_path}")
+        return True
+    
+    # Filtrar módulos "vendored" (código fuente de módulos dentro del repo)
+    # Estos módulos están incluidos directamente en el repositorio pero no son parte del código principal
+    if "/terraform-aws-modules/" in file_path_normalized or "\\terraform-aws-modules\\" in file_path_normalized:
+        logger.debug(f"Filtrando hallazgo en módulo vendored: {file_path}")
         return True
     
     return False
