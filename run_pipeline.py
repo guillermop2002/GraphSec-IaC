@@ -30,7 +30,7 @@ os.makedirs(CACHE_DIR, exist_ok=True)
 
 # Versión del pipeline (incrementar cuando cambie la lógica de generación de grafo/filtrado)
 # Esto invalida el caché automáticamente cuando cambiamos la lógica
-PIPELINE_VERSION = "v19.1"  # Cambiado para invalidar caché después de fixes de aristas y filtros
+PIPELINE_VERSION = "v19.2"  # Cambiado para usar IDs únicos en correlación de hallazgos
 
 
 class PipelineError(Exception):

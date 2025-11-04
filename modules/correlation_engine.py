@@ -533,7 +533,8 @@ def _match_resource_id_by_filename(finding: Dict[str, Any], nodes: List[Dict[str
     
     # Verificar si encontramos un match válido
     if best_match_node:
-        result = best_match_node.get("simple_name", "unknown_resource")
+        # Usar ID único en lugar de simple_name
+        result = best_match_node.get("id", "unknown_resource")
         logger.debug(
             f"[Capa 2] Hallazgo en línea {finding_line} asignado al nodo más cercano "
             f"{result} (línea {best_match_node.get('start_line')}, distancia: {min_distance})"
@@ -542,7 +543,8 @@ def _match_resource_id_by_filename(finding: Dict[str, Any], nodes: List[Dict[str
     else:
         # Ningún nodo tenía línea válida, devolver el primero como fallback
         if nodes_in_file:
-            result = nodes_in_file[0].get("simple_name", "unknown_resource")
+            # Usar ID único en lugar de simple_name
+            result = nodes_in_file[0].get("id", "unknown_resource")
             logger.debug(f"[Capa 2] Ningún nodo con línea válida, usando primer nodo: {result}")
             return result
     
@@ -568,7 +570,8 @@ def _match_resource_id_by_semantics(finding: Dict[str, Any], nodes: List[Dict[st
         # Controles CIS 2.1.x suelen referirse a S3 bucket
         for node in nodes:
             if node.get("type") == "aws_s3_bucket":
-                candidates.append(node.get("simple_name", "unknown_resource"))
+                # Usar ID único en lugar de simple_name
+                candidates.append(node.get("id", "unknown_resource"))
     
     # Estrategia 2: Palabras clave por tipo de recurso (si no hay candidatos CIS)
     if not candidates:
@@ -584,7 +587,8 @@ def _match_resource_id_by_semantics(finding: Dict[str, Any], nodes: List[Dict[st
             ntype = node.get("type", "")
             for kw in type_keywords.get(ntype, []):
                 if kw in message or kw in rule_id:
-                    candidates.append(node.get("simple_name", "unknown_resource"))
+                    # Usar ID único en lugar de simple_name
+                    candidates.append(node.get("id", "unknown_resource"))
                     break  # Un match por nodo es suficiente
     
     # CONSERVADOR: Solo asignar si hay UN SOLO candidato claro
@@ -665,8 +669,9 @@ def _match_resource_id_by_range(finding: Dict[str, Any], nodes: List[Dict[str, A
             if (node_start - margin) <= finding_line <= (node_end + margin):
                 # Calcular distancia (preferir matches más cercanos al inicio del recurso)
                 distance = abs(finding_line - node_start) + abs(node_end - finding_line)
-                candidates.append((distance, node.get("simple_name", "unknown_resource")))
-                logger.debug(f"[Capa 1] MATCH encontrado: nodo={node.get('simple_name')}, rango={node_start}-{node_end}, distancia={distance}")
+                # Usar ID único en lugar de simple_name
+                candidates.append((distance, node.get("id", "unknown_resource")))
+                logger.debug(f"[Capa 1] MATCH encontrado: nodo={node.get('id')}, rango={node_start}-{node_end}, distancia={distance}")
             else:
                 logger.debug(f"[Capa 1] FALLO match rango: hallazgo línea {finding_line} fuera de rango {node_start}-{node_end} (margen={margin})")
         else:
@@ -848,10 +853,12 @@ def process_and_deduplicate_findings(findings: List[Dict[str, Any]], graph_data:
 def attach_findings_to_graph(graph_data: Dict[str, Any], unique_findings: List[Dict[str, Any]]) -> Dict[str, Any]:
     """
     Adjunta hallazgos únicos (ya de-duplicados) a los nodos del grafo usando resource_id.
+    Ahora resource_id es el ID único del nodo (no simple_name).
     """
     enriched_graph = graph_data.copy()
     nodes = enriched_graph.get("nodes", [])
-    nodes_by_id = {n.get("simple_name", ""): n for n in nodes}
+    # Usar ID único como clave (no simple_name)
+    nodes_by_id = {n.get("id", ""): n for n in nodes}
     for node in nodes:
         node["security_issues"] = []
 
