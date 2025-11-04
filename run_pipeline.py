@@ -32,7 +32,7 @@ os.makedirs(CACHE_DIR, exist_ok=True)
 
 # Versión del pipeline (incrementar cuando cambie la lógica de generación de grafo/filtrado)
 # Esto invalida el caché automáticamente cuando cambiamos la lógica
-PIPELINE_VERSION = "v20.2"  # Fix: Normalizar rutas de SARIF y ejecutar escáneres desde project_root
+PIPELINE_VERSION = "v20.3"  # Fix: Usar ruta absoluta explícita en comando Checkov --directory
 
 
 class PipelineError(Exception):

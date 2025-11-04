@@ -136,10 +136,14 @@ class CheckovScanner(Scanner):
         if os.path.isdir(old_dir_style):
             shutil.rmtree(old_dir_style)
         
+        # CRÍTICO: Usar la ruta absoluta del directorio explícitamente
+        # Esto asegura que Checkov genere rutas SARIF relativas desde el project_root correcto
+        directory_path_abs = os.path.abspath(directory_path)
+        
         # Usar ruta absoluta para el output-file-path
         cmd = [
             checkov_cmd,
-            "--directory", ".",  # <- Ejecutar desde el CWD
+            "--directory", directory_path_abs,  # <- Usar ruta absoluta explícita
             "--output", "sarif",
             "--output-file-path", actual_sarif_file,
             "--skip-path", ".git"
@@ -159,7 +163,7 @@ class CheckovScanner(Scanner):
                 stdout=asyncio.subprocess.PIPE,
                 stderr=asyncio.subprocess.PIPE,
                 env=env,
-                cwd=directory_path  # <-- Ejecutar DENTRO del directorio a escanear
+                cwd=directory_path_abs  # <-- Ejecutar desde el project_root (usar versión absoluta)
             )
             stdout, stderr = await asyncio.wait_for(process.communicate(), timeout=self.timeout)
             
