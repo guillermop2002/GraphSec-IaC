@@ -1700,26 +1700,6 @@
         },
         {
             "from": "aws_eks_cluster.this_0",
-            "to": "aws_security_group_rule.cluster_6",
-            "arrows": "to"
-        },
-        {
-            "from": "aws_eks_cluster.this_0",
-            "to": "aws_iam_policy.cni_ipv6_policy_22",
-            "arrows": "to"
-        },
-        {
-            "from": "aws_eks_cluster.this_0",
-            "to": "aws_iam_role.eks_auto_18",
-            "arrows": "to"
-        },
-        {
-            "from": "aws_eks_cluster.this_0",
-            "to": "aws_cloudwatch_log_group.this_2",
-            "arrows": "to"
-        },
-        {
-            "from": "aws_eks_cluster.this_0",
             "to": "aws_iam_role_policy_attachment.this_9",
             "arrows": "to"
         },
@@ -1744,6 +1724,26 @@
             "arrows": "to"
         },
         {
+            "from": "aws_eks_cluster.this_0",
+            "to": "aws_iam_role.eks_auto_18",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_eks_cluster.this_0",
+            "to": "aws_security_group_rule.cluster_6",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_eks_cluster.this_0",
+            "to": "aws_iam_policy.cni_ipv6_policy_22",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_eks_cluster.this_0",
+            "to": "aws_cloudwatch_log_group.this_2",
+            "arrows": "to"
+        },
+        {
             "from": "aws_ec2_tag.cluster_primary_security_group_1",
             "to": "aws_eks_cluster.this_0",
             "arrows": "to"
@@ -1755,17 +1755,17 @@
         },
         {
             "from": "aws_eks_access_policy_association.this_4",
+            "to": "aws_eks_cluster.this_0",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_eks_access_policy_association.this_4",
             "to": "aws_eks_access_entry.this_3",
             "arrows": "to"
         },
         {
             "from": "aws_eks_access_policy_association.this_4",
             "to": "aws_eks_access_entry.this_103",
-            "arrows": "to"
-        },
-        {
-            "from": "aws_eks_access_policy_association.this_4",
-            "to": "aws_eks_cluster.this_0",
             "arrows": "to"
         },
         {
@@ -1875,6 +1875,11 @@
         },
         {
             "from": "aws_iam_role_policy_attachment.custom_14",
+            "to": "aws_iam_policy.custom_13",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.custom_14",
             "to": "aws_iam_role.this_8",
             "arrows": "to"
         },
@@ -1901,11 +1906,6 @@
         {
             "from": "aws_iam_role_policy_attachment.custom_14",
             "to": "aws_iam_role.this_112",
-            "arrows": "to"
-        },
-        {
-            "from": "aws_iam_role_policy_attachment.custom_14",
-            "to": "aws_iam_policy.custom_13",
             "arrows": "to"
         },
         {
@@ -1955,17 +1955,17 @@
         },
         {
             "from": "local_file.join_30",
+            "to": "local_file.key_pem_28",
+            "arrows": "to"
+        },
+        {
+            "from": "local_file.join_30",
             "to": "aws_instance.hybrid_node_31",
             "arrows": "to"
         },
         {
             "from": "local_file.join_30",
             "to": "aws_ssm_activation.this_27",
-            "arrows": "to"
-        },
-        {
-            "from": "local_file.join_30",
-            "to": "local_file.key_pem_28",
             "arrows": "to"
         },
         {
@@ -2000,17 +2000,7 @@
         },
         {
             "from": "aws_kms_alias.this_81",
-            "to": "aws_kms_replica_key.this_79",
-            "arrows": "to"
-        },
-        {
-            "from": "aws_kms_alias.this_81",
             "to": "aws_kms_replica_external_key.this_80",
-            "arrows": "to"
-        },
-        {
-            "from": "aws_kms_alias.this_81",
-            "to": "aws_kms_key.this_77",
             "arrows": "to"
         },
         {
@@ -2019,8 +2009,13 @@
             "arrows": "to"
         },
         {
-            "from": "aws_kms_grant.this_82",
+            "from": "aws_kms_alias.this_81",
             "to": "aws_kms_replica_key.this_79",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_kms_alias.this_81",
+            "to": "aws_kms_key.this_77",
             "arrows": "to"
         },
         {
@@ -2039,23 +2034,18 @@
             "arrows": "to"
         },
         {
-            "from": "aws_launch_template.this_84",
-            "to": "aws_iam_role_policy_attachment.additional_10",
+            "from": "aws_kms_grant.this_82",
+            "to": "aws_kms_replica_key.this_79",
             "arrows": "to"
         },
         {
             "from": "aws_launch_template.this_84",
-            "to": "aws_iam_role_policy_attachment.additional_88",
+            "to": "aws_placement_group.this_90",
             "arrows": "to"
         },
         {
             "from": "aws_launch_template.this_84",
-            "to": "aws_iam_role_policy_attachment.additional_99",
-            "arrows": "to"
-        },
-        {
-            "from": "aws_launch_template.this_84",
-            "to": "aws_iam_role_policy_attachment.additional_109",
+            "to": "aws_placement_group.this_102",
             "arrows": "to"
         },
         {
@@ -2085,12 +2075,22 @@
         },
         {
             "from": "aws_launch_template.this_84",
-            "to": "aws_placement_group.this_90",
+            "to": "aws_iam_role_policy_attachment.additional_10",
             "arrows": "to"
         },
         {
             "from": "aws_launch_template.this_84",
-            "to": "aws_placement_group.this_102",
+            "to": "aws_iam_role_policy_attachment.additional_88",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_launch_template.this_84",
+            "to": "aws_iam_role_policy_attachment.additional_99",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_launch_template.this_84",
+            "to": "aws_iam_role_policy_attachment.additional_109",
             "arrows": "to"
         },
         {
@@ -2235,22 +2235,12 @@
         },
         {
             "from": "aws_launch_template.this_95",
-            "to": "aws_iam_role_policy_attachment.additional_10",
+            "to": "aws_placement_group.this_90",
             "arrows": "to"
         },
         {
             "from": "aws_launch_template.this_95",
-            "to": "aws_iam_role_policy_attachment.additional_88",
-            "arrows": "to"
-        },
-        {
-            "from": "aws_launch_template.this_95",
-            "to": "aws_iam_role_policy_attachment.additional_99",
-            "arrows": "to"
-        },
-        {
-            "from": "aws_launch_template.this_95",
-            "to": "aws_iam_role_policy_attachment.additional_109",
+            "to": "aws_placement_group.this_102",
             "arrows": "to"
         },
         {
@@ -2276,16 +2266,6 @@
         {
             "from": "aws_launch_template.this_95",
             "to": "aws_iam_role_policy_attachment.this_114",
-            "arrows": "to"
-        },
-        {
-            "from": "aws_launch_template.this_95",
-            "to": "aws_placement_group.this_90",
-            "arrows": "to"
-        },
-        {
-            "from": "aws_launch_template.this_95",
-            "to": "aws_placement_group.this_102",
             "arrows": "to"
         },
         {
@@ -2299,6 +2279,26 @@
             "arrows": "to"
         },
         {
+            "from": "aws_launch_template.this_95",
+            "to": "aws_iam_role_policy_attachment.additional_10",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_launch_template.this_95",
+            "to": "aws_iam_role_policy_attachment.additional_88",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_launch_template.this_95",
+            "to": "aws_iam_role_policy_attachment.additional_99",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_launch_template.this_95",
+            "to": "aws_iam_role_policy_attachment.additional_109",
+            "arrows": "to"
+        },
+        {
             "from": "aws_iam_role_policy_attachment.this_98",
             "to": "aws_iam_role.this_8",
             "arrows": "to"
@@ -2585,36 +2585,6 @@
         },
         {
             "from": "aws_eks_fargate_profile.this_111",
-            "to": "aws_iam_role.this_112",
-            "arrows": "to"
-        },
-        {
-            "from": "aws_iam_role_policy_attachment.this_114",
-            "to": "aws_iam_role.this_8",
-            "arrows": "to"
-        },
-        {
-            "from": "aws_iam_role_policy_attachment.this_114",
-            "to": "aws_iam_role.this_42",
-            "arrows": "to"
-        },
-        {
-            "from": "aws_iam_role_policy_attachment.this_114",
-            "to": "aws_iam_role.this_86",
-            "arrows": "to"
-        },
-        {
-            "from": "aws_iam_role_policy_attachment.this_114",
-            "to": "aws_iam_role.this_97",
-            "arrows": "to"
-        },
-        {
-            "from": "aws_iam_role_policy_attachment.this_114",
-            "to": "aws_iam_role.this_107",
-            "arrows": "to"
-        },
-        {
-            "from": "aws_iam_role_policy_attachment.this_114",
             "to": "aws_iam_role.this_112",
             "arrows": "to"
         },
@@ -2624,13 +2594,38 @@
             "arrows": "to"
         },
         {
-            "from": "aws_rolesanywhere_profile.this_115",
-            "to": "aws_iam_role.intermediate_117",
+            "from": "aws_iam_role_policy_attachment.this_114",
+            "to": "aws_iam_role.this_8",
             "arrows": "to"
         },
         {
-            "from": "aws_iam_role_policy_attachment.intermediate_119",
-            "to": "aws_iam_policy.intermediate_118",
+            "from": "aws_iam_role_policy_attachment.this_114",
+            "to": "aws_iam_role.this_42",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.this_114",
+            "to": "aws_iam_role.this_86",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.this_114",
+            "to": "aws_iam_role.this_97",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.this_114",
+            "to": "aws_iam_role.this_107",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.this_114",
+            "to": "aws_iam_role.this_112",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_rolesanywhere_profile.this_115",
+            "to": "aws_iam_role.intermediate_117",
             "arrows": "to"
         },
         {
@@ -2661,6 +2656,11 @@
         {
             "from": "aws_iam_role_policy_attachment.intermediate_119",
             "to": "aws_iam_role.this_112",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.intermediate_119",
+            "to": "aws_iam_policy.intermediate_118",
             "arrows": "to"
         },
         {
@@ -2695,12 +2695,12 @@
         },
         {
             "from": "aws_cloudwatch_event_target.this_129",
-            "to": "aws_cloudwatch_event_rule.this_128",
+            "to": "aws_sqs_queue.this_126",
             "arrows": "to"
         },
         {
             "from": "aws_cloudwatch_event_target.this_129",
-            "to": "aws_sqs_queue.this_126",
+            "to": "aws_cloudwatch_event_rule.this_128",
             "arrows": "to"
         },
         {
@@ -2715,12 +2715,12 @@
         },
         {
             "from": "aws_eks_access_entry.node_133",
-            "to": "aws_iam_role.node_130",
+            "to": "aws_sqs_queue_policy.this_127",
             "arrows": "to"
         },
         {
             "from": "aws_eks_access_entry.node_133",
-            "to": "aws_sqs_queue_policy.this_127",
+            "to": "aws_iam_role.node_130",
             "arrows": "to"
         },
         {
