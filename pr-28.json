@@ -10,7 +10,7 @@
             "end_line": 53,
             "security_issues": [
                 {
-                    "cfi": "d7435c62479cc9a26dc70bb4fc2b1615355eeabca01b2748e6f6e17788f5961d",
+                    "cfi": "76c65dc1a9a889ffd4347a29512f1fbec98ca73c50c832cbc2c571e4b14347bb",
                     "rule_id": "CKV2_AWS_11",
                     "normalized_cis": "CIS-AWS-3.1",
                     "resource_id": "aws_vpc.this_0",
@@ -25,7 +25,7 @@
                     "correlation_layer": 1
                 },
                 {
-                    "cfi": "a8d9062e11e93342b9f88e8e290e481a47e5e5c3b0a3b01796a4f551f72e422d",
+                    "cfi": "f9fb6028829b4b88052d0f531ee7cd9436ea286ed930fd460682112b88a8c1b9",
                     "rule_id": "CKV2_AWS_12",
                     "normalized_cis": "CIS-AWS-3.2",
                     "resource_id": "aws_vpc.this_0",
@@ -40,7 +40,7 @@
                     "correlation_layer": 1
                 },
                 {
-                    "cfi": "06fcd5927c0008e146346a9ff9dcb8bb951cc1d1b78cf0333427e5ad636f1f12",
+                    "cfi": "1530e717f860544e064e3f884d1cef38c87bd7361db8796f752a0a94d30ea27a",
                     "rule_id": "aws-autoscaling-enable-at-rest-encryption",
                     "normalized_cis": "CIS-AWS-2.3.1",
                     "resource_id": "aws_vpc.this_0",
@@ -176,7 +176,7 @@
             "end_line": 264,
             "security_issues": [
                 {
-                    "cfi": "1748ff8f1ebdc2665e55b9e48b33afaa4bd8af40dc6010450bef3c1f498f9945",
+                    "cfi": "f43dcb50b54d9e7cce71b7b7b8333f05819b5ec2f395956f1d0adf292f183263",
                     "rule_id": "aws-vpc-no-public-ingress-acl",
                     "normalized_cis": "CIS-AWS-4.2.1",
                     "resource_id": "aws_network_acl_rule.public_inbound_12",
@@ -512,7 +512,7 @@
             "end_line": 896,
             "security_issues": [
                 {
-                    "cfi": "750440c2dbebb442214c1480afec57f096edb0da369613e084bffe89d9ad7677",
+                    "cfi": "399d25be3defcfa529062fe5be95eb2fd53b9710935b7b3ff506e746cd6b0a63",
                     "rule_id": "aws-vpc-no-excessive-port-access",
                     "normalized_cis": "CIS-AWS-4.2.2",
                     "resource_id": "aws_network_acl_rule.elasticache_inbound_44",
@@ -527,7 +527,7 @@
                     "correlation_layer": 1
                 },
                 {
-                    "cfi": "fe6b3912dd492a56a414c87a941e4bdc20b532f0ec2fb626d076296c7fe0fd54",
+                    "cfi": "3a3845af128c8e7f375e41d453b4f8aba17b3df89812a4db4795768f4f68be13",
                     "rule_id": "aws-vpc-no-public-ingress-acl",
                     "normalized_cis": "CIS-AWS-4.2.1",
                     "resource_id": "aws_network_acl_rule.elasticache_inbound_44",
@@ -653,7 +653,7 @@
             "end_line": 1135,
             "security_issues": [
                 {
-                    "cfi": "bb904649b81e47c5486f328eb07808a67577a5842f061d9bd1440a2e843eea0a",
+                    "cfi": "3b68c1f025e6ec7674c429b77534360b43e38d62b9ae9ae9b1f3e6906e3a9f09",
                     "rule_id": "aws-vpc-no-public-ingress-acl",
                     "normalized_cis": "CIS-AWS-4.2.1",
                     "resource_id": "aws_network_acl_rule.outpost_inbound_55",
@@ -719,7 +719,7 @@
             "end_line": 1226,
             "security_issues": [
                 {
-                    "cfi": "64a63f92f7189f4c4765eb5e0a9857e694b624ef672e04b11b164d3c46a46dbe",
+                    "cfi": "fbf7a71bd01e04f15860460f724da30740c642f395eef79c2d052d6fbf3995cd",
                     "rule_id": "CKV2_AWS_19",
                     "normalized_cis": "CIS-AWS-2.1.6",
                     "resource_id": "aws_eip.nat_60",
@@ -835,7 +835,7 @@
             "end_line": 1401,
             "security_issues": [
                 {
-                    "cfi": "dcf5c0e1cf6a3aad1f2fd8379d90229b1c5227d1c59f243e629fc21d277e0c8f",
+                    "cfi": "e22e397b8d09aac4e3a0581a5f21478b9e785d7019731de18065240c53fec3b6",
                     "rule_id": "CKV_AWS_148",
                     "normalized_cis": "CIS-AWS-4.1.1",
                     "resource_id": "aws_default_vpc.this_70",
@@ -850,22 +850,7 @@
                     "correlation_layer": 1
                 },
                 {
-                    "cfi": "11e9ca25862236d2f54cffce3da17b762fd3e0fb857d4da35acbabf2ed696305",
-                    "rule_id": "aws-vpc-no-default-vpc",
-                    "normalized_cis": "CIS-AWS-4.1.1",
-                    "resource_id": "aws_default_vpc.this_70",
-                    "message": "Artifact: main.tf\nType: terraform\nVulnerability aws-vpc-no-default-vpc\nSeverity: HIGH\nMessage: Default VPC is used.\nLink: [aws-vpc-no-default-vpc](https://avd.aquasec.com/misconfig/aws-vpc-no-default-vpc)",
-                    "level": "error",
-                    "file_path": "main.tf",
-                    "start_line": 1388,
-                    "tool_name": "Trivy",
-                    "sources": [
-                        "Trivy"
-                    ],
-                    "correlation_layer": 1
-                },
-                {
-                    "cfi": "38c5b424a60f5f4a0fe2202342dc08fa90b7c2c54c936ae34833ffb3b9fb042a",
+                    "cfi": "106b063e54e67a481a375c5f4d122432e6e3068f14e517c40ed39c008cd1b4ae",
                     "rule_id": "aws-autoscaling-enable-at-rest-encryption",
                     "normalized_cis": "CIS-AWS-2.3.1",
                     "resource_id": "aws_default_vpc.this_70",
@@ -1071,7 +1056,7 @@
             "end_line": 98,
             "security_issues": [
                 {
-                    "cfi": "5241d8b8fedd87c8241b822bbd9b4a9d3188e6187c60ec3d7b810060da868772",
+                    "cfi": "731fa204212d696d0ecd6025dda094557ee6654292b272abaaecd7dbc9bcb2af",
                     "rule_id": "CKV_AWS_338",
                     "normalized_cis": "CIS-AWS-3.2.2",
                     "resource_id": "aws_cloudwatch_log_group.this_89",
@@ -1137,7 +1122,7 @@
             "end_line": 100,
             "security_issues": [
                 {
-                    "cfi": "34c57ab2bcfda63477d693c79513de41f15cb428963e5d30617396f663f3480d",
+                    "cfi": "85d99825b9a5dc3d06a9e86e49011868eec3c4807c9e4b8ca4a746254ee27ccd",
                     "rule_id": "CKV2_AWS_5",
                     "normalized_cis": "CIS-AWS-2.2.1",
                     "resource_id": "aws_security_group.this_94",
@@ -1172,12 +1157,7 @@
         },
         {
             "from": "aws_vpc_block_public_access_exclusion.this_3",
-            "to": "aws_subnet.outpost_52",
-            "arrows": "to"
-        },
-        {
-            "from": "aws_vpc_block_public_access_exclusion.this_3",
-            "to": "aws_subnet.database_20",
+            "to": "aws_subnet.public_6",
             "arrows": "to"
         },
         {
@@ -1187,22 +1167,27 @@
         },
         {
             "from": "aws_vpc_block_public_access_exclusion.this_3",
-            "to": "aws_subnet.redshift_31",
-            "arrows": "to"
-        },
-        {
-            "from": "aws_vpc_block_public_access_exclusion.this_3",
-            "to": "aws_subnet.public_6",
-            "arrows": "to"
-        },
-        {
-            "from": "aws_vpc_block_public_access_exclusion.this_3",
             "to": "aws_subnet.elasticache_39",
             "arrows": "to"
         },
         {
             "from": "aws_vpc_block_public_access_exclusion.this_3",
+            "to": "aws_subnet.redshift_31",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_vpc_block_public_access_exclusion.this_3",
+            "to": "aws_subnet.database_20",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_vpc_block_public_access_exclusion.this_3",
             "to": "aws_subnet.intra_46",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_vpc_block_public_access_exclusion.this_3",
+            "to": "aws_subnet.outpost_52",
             "arrows": "to"
         },
         {
@@ -1302,17 +1287,17 @@
         },
         {
             "from": "aws_route_table_association.database_23",
-            "to": "aws_route_table.database_22",
-            "arrows": "to"
-        },
-        {
-            "from": "aws_route_table_association.database_23",
             "to": "aws_subnet.database_20",
             "arrows": "to"
         },
         {
             "from": "aws_route_table_association.database_23",
             "to": "aws_route_table.private_15",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_route_table_association.database_23",
+            "to": "aws_route_table.database_22",
             "arrows": "to"
         },
         {
@@ -1347,12 +1332,12 @@
         },
         {
             "from": "aws_route.database_ipv6_egress_27",
-            "to": "aws_route_table.database_22",
+            "to": "aws_egress_only_internet_gateway.this_58",
             "arrows": "to"
         },
         {
             "from": "aws_route.database_ipv6_egress_27",
-            "to": "aws_egress_only_internet_gateway.this_58",
+            "to": "aws_route_table.database_22",
             "arrows": "to"
         },
         {
@@ -1382,6 +1367,11 @@
         },
         {
             "from": "aws_route_table_association.redshift_34",
+            "to": "aws_route_table.redshift_33",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_route_table_association.redshift_34",
             "to": "aws_subnet.redshift_31",
             "arrows": "to"
         },
@@ -1391,7 +1381,7 @@
             "arrows": "to"
         },
         {
-            "from": "aws_route_table_association.redshift_34",
+            "from": "aws_route_table_association.redshift_public_35",
             "to": "aws_route_table.redshift_33",
             "arrows": "to"
         },
@@ -1403,11 +1393,6 @@
         {
             "from": "aws_route_table_association.redshift_public_35",
             "to": "aws_route_table.public_7",
-            "arrows": "to"
-        },
-        {
-            "from": "aws_route_table_association.redshift_public_35",
-            "to": "aws_route_table.redshift_33",
             "arrows": "to"
         },
         {
@@ -1437,17 +1422,17 @@
         },
         {
             "from": "aws_route_table_association.elasticache_42",
-            "to": "aws_route_table.private_15",
-            "arrows": "to"
-        },
-        {
-            "from": "aws_route_table_association.elasticache_42",
             "to": "aws_subnet.elasticache_39",
             "arrows": "to"
         },
         {
             "from": "aws_route_table_association.elasticache_42",
             "to": "aws_route_table.elasticache_41",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_route_table_association.elasticache_42",
+            "to": "aws_route_table.private_15",
             "arrows": "to"
         },
         {
@@ -1527,12 +1512,12 @@
         },
         {
             "from": "aws_route.private_ipv6_egress_59",
-            "to": "aws_route_table.private_15",
+            "to": "aws_egress_only_internet_gateway.this_58",
             "arrows": "to"
         },
         {
             "from": "aws_route.private_ipv6_egress_59",
-            "to": "aws_egress_only_internet_gateway.this_58",
+            "to": "aws_route_table.private_15",
             "arrows": "to"
         },
         {
@@ -1542,17 +1527,12 @@
         },
         {
             "from": "aws_nat_gateway.this_61",
-            "to": "aws_internet_gateway.this_57",
-            "arrows": "to"
-        },
-        {
-            "from": "aws_nat_gateway.this_61",
             "to": "aws_subnet.public_6",
             "arrows": "to"
         },
         {
-            "from": "aws_route.private_nat_gateway_62",
-            "to": "aws_nat_gateway.this_61",
+            "from": "aws_nat_gateway.this_61",
+            "to": "aws_internet_gateway.this_57",
             "arrows": "to"
         },
         {
@@ -1561,13 +1541,18 @@
             "arrows": "to"
         },
         {
-            "from": "aws_route.private_dns64_nat_gateway_63",
+            "from": "aws_route.private_nat_gateway_62",
             "to": "aws_nat_gateway.this_61",
             "arrows": "to"
         },
         {
             "from": "aws_route.private_dns64_nat_gateway_63",
             "to": "aws_route_table.private_15",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_route.private_dns64_nat_gateway_63",
+            "to": "aws_nat_gateway.this_61",
             "arrows": "to"
         },
         {
@@ -1602,12 +1587,12 @@
         },
         {
             "from": "aws_vpn_gateway_route_propagation.intra_69",
-            "to": "aws_vpn_gateway.this_65",
+            "to": "aws_route_table.intra_47",
             "arrows": "to"
         },
         {
             "from": "aws_vpn_gateway_route_propagation.intra_69",
-            "to": "aws_route_table.intra_47",
+            "to": "aws_vpn_gateway.this_65",
             "arrows": "to"
         },
         {
@@ -1632,12 +1617,12 @@
         },
         {
             "from": "aws_iam_role_policy_attachment.vpc_flow_log_cloudwatch_77",
-            "to": "aws_iam_policy.vpc_flow_log_cloudwatch_78",
+            "to": "aws_iam_role.vpc_flow_log_cloudwatch_76",
             "arrows": "to"
         },
         {
             "from": "aws_iam_role_policy_attachment.vpc_flow_log_cloudwatch_77",
-            "to": "aws_iam_role.vpc_flow_log_cloudwatch_76",
+            "to": "aws_iam_policy.vpc_flow_log_cloudwatch_78",
             "arrows": "to"
         },
         {
@@ -1667,12 +1652,12 @@
         },
         {
             "from": "aws_vpc_ipam_preview_next_cidr.this_85",
-            "to": "aws_vpc_ipam_pool.this_83",
+            "to": "aws_vpc_ipam_pool_cidr.this_84",
             "arrows": "to"
         },
         {
             "from": "aws_vpc_ipam_preview_next_cidr.this_85",
-            "to": "aws_vpc_ipam_pool_cidr.this_84",
+            "to": "aws_vpc_ipam_pool.this_83",
             "arrows": "to"
         },
         {
@@ -1708,7 +1693,7 @@
     ],
     "unassigned_findings": [
         {
-            "cfi": "4708f8d295a9f0128bd3137716597d50681e4e67c18b76142686fd7c5b7c944f",
+            "cfi": "5c2411b751bc504167fba5bc6d6125b24ea094ec9ccda751dad8a47d4d086509",
             "rule_id": "AVD-AWS-0088",
             "normalized_cis": "CIS-AWS-2.1.1",
             "resource_id": "unknown_resource",
@@ -1723,7 +1708,7 @@
             "correlation_layer": 0
         },
         {
-            "cfi": "8cac928038e7f2e649f99f705d91bda039a5e3f584b95016ac27e85a69b868f5",
+            "cfi": "b106e98c711d6ebe05fb1a48579112dbcf24563e1467cbf8b070568e59372fa5",
             "rule_id": "s3-bucket-logging",
             "normalized_cis": "CIS-AWS-2.1.3",
             "resource_id": "unknown_resource",
@@ -1738,7 +1723,7 @@
             "correlation_layer": 0
         },
         {
-            "cfi": "c5b183bdf2eadb67bf4b9ad31d53e46dbc7ff254558401c9ed306694662005f3",
+            "cfi": "3c62b4698aaf49d81437a8b53b193d1cf10d72ab65c9795a9f1ac035d2d0b99d",
             "rule_id": "AVD-AWS-0090",
             "normalized_cis": "CIS-AWS-2.1.6",
             "resource_id": "unknown_resource",
@@ -1753,7 +1738,7 @@
             "correlation_layer": 0
         },
         {
-            "cfi": "ce99a4c9e38befa25a5e584fd882602093c61d1d136dd5a77507bd4476500b29",
+            "cfi": "6a1a6d83fd7de568dc8f5e871dc313b77a64cf54f02d706616cb58bea6f911da",
             "rule_id": "AVD-AWS-0132",
             "normalized_cis": "CIS-AWS-4.3",
             "resource_id": "unknown_resource",
@@ -1769,10 +1754,10 @@
         }
     ],
     "correlation_metadata": {
-        "assigned_findings": 13,
+        "assigned_findings": 12,
         "unassigned_findings_count": 4,
         "nodes_with_issues_count": 8,
-        "total_unique_findings": 17,
+        "total_unique_findings": 16,
         "layer_stats": {
             "1": 43,
             "2": 0,
@@ -1789,16 +1774,16 @@
         "checkov_success": true,
         "trivy_success": true,
         "total_findings_original": 51,
-        "total_findings_unique": 17,
-        "duplicates_removed": 34,
+        "total_findings_unique": 16,
+        "duplicates_removed": 35,
         "deduplication_method": "CFI_CIS+SARIF_FP",
         "total_nodes": 96,
         "total_edges": 108,
         "correlation_metadata": {
-            "assigned_findings": 13,
+            "assigned_findings": 12,
             "unassigned_findings_count": 4,
             "nodes_with_issues_count": 8,
-            "total_unique_findings": 17,
+            "total_unique_findings": 16,
             "layer_stats": {
                 "1": 43,
                 "2": 0,
