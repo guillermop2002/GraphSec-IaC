@@ -380,7 +380,7 @@ async def run_analysis_pipeline(directory: str, project_name: str) -> Dict[str, 
         # ===== ETAPA 5: ADJUNTO AL GRAFO =====
         logger.info("Ejecutando Etapa 5: Adjuntando hallazgos al grafo...")
         
-        enriched_graph = attach_findings_to_graph(graph_data, unique_findings)
+        enriched_graph = attach_findings_to_graph(graph_data, unique_findings, project_root=directory)
         
         correlation_metadata = enriched_graph.get("correlation_metadata", {})
         

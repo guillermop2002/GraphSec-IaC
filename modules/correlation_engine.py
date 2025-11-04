@@ -941,7 +941,7 @@ def process_and_deduplicate_findings(findings: List[Dict[str, Any]], graph_data:
     }
 
 
-def attach_findings_to_graph(graph_data: Dict[str, Any], unique_findings: List[Dict[str, Any]]) -> Dict[str, Any]:
+def attach_findings_to_graph(graph_data: Dict[str, Any], unique_findings: List[Dict[str, Any]], project_root: Optional[str] = None) -> Dict[str, Any]:
     """
     Adjunta hallazgos únicos (ya de-duplicados) a los nodos del grafo usando resource_id.
     Ahora resource_id es el ID único del nodo (no simple_name).
