@@ -42,7 +42,18 @@ def _extract_blocks_from_parsed(parsed: Dict[str, Any], block_type: str, content
     """
     blocks: List[Dict[str, Any]] = []
     
-    if block_type not in parsed or not isinstance(parsed[block_type], list):
+    # LOGGING DETALLADO: Para archivos problemáticos
+    is_problematic_file = 'terraform-aws-modules' in file_path_abs
+    
+    if block_type not in parsed:
+        if is_problematic_file and block_type == 'resource':
+            logger.debug(f"[DIAGNÓSTICO PARSER] Bloque '{block_type}' no encontrado en AST de {os.path.basename(file_path)}")
+        return blocks
+    
+    if not isinstance(parsed[block_type], list):
+        if is_problematic_file and block_type == 'resource':
+            logger.warning(f"[DIAGNÓSTICO PARSER] Bloque '{block_type}' existe pero no es una lista en {os.path.basename(file_path)}")
+            logger.warning(f"[DIAGNÓSTICO PARSER]   Tipo real: {type(parsed[block_type])}")
         return blocks
     
     # Estructuras diferentes según el tipo de bloque:
