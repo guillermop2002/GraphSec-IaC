@@ -108,25 +108,27 @@ class CheckovScanner(Scanner):
         
         # Si estamos en Windows, intentar encontrar el ejecutable en Scripts
         if os.name == 'nt':
-            python_exec = self._find_python_executable()
-            venv_scripts = os.path.dirname(python_exec)
-            checkov_exe = os.path.join(venv_scripts, "checkov.exe")
-            checkov_bat = os.path.join(venv_scripts, "checkov.bat")
-            if os.path.exists(checkov_exe):
-                checkov_cmd = checkov_exe
-            elif os.path.exists(checkov_bat):
-                checkov_cmd = checkov_bat
+            import shutil
+            # Intentar encontrar checkov en PATH
+            checkov_path = shutil.which("checkov")
+            if checkov_path:
+                checkov_cmd = checkov_path
+                logger.info(f"Checkov encontrado en PATH: {checkov_path}")
             else:
-                # Si no está en venv, intentar con python -m checkov
-                # Buscar en AppData\Local\Programs\Python o Scripts del usuario
-                import pathlib
-                user_scripts = pathlib.Path.home() / "AppData" / "Local" / "Programs" / "Python" / "Python310" / "Scripts"
-                user_checkov_exe = user_scripts / "checkov.exe"
-                if user_checkov_exe.exists():
-                    checkov_cmd = str(user_checkov_exe)
+                # Buscar en Scripts del Python actual
+                python_exec = self._find_python_executable()
+                python_dir = os.path.dirname(python_exec)
+                scripts_dir = os.path.join(os.path.dirname(python_dir), "Scripts")
+                checkov_exe = os.path.join(scripts_dir, "checkov.exe")
+                checkov_bat = os.path.join(scripts_dir, "checkov.bat")
+                if os.path.exists(checkov_exe):
+                    checkov_cmd = checkov_exe
+                    logger.info(f"Checkov encontrado: {checkov_exe}")
+                elif os.path.exists(checkov_bat):
+                    checkov_cmd = checkov_bat
+                    logger.info(f"Checkov encontrado: {checkov_bat}")
                 else:
-                    # Fallback: usar python -m checkov
-                    checkov_cmd = None  # Se usará python -m checkov
+                    logger.warning(f"Checkov no encontrado en {scripts_dir}. Intentando 'checkov' directamente...")
         
         # 'output_file' ES el path COMPLETO del archivo SARIF final.
         actual_sarif_file = os.path.abspath(output_file)
@@ -148,24 +150,13 @@ class CheckovScanner(Scanner):
             shutil.rmtree(old_dir_style)
         
         # Usar ruta absoluta para el output-file-path
-        if checkov_cmd is None:
-            # Usar python -m checkov como fallback
-            python_exec = self._find_python_executable()
-            cmd = [
-                python_exec, "-m", "checkov",
-                "--directory", ".",  # <- Ejecutar desde el CWD
-                "--output", "sarif",
-                "--output-file-path", actual_sarif_file,
-                "--skip-path", ".git"
-            ]
-        else:
-            cmd = [
-                checkov_cmd,
-                "--directory", ".",  # <- Ejecutar desde el CWD
-                "--output", "sarif",
-                "--output-file-path", actual_sarif_file,
-                "--skip-path", ".git"
-            ]
+        cmd = [
+            checkov_cmd,
+            "--directory", ".",  # <- Ejecutar desde el CWD
+            "--output", "sarif",
+            "--output-file-path", actual_sarif_file,
+            "--skip-path", ".git"
+        ]
         logger.info(f"Comando Checkov completo: {' '.join(cmd)}")
         
         env = os.environ.copy()
