@@ -58,9 +58,16 @@ def build_edges(parsed_resources: List[Dict[str, Any]], name_to_id_map: Dict[str
         "dependencies_found": 0,
         "dependencies_filtered": 0,
         "dependencies_matched": 0,
+        "dependencies_not_found": 0,
         "edges_added": 0,
         "edges_duplicates": 0
     }
+    
+    # Log de diagnóstico: mostrar cuántos recursos hay en name_to_id_map
+    total_resources_in_map = sum(len(ids) for ids in name_to_id_map.values())
+    logger.info(f"[DIAGNÓSTICO] build_edges: name_to_id_map contiene {len(name_to_id_map)} nombres únicos, {total_resources_in_map} recursos totales")
+    
+    dependencies_not_found_samples = []  # Para logging de ejemplos
     
     for resource in parsed_resources:
         # Encontrar el ID 'from' (el ID único de este recurso)
@@ -96,9 +103,15 @@ def build_edges(parsed_resources: List[Dict[str, Any]], name_to_id_map: Dict[str
                         logger.debug(f"Arista encontrada: {resource_id} -> {dep_id}")
                     else:
                         stats["edges_duplicates"] += 1
+            else:
+                stats["dependencies_not_found"] += 1
+                if len(dependencies_not_found_samples) < 10:
+                    dependencies_not_found_samples.append(dep_name)
     
     logger.info(f"[DIAGNÓSTICO] build_edges: {stats['resources_processed']} recursos procesados, {stats['resources_without_id']} sin ID")
-    logger.info(f"[DIAGNÓSTICO] build_edges: {stats['dependencies_found']} dependencias encontradas, {stats['dependencies_filtered']} filtradas (var/local), {stats['dependencies_matched']} coincidieron")
+    logger.info(f"[DIAGNÓSTICO] build_edges: {stats['dependencies_found']} dependencias encontradas, {stats['dependencies_filtered']} filtradas (var/local), {stats['dependencies_matched']} coincidieron, {stats['dependencies_not_found']} NO encontradas en name_to_id_map")
+    if dependencies_not_found_samples:
+        logger.info(f"[DIAGNÓSTICO] build_edges: Ejemplos de dependencias NO encontradas: {dependencies_not_found_samples[:10]}")
     logger.info(f"[DIAGNÓSTICO] build_edges: {stats['edges_added']} aristas añadidas, {stats['edges_duplicates']} duplicadas ignoradas")
     
     return edges
