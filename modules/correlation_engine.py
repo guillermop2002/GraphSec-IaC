@@ -783,22 +783,26 @@ def process_and_deduplicate_findings(findings: List[Dict[str, Any]], graph_data:
     for finding in findings:
         if _should_filter_finding(finding, project_root):
             filtered_count += 1
-            file_path_norm = finding.get("file_path", "").lower()
-            if file_path_norm.endswith((".yml", ".yaml")):
+            # Lógica de conteo de filtros (CORREGIDA)
+            file_path = finding.get("file_path", "")
+            
+            # Replicar la normalización de _should_filter_finding para un conteo preciso
+            file_path_abs = normalize_file_path(file_path, project_root)
+            file_path_normalized = file_path_abs.replace("\\", "/").lower() if file_path_abs else file_path.lower()
+            
+            if file_path_normalized.endswith((".yml", ".yaml")):
                 filter_reasons["yaml"] += 1
-            elif "/examples/" in file_path_norm or "\\examples\\" in file_path_norm:
+            elif "/examples/" in file_path_normalized or "\\examples\\" in file_path_normalized:
                 filter_reasons["examples"] += 1
-            elif "/tests/" in file_path_norm or "\\tests\\" in file_path_norm:
+            elif "/tests/" in file_path_normalized or "\\tests\\" in file_path_normalized:
                 filter_reasons["tests"] += 1
-            elif "/.terraform/" in file_path_norm or "\\.terraform\\" in file_path_norm:
+            elif "/.terraform/" in file_path_normalized or "\\.terraform\\" in file_path_normalized:
                 filter_reasons["terraform_cache"] += 1
             else:
                 filter_reasons["other"] += 1
-                # Log detallado de hallazgos filtrados como "Otros"
-                logger.info(
-                    f"[DIAGNÓSTICO] Hallazgo filtrado (Otros): rule_id={finding.get('rule_id')}, "
-                    f"tool={finding.get('tool_name')}, file_path={finding.get('file_path')}, "
-                    f"file_path_normalized={file_path_norm}"
+                logger.debug(
+                    f"Hallazgo filtrado (Otros) - Razón desconocida: rule_id={finding.get('rule_id')}, "
+                    f"tool={finding.get('tool_name')}, file_path={file_path}, file_path_normalized={file_path_normalized}"
                 )
             continue
         filtered_findings.append(finding)

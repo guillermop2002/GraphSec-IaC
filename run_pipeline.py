@@ -32,7 +32,7 @@ os.makedirs(CACHE_DIR, exist_ok=True)
 
 # Versión del pipeline (incrementar cuando cambie la lógica de generación de grafo/filtrado)
 # Esto invalida el caché automáticamente cuando cambiamos la lógica
-PIPELINE_VERSION = "v20.0"  # Forzando validación de CI sobre main
+PIPELINE_VERSION = "v20.1"  # Fix: Corregir filtro de .terraform y conteo de logs
 
 
 class PipelineError(Exception):
