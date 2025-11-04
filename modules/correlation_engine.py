@@ -840,6 +840,9 @@ def process_and_deduplicate_findings(findings: List[Dict[str, Any]], graph_data:
                 )
         cfi = create_canonical_finding_identifier(finding, resource_id)
         if cfi in seen_cfi:
+            # Log de duplicados
+            if len(unique_findings) < 20:  # Solo los primeros 20 para no saturar
+                logger.debug(f"Duplicado detectado (CFI ya existe): rule_id={finding.get('rule_id')}, resource_id={resource_id}, file={finding.get('file_path')}:{finding.get('start_line')}")
             continue
         seen_cfi.add(cfi)
         unique_findings.append({
@@ -858,10 +861,13 @@ def process_and_deduplicate_findings(findings: List[Dict[str, Any]], graph_data:
 
     duplicates_removed = total_original - len(unique_findings)
     logger.info(
-        f"De-duplicación (CFI) completada: {total_original} -> {len(unique_findings)} (eliminados {duplicates_removed})"
+        f"[DIAGNÓSTICO] De-duplicación (CFI) completada: {total_original} originales -> {len(unique_findings)} únicos (eliminados {duplicates_removed} duplicados)"
     )
     logger.info(
-        f"Distribución por capas: Capa 1={layer_stats[1]}, Capa 2={layer_stats[2]}, Capa 3={layer_stats[3]}, No asignados={layer_stats[0]}"
+        f"[DIAGNÓSTICO] Distribución por capas: Capa 1={layer_stats[1]}, Capa 2={layer_stats[2]}, Capa 3={layer_stats[3]}, No asignados={layer_stats[0]}"
+    )
+    logger.info(
+        f"[DIAGNÓSTICO] Desglose: {len(filtered_findings)} después de filtrado -> {layer_stats[1] + layer_stats[2] + layer_stats[3]} asignados -> {len(unique_findings)} únicos después de CFI"
     )
 
     return {

@@ -116,6 +116,17 @@ class CheckovScanner(Scanner):
                 checkov_cmd = checkov_exe
             elif os.path.exists(checkov_bat):
                 checkov_cmd = checkov_bat
+            else:
+                # Si no está en venv, intentar con python -m checkov
+                # Buscar en AppData\Local\Programs\Python o Scripts del usuario
+                import pathlib
+                user_scripts = pathlib.Path.home() / "AppData" / "Local" / "Programs" / "Python" / "Python310" / "Scripts"
+                user_checkov_exe = user_scripts / "checkov.exe"
+                if user_checkov_exe.exists():
+                    checkov_cmd = str(user_checkov_exe)
+                else:
+                    # Fallback: usar python -m checkov
+                    checkov_cmd = None  # Se usará python -m checkov
         
         # 'output_file' ES el path COMPLETO del archivo SARIF final.
         actual_sarif_file = os.path.abspath(output_file)
@@ -137,13 +148,24 @@ class CheckovScanner(Scanner):
             shutil.rmtree(old_dir_style)
         
         # Usar ruta absoluta para el output-file-path
-        cmd = [
-            checkov_cmd,
-            "--directory", ".",  # <- Ejecutar desde el CWD
-            "--output", "sarif",
-            "--output-file-path", actual_sarif_file,
-            "--skip-path", ".git"
-        ]
+        if checkov_cmd is None:
+            # Usar python -m checkov como fallback
+            python_exec = self._find_python_executable()
+            cmd = [
+                python_exec, "-m", "checkov",
+                "--directory", ".",  # <- Ejecutar desde el CWD
+                "--output", "sarif",
+                "--output-file-path", actual_sarif_file,
+                "--skip-path", ".git"
+            ]
+        else:
+            cmd = [
+                checkov_cmd,
+                "--directory", ".",  # <- Ejecutar desde el CWD
+                "--output", "sarif",
+                "--output-file-path", actual_sarif_file,
+                "--skip-path", ".git"
+            ]
         logger.info(f"Comando Checkov completo: {' '.join(cmd)}")
         
         env = os.environ.copy()
