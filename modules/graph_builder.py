@@ -46,34 +46,60 @@ def build_edges(parsed_resources: List[Dict[str, Any]], name_to_id_map: Dict[str
     """Construye las aristas (edges) del grafo analizando dependencias."""
     
     edges = []
+    edges_set = set()  # Para evitar duplicados
     pattern_direct = re.compile(r'([a-zA-Z0-9_]+\.[a-zA-Z0-9_]+)(?:\.[a-zA-Z0-9_]+)*')
     
     # Crear un mapa de (file, start_line) -> unique_id
     node_lookup = {(n['file'], n['start_line']): n['id'] for n in nodes}
     
+    stats = {
+        "resources_processed": 0,
+        "resources_without_id": 0,
+        "dependencies_found": 0,
+        "dependencies_filtered": 0,
+        "dependencies_matched": 0,
+        "edges_added": 0,
+        "edges_duplicates": 0
+    }
+    
     for resource in parsed_resources:
         # Encontrar el ID 'from' (el ID único de este recurso)
         resource_id = node_lookup.get((resource.get('file'), resource.get('start_line')))
         if not resource_id:
+            stats["resources_without_id"] += 1
             continue
         
+        stats["resources_processed"] += 1
         raw_block_text = resource.get('raw_block_text', '')
         dependencies_found = set(pattern_direct.findall(raw_block_text))
+        stats["dependencies_found"] += len(dependencies_found)
         
         for dep_name in dependencies_found:
             # Filtro MEJORADO: Solo ignorar var y local
             if dep_name.startswith("var.") or dep_name.startswith("local."):
+                stats["dependencies_filtered"] += 1
                 continue
             
             dep_unique_ids = name_to_id_map.get(dep_name)
             if dep_unique_ids:
+                stats["dependencies_matched"] += len(dep_unique_ids)
                 for dep_id in dep_unique_ids:
-                    edges.append({
-                        "from": resource_id,
-                        "to": dep_id,
-                        "arrows": "to"
-                    })
-                    logger.debug(f"Arista encontrada: {resource_id} -> {dep_id}")
+                    edge_key = (resource_id, dep_id)
+                    if edge_key not in edges_set:
+                        edges_set.add(edge_key)
+                        edges.append({
+                            "from": resource_id,
+                            "to": dep_id,
+                            "arrows": "to"
+                        })
+                        stats["edges_added"] += 1
+                        logger.debug(f"Arista encontrada: {resource_id} -> {dep_id}")
+                    else:
+                        stats["edges_duplicates"] += 1
+    
+    logger.info(f"[DIAGNÓSTICO] build_edges: {stats['resources_processed']} recursos procesados, {stats['resources_without_id']} sin ID")
+    logger.info(f"[DIAGNÓSTICO] build_edges: {stats['dependencies_found']} dependencias encontradas, {stats['dependencies_filtered']} filtradas (var/local), {stats['dependencies_matched']} coincidieron")
+    logger.info(f"[DIAGNÓSTICO] build_edges: {stats['edges_added']} aristas añadidas, {stats['edges_duplicates']} duplicadas ignoradas")
     
     return edges
 

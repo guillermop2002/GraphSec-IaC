@@ -108,27 +108,14 @@ class CheckovScanner(Scanner):
         
         # Si estamos en Windows, intentar encontrar el ejecutable en Scripts
         if os.name == 'nt':
-            import shutil
-            # Intentar encontrar checkov en PATH
-            checkov_path = shutil.which("checkov")
-            if checkov_path:
-                checkov_cmd = checkov_path
-                logger.info(f"Checkov encontrado en PATH: {checkov_path}")
-            else:
-                # Buscar en Scripts del Python actual
-                python_exec = self._find_python_executable()
-                python_dir = os.path.dirname(python_exec)
-                scripts_dir = os.path.join(os.path.dirname(python_dir), "Scripts")
-                checkov_exe = os.path.join(scripts_dir, "checkov.exe")
-                checkov_bat = os.path.join(scripts_dir, "checkov.bat")
-                if os.path.exists(checkov_exe):
-                    checkov_cmd = checkov_exe
-                    logger.info(f"Checkov encontrado: {checkov_exe}")
-                elif os.path.exists(checkov_bat):
-                    checkov_cmd = checkov_bat
-                    logger.info(f"Checkov encontrado: {checkov_bat}")
-                else:
-                    logger.warning(f"Checkov no encontrado en {scripts_dir}. Intentando 'checkov' directamente...")
+            python_exec = self._find_python_executable()
+            venv_scripts = os.path.dirname(python_exec)
+            checkov_exe = os.path.join(venv_scripts, "checkov.exe")
+            checkov_bat = os.path.join(venv_scripts, "checkov.bat")
+            if os.path.exists(checkov_exe):
+                checkov_cmd = checkov_exe
+            elif os.path.exists(checkov_bat):
+                checkov_cmd = checkov_bat
         
         # 'output_file' ES el path COMPLETO del archivo SARIF final.
         actual_sarif_file = os.path.abspath(output_file)
