@@ -255,15 +255,13 @@ def create_canonical_finding_identifier(finding: Dict[str, Any], resource_id: st
         return hashlib.sha256(key.encode("utf-8")).hexdigest()
 
     # 2) Fallback canónico propio basado en control CIS y ubicación
-    # IMPORTANTE: Incluimos tool_name en el CFI para que Checkov y Trivy puedan reportar
-    # el mismo hallazgo como hallazgos separados si tienen diferentes niveles de severidad o mensajes
+    # IMPORTANTE: NO incluimos tool_name para que Checkov y Trivy puedan fusionarse
+    # cuando detectan el mismo problema (esa es la característica principal de la herramienta)
     rule_id = finding.get("rule_id", "unknown")
     cis_id = normalize_rule_to_cis(rule_id)
     normalized_file = normalize_file_path(finding.get("file_path", ""))
     start_line = str(finding.get("start_line", 0))
-    tool_name = finding.get("tool_name", "unknown")
-    # Incluir tool_name para diferenciar hallazgos del mismo tipo de diferentes escáneres
-    composite_key = f"cis:{cis_id}:{resource_id}:{normalized_file}:{start_line}:{tool_name}"
+    composite_key = f"cis:{cis_id}:{resource_id}:{normalized_file}:{start_line}"
     return hashlib.sha256(composite_key.encode("utf-8")).hexdigest()
 
 def load_sarif_results(sarif_path: str) -> List[Dict[str, Any]]:
@@ -796,6 +794,12 @@ def process_and_deduplicate_findings(findings: List[Dict[str, Any]], graph_data:
                 filter_reasons["terraform_cache"] += 1
             else:
                 filter_reasons["other"] += 1
+                # Log detallado de hallazgos filtrados como "Otros"
+                logger.info(
+                    f"[DIAGNÓSTICO] Hallazgo filtrado (Otros): rule_id={finding.get('rule_id')}, "
+                    f"tool={finding.get('tool_name')}, file_path={finding.get('file_path')}, "
+                    f"file_path_normalized={file_path_norm}"
+                )
             continue
         filtered_findings.append(finding)
     

@@ -30,7 +30,7 @@ os.makedirs(CACHE_DIR, exist_ok=True)
 
 # Versión del pipeline (incrementar cuando cambie la lógica de generación de grafo/filtrado)
 # Esto invalida el caché automáticamente cuando cambiamos la lógica
-PIPELINE_VERSION = "v19.5"  # Incluir tool_name en CFI para evitar de-duplicación excesiva entre Checkov y Trivy
+PIPELINE_VERSION = "v19.6"  # Revert: Eliminar tool_name del CFI. La fusión entre escáneres es intencional.
 
 
 class PipelineError(Exception):
