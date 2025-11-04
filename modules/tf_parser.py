@@ -146,12 +146,20 @@ def _extract_blocks_from_parsed(parsed: Dict[str, Any], block_type: str, content
     else:
         # Caso: resource y data (estructura con tipo intermedio)
         # {'resource': [{'resource_type': {'resource_name': {...}}}, ...]}
+        blocks_in_ast = len(parsed[block_type])
+        if is_problematic_file and block_type == 'resource' and blocks_in_ast > 0:
+            logger.info(f"[DIAGNÓSTICO PARSER] Procesando {blocks_in_ast} bloques '{block_type}' en {os.path.basename(file_path)}")
+        
         for block_item in parsed[block_type]:
             if not isinstance(block_item, dict):
+                if is_problematic_file and block_type == 'resource':
+                    logger.warning(f"[DIAGNÓSTICO PARSER] Bloque item no es dict: {type(block_item)}")
                 continue
                 
             for block_resource_type, block_instances in block_item.items():
                 if not isinstance(block_instances, dict):
+                    if is_problematic_file and block_type == 'resource':
+                        logger.warning(f"[DIAGNÓSTICO PARSER] Instancias de {block_resource_type} no es dict: {type(block_instances)}")
                     continue
                     
                 for block_name, block_data in block_instances.items():
@@ -159,11 +167,20 @@ def _extract_blocks_from_parsed(parsed: Dict[str, Any], block_type: str, content
                     start_line = block_data.get('__start_line__')
                     end_line = block_data.get('__end_line__')
                     
+                    # LOGGING DETALLADO: Para recursos problemáticos
+                    if is_problematic_file and block_type == 'resource':
+                        logger.debug(f"[DIAGNÓSTICO PARSER]   Procesando {block_type} {block_resource_type}.{block_name}")
+                        logger.debug(f"[DIAGNÓSTICO PARSER]     Metadatos línea: start={start_line}, end={end_line}")
+                    
                     # Si no hay metadatos de línea, usar fallback
                     if start_line is None or end_line is None:
+                        if is_problematic_file and block_type == 'resource':
+                            logger.warning(f"[DIAGNÓSTICO PARSER]     ⚠️ Sin metadatos de línea, usando fallback para {block_resource_type}.{block_name}")
                         start_line, end_line = _find_block_lines_fallback(
                             content, block_type, block_resource_type, block_name
                         )
+                        if is_problematic_file and block_type == 'resource':
+                            logger.debug(f"[DIAGNÓSTICO PARSER]     Fallback resultó: start={start_line}, end={end_line}")
                     
                     if start_line and end_line:
                         # Extraer el bloque de texto crudo
@@ -187,10 +204,18 @@ def _extract_blocks_from_parsed(parsed: Dict[str, Any], block_type: str, content
                             'end_line': end_line,
                             'raw_block_text': raw_block_text,
                         })
+                        
+                        if is_problematic_file and block_type == 'resource':
+                            logger.info(f"[DIAGNÓSTICO PARSER]     ✅ Extraído: {simple_name} (líneas {start_line}-{end_line})")
                     else:
                         logger.warning(
                             f"No se pudieron obtener líneas para {block_type} {block_resource_type}.{block_name} en {file_path}"
                         )
+                        if is_problematic_file and block_type == 'resource':
+                            logger.warning(f"[DIAGNÓSTICO PARSER]     ❌ NO SE PUDO EXTRAER: {block_resource_type}.{block_name}")
+        
+        if is_problematic_file and block_type == 'resource':
+            logger.info(f"[DIAGNÓSTICO PARSER] Total extraído: {len(blocks)} bloques '{block_type}' de {blocks_in_ast} encontrados en AST")
     
     return blocks
 
@@ -239,6 +264,10 @@ def parse_terraform(directory: str) -> List[Dict[str, Any]]:
             with open(file_path, 'r', encoding='utf-8') as f:
                 content = f.read()
             
+            # ESTRATEGIA CAMBIADA: Guardar ruta absoluta en lugar de relativa
+            # Esto permite comparación directa en el motor de correlación
+            file_path_abs = os.path.abspath(os.path.normpath(file_path))
+            
             # Parsear con hcl2
             try:
                 parsed = hcl2.loads(content)
@@ -246,14 +275,36 @@ def parse_terraform(directory: str) -> List[Dict[str, Any]]:
                 logger.warning(f"Error al parsear {file_path} con hcl2: {e}")
                 continue
             
-            # ESTRATEGIA CAMBIADA: Guardar ruta absoluta en lugar de relativa
-            # Esto permite comparación directa en el motor de correlación
-            file_path_abs = os.path.abspath(os.path.normpath(file_path))
+            # LOGGING DETALLADO: Para archivos problemáticos (terraform-aws-modules)
+            is_problematic_file = 'terraform-aws-modules' in file_path_abs
+            if is_problematic_file:
+                logger.info(f"[DIAGNÓSTICO PARSER] Archivo problemático detectado: {file_path_abs}")
+                logger.info(f"[DIAGNÓSTICO PARSER] Claves en el AST parseado: {list(parsed.keys())}")
+                
+                # Contar bloques por tipo en el AST
+                for key in parsed.keys():
+                    if isinstance(parsed[key], list):
+                        logger.info(f"[DIAGNÓSTICO PARSER]   {key}: {len(parsed[key])} bloques encontrados en AST")
+                        # Para resource, mostrar estructura de ejemplo
+                        if key == 'resource' and parsed[key]:
+                            first_resource = parsed[key][0]
+                            if isinstance(first_resource, dict):
+                                logger.info(f"[DIAGNÓSTICO PARSER]     Ejemplo estructura resource: {list(first_resource.keys())[:3]}")
+                    elif isinstance(parsed[key], dict):
+                        logger.info(f"[DIAGNÓSTICO PARSER]   {key}: {len(parsed[key])} elementos")
             
             # Extraer bloques de todos los tipos soportados
+            blocks_found_in_file = 0
             for block_type in BLOCK_TYPES:
                 blocks = _extract_blocks_from_parsed(parsed, block_type, content, file_path, file_path_abs)
+                blocks_found_in_file += len(blocks)
                 resources.extend(blocks)
+            
+            # LOGGING DETALLADO: Si un archivo problemático no produjo bloques
+            if is_problematic_file and blocks_found_in_file == 0:
+                logger.warning(f"[DIAGNÓSTICO PARSER] ⚠️ ARCHIVO PROBLEMÁTICO SIN BLOQUES: {file_path_abs}")
+                logger.warning(f"[DIAGNÓSTICO PARSER]   El AST tiene {len(parsed)} claves pero no se extrajeron bloques")
+                logger.warning(f"[DIAGNÓSTICO PARSER]   Esto puede indicar un problema en la lógica de extracción")
                                         
         except FileNotFoundError:
             logger.warning(f"Archivo no encontrado: {file_path}")
