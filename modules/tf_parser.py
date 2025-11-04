@@ -270,26 +270,38 @@ def parse_terraform(directory: str) -> List[Dict[str, Any]]:
     # Fase 4: Añadir soporte para variable, locals, module
     BLOCK_TYPES = ['resource', 'data', 'variable', 'locals', 'module']
     
+    # LOGGING: Contar archivos problemáticos antes de procesar
+    problematic_files = [f for f in tf_files if 'terraform-aws-modules' in f]
+    if problematic_files:
+        logger.info(f"[DIAGNÓSTICO PARSER] Se encontraron {len(problematic_files)} archivos en terraform-aws-modules/")
+        logger.info(f"[DIAGNÓSTICO PARSER] Primeros archivos: {[os.path.basename(f) for f in problematic_files[:5]]}")
+    
     for file_path in tf_files:
         try:
-            with open(file_path, 'r', encoding='utf-8') as f:
-                content = f.read()
-            
             # ESTRATEGIA CAMBIADA: Guardar ruta absoluta en lugar de relativa
             # Esto permite comparación directa en el motor de correlación
             file_path_abs = os.path.abspath(os.path.normpath(file_path))
+            
+            # LOGGING DETALLADO: Para archivos problemáticos (ANTES de parsear)
+            is_problematic_file = 'terraform-aws-modules' in file_path_abs
+            if is_problematic_file:
+                logger.info(f"[DIAGNÓSTICO PARSER] ════════════════════════════════════════════════════════════")
+                logger.info(f"[DIAGNÓSTICO PARSER] Archivo problemático detectado: {file_path_abs}")
+            
+            with open(file_path, 'r', encoding='utf-8') as f:
+                content = f.read()
             
             # Parsear con hcl2
             try:
                 parsed = hcl2.loads(content)
             except Exception as e:
+                if is_problematic_file:
+                    logger.error(f"[DIAGNÓSTICO PARSER] ❌ Error al parsear archivo problemático: {e}")
                 logger.warning(f"Error al parsear {file_path} con hcl2: {e}")
                 continue
             
-            # LOGGING DETALLADO: Para archivos problemáticos (terraform-aws-modules)
-            is_problematic_file = 'terraform-aws-modules' in file_path_abs
+            # LOGGING DETALLADO: Para archivos problemáticos (DESPUÉS de parsear)
             if is_problematic_file:
-                logger.info(f"[DIAGNÓSTICO PARSER] Archivo problemático detectado: {file_path_abs}")
                 logger.info(f"[DIAGNÓSTICO PARSER] Claves en el AST parseado: {list(parsed.keys())}")
                 
                 # Contar bloques por tipo en el AST
@@ -312,10 +324,13 @@ def parse_terraform(directory: str) -> List[Dict[str, Any]]:
                 resources.extend(blocks)
             
             # LOGGING DETALLADO: Si un archivo problemático no produjo bloques
-            if is_problematic_file and blocks_found_in_file == 0:
-                logger.warning(f"[DIAGNÓSTICO PARSER] ⚠️ ARCHIVO PROBLEMÁTICO SIN BLOQUES: {file_path_abs}")
-                logger.warning(f"[DIAGNÓSTICO PARSER]   El AST tiene {len(parsed)} claves pero no se extrajeron bloques")
-                logger.warning(f"[DIAGNÓSTICO PARSER]   Esto puede indicar un problema en la lógica de extracción")
+            if is_problematic_file:
+                logger.info(f"[DIAGNÓSTICO PARSER] Bloques extraídos de este archivo: {blocks_found_in_file}")
+                if blocks_found_in_file == 0:
+                    logger.warning(f"[DIAGNÓSTICO PARSER] ⚠️ ARCHIVO PROBLEMÁTICO SIN BLOQUES: {file_path_abs}")
+                    logger.warning(f"[DIAGNÓSTICO PARSER]   El AST tiene {len(parsed)} claves pero no se extrajeron bloques")
+                    logger.warning(f"[DIAGNÓSTICO PARSER]   Esto puede indicar un problema en la lógica de extracción")
+                logger.info(f"[DIAGNÓSTICO PARSER] ════════════════════════════════════════════════════════════")
                                         
         except FileNotFoundError:
             logger.warning(f"Archivo no encontrado: {file_path}")
