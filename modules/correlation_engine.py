@@ -710,14 +710,14 @@ def _should_filter_finding(finding: Dict[str, Any], project_root: Optional[str] 
     # Normalizar a ruta absoluta para análisis
     file_path_abs = normalize_file_path(file_path, project_root)
     
-    # Verificar si el archivo existe físicamente (CRÍTICO para módulos remotos)
-    # Los escáneres pueden reportar hallazgos en módulos de Terraform Registry que están en cache
-    # pero no existen en el código fuente del usuario
-    if file_path_abs and project_root:
-        if not os.path.exists(file_path_abs):
-            # El archivo no existe físicamente - probablemente es un módulo remoto en cache
-            logger.debug(f"Filtrando hallazgo en archivo inexistente (módulo remoto/cache): {file_path}")
-            return True
+    # COMENTADO: Este filtro estaba eliminando hallazgos válidos en módulos remotos
+    # Los escáneres reportan hallazgos en módulos remotos que están en .terraform/modules/
+    # pero no en el código fuente. Sin embargo, estos hallazgos son válidos y deben procesarse.
+    # if file_path_abs and project_root:
+    #     if not os.path.exists(file_path_abs):
+    #         # El archivo no existe físicamente - probablemente es un módulo remoto en cache
+    #         logger.debug(f"Filtrando hallazgo en archivo inexistente (módulo remoto/cache): {file_path}")
+    #         return True
     
     # Normalizar separadores para comparación
     file_path_normalized = file_path_abs.replace("\\", "/").lower() if file_path_abs else ""
