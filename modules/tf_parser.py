@@ -6,7 +6,7 @@ correctamente todos los casos edge (comentarios, strings, bloques dinámicos, et
 y proporciona metadatos de línea precisos.
 """
 
-# FORCING CI CODE REFRESH v21.3
+# FORCING CI CODE REFRESH v21.4 - Logging incondicional
 from typing import List, Dict, Any
 import os
 import hcl2
@@ -273,9 +273,13 @@ def parse_terraform(directory: str) -> List[Dict[str, Any]]:
     
     # LOGGING: Contar archivos problemáticos antes de procesar
     problematic_files = [f for f in tf_files if 'terraform-aws-modules' in f]
+    logger.info(f"[DIAGNÓSTICO PARSER] Total archivos .tf encontrados: {len(tf_files)}")
+    logger.info(f"[DIAGNÓSTICO PARSER] Archivos problemáticos detectados: {len(problematic_files)}")
     if problematic_files:
-        logger.info(f"[DIAGNÓSTICO PARSER] Se encontraron {len(problematic_files)} archivos en terraform-aws-modules/")
-        logger.info(f"[DIAGNÓSTICO PARSER] Primeros archivos: {[os.path.basename(f) for f in problematic_files[:5]]}")
+        logger.info(f"[DIAGNÓSTICO PARSER] Primeros archivos problemáticos: {[os.path.basename(f) for f in problematic_files[:5]]}")
+        logger.info(f"[DIAGNÓSTICO PARSER] Ejemplo ruta completa: {problematic_files[0] if problematic_files else 'N/A'}")
+    else:
+        logger.warning(f"[DIAGNÓSTICO PARSER] ⚠️ NO se detectaron archivos problemáticos. Ejemplo de rutas: {[os.path.basename(f) for f in tf_files[:5]]}")
     
     for file_path in tf_files:
         try:
