@@ -11,6 +11,7 @@ import logging
 import asyncio
 import argparse
 import time
+import hashlib
 from typing import Dict, Any, Tuple
 
 # Importar funciones de los módulos existentes
@@ -26,6 +27,10 @@ logger = logging.getLogger(__name__)
 # Directorio de caché
 CACHE_DIR = ".graphsec_cache"
 os.makedirs(CACHE_DIR, exist_ok=True)
+
+# Versión del pipeline (incrementar cuando cambie la lógica de generación de grafo/filtrado)
+# Esto invalida el caché automáticamente cuando cambiamos la lógica
+PIPELINE_VERSION = "v19.1"  # Cambiado para invalidar caché después de fixes de aristas y filtros
 
 
 class PipelineError(Exception):
@@ -55,11 +60,13 @@ def get_cached_or_generate_graph(directory: str, project_name: str) -> Dict[str,
     if not tf_files:
         raise PipelineError("Error: No se encontraron archivos .tf para analizar")
     
-    # Generar hash de todos los archivos .tf
+    # Generar hash de todos los archivos .tf + versión del pipeline
     graph_hash = generate_hash_for_files(tf_files)
+    # Incluir versión del pipeline en el hash para invalidar caché cuando cambie la lógica
+    version_hash = hashlib.md5(PIPELINE_VERSION.encode()).hexdigest()[:8]
     
-    # Definir archivo de caché
-    cache_file_graph = os.path.join(CACHE_DIR, f"{project_name}_graph_{graph_hash}.json")
+    # Definir archivo de caché (incluye versión del pipeline)
+    cache_file_graph = os.path.join(CACHE_DIR, f"{project_name}_graph_{graph_hash}_{version_hash}.json")
     
     # Intentar cargar desde caché
     if os.path.exists(cache_file_graph):
@@ -178,17 +185,19 @@ async def get_cached_or_run_scanner(scanner, directory: str, output_file: str, p
         success = await scanner.scan(directory, output_file)
         return success, output_file
     
-    # Generar hash de todos los archivos relevantes
+    # Generar hash de todos los archivos relevantes + versión del pipeline
     scanner_hash = generate_hash_for_files(all_files)
+    # Incluir versión del pipeline en el hash para invalidar caché cuando cambie la lógica
+    version_hash = hashlib.md5(PIPELINE_VERSION.encode()).hexdigest()[:8]
     
-    # Definir archivo de caché (usar directorio de caché, pero mantener formato SARIF)
+    # Definir archivo de caché (incluye versión del pipeline)
     if scanner_name == "checkov":
         # Checkov guarda en un subdirectorio, usar ese formato
-        cache_dir_scanner = os.path.join(CACHE_DIR, f"{scanner_name}_{project_name}_{scanner_hash}")
+        cache_dir_scanner = os.path.join(CACHE_DIR, f"{scanner_name}_{project_name}_{scanner_hash}_{version_hash}")
         cache_file_scanner = os.path.join(cache_dir_scanner, "results_sarif.sarif")
     else:
         # Trivy guarda directamente en un archivo
-        cache_file_scanner = os.path.join(CACHE_DIR, f"{scanner_name}_{project_name}_{scanner_hash}.sarif")
+        cache_file_scanner = os.path.join(CACHE_DIR, f"{scanner_name}_{project_name}_{scanner_hash}_{version_hash}.sarif")
     
     # Intentar cargar desde caché
     if os.path.exists(cache_file_scanner):
