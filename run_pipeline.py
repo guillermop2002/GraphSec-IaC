@@ -30,7 +30,7 @@ os.makedirs(CACHE_DIR, exist_ok=True)
 
 # Versión del pipeline (incrementar cuando cambie la lógica de generación de grafo/filtrado)
 # Esto invalida el caché automáticamente cuando cambiamos la lógica
-PIPELINE_VERSION = "v19.6"  # Revert: Eliminar tool_name del CFI. La fusión entre escáneres es intencional.
+PIPELINE_VERSION = "v19.7"  # Force: Forzar regeneración completa de CI con código actualizado
 
 
 class PipelineError(Exception):
