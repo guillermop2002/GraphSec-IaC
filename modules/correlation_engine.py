@@ -525,7 +525,12 @@ def _match_resource_id_by_filename(finding: Dict[str, Any], nodes: List[Dict[str
             nodes_in_file.append(node)
     
     if not nodes_in_file:
-        logger.debug(f"[Capa 2] NO SE ENCONTRO MATCH para archivo '{finding_path_abs}'")
+        # Logging detallado para Capa 2
+        logger.info(
+            f"[DIAGNÓSTICO] Hallazgo no asignado (Capa 2): rule_id={finding.get('rule_id')}, "
+            f"file='{finding_path_abs}' - NO HAY NODOS en este archivo "
+            f"(el parser no encontró recursos en este archivo)"
+        )
         return "unknown_resource"
     
     # Obtener la línea del hallazgo
@@ -700,7 +705,23 @@ def _match_resource_id_by_range(finding: Dict[str, Any], nodes: List[Dict[str, A
         logger.debug(f"[Capa 1] MEJOR MATCH seleccionado: {best_match} (de {len(candidates)} candidatos, {nodes_same_file} nodos en mismo archivo de {nodes_checked} verificados)")
         return best_match
     else:
-        logger.debug(f"[Capa 1] NO SE ENCONTRO MATCH: {nodes_same_file} nodos en mismo archivo '{finding_path_abs}', pero ninguno coincide en rango de líneas")
+        # Logging detallado para hallazgos no asignados
+        if nodes_same_file == 0:
+            # No hay nodos en este archivo - el archivo puede no tener recursos parseados
+            logger.info(
+                f"[DIAGNÓSTICO] Hallazgo no asignado (Capa 1): rule_id={finding.get('rule_id')}, "
+                f"file='{finding_path_abs}', line={finding_line} - NO HAY NODOS en este archivo "
+                f"(archivo puede no tener recursos Terraform, solo variables/data/modules)"
+            )
+        else:
+            # Hay nodos pero ninguno coincide en rango - obtener ejemplos de nodos en este archivo
+            nodes_in_this_file = [n for n in nodes if normalize_file_path(n.get('file', ''), project_root) == finding_path_abs]
+            sample_nodes = [f"{n.get('id')} (líneas {n.get('start_line')}-{n.get('end_line')})" for n in nodes_in_this_file[:3]]
+            logger.info(
+                f"[DIAGNÓSTICO] Hallazgo no asignado (Capa 1): rule_id={finding.get('rule_id')}, "
+                f"file='{finding_path_abs}', line={finding_line} - {nodes_same_file} nodos en archivo pero "
+                f"ninguno contiene línea {finding_line}. Ejemplos de nodos: {sample_nodes}"
+            )
         return "unknown_resource"
 
 
