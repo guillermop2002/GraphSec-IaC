@@ -255,11 +255,15 @@ def create_canonical_finding_identifier(finding: Dict[str, Any], resource_id: st
         return hashlib.sha256(key.encode("utf-8")).hexdigest()
 
     # 2) Fallback canónico propio basado en control CIS y ubicación
+    # IMPORTANTE: Incluimos tool_name en el CFI para que Checkov y Trivy puedan reportar
+    # el mismo hallazgo como hallazgos separados si tienen diferentes niveles de severidad o mensajes
     rule_id = finding.get("rule_id", "unknown")
     cis_id = normalize_rule_to_cis(rule_id)
     normalized_file = normalize_file_path(finding.get("file_path", ""))
     start_line = str(finding.get("start_line", 0))
-    composite_key = f"cis:{cis_id}:{resource_id}:{normalized_file}:{start_line}"
+    tool_name = finding.get("tool_name", "unknown")
+    # Incluir tool_name para diferenciar hallazgos del mismo tipo de diferentes escáneres
+    composite_key = f"cis:{cis_id}:{resource_id}:{normalized_file}:{start_line}:{tool_name}"
     return hashlib.sha256(composite_key.encode("utf-8")).hexdigest()
 
 def load_sarif_results(sarif_path: str) -> List[Dict[str, Any]]:
@@ -840,9 +844,13 @@ def process_and_deduplicate_findings(findings: List[Dict[str, Any]], graph_data:
                 )
         cfi = create_canonical_finding_identifier(finding, resource_id)
         if cfi in seen_cfi:
-            # Log de duplicados
-            if len(unique_findings) < 20:  # Solo los primeros 20 para no saturar
-                logger.debug(f"Duplicado detectado (CFI ya existe): rule_id={finding.get('rule_id')}, resource_id={resource_id}, file={finding.get('file_path')}:{finding.get('start_line')}")
+            # Log de duplicados - más detallado para diagnóstico
+            logger.info(
+                f"[DIAGNÓSTICO] Duplicado detectado (CFI ya existe): "
+                f"rule_id={finding.get('rule_id')}, tool={finding.get('tool_name')}, "
+                f"resource_id={resource_id}, file={finding.get('file_path')}:{finding.get('start_line')}, "
+                f"cis_normalized={normalize_rule_to_cis(finding.get('rule_id', 'unknown'))}"
+            )
             continue
         seen_cfi.add(cfi)
         unique_findings.append({
@@ -869,6 +877,18 @@ def process_and_deduplicate_findings(findings: List[Dict[str, Any]], graph_data:
     logger.info(
         f"[DIAGNÓSTICO] Desglose: {len(filtered_findings)} después de filtrado -> {layer_stats[1] + layer_stats[2] + layer_stats[3]} asignados -> {len(unique_findings)} únicos después de CFI"
     )
+    
+    # Log de estadísticas de duplicados por escáner
+    duplicates_by_tool = {}
+    for finding in filtered_findings:
+        tool = finding.get('tool_name', 'unknown')
+        if tool not in duplicates_by_tool:
+            duplicates_by_tool[tool] = {'total': 0, 'duplicates': 0}
+        duplicates_by_tool[tool]['total'] += 1
+    
+    # Contar duplicados (esto es aproximado, pero útil)
+    seen_cfi_list = list(seen_cfi)
+    logger.info(f"[DIAGNÓSTICO] Total de CFIs únicos generados: {len(seen_cfi_list)}")
 
     return {
         "unique_findings": unique_findings,
