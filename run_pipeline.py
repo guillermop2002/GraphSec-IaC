@@ -32,7 +32,7 @@ os.makedirs(CACHE_DIR, exist_ok=True)
 
 # Versión del pipeline (incrementar cuando cambie la lógica de generación de grafo/filtrado)
 # Esto invalida el caché automáticamente cuando cambiamos la lógica
-PIPELINE_VERSION = "v20.3"  # Fix: Usar ruta absoluta explícita en comando Checkov --directory
+PIPELINE_VERSION = "v20.4"  # Fix: Forzar ejecución de workflow con ruta absoluta en Checkov
 
 
 class PipelineError(Exception):
