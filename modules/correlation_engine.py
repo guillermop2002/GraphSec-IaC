@@ -1006,16 +1006,25 @@ def attach_findings_to_graph(graph_data: Dict[str, Any], unique_findings: List[D
                 message = message[:200] + "..."
             logger.warning(f"  💬 Mensaje: {message}")
             
-            # Verificar si hay nodos en el mismo archivo
-            if project_root:
-                finding_path_abs = normalize_file_path(uf.get('file_path', ''), project_root)
-                nodes_in_same_file = [n for n in nodes if normalize_file_path(n.get('file', ''), project_root) == finding_path_abs]
-                if nodes_in_same_file:
-                    logger.warning(f"  ℹ️  Hay {len(nodes_in_same_file)} nodo(s) en este archivo, pero ninguno coincidió:")
-                    for node in nodes_in_same_file[:3]:
-                        logger.warning(f"      - {node.get('id')} (tipo: {node.get('block_type', 'N/A')}, líneas: {node.get('start_line')}-{node.get('end_line')})")
-                else:
-                    logger.warning(f"  ❌ NO HAY NODOS en este archivo (el parser no encontró recursos en este archivo)")
+            # Verificar si hay nodos en el mismo archivo (usando rutas absolutas normalizadas)
+            finding_file = uf.get('file_path', '')
+            nodes_in_same_file = []
+            for n in nodes:
+                node_file = n.get('file', '')
+                # Normalizar rutas para comparación (usar rutas absolutas directamente)
+                if finding_file and node_file:
+                    # Normalizar separadores
+                    finding_normalized = finding_file.replace("\\", "/").lower()
+                    node_normalized = node_file.replace("\\", "/").lower()
+                    if finding_normalized == node_normalized or finding_normalized.endswith(node_normalized) or node_normalized.endswith(finding_normalized):
+                        nodes_in_same_file.append(n)
+            
+            if nodes_in_same_file:
+                logger.warning(f"  ℹ️  Hay {len(nodes_in_same_file)} nodo(s) en este archivo, pero ninguno coincidió:")
+                for node in nodes_in_same_file[:3]:
+                    logger.warning(f"      - {node.get('id')} (tipo: {node.get('block_type', 'N/A')}, líneas: {node.get('start_line')}-{node.get('end_line')})")
+            else:
+                logger.warning(f"  ❌ NO HAY NODOS en este archivo (el parser no encontró recursos en este archivo)")
         logger.warning("=" * 80)
     
     enriched_graph["unassigned_findings"] = unassigned
