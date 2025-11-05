@@ -422,7 +422,7 @@
                         bold: hasIssues
                     },
                     shape: 'box',
-                    margin: 15,
+                    margin: 25,                       // Mayor margen para evitar solapamiento
                     x: initialPositions[index]?.x,
                     y: initialPositions[index]?.y,
                     // Almacenar datos originales del nodo
@@ -544,7 +544,7 @@
             const options = {
                 nodes: {
                     shape: 'box',
-                    margin: 15,
+                    margin: 25,                       // Mayor margen alrededor de los nodos (aumentado de 15)
                     font: {
                         size: 14,
                         color: '#333333'
@@ -587,16 +587,17 @@
                 physics: {
                     enabled: true,
                     stabilization: {
-                        iterations: 200,
+                        iterations: 300,              // Más iteraciones para mejor estabilización
                         updateInterval: 50
                     },
                     solver: 'forceAtlas2Based',
                     forceAtlas2Based: {
-                        gravitationalConstant: -200,  // Más repulsión entre nodos
-                        centralGravity: 0.005,        // Menos atracción al centro
-                        springLength: 200,            // Mayor longitud de resorte
-                        springConstant: 0.05,         // Menos fuerza de resorte
-                        damping: 0.6                  // Más amortiguación para estabilidad
+                        gravitationalConstant: -500,  // Más repulsión entre nodos (aumentado de -200)
+                        centralGravity: 0.001,        // Menos atracción al centro (reducido de 0.005)
+                        springLength: 400,            // Mayor longitud de resorte (aumentado de 200)
+                        springConstant: 0.02,         // Menos fuerza de resorte (reducido de 0.05)
+                        damping: 0.8,                 // Más amortiguación para estabilidad (aumentado de 0.6)
+                        avoidOverlap: 1.0             // Evitar solapamiento (0-1, 1 = máximo)
                     }
                 },
                 interaction: {
