@@ -57,12 +57,27 @@ jobs:
       
       # 6.5. Cachear resultados del pipeline (grafo y escáneres)
       - name: Restaurar caché del pipeline
+        id: cache-pipeline
         uses: actions/cache@v3
         with:
           path: .graphsec_cache
           key: pipeline-cache-${{ runner.os }}-${{ hashFiles('terraform-aws-eks/**/*.tf') }}-v22.4
           restore-keys: |
             pipeline-cache-${{ runner.os }}-
+      
+      # 6.6. Verificar contenido del caché restaurado
+      - name: Verificar caché restaurado
+        run: |
+          echo "=== Caché restaurado: ${{ steps.cache-pipeline.outputs.cache-hit }} ==="
+          if [ -d .graphsec_cache ]; then
+            echo "=== Directorios de Checkov en caché ==="
+            find .graphsec_cache -type d -name "checkov_eks_*" || echo "No se encontraron directorios de Checkov"
+            echo ""
+            echo "=== Archivos de Trivy en caché ==="
+            find .graphsec_cache -type f -name "trivy_eks_*" | head -5 || echo "No se encontraron archivos de Trivy"
+          else
+            echo "Directorio .graphsec_cache no existe después de restaurar"
+          fi
       
       # 7. Inicializar Terraform (analizando 'terraform-aws-eks')
       - name: Terraform Init
@@ -120,7 +135,23 @@ jobs:
               json.dump(data, f, indent=2)
           "
       
-      # 8.6. Guardar caché del pipeline
+      # 8.6. Verificar contenido del caché antes de guardar
+      - name: Verificar contenido del caché
+        run: |
+          echo "=== Contenido de .graphsec_cache antes de guardar ==="
+          if [ -d .graphsec_cache ]; then
+            find .graphsec_cache -type f -o -type d | head -20
+            echo ""
+            echo "=== Directorios de Checkov ==="
+            find .graphsec_cache -type d -name "checkov_eks_*" || echo "No se encontraron directorios de Checkov"
+            echo ""
+            echo "=== Archivos de Trivy ==="
+            find .graphsec_cache -type f -name "trivy_eks_*" | head -5 || echo "No se encontraron archivos de Trivy"
+          else
+            echo "Directorio .graphsec_cache no existe"
+          fi
+      
+      # 8.7. Guardar caché del pipeline
       - name: Guardar caché del pipeline
         uses: actions/cache@v3
         with:
