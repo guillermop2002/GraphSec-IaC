@@ -276,8 +276,16 @@ async def get_cached_or_run_scanner(scanner, directory: str, output_file: str, p
                     # Checkov guardó en un subdirectorio
                     source_file = os.path.join(source_path, "results_sarif.sarif")
                     if os.path.exists(source_file):
-                        os.makedirs(os.path.dirname(cache_file_scanner), exist_ok=True)
+                        cache_dir = os.path.dirname(cache_file_scanner)
+                        os.makedirs(cache_dir, exist_ok=True)
+                        logger.info(f"[GUARDAR CACHÉ] Directorio creado: {cache_dir}")
                         shutil.copy2(source_file, cache_file_scanner)
+                        logger.info(f"[GUARDAR CACHÉ] Archivo copiado: {source_file} -> {cache_file_scanner}")
+                        # Verificar que el archivo existe después de copiar
+                        if os.path.exists(cache_file_scanner):
+                            logger.info(f"[GUARDAR CACHÉ] ✅ Archivo de caché verificado: {cache_file_scanner}")
+                        else:
+                            logger.error(f"[GUARDAR CACHÉ] ❌ Archivo de caché NO existe después de copiar: {cache_file_scanner}")
                         logger.info(f"Resultados de {scanner_name} guardados en caché (desde directorio)")
                     else:
                         logger.warning(f"Archivo SARIF no encontrado en directorio: {source_file}")
