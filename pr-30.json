@@ -10,6 +10,66 @@
       "end_line": 206,
       "security_issues": [
         {
+          "cfi": "7694615de49aa40b5c551eda84ffb75f3f8d43c2e34ade2d7e7218e2ca1653c9",
+          "rule_id": "CKV_AWS_37",
+          "normalized_cis": "CKV_AWS_37",
+          "resource_id": "aws_eks_cluster.this_0",
+          "message": "Ensure Amazon EKS control plane logging is enabled for all log types",
+          "level": "error",
+          "file_path": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/main.tf",
+          "start_line": 36,
+          "tool_name": "Checkov",
+          "sources": [
+            "Checkov"
+          ],
+          "correlation_layer": 1
+        },
+        {
+          "cfi": "4be94560230b715aa2657c47d6771be7e5dcac944cef419e33eb382e1b728eac",
+          "rule_id": "CKV_AWS_58",
+          "normalized_cis": "CKV_AWS_58",
+          "resource_id": "aws_eks_cluster.this_0",
+          "message": "Ensure EKS Cluster has Secrets Encryption Enabled",
+          "level": "error",
+          "file_path": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/main.tf",
+          "start_line": 36,
+          "tool_name": "Checkov",
+          "sources": [
+            "Checkov"
+          ],
+          "correlation_layer": 1
+        },
+        {
+          "cfi": "3633470f850acad5e98e52baa9049efd3e88fcd251d99cc96f81cd89950fdaf8",
+          "rule_id": "CKV_AWS_39",
+          "normalized_cis": "CKV_AWS_39",
+          "resource_id": "aws_eks_cluster.this_0",
+          "message": "Ensure Amazon EKS public endpoint disabled",
+          "level": "error",
+          "file_path": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/main.tf",
+          "start_line": 36,
+          "tool_name": "Checkov",
+          "sources": [
+            "Checkov"
+          ],
+          "correlation_layer": 1
+        },
+        {
+          "cfi": "414cd9f4cee2cb3a9c0c1868dd08bf8109ff5cfb4ab84cce4a1a948e07659b8f",
+          "rule_id": "CKV_AWS_38",
+          "normalized_cis": "CKV_AWS_38",
+          "resource_id": "aws_eks_cluster.this_0",
+          "message": "Ensure Amazon EKS public endpoint not accessible to 0.0.0.0/0",
+          "level": "error",
+          "file_path": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/main.tf",
+          "start_line": 36,
+          "tool_name": "Checkov",
+          "sources": [
+            "Checkov"
+          ],
+          "correlation_layer": 1
+        },
+        {
           "cfi": "ee49030c4c83f67ca9860e52a33577ccc979fc0be8d7dee204d698582c21e816",
           "rule_id": "AVD-AWS-0038",
           "normalized_cis": "CIS-AWS-2.3.2",
@@ -74,7 +134,23 @@
       "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/main.tf",
       "start_line": 223,
       "end_line": 238,
-      "security_issues": []
+      "security_issues": [
+        {
+          "cfi": "59d63ef0a27516f37c549baf8277511a7dfbb19505f710ef3d27238545b77d72",
+          "rule_id": "CKV_AWS_338",
+          "normalized_cis": "CIS-AWS-3.2.2",
+          "resource_id": "aws_cloudwatch_log_group.this_2",
+          "message": "Ensure CloudWatch log groups retains logs for at least 1 year",
+          "level": "error",
+          "file_path": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/main.tf",
+          "start_line": 223,
+          "tool_name": "Checkov",
+          "sources": [
+            "Checkov"
+          ],
+          "correlation_layer": 1
+        }
+      ]
     },
     {
       "id": "aws_eks_access_entry.this_3",
@@ -104,7 +180,23 @@
       "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/main.tf",
       "start_line": 391,
       "end_line": 410,
-      "security_issues": []
+      "security_issues": [
+        {
+          "cfi": "945c95d93211ae20dadda28470b8b66da534abacbcf23256ff89dcff80f6494b",
+          "rule_id": "CKV2_AWS_5",
+          "normalized_cis": "CIS-AWS-2.2.1",
+          "resource_id": "aws_security_group.cluster_5",
+          "message": "Ensure that Security Groups are attached to another resource",
+          "level": "error",
+          "file_path": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/main.tf",
+          "start_line": 391,
+          "tool_name": "Checkov",
+          "sources": [
+            "Checkov"
+          ],
+          "correlation_layer": 1
+        }
+      ]
     },
     {
       "id": "aws_security_group_rule.cluster_6",
@@ -594,7 +686,23 @@
       "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/main.tf",
       "start_line": 331,
       "end_line": 365,
-      "security_issues": []
+      "security_issues": [
+        {
+          "cfi": "8ca61632ae235014d346c6df8384e891b806928d2bcff9b764c2df6efaec8fcc",
+          "rule_id": "CKV_TF_1",
+          "normalized_cis": "TF-BACKEND-1",
+          "resource_id": "module.kms_54",
+          "message": "Ensure Terraform module sources use a commit hash",
+          "level": "error",
+          "file_path": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/main.tf",
+          "start_line": 331,
+          "tool_name": "Checkov",
+          "sources": [
+            "Checkov"
+          ],
+          "correlation_layer": 1
+        }
+      ]
     },
     {
       "id": "var.create_55",
@@ -1644,7 +1752,23 @@
       "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/node_groups.tf",
       "start_line": 177,
       "end_line": 199,
-      "security_issues": []
+      "security_issues": [
+        {
+          "cfi": "a0ebf94bf5c8af1116380e9b32a226cacedbdd0e764e7be493c3d430e4ed88e2",
+          "rule_id": "CKV2_AWS_5",
+          "normalized_cis": "CIS-AWS-2.2.1",
+          "resource_id": "aws_security_group.node_159",
+          "message": "Ensure that Security Groups are attached to another resource",
+          "level": "error",
+          "file_path": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/node_groups.tf",
+          "start_line": 177,
+          "tool_name": "Checkov",
+          "sources": [
+            "Checkov"
+          ],
+          "correlation_layer": 1
+        }
+      ]
     },
     {
       "id": "aws_security_group_rule.node_160",
@@ -1695,7 +1819,38 @@
       "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/node_groups.tf",
       "start_line": 30,
       "end_line": 50,
-      "security_issues": []
+      "security_issues": [
+        {
+          "cfi": "e9b29a2df07b5684ee98e42af98e475ab19435d182251fae3a953917b24fdd19",
+          "rule_id": "CKV_AWS_356",
+          "normalized_cis": "CIS-AWS-1.3.2",
+          "resource_id": "data.aws_iam_policy_document.cni_ipv6_policy_161",
+          "message": "Ensure no IAM policies documents allow \"*\" as a statement's resource for restrictable actions",
+          "level": "error",
+          "file_path": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/node_groups.tf",
+          "start_line": 30,
+          "tool_name": "Checkov",
+          "sources": [
+            "Checkov"
+          ],
+          "correlation_layer": 1
+        },
+        {
+          "cfi": "ef170638d98bde6e55799925a41f11afe601e014ebf3b0b16265d8dc357dc8ce",
+          "rule_id": "CKV_AWS_111",
+          "normalized_cis": "CKV_AWS_111",
+          "resource_id": "data.aws_iam_policy_document.cni_ipv6_policy_161",
+          "message": "Ensure IAM policies does not allow write access without constraints",
+          "level": "error",
+          "file_path": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/node_groups.tf",
+          "start_line": 30,
+          "tool_name": "Checkov",
+          "sources": [
+            "Checkov"
+          ],
+          "correlation_layer": 1
+        }
+      ]
     },
     {
       "id": "local.kubernetes_network_config_162",
@@ -4555,7 +4710,38 @@
       "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/eks-managed-node-group/main.tf",
       "start_line": 98,
       "end_line": 380,
-      "security_issues": []
+      "security_issues": [
+        {
+          "cfi": "6336829da8135212da704608105b639dcb8d315b493afdc6dcf47dd639d307a3",
+          "rule_id": "CKV_AWS_79",
+          "normalized_cis": "CIS-AWS-1.3.1",
+          "resource_id": "aws_launch_template.this_447",
+          "message": "Ensure Instance Metadata Service Version 1 is not enabled",
+          "level": "error",
+          "file_path": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/eks-managed-node-group/main.tf",
+          "start_line": 98,
+          "tool_name": "Checkov",
+          "sources": [
+            "Checkov"
+          ],
+          "correlation_layer": 1
+        },
+        {
+          "cfi": "97a9d57611589d199e146995d43e13d3da9a0b8a3d1740569ff20c404f3cf8ee",
+          "rule_id": "CKV_AWS_341",
+          "normalized_cis": "CIS-AWS-1.4.1",
+          "resource_id": "aws_launch_template.this_447",
+          "message": "Ensure Launch template should not have a metadata response hop limit greater than 1",
+          "level": "error",
+          "file_path": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/eks-managed-node-group/main.tf",
+          "start_line": 98,
+          "tool_name": "Checkov",
+          "sources": [
+            "Checkov"
+          ],
+          "correlation_layer": 1
+        }
+      ]
     },
     {
       "id": "aws_eks_node_group.this_448",
@@ -6205,7 +6391,38 @@
       "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/self-managed-node-group/main.tf",
       "start_line": 139,
       "end_line": 495,
-      "security_issues": []
+      "security_issues": [
+        {
+          "cfi": "1f969b8a5da351ea3088f6d8a3adbdf8693d5c3d2b756b811a55927217de256e",
+          "rule_id": "CKV_AWS_79",
+          "normalized_cis": "CIS-AWS-1.3.1",
+          "resource_id": "aws_launch_template.this_612",
+          "message": "Ensure Instance Metadata Service Version 1 is not enabled",
+          "level": "error",
+          "file_path": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/self-managed-node-group/main.tf",
+          "start_line": 139,
+          "tool_name": "Checkov",
+          "sources": [
+            "Checkov"
+          ],
+          "correlation_layer": 1
+        },
+        {
+          "cfi": "f13ae4e7f807faee60ddd06ff68eb36eb90204040d63d18366dab600cdaf18c9",
+          "rule_id": "CKV_AWS_341",
+          "normalized_cis": "CIS-AWS-1.4.1",
+          "resource_id": "aws_launch_template.this_612",
+          "message": "Ensure Launch template should not have a metadata response hop limit greater than 1",
+          "level": "error",
+          "file_path": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/self-managed-node-group/main.tf",
+          "start_line": 139,
+          "tool_name": "Checkov",
+          "sources": [
+            "Checkov"
+          ],
+          "correlation_layer": 1
+        }
+      ]
     },
     {
       "id": "aws_autoscaling_group.this_613",
@@ -6295,7 +6512,23 @@
       "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/self-managed-node-group/main.tf",
       "start_line": 1041,
       "end_line": 1060,
-      "security_issues": []
+      "security_issues": [
+        {
+          "cfi": "85419f5172f45fb8312a8f22169c429d47f2455deb18808edbe5c387c06fefaa",
+          "rule_id": "CKV2_AWS_5",
+          "normalized_cis": "CIS-AWS-2.2.1",
+          "resource_id": "aws_security_group.this_621",
+          "message": "Ensure that Security Groups are attached to another resource",
+          "level": "error",
+          "file_path": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/self-managed-node-group/main.tf",
+          "start_line": 1041,
+          "tool_name": "Checkov",
+          "sources": [
+            "Checkov"
+          ],
+          "correlation_layer": 1
+        }
+      ]
     },
     {
       "id": "aws_vpc_security_group_ingress_rule.this_622",
@@ -8245,7 +8478,38 @@
       "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/hybrid-node-role/main.tf",
       "start_line": 93,
       "end_line": 159,
-      "security_issues": []
+      "security_issues": [
+        {
+          "cfi": "d0dbb59040675bdcb46b5627832b70642f816c020f6e6def19147e63963a4eb2",
+          "rule_id": "CKV_AWS_356",
+          "normalized_cis": "CIS-AWS-1.3.2",
+          "resource_id": "data.aws_iam_policy_document.this_816",
+          "message": "Ensure no IAM policies documents allow \"*\" as a statement's resource for restrictable actions",
+          "level": "error",
+          "file_path": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/hybrid-node-role/main.tf",
+          "start_line": 93,
+          "tool_name": "Checkov",
+          "sources": [
+            "Checkov"
+          ],
+          "correlation_layer": 1
+        },
+        {
+          "cfi": "37c432354ddc87dc9c91c2e8ae83e320341a3f914c186bf5e326baf8e86f77ad",
+          "rule_id": "CKV_AWS_111",
+          "normalized_cis": "CKV_AWS_111",
+          "resource_id": "data.aws_iam_policy_document.this_816",
+          "message": "Ensure IAM policies does not allow write access without constraints",
+          "level": "error",
+          "file_path": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/hybrid-node-role/main.tf",
+          "start_line": 93,
+          "tool_name": "Checkov",
+          "sources": [
+            "Checkov"
+          ],
+          "correlation_layer": 1
+        }
+      ]
     },
     {
       "id": "data.aws_iam_policy_document.intermediate_assume_role_817",
@@ -13714,12 +13978,12 @@
     }
   ],
   "correlation_metadata": {
-    "assigned_findings": 6,
+    "assigned_findings": 23,
     "unassigned_findings_count": 3,
-    "nodes_with_issues_count": 3,
-    "total_unique_findings": 9,
+    "nodes_with_issues_count": 12,
+    "total_unique_findings": 26,
     "layer_stats": {
-      "1": 35,
+      "1": 82,
       "2": 0,
       "3": 0,
       "0": 21
@@ -13730,22 +13994,22 @@
     "message": "Pipeline completado exitosamente para proyecto 'eks'",
     "project_name": "eks_pr_30",
     "project_directory": "./terraform-aws-eks",
-    "scanners_used": 1,
-    "checkov_success": false,
+    "scanners_used": 2,
+    "checkov_success": true,
     "trivy_success": true,
-    "total_findings_original": 101,
-    "total_findings_unique": 9,
-    "duplicates_removed": 92,
+    "total_findings_original": 228,
+    "total_findings_unique": 26,
+    "duplicates_removed": 202,
     "deduplication_method": "CFI_CIS+SARIF_FP",
     "total_nodes": 945,
     "total_edges": 824,
     "correlation_metadata": {
-      "assigned_findings": 6,
+      "assigned_findings": 23,
       "unassigned_findings_count": 3,
-      "nodes_with_issues_count": 3,
-      "total_unique_findings": 9,
+      "nodes_with_issues_count": 12,
+      "total_unique_findings": 26,
       "layer_stats": {
-        "1": 35,
+        "1": 82,
         "2": 0,
         "3": 0,
         "0": 21
