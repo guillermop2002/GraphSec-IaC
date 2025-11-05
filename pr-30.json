@@ -9811,27 +9811,17 @@
     "edges": [
         {
             "from": "aws_eks_cluster.this_0",
+            "to": "aws_security_group_rule.cluster_6",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_eks_cluster.this_0",
             "to": "module.kms_54",
             "arrows": "to"
         },
         {
             "from": "aws_eks_cluster.this_0",
             "to": "module.kms_284",
-            "arrows": "to"
-        },
-        {
-            "from": "aws_eks_cluster.this_0",
-            "to": "aws_security_group_rule.cluster_6",
-            "arrows": "to"
-        },
-        {
-            "from": "aws_eks_cluster.this_0",
-            "to": "aws_cloudwatch_log_group.this_2",
-            "arrows": "to"
-        },
-        {
-            "from": "aws_eks_cluster.this_0",
-            "to": "aws_iam_role.eks_auto_18",
             "arrows": "to"
         },
         {
@@ -9861,12 +9851,22 @@
         },
         {
             "from": "aws_eks_cluster.this_0",
-            "to": "aws_iam_policy.cni_ipv6_policy_158",
+            "to": "aws_iam_role.eks_auto_18",
             "arrows": "to"
         },
         {
             "from": "aws_eks_cluster.this_0",
             "to": "aws_security_group_rule.node_160",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_eks_cluster.this_0",
+            "to": "aws_cloudwatch_log_group.this_2",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_eks_cluster.this_0",
+            "to": "aws_iam_policy.cni_ipv6_policy_158",
             "arrows": "to"
         },
         {
@@ -10071,12 +10071,27 @@
         },
         {
             "from": "aws_eks_addon.this_15",
+            "to": "module.fargate_profile_168",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_eks_addon.this_15",
+            "to": "module.fargate_profile_303",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_eks_addon.this_15",
             "to": "module.eks_managed_node_group_169",
             "arrows": "to"
         },
         {
             "from": "aws_eks_addon.this_15",
             "to": "module.eks_managed_node_group_261",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_eks_addon.this_15",
+            "to": "aws_eks_cluster.this_0",
             "arrows": "to"
         },
         {
@@ -10090,28 +10105,13 @@
             "arrows": "to"
         },
         {
-            "from": "aws_eks_addon.this_15",
+            "from": "aws_eks_addon.before_compute_16",
             "to": "aws_eks_cluster.this_0",
-            "arrows": "to"
-        },
-        {
-            "from": "aws_eks_addon.this_15",
-            "to": "module.fargate_profile_168",
-            "arrows": "to"
-        },
-        {
-            "from": "aws_eks_addon.this_15",
-            "to": "module.fargate_profile_303",
             "arrows": "to"
         },
         {
             "from": "aws_eks_addon.before_compute_16",
             "to": "data.aws_eks_addon_version.this_27",
-            "arrows": "to"
-        },
-        {
-            "from": "aws_eks_addon.before_compute_16",
-            "to": "aws_eks_cluster.this_0",
             "arrows": "to"
         },
         {
@@ -10736,6 +10736,11 @@
         },
         {
             "from": "aws_route.peer_201",
+            "to": "aws_vpc_peering_connection.remote_node_220",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_route.peer_201",
             "to": "module.vpc_177",
             "arrows": "to"
         },
@@ -10772,11 +10777,6 @@
         {
             "from": "aws_route.peer_201",
             "to": "module.vpc_305",
-            "arrows": "to"
-        },
-        {
-            "from": "aws_route.peer_201",
-            "to": "aws_vpc_peering_connection.remote_node_220",
             "arrows": "to"
         },
         {
@@ -10821,6 +10821,16 @@
         },
         {
             "from": "module.eks_209",
+            "to": "module.eks_hybrid_node_role_230",
+            "arrows": "to"
+        },
+        {
+            "from": "module.eks_209",
+            "to": "module.eks_hybrid_node_role_291",
+            "arrows": "to"
+        },
+        {
+            "from": "module.eks_209",
             "to": "module.vpc_177",
             "arrows": "to"
         },
@@ -10857,16 +10867,6 @@
         {
             "from": "module.eks_209",
             "to": "module.vpc_305",
-            "arrows": "to"
-        },
-        {
-            "from": "module.eks_209",
-            "to": "module.eks_hybrid_node_role_230",
-            "arrows": "to"
-        },
-        {
-            "from": "module.eks_209",
-            "to": "module.eks_hybrid_node_role_291",
             "arrows": "to"
         },
         {
@@ -10911,7 +10911,7 @@
         },
         {
             "from": "local_file.join_214",
-            "to": "aws_ssm_activation.this_211",
+            "to": "local_file.key_pem_212",
             "arrows": "to"
         },
         {
@@ -10946,12 +10946,12 @@
         },
         {
             "from": "local_file.join_214",
-            "to": "aws_instance.hybrid_node_215",
+            "to": "aws_ssm_activation.this_211",
             "arrows": "to"
         },
         {
             "from": "local_file.join_214",
-            "to": "local_file.key_pem_212",
+            "to": "aws_instance.hybrid_node_215",
             "arrows": "to"
         },
         {
@@ -10961,12 +10961,12 @@
         },
         {
             "from": "aws_instance.hybrid_node_215",
-            "to": "aws_security_group.remote_node_216",
+            "to": "module.remote_node_vpc_232",
             "arrows": "to"
         },
         {
             "from": "aws_instance.hybrid_node_215",
-            "to": "module.remote_node_vpc_232",
+            "to": "aws_security_group.remote_node_216",
             "arrows": "to"
         },
         {
@@ -10976,11 +10976,6 @@
         },
         {
             "from": "aws_vpc_security_group_ingress_rule.remote_node_217",
-            "to": "data.http.icanhazip_224",
-            "arrows": "to"
-        },
-        {
-            "from": "aws_vpc_security_group_ingress_rule.remote_node_217",
             "to": "module.vpc_177",
             "arrows": "to"
         },
@@ -11022,6 +11017,11 @@
         {
             "from": "aws_vpc_security_group_ingress_rule.remote_node_217",
             "to": "aws_security_group.remote_node_216",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_vpc_security_group_ingress_rule.remote_node_217",
+            "to": "data.http.icanhazip_224",
             "arrows": "to"
         },
         {
@@ -11031,6 +11031,11 @@
         },
         {
             "from": "aws_vpc_peering_connection.remote_node_220",
+            "to": "module.remote_node_vpc_232",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_vpc_peering_connection.remote_node_220",
             "to": "module.vpc_177",
             "arrows": "to"
         },
@@ -11067,11 +11072,6 @@
         {
             "from": "aws_vpc_peering_connection.remote_node_220",
             "to": "module.vpc_305",
-            "arrows": "to"
-        },
-        {
-            "from": "aws_vpc_peering_connection.remote_node_220",
-            "to": "module.remote_node_vpc_232",
             "arrows": "to"
         },
         {
@@ -11081,6 +11081,11 @@
         },
         {
             "from": "aws_route.remote_node_private_221",
+            "to": "module.remote_node_vpc_232",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_route.remote_node_private_221",
             "to": "module.vpc_177",
             "arrows": "to"
         },
@@ -11117,11 +11122,6 @@
         {
             "from": "aws_route.remote_node_private_221",
             "to": "module.vpc_305",
-            "arrows": "to"
-        },
-        {
-            "from": "aws_route.remote_node_private_221",
-            "to": "module.remote_node_vpc_232",
             "arrows": "to"
         },
         {
@@ -11181,32 +11181,7 @@
         },
         {
             "from": "helm_release.karpenter_233",
-            "to": "module.eks_187",
-            "arrows": "to"
-        },
-        {
-            "from": "helm_release.karpenter_233",
-            "to": "module.eks_209",
-            "arrows": "to"
-        },
-        {
-            "from": "helm_release.karpenter_233",
-            "to": "module.eks_241",
-            "arrows": "to"
-        },
-        {
-            "from": "helm_release.karpenter_233",
-            "to": "module.eks_259",
-            "arrows": "to"
-        },
-        {
-            "from": "helm_release.karpenter_233",
-            "to": "module.eks_278",
-            "arrows": "to"
-        },
-        {
-            "from": "helm_release.karpenter_233",
-            "to": "module.eks_302",
+            "to": "module.karpenter_242",
             "arrows": "to"
         },
         {
@@ -11216,7 +11191,32 @@
         },
         {
             "from": "helm_release.karpenter_233",
-            "to": "module.karpenter_242",
+            "to": "module.eks_187",
+            "arrows": "to"
+        },
+        {
+            "from": "helm_release.karpenter_233",
+            "to": "module.eks_209",
+            "arrows": "to"
+        },
+        {
+            "from": "helm_release.karpenter_233",
+            "to": "module.eks_241",
+            "arrows": "to"
+        },
+        {
+            "from": "helm_release.karpenter_233",
+            "to": "module.eks_259",
+            "arrows": "to"
+        },
+        {
+            "from": "helm_release.karpenter_233",
+            "to": "module.eks_278",
+            "arrows": "to"
+        },
+        {
+            "from": "helm_release.karpenter_233",
+            "to": "module.eks_302",
             "arrows": "to"
         },
         {
@@ -11407,51 +11407,6 @@
         {
             "from": "local.tags_258",
             "to": "data.aws_availability_zones.available_295",
-            "arrows": "to"
-        },
-        {
-            "from": "module.eks_259",
-            "to": "module.vpc_177",
-            "arrows": "to"
-        },
-        {
-            "from": "module.eks_259",
-            "to": "module.vpc_190",
-            "arrows": "to"
-        },
-        {
-            "from": "module.eks_259",
-            "to": "module.vpc_197",
-            "arrows": "to"
-        },
-        {
-            "from": "module.eks_259",
-            "to": "module.vpc_210",
-            "arrows": "to"
-        },
-        {
-            "from": "module.eks_259",
-            "to": "module.vpc_244",
-            "arrows": "to"
-        },
-        {
-            "from": "module.eks_259",
-            "to": "module.vpc_263",
-            "arrows": "to"
-        },
-        {
-            "from": "module.eks_259",
-            "to": "module.vpc_280",
-            "arrows": "to"
-        },
-        {
-            "from": "module.eks_259",
-            "to": "module.vpc_305",
-            "arrows": "to"
-        },
-        {
-            "from": "module.eks_259",
-            "to": "data.aws_ami.eks_default_arm_251",
             "arrows": "to"
         },
         {
@@ -11462,6 +11417,116 @@
         {
             "from": "module.eks_259",
             "to": "module.ebs_kms_key_283",
+            "arrows": "to"
+        },
+        {
+            "from": "module.eks_259",
+            "to": "aws_security_group.remote_access_245",
+            "arrows": "to"
+        },
+        {
+            "from": "module.eks_259",
+            "to": "aws_iam_role.this_8",
+            "arrows": "to"
+        },
+        {
+            "from": "module.eks_259",
+            "to": "aws_iam_role.this_247",
+            "arrows": "to"
+        },
+        {
+            "from": "module.eks_259",
+            "to": "aws_iam_role.this_449",
+            "arrows": "to"
+        },
+        {
+            "from": "module.eks_259",
+            "to": "aws_iam_role.this_614",
+            "arrows": "to"
+        },
+        {
+            "from": "module.eks_259",
+            "to": "aws_iam_role.this_764",
+            "arrows": "to"
+        },
+        {
+            "from": "module.eks_259",
+            "to": "aws_iam_role.this_806",
+            "arrows": "to"
+        },
+        {
+            "from": "module.eks_259",
+            "to": "module.aws_vpc_cni_ipv6_pod_identity_264",
+            "arrows": "to"
+        },
+        {
+            "from": "module.eks_259",
+            "to": "data.aws_ami.eks_default_arm_251",
+            "arrows": "to"
+        },
+        {
+            "from": "module.eks_259",
+            "to": "data.aws_ami.eks_default_bottlerocket_252",
+            "arrows": "to"
+        },
+        {
+            "from": "module.eks_259",
+            "to": "data.aws_ami.eks_default_bottlerocket_271",
+            "arrows": "to"
+        },
+        {
+            "from": "module.eks_259",
+            "to": "module.vpc_177",
+            "arrows": "to"
+        },
+        {
+            "from": "module.eks_259",
+            "to": "module.vpc_190",
+            "arrows": "to"
+        },
+        {
+            "from": "module.eks_259",
+            "to": "module.vpc_197",
+            "arrows": "to"
+        },
+        {
+            "from": "module.eks_259",
+            "to": "module.vpc_210",
+            "arrows": "to"
+        },
+        {
+            "from": "module.eks_259",
+            "to": "module.vpc_244",
+            "arrows": "to"
+        },
+        {
+            "from": "module.eks_259",
+            "to": "module.vpc_263",
+            "arrows": "to"
+        },
+        {
+            "from": "module.eks_259",
+            "to": "module.vpc_280",
+            "arrows": "to"
+        },
+        {
+            "from": "module.eks_259",
+            "to": "module.vpc_305",
+            "arrows": "to"
+        },
+        {
+            "from": "module.eks_259",
+            "to": "module.key_pair_231",
+            "arrows": "to"
+        },
+        {
+            "from": "module.eks_259",
+            "to": "module.key_pair_266",
+            "arrows": "to"
+        },
+        {
+            "from": "module.eks_259",
+            "to": "module.key_pair_282",
             "arrows": "to"
         },
         {
@@ -11525,71 +11590,6 @@
             "arrows": "to"
         },
         {
-            "from": "module.eks_259",
-            "to": "data.aws_ami.eks_default_bottlerocket_252",
-            "arrows": "to"
-        },
-        {
-            "from": "module.eks_259",
-            "to": "data.aws_ami.eks_default_bottlerocket_271",
-            "arrows": "to"
-        },
-        {
-            "from": "module.eks_259",
-            "to": "module.key_pair_231",
-            "arrows": "to"
-        },
-        {
-            "from": "module.eks_259",
-            "to": "module.key_pair_266",
-            "arrows": "to"
-        },
-        {
-            "from": "module.eks_259",
-            "to": "module.key_pair_282",
-            "arrows": "to"
-        },
-        {
-            "from": "module.eks_259",
-            "to": "module.aws_vpc_cni_ipv6_pod_identity_264",
-            "arrows": "to"
-        },
-        {
-            "from": "module.eks_259",
-            "to": "aws_iam_role.this_8",
-            "arrows": "to"
-        },
-        {
-            "from": "module.eks_259",
-            "to": "aws_iam_role.this_247",
-            "arrows": "to"
-        },
-        {
-            "from": "module.eks_259",
-            "to": "aws_iam_role.this_449",
-            "arrows": "to"
-        },
-        {
-            "from": "module.eks_259",
-            "to": "aws_iam_role.this_614",
-            "arrows": "to"
-        },
-        {
-            "from": "module.eks_259",
-            "to": "aws_iam_role.this_764",
-            "arrows": "to"
-        },
-        {
-            "from": "module.eks_259",
-            "to": "aws_iam_role.this_806",
-            "arrows": "to"
-        },
-        {
-            "from": "module.eks_259",
-            "to": "aws_security_group.remote_access_245",
-            "arrows": "to"
-        },
-        {
             "from": "module.eks_managed_node_group_261",
             "to": "module.eks_187",
             "arrows": "to"
@@ -11661,6 +11661,36 @@
         },
         {
             "from": "module.ebs_kms_key_265",
+            "to": "module.eks_187",
+            "arrows": "to"
+        },
+        {
+            "from": "module.ebs_kms_key_265",
+            "to": "module.eks_209",
+            "arrows": "to"
+        },
+        {
+            "from": "module.ebs_kms_key_265",
+            "to": "module.eks_241",
+            "arrows": "to"
+        },
+        {
+            "from": "module.ebs_kms_key_265",
+            "to": "module.eks_259",
+            "arrows": "to"
+        },
+        {
+            "from": "module.ebs_kms_key_265",
+            "to": "module.eks_278",
+            "arrows": "to"
+        },
+        {
+            "from": "module.ebs_kms_key_265",
+            "to": "module.eks_302",
+            "arrows": "to"
+        },
+        {
+            "from": "module.ebs_kms_key_265",
             "to": "data.aws_caller_identity.current_22",
             "arrows": "to"
         },
@@ -11702,36 +11732,6 @@
         {
             "from": "module.ebs_kms_key_265",
             "to": "data.aws_caller_identity.current_878",
-            "arrows": "to"
-        },
-        {
-            "from": "module.ebs_kms_key_265",
-            "to": "module.eks_187",
-            "arrows": "to"
-        },
-        {
-            "from": "module.ebs_kms_key_265",
-            "to": "module.eks_209",
-            "arrows": "to"
-        },
-        {
-            "from": "module.ebs_kms_key_265",
-            "to": "module.eks_241",
-            "arrows": "to"
-        },
-        {
-            "from": "module.ebs_kms_key_265",
-            "to": "module.eks_259",
-            "arrows": "to"
-        },
-        {
-            "from": "module.ebs_kms_key_265",
-            "to": "module.eks_278",
-            "arrows": "to"
-        },
-        {
-            "from": "module.ebs_kms_key_265",
-            "to": "module.eks_302",
             "arrows": "to"
         },
         {
@@ -11776,6 +11776,26 @@
         },
         {
             "from": "module.eks_278",
+            "to": "module.ebs_kms_key_265",
+            "arrows": "to"
+        },
+        {
+            "from": "module.eks_278",
+            "to": "module.ebs_kms_key_283",
+            "arrows": "to"
+        },
+        {
+            "from": "module.eks_278",
+            "to": "module.kms_54",
+            "arrows": "to"
+        },
+        {
+            "from": "module.eks_278",
+            "to": "module.kms_284",
+            "arrows": "to"
+        },
+        {
+            "from": "module.eks_278",
             "to": "module.vpc_177",
             "arrows": "to"
         },
@@ -11816,22 +11836,32 @@
         },
         {
             "from": "module.eks_278",
-            "to": "module.kms_54",
+            "to": "data.aws_ami.eks_default_bottlerocket_252",
             "arrows": "to"
         },
         {
             "from": "module.eks_278",
-            "to": "module.kms_284",
+            "to": "data.aws_ami.eks_default_bottlerocket_271",
             "arrows": "to"
         },
         {
             "from": "module.eks_278",
-            "to": "module.ebs_kms_key_265",
+            "to": "module.aws_vpc_cni_ipv4_pod_identity_281",
             "arrows": "to"
         },
         {
             "from": "module.eks_278",
-            "to": "module.ebs_kms_key_283",
+            "to": "module.key_pair_231",
+            "arrows": "to"
+        },
+        {
+            "from": "module.eks_278",
+            "to": "module.key_pair_266",
+            "arrows": "to"
+        },
+        {
+            "from": "module.eks_278",
+            "to": "module.key_pair_282",
             "arrows": "to"
         },
         {
@@ -11855,33 +11885,33 @@
             "arrows": "to"
         },
         {
-            "from": "module.eks_278",
-            "to": "data.aws_ami.eks_default_bottlerocket_252",
+            "from": "module.ebs_kms_key_283",
+            "to": "module.eks_187",
             "arrows": "to"
         },
         {
-            "from": "module.eks_278",
-            "to": "data.aws_ami.eks_default_bottlerocket_271",
+            "from": "module.ebs_kms_key_283",
+            "to": "module.eks_209",
             "arrows": "to"
         },
         {
-            "from": "module.eks_278",
-            "to": "module.key_pair_231",
+            "from": "module.ebs_kms_key_283",
+            "to": "module.eks_241",
             "arrows": "to"
         },
         {
-            "from": "module.eks_278",
-            "to": "module.key_pair_266",
+            "from": "module.ebs_kms_key_283",
+            "to": "module.eks_259",
             "arrows": "to"
         },
         {
-            "from": "module.eks_278",
-            "to": "module.key_pair_282",
+            "from": "module.ebs_kms_key_283",
+            "to": "module.eks_278",
             "arrows": "to"
         },
         {
-            "from": "module.eks_278",
-            "to": "module.aws_vpc_cni_ipv4_pod_identity_281",
+            "from": "module.ebs_kms_key_283",
+            "to": "module.eks_302",
             "arrows": "to"
         },
         {
@@ -11927,36 +11957,6 @@
         {
             "from": "module.ebs_kms_key_283",
             "to": "data.aws_caller_identity.current_878",
-            "arrows": "to"
-        },
-        {
-            "from": "module.ebs_kms_key_283",
-            "to": "module.eks_187",
-            "arrows": "to"
-        },
-        {
-            "from": "module.ebs_kms_key_283",
-            "to": "module.eks_209",
-            "arrows": "to"
-        },
-        {
-            "from": "module.ebs_kms_key_283",
-            "to": "module.eks_241",
-            "arrows": "to"
-        },
-        {
-            "from": "module.ebs_kms_key_283",
-            "to": "module.eks_259",
-            "arrows": "to"
-        },
-        {
-            "from": "module.ebs_kms_key_283",
-            "to": "module.eks_278",
-            "arrows": "to"
-        },
-        {
-            "from": "module.ebs_kms_key_283",
-            "to": "module.eks_302",
             "arrows": "to"
         },
         {
@@ -12056,46 +12056,6 @@
         },
         {
             "from": "module.eks_302",
-            "to": "module.vpc_177",
-            "arrows": "to"
-        },
-        {
-            "from": "module.eks_302",
-            "to": "module.vpc_190",
-            "arrows": "to"
-        },
-        {
-            "from": "module.eks_302",
-            "to": "module.vpc_197",
-            "arrows": "to"
-        },
-        {
-            "from": "module.eks_302",
-            "to": "module.vpc_210",
-            "arrows": "to"
-        },
-        {
-            "from": "module.eks_302",
-            "to": "module.vpc_244",
-            "arrows": "to"
-        },
-        {
-            "from": "module.eks_302",
-            "to": "module.vpc_263",
-            "arrows": "to"
-        },
-        {
-            "from": "module.eks_302",
-            "to": "module.vpc_280",
-            "arrows": "to"
-        },
-        {
-            "from": "module.eks_302",
-            "to": "module.vpc_305",
-            "arrows": "to"
-        },
-        {
-            "from": "module.eks_302",
             "to": "aws_iam_policy.additional_267",
             "arrows": "to"
         },
@@ -12105,42 +12065,42 @@
             "arrows": "to"
         },
         {
-            "from": "module.fargate_profile_303",
+            "from": "module.eks_302",
             "to": "module.vpc_177",
             "arrows": "to"
         },
         {
-            "from": "module.fargate_profile_303",
+            "from": "module.eks_302",
             "to": "module.vpc_190",
             "arrows": "to"
         },
         {
-            "from": "module.fargate_profile_303",
+            "from": "module.eks_302",
             "to": "module.vpc_197",
             "arrows": "to"
         },
         {
-            "from": "module.fargate_profile_303",
+            "from": "module.eks_302",
             "to": "module.vpc_210",
             "arrows": "to"
         },
         {
-            "from": "module.fargate_profile_303",
+            "from": "module.eks_302",
             "to": "module.vpc_244",
             "arrows": "to"
         },
         {
-            "from": "module.fargate_profile_303",
+            "from": "module.eks_302",
             "to": "module.vpc_263",
             "arrows": "to"
         },
         {
-            "from": "module.fargate_profile_303",
+            "from": "module.eks_302",
             "to": "module.vpc_280",
             "arrows": "to"
         },
         {
-            "from": "module.fargate_profile_303",
+            "from": "module.eks_302",
             "to": "module.vpc_305",
             "arrows": "to"
         },
@@ -12172,6 +12132,46 @@
         {
             "from": "module.fargate_profile_303",
             "to": "module.eks_302",
+            "arrows": "to"
+        },
+        {
+            "from": "module.fargate_profile_303",
+            "to": "module.vpc_177",
+            "arrows": "to"
+        },
+        {
+            "from": "module.fargate_profile_303",
+            "to": "module.vpc_190",
+            "arrows": "to"
+        },
+        {
+            "from": "module.fargate_profile_303",
+            "to": "module.vpc_197",
+            "arrows": "to"
+        },
+        {
+            "from": "module.fargate_profile_303",
+            "to": "module.vpc_210",
+            "arrows": "to"
+        },
+        {
+            "from": "module.fargate_profile_303",
+            "to": "module.vpc_244",
+            "arrows": "to"
+        },
+        {
+            "from": "module.fargate_profile_303",
+            "to": "module.vpc_263",
+            "arrows": "to"
+        },
+        {
+            "from": "module.fargate_profile_303",
+            "to": "module.vpc_280",
+            "arrows": "to"
+        },
+        {
+            "from": "module.fargate_profile_303",
+            "to": "module.vpc_305",
             "arrows": "to"
         },
         {
@@ -12366,12 +12366,12 @@
         },
         {
             "from": "aws_kms_alias.this_377",
-            "to": "aws_kms_replica_external_key.this_376",
+            "to": "aws_kms_key.this_373",
             "arrows": "to"
         },
         {
             "from": "aws_kms_alias.this_377",
-            "to": "aws_kms_replica_key.this_375",
+            "to": "aws_kms_replica_external_key.this_376",
             "arrows": "to"
         },
         {
@@ -12381,6 +12381,11 @@
         },
         {
             "from": "aws_kms_alias.this_377",
+            "to": "aws_kms_replica_key.this_375",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_kms_grant.this_378",
             "to": "aws_kms_key.this_373",
             "arrows": "to"
         },
@@ -12391,52 +12396,12 @@
         },
         {
             "from": "aws_kms_grant.this_378",
-            "to": "aws_kms_replica_key.this_375",
-            "arrows": "to"
-        },
-        {
-            "from": "aws_kms_grant.this_378",
             "to": "aws_kms_external_key.this_374",
             "arrows": "to"
         },
         {
             "from": "aws_kms_grant.this_378",
-            "to": "aws_kms_key.this_373",
-            "arrows": "to"
-        },
-        {
-            "from": "local.dns_suffix_384",
-            "to": "data.aws_partition.current_21",
-            "arrows": "to"
-        },
-        {
-            "from": "local.dns_suffix_384",
-            "to": "data.aws_partition.current_379",
-            "arrows": "to"
-        },
-        {
-            "from": "local.dns_suffix_384",
-            "to": "data.aws_partition.current_457",
-            "arrows": "to"
-        },
-        {
-            "from": "local.dns_suffix_384",
-            "to": "data.aws_partition.current_624",
-            "arrows": "to"
-        },
-        {
-            "from": "local.dns_suffix_384",
-            "to": "data.aws_partition.current_770",
-            "arrows": "to"
-        },
-        {
-            "from": "local.dns_suffix_384",
-            "to": "data.aws_partition.current_814",
-            "arrows": "to"
-        },
-        {
-            "from": "local.dns_suffix_384",
-            "to": "data.aws_partition.current_877",
+            "to": "aws_kms_replica_key.this_375",
             "arrows": "to"
         },
         {
@@ -12482,6 +12447,41 @@
         {
             "from": "local.dns_suffix_384",
             "to": "data.aws_caller_identity.current_878",
+            "arrows": "to"
+        },
+        {
+            "from": "local.dns_suffix_384",
+            "to": "data.aws_partition.current_21",
+            "arrows": "to"
+        },
+        {
+            "from": "local.dns_suffix_384",
+            "to": "data.aws_partition.current_379",
+            "arrows": "to"
+        },
+        {
+            "from": "local.dns_suffix_384",
+            "to": "data.aws_partition.current_457",
+            "arrows": "to"
+        },
+        {
+            "from": "local.dns_suffix_384",
+            "to": "data.aws_partition.current_624",
+            "arrows": "to"
+        },
+        {
+            "from": "local.dns_suffix_384",
+            "to": "data.aws_partition.current_770",
+            "arrows": "to"
+        },
+        {
+            "from": "local.dns_suffix_384",
+            "to": "data.aws_partition.current_814",
+            "arrows": "to"
+        },
+        {
+            "from": "local.dns_suffix_384",
+            "to": "data.aws_partition.current_877",
             "arrows": "to"
         },
         {
@@ -12536,12 +12536,12 @@
         },
         {
             "from": "module.kms_replica_444",
-            "to": "aws_iam_role.lambda_429",
+            "to": "module.kms_primary_443",
             "arrows": "to"
         },
         {
             "from": "module.kms_replica_444",
-            "to": "module.kms_primary_443",
+            "to": "aws_iam_role.lambda_429",
             "arrows": "to"
         },
         {
@@ -12566,16 +12566,6 @@
         },
         {
             "from": "aws_launch_template.this_447",
-            "to": "module.user_data_492",
-            "arrows": "to"
-        },
-        {
-            "from": "aws_launch_template.this_447",
-            "to": "module.user_data_655",
-            "arrows": "to"
-        },
-        {
-            "from": "aws_launch_template.this_447",
             "to": "aws_iam_role_policy_attachment.this_9",
             "arrows": "to"
         },
@@ -12617,6 +12607,16 @@
         {
             "from": "aws_launch_template.this_447",
             "to": "aws_iam_role_policy_attachment.additional_766",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_launch_template.this_447",
+            "to": "module.user_data_492",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_launch_template.this_447",
+            "to": "module.user_data_655",
             "arrows": "to"
         },
         {
@@ -12806,41 +12806,6 @@
         },
         {
             "from": "local.account_id_466",
-            "to": "data.aws_partition.current_21",
-            "arrows": "to"
-        },
-        {
-            "from": "local.account_id_466",
-            "to": "data.aws_partition.current_379",
-            "arrows": "to"
-        },
-        {
-            "from": "local.account_id_466",
-            "to": "data.aws_partition.current_457",
-            "arrows": "to"
-        },
-        {
-            "from": "local.account_id_466",
-            "to": "data.aws_partition.current_624",
-            "arrows": "to"
-        },
-        {
-            "from": "local.account_id_466",
-            "to": "data.aws_partition.current_770",
-            "arrows": "to"
-        },
-        {
-            "from": "local.account_id_466",
-            "to": "data.aws_partition.current_814",
-            "arrows": "to"
-        },
-        {
-            "from": "local.account_id_466",
-            "to": "data.aws_partition.current_877",
-            "arrows": "to"
-        },
-        {
-            "from": "local.account_id_466",
             "to": "data.aws_caller_identity.current_22",
             "arrows": "to"
         },
@@ -12885,6 +12850,41 @@
             "arrows": "to"
         },
         {
+            "from": "local.account_id_466",
+            "to": "data.aws_partition.current_21",
+            "arrows": "to"
+        },
+        {
+            "from": "local.account_id_466",
+            "to": "data.aws_partition.current_379",
+            "arrows": "to"
+        },
+        {
+            "from": "local.account_id_466",
+            "to": "data.aws_partition.current_457",
+            "arrows": "to"
+        },
+        {
+            "from": "local.account_id_466",
+            "to": "data.aws_partition.current_624",
+            "arrows": "to"
+        },
+        {
+            "from": "local.account_id_466",
+            "to": "data.aws_partition.current_770",
+            "arrows": "to"
+        },
+        {
+            "from": "local.account_id_466",
+            "to": "data.aws_partition.current_814",
+            "arrows": "to"
+        },
+        {
+            "from": "local.account_id_466",
+            "to": "data.aws_partition.current_877",
+            "arrows": "to"
+        },
+        {
             "from": "local.network_interfaces_471",
             "to": "data.aws_ec2_instance_type.this_459",
             "arrows": "to"
@@ -12906,17 +12906,17 @@
         },
         {
             "from": "local.latest_ami_release_version_478",
+            "to": "data.aws_eks_cluster_versions.this_460",
+            "arrows": "to"
+        },
+        {
+            "from": "local.latest_ami_release_version_478",
             "to": "data.aws_ssm_parameter.ami_461",
             "arrows": "to"
         },
         {
             "from": "local.latest_ami_release_version_478",
             "to": "data.aws_ssm_parameter.ami_626",
-            "arrows": "to"
-        },
-        {
-            "from": "local.latest_ami_release_version_478",
-            "to": "data.aws_eks_cluster_versions.this_460",
             "arrows": "to"
         },
         {
@@ -12931,32 +12931,12 @@
         },
         {
             "from": "local.user_data_type_to_rendered_594",
-            "to": "data.cloudinit_config.al2_eks_managed_node_group_586",
-            "arrows": "to"
-        },
-        {
-            "from": "local.user_data_type_to_rendered_594",
             "to": "data.cloudinit_config.al2023_eks_managed_node_group_587",
             "arrows": "to"
         },
         {
-            "from": "aws_launch_template.this_612",
-            "to": "aws_placement_group.this_453",
-            "arrows": "to"
-        },
-        {
-            "from": "aws_launch_template.this_612",
-            "to": "aws_placement_group.this_619",
-            "arrows": "to"
-        },
-        {
-            "from": "aws_launch_template.this_612",
-            "to": "module.user_data_492",
-            "arrows": "to"
-        },
-        {
-            "from": "aws_launch_template.this_612",
-            "to": "module.user_data_655",
+            "from": "local.user_data_type_to_rendered_594",
+            "to": "data.cloudinit_config.al2_eks_managed_node_group_586",
             "arrows": "to"
         },
         {
@@ -12971,12 +12951,12 @@
         },
         {
             "from": "aws_launch_template.this_612",
-            "to": "data.aws_ssm_parameter.ami_461",
+            "to": "aws_placement_group.this_453",
             "arrows": "to"
         },
         {
             "from": "aws_launch_template.this_612",
-            "to": "data.aws_ssm_parameter.ami_626",
+            "to": "aws_placement_group.this_619",
             "arrows": "to"
         },
         {
@@ -13022,6 +13002,26 @@
         {
             "from": "aws_launch_template.this_612",
             "to": "aws_iam_role_policy_attachment.additional_766",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_launch_template.this_612",
+            "to": "data.aws_ssm_parameter.ami_461",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_launch_template.this_612",
+            "to": "data.aws_ssm_parameter.ami_626",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_launch_template.this_612",
+            "to": "module.user_data_492",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_launch_template.this_612",
+            "to": "module.user_data_655",
             "arrows": "to"
         },
         {
@@ -13241,41 +13241,6 @@
         },
         {
             "from": "local.account_id_632",
-            "to": "data.aws_partition.current_21",
-            "arrows": "to"
-        },
-        {
-            "from": "local.account_id_632",
-            "to": "data.aws_partition.current_379",
-            "arrows": "to"
-        },
-        {
-            "from": "local.account_id_632",
-            "to": "data.aws_partition.current_457",
-            "arrows": "to"
-        },
-        {
-            "from": "local.account_id_632",
-            "to": "data.aws_partition.current_624",
-            "arrows": "to"
-        },
-        {
-            "from": "local.account_id_632",
-            "to": "data.aws_partition.current_770",
-            "arrows": "to"
-        },
-        {
-            "from": "local.account_id_632",
-            "to": "data.aws_partition.current_814",
-            "arrows": "to"
-        },
-        {
-            "from": "local.account_id_632",
-            "to": "data.aws_partition.current_877",
-            "arrows": "to"
-        },
-        {
-            "from": "local.account_id_632",
             "to": "data.aws_caller_identity.current_22",
             "arrows": "to"
         },
@@ -13317,6 +13282,41 @@
         {
             "from": "local.account_id_632",
             "to": "data.aws_caller_identity.current_878",
+            "arrows": "to"
+        },
+        {
+            "from": "local.account_id_632",
+            "to": "data.aws_partition.current_21",
+            "arrows": "to"
+        },
+        {
+            "from": "local.account_id_632",
+            "to": "data.aws_partition.current_379",
+            "arrows": "to"
+        },
+        {
+            "from": "local.account_id_632",
+            "to": "data.aws_partition.current_457",
+            "arrows": "to"
+        },
+        {
+            "from": "local.account_id_632",
+            "to": "data.aws_partition.current_624",
+            "arrows": "to"
+        },
+        {
+            "from": "local.account_id_632",
+            "to": "data.aws_partition.current_770",
+            "arrows": "to"
+        },
+        {
+            "from": "local.account_id_632",
+            "to": "data.aws_partition.current_814",
+            "arrows": "to"
+        },
+        {
+            "from": "local.account_id_632",
+            "to": "data.aws_partition.current_877",
             "arrows": "to"
         },
         {
@@ -13496,16 +13496,6 @@
         },
         {
             "from": "local.region_776",
-            "to": "data.aws_region.current_769",
-            "arrows": "to"
-        },
-        {
-            "from": "local.region_776",
-            "to": "data.aws_region.current_876",
-            "arrows": "to"
-        },
-        {
-            "from": "local.region_776",
             "to": "data.aws_partition.current_21",
             "arrows": "to"
         },
@@ -13582,6 +13572,16 @@
         {
             "from": "local.region_776",
             "to": "data.aws_caller_identity.current_878",
+            "arrows": "to"
+        },
+        {
+            "from": "local.region_776",
+            "to": "data.aws_region.current_769",
+            "arrows": "to"
+        },
+        {
+            "from": "local.region_776",
+            "to": "data.aws_region.current_876",
             "arrows": "to"
         },
         {
@@ -13601,11 +13601,6 @@
         },
         {
             "from": "aws_iam_role_policy_attachment.this_808",
-            "to": "aws_iam_policy.this_807",
-            "arrows": "to"
-        },
-        {
-            "from": "aws_iam_role_policy_attachment.this_808",
             "to": "aws_iam_role.this_8",
             "arrows": "to"
         },
@@ -13632,6 +13627,11 @@
         {
             "from": "aws_iam_role_policy_attachment.this_808",
             "to": "aws_iam_role.this_806",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.this_808",
+            "to": "aws_iam_policy.this_807",
             "arrows": "to"
         },
         {
@@ -13651,11 +13651,6 @@
         },
         {
             "from": "aws_iam_role_policy_attachment.intermediate_813",
-            "to": "aws_iam_policy.intermediate_812",
-            "arrows": "to"
-        },
-        {
-            "from": "aws_iam_role_policy_attachment.intermediate_813",
             "to": "aws_iam_role.this_8",
             "arrows": "to"
         },
@@ -13682,6 +13677,11 @@
         {
             "from": "aws_iam_role_policy_attachment.intermediate_813",
             "to": "aws_iam_role.this_806",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_iam_role_policy_attachment.intermediate_813",
+            "to": "aws_iam_policy.intermediate_812",
             "arrows": "to"
         },
         {
@@ -13736,12 +13736,12 @@
         },
         {
             "from": "aws_iam_role_policy.controller_862",
-            "to": "aws_iam_role.controller_861",
+            "to": "data.aws_iam_policy_document.controller_944",
             "arrows": "to"
         },
         {
             "from": "aws_iam_role_policy.controller_862",
-            "to": "data.aws_iam_policy_document.controller_944",
+            "to": "aws_iam_role.controller_861",
             "arrows": "to"
         },
         {
@@ -13771,22 +13771,22 @@
         },
         {
             "from": "aws_sqs_queue_policy.this_868",
-            "to": "data.aws_iam_policy_document.queue_881",
+            "to": "aws_sqs_queue.this_867",
             "arrows": "to"
         },
         {
             "from": "aws_sqs_queue_policy.this_868",
+            "to": "data.aws_iam_policy_document.queue_881",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_cloudwatch_event_target.this_870",
             "to": "aws_sqs_queue.this_867",
             "arrows": "to"
         },
         {
             "from": "aws_cloudwatch_event_target.this_870",
             "to": "aws_cloudwatch_event_rule.this_869",
-            "arrows": "to"
-        },
-        {
-            "from": "aws_cloudwatch_event_target.this_870",
-            "to": "aws_sqs_queue.this_867",
             "arrows": "to"
         },
         {
@@ -13822,51 +13822,6 @@
         {
             "from": "data.aws_iam_policy_document.queue_881",
             "to": "aws_sqs_queue.this_867",
-            "arrows": "to"
-        },
-        {
-            "from": "local.region_886",
-            "to": "data.aws_region.current_769",
-            "arrows": "to"
-        },
-        {
-            "from": "local.region_886",
-            "to": "data.aws_region.current_876",
-            "arrows": "to"
-        },
-        {
-            "from": "local.region_886",
-            "to": "data.aws_partition.current_21",
-            "arrows": "to"
-        },
-        {
-            "from": "local.region_886",
-            "to": "data.aws_partition.current_379",
-            "arrows": "to"
-        },
-        {
-            "from": "local.region_886",
-            "to": "data.aws_partition.current_457",
-            "arrows": "to"
-        },
-        {
-            "from": "local.region_886",
-            "to": "data.aws_partition.current_624",
-            "arrows": "to"
-        },
-        {
-            "from": "local.region_886",
-            "to": "data.aws_partition.current_770",
-            "arrows": "to"
-        },
-        {
-            "from": "local.region_886",
-            "to": "data.aws_partition.current_814",
-            "arrows": "to"
-        },
-        {
-            "from": "local.region_886",
-            "to": "data.aws_partition.current_877",
             "arrows": "to"
         },
         {
@@ -13917,6 +13872,51 @@
         {
             "from": "local.region_886",
             "to": "data.aws_caller_identity.current_878",
+            "arrows": "to"
+        },
+        {
+            "from": "local.region_886",
+            "to": "data.aws_region.current_769",
+            "arrows": "to"
+        },
+        {
+            "from": "local.region_886",
+            "to": "data.aws_region.current_876",
+            "arrows": "to"
+        },
+        {
+            "from": "local.region_886",
+            "to": "data.aws_partition.current_21",
+            "arrows": "to"
+        },
+        {
+            "from": "local.region_886",
+            "to": "data.aws_partition.current_379",
+            "arrows": "to"
+        },
+        {
+            "from": "local.region_886",
+            "to": "data.aws_partition.current_457",
+            "arrows": "to"
+        },
+        {
+            "from": "local.region_886",
+            "to": "data.aws_partition.current_624",
+            "arrows": "to"
+        },
+        {
+            "from": "local.region_886",
+            "to": "data.aws_partition.current_770",
+            "arrows": "to"
+        },
+        {
+            "from": "local.region_886",
+            "to": "data.aws_partition.current_814",
+            "arrows": "to"
+        },
+        {
+            "from": "local.region_886",
+            "to": "data.aws_partition.current_877",
             "arrows": "to"
         },
         {
