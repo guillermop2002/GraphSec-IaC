@@ -6,7 +6,7 @@ correctamente todos los casos edge (comentarios, strings, bloques dinámicos, et
 y proporciona metadatos de línea precisos.
 """
 
-# FORCING CI CODE REFRESH v21.6 - Logging detallado en _iter_tf_files
+# FORCING CI CODE REFRESH v21.7 - Verificar .terraform/modules/ y mejorar logging
 from typing import List, Dict, Any
 import os
 import hcl2
@@ -21,15 +21,29 @@ def _iter_tf_files(root_dir: str) -> List[str]:
     root_dir_abs = os.path.abspath(os.path.normpath(root_dir))
     logger.info(f"[DIAGNÓSTICO PARSER] _iter_tf_files: Explorando desde: {root_dir_abs}")
     
-    # Verificar si existe terraform-aws-modules/
+    # Verificar si existe terraform-aws-modules/ o .terraform/modules/
     terraform_modules_path = os.path.join(root_dir_abs, 'terraform-aws-modules')
+    terraform_dot_modules_path = os.path.join(root_dir_abs, '.terraform', 'modules')
+    
     if os.path.exists(terraform_modules_path):
         logger.info(f"[DIAGNÓSTICO PARSER] _iter_tf_files: ✅ Directorio terraform-aws-modules/ EXISTE: {terraform_modules_path}")
-        # Contar archivos .tf en ese directorio
         tf_count = sum(1 for root, _, filenames in os.walk(terraform_modules_path) for f in filenames if f.endswith('.tf'))
         logger.info(f"[DIAGNÓSTICO PARSER] _iter_tf_files: Archivos .tf en terraform-aws-modules/: {tf_count}")
     else:
         logger.warning(f"[DIAGNÓSTICO PARSER] _iter_tf_files: ❌ Directorio terraform-aws-modules/ NO EXISTE: {terraform_modules_path}")
+    
+    if os.path.exists(terraform_dot_modules_path):
+        logger.info(f"[DIAGNÓSTICO PARSER] _iter_tf_files: ✅ Directorio .terraform/modules/ EXISTE: {terraform_dot_modules_path}")
+        tf_count = sum(1 for root, _, filenames in os.walk(terraform_dot_modules_path) for f in filenames if f.endswith('.tf'))
+        logger.info(f"[DIAGNÓSTICO PARSER] _iter_tf_files: Archivos .tf en .terraform/modules/: {tf_count}")
+        # Listar algunos subdirectorios para ver la estructura
+        try:
+            subdirs = [d for d in os.listdir(terraform_dot_modules_path) if os.path.isdir(os.path.join(terraform_dot_modules_path, d))][:5]
+            logger.info(f"[DIAGNÓSTICO PARSER] _iter_tf_files: Subdirectorios en .terraform/modules/: {subdirs}")
+        except Exception as e:
+            logger.warning(f"[DIAGNÓSTICO PARSER] _iter_tf_files: Error listando .terraform/modules/: {e}")
+    else:
+        logger.warning(f"[DIAGNÓSTICO PARSER] _iter_tf_files: ❌ Directorio .terraform/modules/ NO EXISTE: {terraform_dot_modules_path}")
     
     directories_visited = []
     for dirpath, dirnames, filenames in os.walk(root_dir_abs):
@@ -44,12 +58,30 @@ def _iter_tf_files(root_dir: str) -> List[str]:
     
     logger.info(f"[DIAGNÓSTICO PARSER] _iter_tf_files: Total directorios visitados: {len(directories_visited)}")
     logger.info(f"[DIAGNÓSTICO PARSER] _iter_tf_files: Total archivos .tf encontrados: {len(files)}")
+    
+    # Verificar si se visitaron directorios de módulos
     modules_dirs = [d for d in directories_visited if 'terraform-aws-modules' in d]
+    terraform_dirs = [d for d in directories_visited if '.terraform' in d]
+    
     if modules_dirs:
         logger.info(f"[DIAGNÓSTICO PARSER] _iter_tf_files: Directorios que contienen 'terraform-aws-modules': {len(modules_dirs)}")
         logger.info(f"[DIAGNÓSTICO PARSER] _iter_tf_files: Ejemplos: {modules_dirs[:5]}")
     else:
         logger.warning(f"[DIAGNÓSTICO PARSER] _iter_tf_files: ⚠️ Ningún directorio visitado contiene 'terraform-aws-modules'")
+    
+    if terraform_dirs:
+        logger.info(f"[DIAGNÓSTICO PARSER] _iter_tf_files: Directorios que contienen '.terraform': {len(terraform_dirs)}")
+        logger.info(f"[DIAGNÓSTICO PARSER] _iter_tf_files: Ejemplos: {terraform_dirs[:5]}")
+    else:
+        logger.warning(f"[DIAGNÓSTICO PARSER] _iter_tf_files: ⚠️ Ningún directorio visitado contiene '.terraform'")
+    
+    # Verificar si hay archivos .tf en rutas de módulos
+    files_in_modules = [f for f in files if 'terraform-aws-modules' in f or '.terraform' in f]
+    if files_in_modules:
+        logger.info(f"[DIAGNÓSTICO PARSER] _iter_tf_files: Archivos .tf en rutas de módulos: {len(files_in_modules)}")
+        logger.info(f"[DIAGNÓSTICO PARSER] _iter_tf_files: Ejemplos: {files_in_modules[:5]}")
+    else:
+        logger.warning(f"[DIAGNÓSTICO PARSER] _iter_tf_files: ⚠️ Ningún archivo .tf encontrado en rutas de módulos")
     
     return files
 
