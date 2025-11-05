@@ -60,6 +60,27 @@ jobs:
         run: terraform init -backend=false
         working-directory: ./terraform-aws-eks
       
+      # 7.1. Verificar que terraform-aws-modules existe después de init
+      - name: Verificar directorio terraform-aws-modules
+        run: |
+          echo "Verificando estructura de directorios después de terraform init:"
+          ls -la ./terraform-aws-eks/ | head -20
+          echo ""
+          echo "Buscando directorio terraform-aws-modules:"
+          if [ -d "./terraform-aws-eks/terraform-aws-modules" ]; then
+            echo "✅ Directorio terraform-aws-modules/ EXISTE"
+            find ./terraform-aws-eks/terraform-aws-modules -name "*.tf" | head -10
+          else
+            echo "❌ Directorio terraform-aws-modules/ NO EXISTE"
+            echo "Buscando en .terraform/modules:"
+            if [ -d "./terraform-aws-eks/.terraform/modules" ]; then
+              echo "✅ Directorio .terraform/modules/ EXISTE"
+              find ./terraform-aws-eks/.terraform/modules -name "*.tf" | head -10
+            else
+              echo "❌ Directorio .terraform/modules/ TAMPOCO EXISTE"
+            fi
+          fi
+      
       # 8. Ejecutar el Pipeline (analizando 'terraform-aws-eks')
       - name: Ejecutar Pipeline de GraphSec-IaC
         run: |
