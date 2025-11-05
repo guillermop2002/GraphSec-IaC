@@ -232,16 +232,19 @@ def _map_vendored_module_path(logical_path: str, project_root: Optional[str] = N
                         logger.info(f"[MAPEO] ✅ Coincidencia exacta: '{logical_path}' -> '{physical_path}'")
                         return os.path.normpath(physical_path)
         
-        # Si no encontramos coincidencia exacta, buscar solo por nombre de archivo
-        # (último recurso)
-        logger.info(f"[MAPEO] No se encontró coincidencia exacta, buscando solo por nombre de archivo '{target_filename}'...")
-        for root_dir, dirs, files in os.walk(terraform_modules_dir):
-            if target_filename in files:
-                physical_path = os.path.join(root_dir, target_filename)
-                rel_path_from_modules = os.path.relpath(root_dir, terraform_modules_dir)
-                logger.info(f"[MAPEO] ✅ Coincidencia por nombre: '{logical_path}' -> '{physical_path}' (en '{rel_path_from_modules}')")
-                if os.path.exists(physical_path):
-                    return os.path.normpath(physical_path)
+        # CRÍTICO: NO hacer coincidencias solo por nombre de archivo
+        # Esto causa mapeos incorrectos (ej: eks/aws/main.tf -> kms/main.tf)
+        # Si no hay coincidencia exacta de subpath, el módulo no está descargado
+        logger.warning(f"[MAPEO] No se encontró coincidencia exacta para subpath '{target_subpath}'")
+        logger.warning(f"[MAPEO] El módulo '{target_subpath}' no está descargado en .terraform/modules/")
+        # Listar módulos únicos encontrados
+        unique_modules = set()
+        for f in all_tf_files:
+            if '/' in f:
+                module_dir = f.split('/')[0]
+                unique_modules.add(module_dir)
+        if unique_modules:
+            logger.warning(f"[MAPEO] Solo se encontraron estos módulos descargados: {sorted(unique_modules)}")
     
     except Exception as e:
         logger.warning(f"[MAPEO] Error al buscar ruta vendored '{logical_path}': {e}")
