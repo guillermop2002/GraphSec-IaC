@@ -60,7 +60,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: .graphsec_cache
-          key: pipeline-cache-${{ runner.os }}-${{ hashFiles('terraform-aws-eks/**/*.tf') }}-v22.3
+          key: pipeline-cache-${{ runner.os }}-${{ hashFiles('terraform-aws-eks/**/*.tf') }}-v22.4
           restore-keys: |
             pipeline-cache-${{ runner.os }}-
       
@@ -125,7 +125,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: .graphsec_cache
-          key: pipeline-cache-${{ runner.os }}-${{ hashFiles('terraform-aws-eks/**/*.tf') }}-v22.3
+          key: pipeline-cache-${{ runner.os }}-${{ hashFiles('terraform-aws-eks/**/*.tf') }}-v22.4
       
       # 9. Renombrar artefacto JSON
       - name: Renombrar artefacto JSON
