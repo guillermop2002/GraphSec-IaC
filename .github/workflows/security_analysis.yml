@@ -3,6 +3,9 @@ name: 'GraphSec-IaC Análisis de Seguridad'
 on:
   pull_request:
     branches: [ main ]
+  workflow_dispatch:  # Permite ejecución manual desde GitHub Actions
+  push:
+    branches: [ main ]  # Ejecutar también cuando se hace push a main
 
 jobs:
   analysis:
@@ -62,12 +65,15 @@ jobs:
         run: |
           python run_pipeline.py \
             --directory ./terraform-aws-eks \
-            --project eks_pr_${{ github.event.pull_request.number }} \
+            --project eks_pr_${{ github.event.pull_request.number || github.run_number }} \
             --output graph_data.json
       
       # 9. Renombrar artefacto JSON
       - name: Renombrar artefacto JSON
-        run: mv graph_data.json pr-${{ github.event.pull_request.number }}.json
+        run: |
+          PR_NUMBER="${{ github.event.pull_request.number || github.run_number }}"
+          mv graph_data.json pr-${PR_NUMBER}.json
+          echo "PR_NUMBER=${PR_NUMBER}" >> $GITHUB_ENV
       
       # 10. Copiar index.html a la raíz para GitHub Pages
       - name: Copiar index.html a la raíz
@@ -80,7 +86,7 @@ jobs:
       # 12. Mover artefactos al directorio de despliegue
       - name: Mover artefactos al directorio de despliegue
         run: |
-          mv pr-${{ github.event.pull_request.number }}.json ./deploy_dir/
+          mv pr-${PR_NUMBER}.json ./deploy_dir/
           mv index.html ./deploy_dir/
       
       # 13. Desplegar informe en GitHub Pages
@@ -90,14 +96,16 @@ jobs:
           branch: gh-pages
           folder: deploy_dir
       
-      # 14. Publicar un comentario en el PR
+      # 14. Publicar un comentario en el PR (solo si hay PR)
       - name: Publicar Comentario en PR
+        if: github.event_name == 'pull_request'
         uses: actions/github-script@v7
         with:
           script: |
             // Cargar el JSON generado
             const fs = require('fs');
-            const results = JSON.parse(fs.readFileSync(`deploy_dir/pr-${context.issue.number}.json`, 'utf8'));
+            const prNumber = context.issue.number;
+            const results = JSON.parse(fs.readFileSync(`deploy_dir/pr-${prNumber}.json`, 'utf8'));
             
             // Usar valores por defecto ({})
             const metadata = results.api_metadata || {};
@@ -110,7 +118,7 @@ jobs:
             const findings_unassigned = metadata.unassigned_findings_count || 0;
             
             // Construir la URL del informe visual
-            const report_url = `https://guillermop2002.github.io/GraphSec-IaC/?report=https://guillermop2002.github.io/GraphSec-IaC/pr-${context.issue.number}.json`;
+            const report_url = `https://guillermop2002.github.io/GraphSec-IaC/?report=https://guillermop2002.github.io/GraphSec-IaC/pr-${prNumber}.json`;
             
             // Construir el comentario
             const body = `
@@ -130,7 +138,7 @@ jobs:
             
             // Publicar el comentario
             github.rest.issues.createComment({
-              issue_number: context.issue.number,
+              issue_number: prNumber,
               owner: context.repo.owner,
               repo: context.repo.repo,
               body: body
