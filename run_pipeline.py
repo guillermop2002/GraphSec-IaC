@@ -32,7 +32,7 @@ os.makedirs(CACHE_DIR, exist_ok=True)
 
 # Versión del pipeline (incrementar cuando cambie la lógica de generación de grafo/filtrado)
 # Esto invalida el caché automáticamente cuando cambiamos la lógica
-PIPELINE_VERSION = "v22.2"  # Force: Reducir verbosidad de logs [MAPEO] con caché y evitar logs repetidos
+PIPELINE_VERSION = "v22.3"  # Force: Mejorar diagnóstico de caché y añadir fallback para Checkov
 
 
 class PipelineError(Exception):
