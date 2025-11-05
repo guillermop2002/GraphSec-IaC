@@ -147,6 +147,9 @@ RULE_CIS_MAP: Dict[str, str] = {
 # Variable global para almacenar el directorio raíz del proyecto
 _project_root: Optional[str] = None
 
+# Cache para resultados de mapeo vendored (evitar logs repetidos y búsquedas redundantes)
+_vendored_mapping_cache: Dict[str, Optional[str]] = {}
+
 
 def set_project_root(root_directory: str) -> None:
     """
@@ -155,9 +158,13 @@ def set_project_root(root_directory: str) -> None:
     Args:
         root_directory: Ruta absoluta del directorio raíz del proyecto
     """
-    global _project_root
+    global _project_root, _vendored_mapping_cache
     if root_directory:
-        _project_root = os.path.abspath(os.path.normpath(root_directory))
+        new_root = os.path.abspath(os.path.normpath(root_directory))
+        if new_root != _project_root:
+            # Limpiar caché si cambia el directorio raíz
+            _vendored_mapping_cache.clear()
+        _project_root = new_root
         logger.debug(f"Directorio raíz del proyecto establecido: {_project_root}")
 
 
@@ -166,6 +173,8 @@ def _map_vendored_module_path(logical_path: str, project_root: Optional[str] = N
     Mapea una ruta lógica de módulo vendored (ej: terraform-aws-modules/eks/aws/main.tf)
     a su ruta física real en .terraform/modules/.
     
+    Usa caché para evitar búsquedas repetidas y logs excesivos.
+    
     Args:
         logical_path: Ruta lógica reportada por el escáner (puede ser absoluta o relativa)
         project_root: Directorio raíz del proyecto
@@ -173,6 +182,8 @@ def _map_vendored_module_path(logical_path: str, project_root: Optional[str] = N
     Returns:
         Ruta física encontrada en .terraform/modules/, o None si no se encuentra
     """
+    global _vendored_mapping_cache
+    
     if not logical_path or "terraform-aws-modules" not in logical_path:
         return None
     
@@ -180,19 +191,26 @@ def _map_vendored_module_path(logical_path: str, project_root: Optional[str] = N
     if not root:
         return None
     
-    # Normalizar separadores
+    # Normalizar separadores y crear clave para el caché
     logical_path_clean = logical_path.replace("\\", "/")
+    cache_key = f"{root}:{logical_path_clean}"
+    
+    # Verificar caché
+    if cache_key in _vendored_mapping_cache:
+        return _vendored_mapping_cache[cache_key]
     
     # Extraer la parte después de terraform-aws-modules/
     # Ejemplo: "terraform-aws-modules/eks/aws/main.tf" -> "eks/aws/main.tf"
     if "terraform-aws-modules/" in logical_path_clean:
         module_path = logical_path_clean.split("terraform-aws-modules/", 1)[1]
     else:
+        _vendored_mapping_cache[cache_key] = None
         return None
     
     # Buscar en .terraform/modules/ recursivamente
     terraform_modules_dir = os.path.join(root, ".terraform", "modules")
     if not os.path.exists(terraform_modules_dir):
+        _vendored_mapping_cache[cache_key] = None
         return None
     
     # Buscar el archivo que coincida con la estructura de directorios
@@ -200,19 +218,12 @@ def _map_vendored_module_path(logical_path: str, project_root: Optional[str] = N
     target_filename = os.path.basename(module_path)
     target_subpath = os.path.dirname(module_path)  # ej: "eks/aws"
     
-    logger.info(f"[MAPEO] Buscando archivo vendored: filename='{target_filename}', subpath='{target_subpath}' en '{terraform_modules_dir}'")
+    # Solo loggear una vez por subpath único (no por cada archivo)
+    subpath_cache_key = f"{root}:subpath:{target_subpath}"
+    if subpath_cache_key not in _vendored_mapping_cache:
+        logger.debug(f"[MAPEO] Buscando módulo vendored: subpath='{target_subpath}' en '{terraform_modules_dir}'")
     
     try:
-        # Listar todos los archivos .tf encontrados en .terraform/modules/ para debugging
-        all_tf_files = []
-        for root_dir, dirs, files in os.walk(terraform_modules_dir):
-            for f in files:
-                if f.endswith('.tf'):
-                    rel_path = os.path.relpath(os.path.join(root_dir, f), terraform_modules_dir)
-                    all_tf_files.append(rel_path.replace("\\", "/"))
-        
-        logger.info(f"[MAPEO] Archivos .tf encontrados en .terraform/modules/ ({len(all_tf_files)} total): {all_tf_files[:10]}")
-        
         # Recorrer .terraform/modules/ recursivamente
         for root_dir, dirs, files in os.walk(terraform_modules_dir):
             # Buscar archivo que coincida con el nombre
@@ -222,34 +233,47 @@ def _map_vendored_module_path(logical_path: str, project_root: Optional[str] = N
                 # Normalizar para comparación
                 rel_path_normalized = rel_path_from_modules.replace("\\", "/")
                 
-                logger.debug(f"[MAPEO] Archivo encontrado: '{target_filename}' en '{rel_path_normalized}' (buscando subpath: '{target_subpath}')")
-                
                 # Verificar si el path relativo termina con el target_subpath
                 # Ejemplo: rel_path_normalized = "modules_*/eks/aws" y target_subpath = "eks/aws"
                 if rel_path_normalized.endswith(target_subpath) or target_subpath in rel_path_normalized:
                     physical_path = os.path.join(root_dir, target_filename)
                     if os.path.exists(physical_path):
-                        logger.info(f"[MAPEO] ✅ Coincidencia exacta: '{logical_path}' -> '{physical_path}'")
-                        return os.path.normpath(physical_path)
+                        result = os.path.normpath(physical_path)
+                        # Loggear solo una vez por subpath
+                        if subpath_cache_key not in _vendored_mapping_cache:
+                            logger.info(f"[MAPEO] ✅ Módulo vendored encontrado: '{target_subpath}' -> '{result}'")
+                            _vendored_mapping_cache[subpath_cache_key] = True  # Marcar como loggeado
+                        _vendored_mapping_cache[cache_key] = result
+                        return result
         
         # CRÍTICO: NO hacer coincidencias solo por nombre de archivo
         # Esto causa mapeos incorrectos (ej: eks/aws/main.tf -> kms/main.tf)
         # Si no hay coincidencia exacta de subpath, el módulo no está descargado
-        logger.warning(f"[MAPEO] No se encontró coincidencia exacta para subpath '{target_subpath}'")
-        logger.warning(f"[MAPEO] El módulo '{target_subpath}' no está descargado en .terraform/modules/")
-        # Listar módulos únicos encontrados
-        unique_modules = set()
-        for f in all_tf_files:
-            if '/' in f:
-                module_dir = f.split('/')[0]
-                unique_modules.add(module_dir)
-        if unique_modules:
-            logger.warning(f"[MAPEO] Solo se encontraron estos módulos descargados: {sorted(unique_modules)}")
+        # Solo loggear una vez por subpath
+        if subpath_cache_key not in _vendored_mapping_cache:
+            logger.warning(f"[MAPEO] ❌ Módulo vendored no encontrado: subpath='{target_subpath}'")
+            logger.warning(f"[MAPEO] El módulo no está descargado en .terraform/modules/")
+            # Listar módulos únicos encontrados (solo una vez)
+            try:
+                unique_modules = set()
+                for root_dir, dirs, files in os.walk(terraform_modules_dir):
+                    for f in files:
+                        if f.endswith('.tf'):
+                            rel_path = os.path.relpath(os.path.join(root_dir, f), terraform_modules_dir)
+                            rel_path_clean = rel_path.replace("\\", "/")
+                            if '/' in rel_path_clean:
+                                module_dir = rel_path_clean.split('/')[0]
+                                unique_modules.add(module_dir)
+                if unique_modules:
+                    logger.warning(f"[MAPEO] Módulos descargados disponibles: {sorted(unique_modules)}")
+            except Exception:
+                pass  # Ignorar errores al listar módulos
+            _vendored_mapping_cache[subpath_cache_key] = True  # Marcar como loggeado
     
     except Exception as e:
         logger.warning(f"[MAPEO] Error al buscar ruta vendored '{logical_path}': {e}")
     
-    logger.warning(f"[MAPEO] ❌ No se encontró archivo '{target_filename}' con subpath '{target_subpath}' en .terraform/modules/")
+    _vendored_mapping_cache[cache_key] = None
     return None
 
 
@@ -320,13 +344,9 @@ def normalize_file_path(file_path: str, project_root: Optional[str] = None) -> s
         if not os.path.exists(abs_file_path):
             # Si contiene terraform-aws-modules, intentar mapear a .terraform/modules/
             if "terraform-aws-modules" in abs_file_path:
-                logger.info(f"[MAPEO] Intentando mapear ruta vendored: '{abs_file_path}'")
                 mapped_path = _map_vendored_module_path(abs_file_path, root)
                 if mapped_path:
-                    logger.info(f"[MAPEO] ✅ Ruta vendored mapeada exitosamente: '{file_path}' -> '{mapped_path}'")
                     return mapped_path
-                else:
-                    logger.warning(f"[MAPEO] ❌ No se pudo mapear ruta vendored: '{abs_file_path}' (no encontrada en .terraform/modules/)")
             # Log de advertencia pero continuar (puede ser un archivo en módulos remotos)
             logger.debug(f"Ruta normalizada no existe físicamente: '{abs_file_path}' (original: '{file_path}')")
         
