@@ -9811,6 +9811,26 @@
     "edges": [
         {
             "from": "aws_eks_cluster.this_0",
+            "to": "aws_cloudwatch_log_group.this_2",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_eks_cluster.this_0",
+            "to": "module.kms_54",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_eks_cluster.this_0",
+            "to": "module.kms_284",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_eks_cluster.this_0",
+            "to": "aws_iam_policy.cni_ipv6_policy_158",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_eks_cluster.this_0",
             "to": "aws_iam_role_policy_attachment.this_9",
             "arrows": "to"
         },
@@ -9836,37 +9856,17 @@
         },
         {
             "from": "aws_eks_cluster.this_0",
-            "to": "aws_cloudwatch_log_group.this_2",
-            "arrows": "to"
-        },
-        {
-            "from": "aws_eks_cluster.this_0",
-            "to": "aws_iam_policy.cni_ipv6_policy_158",
-            "arrows": "to"
-        },
-        {
-            "from": "aws_eks_cluster.this_0",
-            "to": "module.kms_54",
-            "arrows": "to"
-        },
-        {
-            "from": "aws_eks_cluster.this_0",
-            "to": "module.kms_284",
-            "arrows": "to"
-        },
-        {
-            "from": "aws_eks_cluster.this_0",
             "to": "aws_security_group_rule.cluster_6",
             "arrows": "to"
         },
         {
             "from": "aws_eks_cluster.this_0",
-            "to": "aws_iam_role.eks_auto_18",
+            "to": "aws_security_group_rule.node_160",
             "arrows": "to"
         },
         {
             "from": "aws_eks_cluster.this_0",
-            "to": "aws_security_group_rule.node_160",
+            "to": "aws_iam_role.eks_auto_18",
             "arrows": "to"
         },
         {
@@ -9881,17 +9881,17 @@
         },
         {
             "from": "aws_eks_access_policy_association.this_4",
-            "to": "aws_eks_cluster.this_0",
-            "arrows": "to"
-        },
-        {
-            "from": "aws_eks_access_policy_association.this_4",
             "to": "aws_eks_access_entry.this_3",
             "arrows": "to"
         },
         {
             "from": "aws_eks_access_policy_association.this_4",
             "to": "aws_eks_access_entry.this_620",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_eks_access_policy_association.this_4",
+            "to": "aws_eks_cluster.this_0",
             "arrows": "to"
         },
         {
@@ -10071,17 +10071,12 @@
         },
         {
             "from": "aws_eks_addon.this_15",
-            "to": "aws_eks_cluster.this_0",
+            "to": "module.eks_managed_node_group_169",
             "arrows": "to"
         },
         {
             "from": "aws_eks_addon.this_15",
-            "to": "data.aws_eks_addon_version.this_27",
-            "arrows": "to"
-        },
-        {
-            "from": "aws_eks_addon.this_15",
-            "to": "module.self_managed_node_group_170",
+            "to": "module.eks_managed_node_group_261",
             "arrows": "to"
         },
         {
@@ -10096,22 +10091,27 @@
         },
         {
             "from": "aws_eks_addon.this_15",
-            "to": "module.eks_managed_node_group_169",
+            "to": "data.aws_eks_addon_version.this_27",
             "arrows": "to"
         },
         {
             "from": "aws_eks_addon.this_15",
-            "to": "module.eks_managed_node_group_261",
+            "to": "aws_eks_cluster.this_0",
             "arrows": "to"
         },
         {
-            "from": "aws_eks_addon.before_compute_16",
-            "to": "aws_eks_cluster.this_0",
+            "from": "aws_eks_addon.this_15",
+            "to": "module.self_managed_node_group_170",
             "arrows": "to"
         },
         {
             "from": "aws_eks_addon.before_compute_16",
             "to": "data.aws_eks_addon_version.this_27",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_eks_addon.before_compute_16",
+            "to": "aws_eks_cluster.this_0",
             "arrows": "to"
         },
         {
@@ -10351,22 +10351,22 @@
         },
         {
             "from": "module.eks_managed_node_group_169",
-            "to": "aws_eks_cluster.this_0",
+            "to": "time_sleep.this_157",
             "arrows": "to"
         },
         {
             "from": "module.eks_managed_node_group_169",
-            "to": "time_sleep.this_157",
-            "arrows": "to"
-        },
-        {
-            "from": "module.self_managed_node_group_170",
             "to": "aws_eks_cluster.this_0",
             "arrows": "to"
         },
         {
             "from": "module.self_managed_node_group_170",
             "to": "time_sleep.this_157",
+            "arrows": "to"
+        },
+        {
+            "from": "module.self_managed_node_group_170",
+            "to": "aws_eks_cluster.this_0",
             "arrows": "to"
         },
         {
@@ -10736,11 +10736,6 @@
         },
         {
             "from": "aws_route.peer_201",
-            "to": "aws_vpc_peering_connection.remote_node_220",
-            "arrows": "to"
-        },
-        {
-            "from": "aws_route.peer_201",
             "to": "module.vpc_177",
             "arrows": "to"
         },
@@ -10777,6 +10772,11 @@
         {
             "from": "aws_route.peer_201",
             "to": "module.vpc_305",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_route.peer_201",
+            "to": "aws_vpc_peering_connection.remote_node_220",
             "arrows": "to"
         },
         {
@@ -10911,11 +10911,6 @@
         },
         {
             "from": "local_file.join_214",
-            "to": "aws_ssm_activation.this_211",
-            "arrows": "to"
-        },
-        {
-            "from": "local_file.join_214",
             "to": "local_file.key_pem_212",
             "arrows": "to"
         },
@@ -10955,8 +10950,13 @@
             "arrows": "to"
         },
         {
+            "from": "local_file.join_214",
+            "to": "aws_ssm_activation.this_211",
+            "arrows": "to"
+        },
+        {
             "from": "aws_instance.hybrid_node_215",
-            "to": "data.aws_ami.hybrid_node_223",
+            "to": "module.remote_node_vpc_232",
             "arrows": "to"
         },
         {
@@ -10966,7 +10966,7 @@
         },
         {
             "from": "aws_instance.hybrid_node_215",
-            "to": "module.remote_node_vpc_232",
+            "to": "data.aws_ami.hybrid_node_223",
             "arrows": "to"
         },
         {
@@ -11166,12 +11166,12 @@
         },
         {
             "from": "aws_route.remote_node_public_222",
-            "to": "aws_vpc_peering_connection.remote_node_220",
+            "to": "module.remote_node_vpc_232",
             "arrows": "to"
         },
         {
             "from": "aws_route.remote_node_public_222",
-            "to": "module.remote_node_vpc_232",
+            "to": "aws_vpc_peering_connection.remote_node_220",
             "arrows": "to"
         },
         {
@@ -11181,12 +11181,12 @@
         },
         {
             "from": "helm_release.karpenter_233",
-            "to": "module.karpenter_242",
+            "to": "data.aws_ecrpublic_authorization_token.token_235",
             "arrows": "to"
         },
         {
             "from": "helm_release.karpenter_233",
-            "to": "data.aws_ecrpublic_authorization_token.token_235",
+            "to": "module.karpenter_242",
             "arrows": "to"
         },
         {
@@ -11411,7 +11411,22 @@
         },
         {
             "from": "module.eks_259",
-            "to": "aws_iam_policy.node_additional_246",
+            "to": "module.key_pair_231",
+            "arrows": "to"
+        },
+        {
+            "from": "module.eks_259",
+            "to": "module.key_pair_266",
+            "arrows": "to"
+        },
+        {
+            "from": "module.eks_259",
+            "to": "module.key_pair_282",
+            "arrows": "to"
+        },
+        {
+            "from": "module.eks_259",
+            "to": "module.aws_vpc_cni_ipv6_pod_identity_264",
             "arrows": "to"
         },
         {
@@ -11486,17 +11501,12 @@
         },
         {
             "from": "module.eks_259",
-            "to": "data.aws_ami.eks_default_250",
+            "to": "aws_iam_policy.node_additional_246",
             "arrows": "to"
         },
         {
             "from": "module.eks_259",
-            "to": "data.aws_ami.eks_default_270",
-            "arrows": "to"
-        },
-        {
-            "from": "module.eks_259",
-            "to": "module.aws_vpc_cni_ipv6_pod_identity_264",
+            "to": "data.aws_ami.eks_default_arm_251",
             "arrows": "to"
         },
         {
@@ -11507,21 +11517,6 @@
         {
             "from": "module.eks_259",
             "to": "module.ebs_kms_key_283",
-            "arrows": "to"
-        },
-        {
-            "from": "module.eks_259",
-            "to": "data.aws_ami.eks_default_arm_251",
-            "arrows": "to"
-        },
-        {
-            "from": "module.eks_259",
-            "to": "data.aws_ami.eks_default_bottlerocket_252",
-            "arrows": "to"
-        },
-        {
-            "from": "module.eks_259",
-            "to": "data.aws_ami.eks_default_bottlerocket_271",
             "arrows": "to"
         },
         {
@@ -11571,22 +11566,27 @@
         },
         {
             "from": "module.eks_259",
-            "to": "module.key_pair_231",
+            "to": "data.aws_ami.eks_default_250",
             "arrows": "to"
         },
         {
             "from": "module.eks_259",
-            "to": "module.key_pair_266",
-            "arrows": "to"
-        },
-        {
-            "from": "module.eks_259",
-            "to": "module.key_pair_282",
+            "to": "data.aws_ami.eks_default_270",
             "arrows": "to"
         },
         {
             "from": "module.eks_259",
             "to": "aws_security_group.remote_access_245",
+            "arrows": "to"
+        },
+        {
+            "from": "module.eks_259",
+            "to": "data.aws_ami.eks_default_bottlerocket_252",
+            "arrows": "to"
+        },
+        {
+            "from": "module.eks_259",
+            "to": "data.aws_ami.eks_default_bottlerocket_271",
             "arrows": "to"
         },
         {
@@ -11776,12 +11776,17 @@
         },
         {
             "from": "module.eks_278",
-            "to": "aws_iam_policy.additional_267",
+            "to": "module.key_pair_231",
             "arrows": "to"
         },
         {
             "from": "module.eks_278",
-            "to": "aws_iam_policy.additional_294",
+            "to": "module.key_pair_266",
+            "arrows": "to"
+        },
+        {
+            "from": "module.eks_278",
+            "to": "module.key_pair_282",
             "arrows": "to"
         },
         {
@@ -11826,22 +11831,22 @@
         },
         {
             "from": "module.eks_278",
-            "to": "data.aws_ami.eks_default_250",
-            "arrows": "to"
-        },
-        {
-            "from": "module.eks_278",
-            "to": "data.aws_ami.eks_default_270",
-            "arrows": "to"
-        },
-        {
-            "from": "module.eks_278",
             "to": "module.kms_54",
             "arrows": "to"
         },
         {
             "from": "module.eks_278",
             "to": "module.kms_284",
+            "arrows": "to"
+        },
+        {
+            "from": "module.eks_278",
+            "to": "aws_iam_policy.additional_267",
+            "arrows": "to"
+        },
+        {
+            "from": "module.eks_278",
+            "to": "aws_iam_policy.additional_294",
             "arrows": "to"
         },
         {
@@ -11856,12 +11861,12 @@
         },
         {
             "from": "module.eks_278",
-            "to": "data.aws_ami.eks_default_bottlerocket_252",
+            "to": "data.aws_ami.eks_default_250",
             "arrows": "to"
         },
         {
             "from": "module.eks_278",
-            "to": "data.aws_ami.eks_default_bottlerocket_271",
+            "to": "data.aws_ami.eks_default_270",
             "arrows": "to"
         },
         {
@@ -11871,17 +11876,12 @@
         },
         {
             "from": "module.eks_278",
-            "to": "module.key_pair_231",
+            "to": "data.aws_ami.eks_default_bottlerocket_252",
             "arrows": "to"
         },
         {
             "from": "module.eks_278",
-            "to": "module.key_pair_266",
-            "arrows": "to"
-        },
-        {
-            "from": "module.eks_278",
-            "to": "module.key_pair_282",
+            "to": "data.aws_ami.eks_default_bottlerocket_271",
             "arrows": "to"
         },
         {
@@ -12366,11 +12366,6 @@
         },
         {
             "from": "aws_kms_alias.this_377",
-            "to": "aws_kms_replica_key.this_375",
-            "arrows": "to"
-        },
-        {
-            "from": "aws_kms_alias.this_377",
             "to": "aws_kms_replica_external_key.this_376",
             "arrows": "to"
         },
@@ -12381,12 +12376,12 @@
         },
         {
             "from": "aws_kms_alias.this_377",
-            "to": "aws_kms_external_key.this_374",
+            "to": "aws_kms_replica_key.this_375",
             "arrows": "to"
         },
         {
-            "from": "aws_kms_grant.this_378",
-            "to": "aws_kms_replica_key.this_375",
+            "from": "aws_kms_alias.this_377",
+            "to": "aws_kms_external_key.this_374",
             "arrows": "to"
         },
         {
@@ -12401,7 +12396,47 @@
         },
         {
             "from": "aws_kms_grant.this_378",
+            "to": "aws_kms_replica_key.this_375",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_kms_grant.this_378",
             "to": "aws_kms_external_key.this_374",
+            "arrows": "to"
+        },
+        {
+            "from": "local.dns_suffix_384",
+            "to": "data.aws_partition.current_21",
+            "arrows": "to"
+        },
+        {
+            "from": "local.dns_suffix_384",
+            "to": "data.aws_partition.current_379",
+            "arrows": "to"
+        },
+        {
+            "from": "local.dns_suffix_384",
+            "to": "data.aws_partition.current_457",
+            "arrows": "to"
+        },
+        {
+            "from": "local.dns_suffix_384",
+            "to": "data.aws_partition.current_624",
+            "arrows": "to"
+        },
+        {
+            "from": "local.dns_suffix_384",
+            "to": "data.aws_partition.current_770",
+            "arrows": "to"
+        },
+        {
+            "from": "local.dns_suffix_384",
+            "to": "data.aws_partition.current_814",
+            "arrows": "to"
+        },
+        {
+            "from": "local.dns_suffix_384",
+            "to": "data.aws_partition.current_877",
             "arrows": "to"
         },
         {
@@ -12447,41 +12482,6 @@
         {
             "from": "local.dns_suffix_384",
             "to": "data.aws_caller_identity.current_878",
-            "arrows": "to"
-        },
-        {
-            "from": "local.dns_suffix_384",
-            "to": "data.aws_partition.current_21",
-            "arrows": "to"
-        },
-        {
-            "from": "local.dns_suffix_384",
-            "to": "data.aws_partition.current_379",
-            "arrows": "to"
-        },
-        {
-            "from": "local.dns_suffix_384",
-            "to": "data.aws_partition.current_457",
-            "arrows": "to"
-        },
-        {
-            "from": "local.dns_suffix_384",
-            "to": "data.aws_partition.current_624",
-            "arrows": "to"
-        },
-        {
-            "from": "local.dns_suffix_384",
-            "to": "data.aws_partition.current_770",
-            "arrows": "to"
-        },
-        {
-            "from": "local.dns_suffix_384",
-            "to": "data.aws_partition.current_814",
-            "arrows": "to"
-        },
-        {
-            "from": "local.dns_suffix_384",
-            "to": "data.aws_partition.current_877",
             "arrows": "to"
         },
         {
@@ -12536,12 +12536,12 @@
         },
         {
             "from": "module.kms_replica_444",
-            "to": "aws_iam_role.lambda_429",
+            "to": "module.kms_primary_443",
             "arrows": "to"
         },
         {
             "from": "module.kms_replica_444",
-            "to": "module.kms_primary_443",
+            "to": "aws_iam_role.lambda_429",
             "arrows": "to"
         },
         {
@@ -12552,6 +12552,46 @@
         {
             "from": "module.kms_replica_external_446",
             "to": "aws_iam_role.lambda_429",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_launch_template.this_447",
+            "to": "module.user_data_492",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_launch_template.this_447",
+            "to": "module.user_data_655",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_launch_template.this_447",
+            "to": "aws_placement_group.this_453",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_launch_template.this_447",
+            "to": "aws_placement_group.this_619",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_launch_template.this_447",
+            "to": "aws_iam_role_policy_attachment.additional_10",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_launch_template.this_447",
+            "to": "aws_iam_role_policy_attachment.additional_451",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_launch_template.this_447",
+            "to": "aws_iam_role_policy_attachment.additional_616",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_launch_template.this_447",
+            "to": "aws_iam_role_policy_attachment.additional_766",
             "arrows": "to"
         },
         {
@@ -12577,46 +12617,6 @@
         {
             "from": "aws_launch_template.this_447",
             "to": "aws_iam_role_policy_attachment.this_808",
-            "arrows": "to"
-        },
-        {
-            "from": "aws_launch_template.this_447",
-            "to": "aws_iam_role_policy_attachment.additional_10",
-            "arrows": "to"
-        },
-        {
-            "from": "aws_launch_template.this_447",
-            "to": "aws_iam_role_policy_attachment.additional_451",
-            "arrows": "to"
-        },
-        {
-            "from": "aws_launch_template.this_447",
-            "to": "aws_iam_role_policy_attachment.additional_616",
-            "arrows": "to"
-        },
-        {
-            "from": "aws_launch_template.this_447",
-            "to": "aws_iam_role_policy_attachment.additional_766",
-            "arrows": "to"
-        },
-        {
-            "from": "aws_launch_template.this_447",
-            "to": "aws_placement_group.this_453",
-            "arrows": "to"
-        },
-        {
-            "from": "aws_launch_template.this_447",
-            "to": "aws_placement_group.this_619",
-            "arrows": "to"
-        },
-        {
-            "from": "aws_launch_template.this_447",
-            "to": "module.user_data_492",
-            "arrows": "to"
-        },
-        {
-            "from": "aws_launch_template.this_447",
-            "to": "module.user_data_655",
             "arrows": "to"
         },
         {
@@ -12806,6 +12806,41 @@
         },
         {
             "from": "local.account_id_466",
+            "to": "data.aws_partition.current_21",
+            "arrows": "to"
+        },
+        {
+            "from": "local.account_id_466",
+            "to": "data.aws_partition.current_379",
+            "arrows": "to"
+        },
+        {
+            "from": "local.account_id_466",
+            "to": "data.aws_partition.current_457",
+            "arrows": "to"
+        },
+        {
+            "from": "local.account_id_466",
+            "to": "data.aws_partition.current_624",
+            "arrows": "to"
+        },
+        {
+            "from": "local.account_id_466",
+            "to": "data.aws_partition.current_770",
+            "arrows": "to"
+        },
+        {
+            "from": "local.account_id_466",
+            "to": "data.aws_partition.current_814",
+            "arrows": "to"
+        },
+        {
+            "from": "local.account_id_466",
+            "to": "data.aws_partition.current_877",
+            "arrows": "to"
+        },
+        {
+            "from": "local.account_id_466",
             "to": "data.aws_caller_identity.current_22",
             "arrows": "to"
         },
@@ -12847,41 +12882,6 @@
         {
             "from": "local.account_id_466",
             "to": "data.aws_caller_identity.current_878",
-            "arrows": "to"
-        },
-        {
-            "from": "local.account_id_466",
-            "to": "data.aws_partition.current_21",
-            "arrows": "to"
-        },
-        {
-            "from": "local.account_id_466",
-            "to": "data.aws_partition.current_379",
-            "arrows": "to"
-        },
-        {
-            "from": "local.account_id_466",
-            "to": "data.aws_partition.current_457",
-            "arrows": "to"
-        },
-        {
-            "from": "local.account_id_466",
-            "to": "data.aws_partition.current_624",
-            "arrows": "to"
-        },
-        {
-            "from": "local.account_id_466",
-            "to": "data.aws_partition.current_770",
-            "arrows": "to"
-        },
-        {
-            "from": "local.account_id_466",
-            "to": "data.aws_partition.current_814",
-            "arrows": "to"
-        },
-        {
-            "from": "local.account_id_466",
-            "to": "data.aws_partition.current_877",
             "arrows": "to"
         },
         {
@@ -12931,37 +12931,32 @@
         },
         {
             "from": "local.user_data_type_to_rendered_594",
-            "to": "data.cloudinit_config.al2023_eks_managed_node_group_587",
-            "arrows": "to"
-        },
-        {
-            "from": "local.user_data_type_to_rendered_594",
             "to": "data.cloudinit_config.al2_eks_managed_node_group_586",
             "arrows": "to"
         },
         {
-            "from": "aws_launch_template.this_612",
-            "to": "aws_iam_role_policy_attachment.this_9",
+            "from": "local.user_data_type_to_rendered_594",
+            "to": "data.cloudinit_config.al2023_eks_managed_node_group_587",
             "arrows": "to"
         },
         {
             "from": "aws_launch_template.this_612",
-            "to": "aws_iam_role_policy_attachment.this_450",
+            "to": "module.user_data_492",
             "arrows": "to"
         },
         {
             "from": "aws_launch_template.this_612",
-            "to": "aws_iam_role_policy_attachment.this_615",
+            "to": "module.user_data_655",
             "arrows": "to"
         },
         {
             "from": "aws_launch_template.this_612",
-            "to": "aws_iam_role_policy_attachment.this_765",
+            "to": "aws_placement_group.this_453",
             "arrows": "to"
         },
         {
             "from": "aws_launch_template.this_612",
-            "to": "aws_iam_role_policy_attachment.this_808",
+            "to": "aws_placement_group.this_619",
             "arrows": "to"
         },
         {
@@ -12996,32 +12991,37 @@
         },
         {
             "from": "aws_launch_template.this_612",
+            "to": "aws_iam_role_policy_attachment.this_9",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_launch_template.this_612",
+            "to": "aws_iam_role_policy_attachment.this_450",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_launch_template.this_612",
+            "to": "aws_iam_role_policy_attachment.this_615",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_launch_template.this_612",
+            "to": "aws_iam_role_policy_attachment.this_765",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_launch_template.this_612",
+            "to": "aws_iam_role_policy_attachment.this_808",
+            "arrows": "to"
+        },
+        {
+            "from": "aws_launch_template.this_612",
             "to": "aws_iam_instance_profile.this_617",
             "arrows": "to"
         },
         {
             "from": "aws_launch_template.this_612",
             "to": "aws_iam_instance_profile.this_875",
-            "arrows": "to"
-        },
-        {
-            "from": "aws_launch_template.this_612",
-            "to": "aws_placement_group.this_453",
-            "arrows": "to"
-        },
-        {
-            "from": "aws_launch_template.this_612",
-            "to": "aws_placement_group.this_619",
-            "arrows": "to"
-        },
-        {
-            "from": "aws_launch_template.this_612",
-            "to": "module.user_data_492",
-            "arrows": "to"
-        },
-        {
-            "from": "aws_launch_template.this_612",
-            "to": "module.user_data_655",
             "arrows": "to"
         },
         {
@@ -13241,6 +13241,41 @@
         },
         {
             "from": "local.account_id_632",
+            "to": "data.aws_partition.current_21",
+            "arrows": "to"
+        },
+        {
+            "from": "local.account_id_632",
+            "to": "data.aws_partition.current_379",
+            "arrows": "to"
+        },
+        {
+            "from": "local.account_id_632",
+            "to": "data.aws_partition.current_457",
+            "arrows": "to"
+        },
+        {
+            "from": "local.account_id_632",
+            "to": "data.aws_partition.current_624",
+            "arrows": "to"
+        },
+        {
+            "from": "local.account_id_632",
+            "to": "data.aws_partition.current_770",
+            "arrows": "to"
+        },
+        {
+            "from": "local.account_id_632",
+            "to": "data.aws_partition.current_814",
+            "arrows": "to"
+        },
+        {
+            "from": "local.account_id_632",
+            "to": "data.aws_partition.current_877",
+            "arrows": "to"
+        },
+        {
+            "from": "local.account_id_632",
             "to": "data.aws_caller_identity.current_22",
             "arrows": "to"
         },
@@ -13282,41 +13317,6 @@
         {
             "from": "local.account_id_632",
             "to": "data.aws_caller_identity.current_878",
-            "arrows": "to"
-        },
-        {
-            "from": "local.account_id_632",
-            "to": "data.aws_partition.current_21",
-            "arrows": "to"
-        },
-        {
-            "from": "local.account_id_632",
-            "to": "data.aws_partition.current_379",
-            "arrows": "to"
-        },
-        {
-            "from": "local.account_id_632",
-            "to": "data.aws_partition.current_457",
-            "arrows": "to"
-        },
-        {
-            "from": "local.account_id_632",
-            "to": "data.aws_partition.current_624",
-            "arrows": "to"
-        },
-        {
-            "from": "local.account_id_632",
-            "to": "data.aws_partition.current_770",
-            "arrows": "to"
-        },
-        {
-            "from": "local.account_id_632",
-            "to": "data.aws_partition.current_814",
-            "arrows": "to"
-        },
-        {
-            "from": "local.account_id_632",
-            "to": "data.aws_partition.current_877",
             "arrows": "to"
         },
         {
@@ -13751,12 +13751,12 @@
         },
         {
             "from": "aws_iam_role_policy_attachment.controller_864",
-            "to": "aws_iam_policy.controller_863",
+            "to": "aws_iam_role.controller_861",
             "arrows": "to"
         },
         {
             "from": "aws_iam_role_policy_attachment.controller_864",
-            "to": "aws_iam_role.controller_861",
+            "to": "aws_iam_policy.controller_863",
             "arrows": "to"
         },
         {
@@ -13781,12 +13781,12 @@
         },
         {
             "from": "aws_cloudwatch_event_target.this_870",
-            "to": "aws_sqs_queue.this_867",
+            "to": "aws_cloudwatch_event_rule.this_869",
             "arrows": "to"
         },
         {
             "from": "aws_cloudwatch_event_target.this_870",
-            "to": "aws_cloudwatch_event_rule.this_869",
+            "to": "aws_sqs_queue.this_867",
             "arrows": "to"
         },
         {
@@ -13806,12 +13806,12 @@
         },
         {
             "from": "aws_eks_access_entry.node_874",
-            "to": "aws_sqs_queue_policy.this_868",
+            "to": "aws_iam_role.node_871",
             "arrows": "to"
         },
         {
             "from": "aws_eks_access_entry.node_874",
-            "to": "aws_iam_role.node_871",
+            "to": "aws_sqs_queue_policy.this_868",
             "arrows": "to"
         },
         {
@@ -13826,7 +13826,37 @@
         },
         {
             "from": "local.region_886",
-            "to": "data.aws_service_principal.ec2_879",
+            "to": "data.aws_partition.current_21",
+            "arrows": "to"
+        },
+        {
+            "from": "local.region_886",
+            "to": "data.aws_partition.current_379",
+            "arrows": "to"
+        },
+        {
+            "from": "local.region_886",
+            "to": "data.aws_partition.current_457",
+            "arrows": "to"
+        },
+        {
+            "from": "local.region_886",
+            "to": "data.aws_partition.current_624",
+            "arrows": "to"
+        },
+        {
+            "from": "local.region_886",
+            "to": "data.aws_partition.current_770",
+            "arrows": "to"
+        },
+        {
+            "from": "local.region_886",
+            "to": "data.aws_partition.current_814",
+            "arrows": "to"
+        },
+        {
+            "from": "local.region_886",
+            "to": "data.aws_partition.current_877",
             "arrows": "to"
         },
         {
@@ -13886,37 +13916,7 @@
         },
         {
             "from": "local.region_886",
-            "to": "data.aws_partition.current_21",
-            "arrows": "to"
-        },
-        {
-            "from": "local.region_886",
-            "to": "data.aws_partition.current_379",
-            "arrows": "to"
-        },
-        {
-            "from": "local.region_886",
-            "to": "data.aws_partition.current_457",
-            "arrows": "to"
-        },
-        {
-            "from": "local.region_886",
-            "to": "data.aws_partition.current_624",
-            "arrows": "to"
-        },
-        {
-            "from": "local.region_886",
-            "to": "data.aws_partition.current_770",
-            "arrows": "to"
-        },
-        {
-            "from": "local.region_886",
-            "to": "data.aws_partition.current_814",
-            "arrows": "to"
-        },
-        {
-            "from": "local.region_886",
-            "to": "data.aws_partition.current_877",
+            "to": "data.aws_service_principal.ec2_879",
             "arrows": "to"
         },
         {
@@ -13991,8 +13991,8 @@
     },
     "api_metadata": {
         "status": "success",
-        "message": "Pipeline completado exitosamente para proyecto 'eks_pr_29'",
-        "project_name": "eks_pr_29",
+        "message": "Pipeline completado exitosamente para proyecto 'eks_pr_30'",
+        "project_name": "eks_pr_30",
         "project_directory": "./terraform-aws-eks",
         "scanners_used": 2,
         "checkov_success": true,
