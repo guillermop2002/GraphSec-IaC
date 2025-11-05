@@ -55,6 +55,15 @@ jobs:
         run: |
           git clone https://github.com/terraform-aws-modules/terraform-aws-eks.git --depth 1
       
+      # 6.5. Cachear resultados del pipeline (grafo y escáneres)
+      - name: Restaurar caché del pipeline
+        uses: actions/cache@v3
+        with:
+          path: .graphsec_cache
+          key: pipeline-cache-${{ runner.os }}-${{ hashFiles('terraform-aws-eks/**/*.tf') }}-v22.2
+          restore-keys: |
+            pipeline-cache-${{ runner.os }}-
+      
       # 7. Inicializar Terraform (analizando 'terraform-aws-eks')
       - name: Terraform Init
         run: terraform init -backend=false
@@ -83,11 +92,40 @@ jobs:
       
       # 8. Ejecutar el Pipeline (analizando 'terraform-aws-eks')
       - name: Ejecutar Pipeline de GraphSec-IaC
+        id: run_pipeline
         run: |
+          PR_NUMBER="${{ github.event.pull_request.number || github.run_number }}"
+          echo "PR_NUMBER=${PR_NUMBER}" >> $GITHUB_ENV
+          # Usar nombre fijo para el caché ('eks'), pero el output JSON tendrá el PR number
           python run_pipeline.py \
             --directory ./terraform-aws-eks \
-            --project eks_pr_${{ github.event.pull_request.number || github.run_number }} \
+            --project eks \
             --output graph_data.json
+      
+      # 8.5. Actualizar metadata del JSON con el PR number
+      - name: Actualizar metadata del JSON
+        run: |
+          PR_NUMBER="${{ github.event.pull_request.number || github.run_number }}"
+          python -c "
+          import json
+          import sys
+          pr_num = '${{ github.event.pull_request.number || github.run_number }}'
+          with open('graph_data.json', 'r') as f:
+              data = json.load(f)
+          metadata = data.get('api_metadata', {})
+          metadata['project_name'] = f'eks_pr_{pr_num}'
+          metadata['pr_number'] = int(pr_num)
+          data['api_metadata'] = metadata
+          with open('graph_data.json', 'w') as f:
+              json.dump(data, f, indent=2)
+          "
+      
+      # 8.6. Guardar caché del pipeline
+      - name: Guardar caché del pipeline
+        uses: actions/cache@v3
+        with:
+          path: .graphsec_cache
+          key: pipeline-cache-${{ runner.os }}-${{ hashFiles('terraform-aws-eks/**/*.tf') }}-v22.2
       
       # 9. Renombrar artefacto JSON
       - name: Renombrar artefacto JSON
