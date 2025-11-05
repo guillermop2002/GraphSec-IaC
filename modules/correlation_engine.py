@@ -200,7 +200,19 @@ def _map_vendored_module_path(logical_path: str, project_root: Optional[str] = N
     target_filename = os.path.basename(module_path)
     target_subpath = os.path.dirname(module_path)  # ej: "eks/aws"
     
+    logger.info(f"[MAPEO] Buscando archivo vendored: filename='{target_filename}', subpath='{target_subpath}' en '{terraform_modules_dir}'")
+    
     try:
+        # Listar todos los archivos .tf encontrados en .terraform/modules/ para debugging
+        all_tf_files = []
+        for root_dir, dirs, files in os.walk(terraform_modules_dir):
+            for f in files:
+                if f.endswith('.tf'):
+                    rel_path = os.path.relpath(os.path.join(root_dir, f), terraform_modules_dir)
+                    all_tf_files.append(rel_path.replace("\\", "/"))
+        
+        logger.info(f"[MAPEO] Archivos .tf encontrados en .terraform/modules/ ({len(all_tf_files)} total): {all_tf_files[:10]}")
+        
         # Recorrer .terraform/modules/ recursivamente
         for root_dir, dirs, files in os.walk(terraform_modules_dir):
             # Buscar archivo que coincida con el nombre
@@ -210,26 +222,31 @@ def _map_vendored_module_path(logical_path: str, project_root: Optional[str] = N
                 # Normalizar para comparación
                 rel_path_normalized = rel_path_from_modules.replace("\\", "/")
                 
+                logger.debug(f"[MAPEO] Archivo encontrado: '{target_filename}' en '{rel_path_normalized}' (buscando subpath: '{target_subpath}')")
+                
                 # Verificar si el path relativo termina con el target_subpath
                 # Ejemplo: rel_path_normalized = "modules_*/eks/aws" y target_subpath = "eks/aws"
                 if rel_path_normalized.endswith(target_subpath) or target_subpath in rel_path_normalized:
                     physical_path = os.path.join(root_dir, target_filename)
                     if os.path.exists(physical_path):
-                        logger.debug(f"Mapeo de ruta vendored: '{logical_path}' -> '{physical_path}'")
+                        logger.info(f"[MAPEO] ✅ Coincidencia exacta: '{logical_path}' -> '{physical_path}'")
                         return os.path.normpath(physical_path)
         
         # Si no encontramos coincidencia exacta, buscar solo por nombre de archivo
         # (último recurso)
+        logger.info(f"[MAPEO] No se encontró coincidencia exacta, buscando solo por nombre de archivo '{target_filename}'...")
         for root_dir, dirs, files in os.walk(terraform_modules_dir):
             if target_filename in files:
                 physical_path = os.path.join(root_dir, target_filename)
+                rel_path_from_modules = os.path.relpath(root_dir, terraform_modules_dir)
+                logger.info(f"[MAPEO] ✅ Coincidencia por nombre: '{logical_path}' -> '{physical_path}' (en '{rel_path_from_modules}')")
                 if os.path.exists(physical_path):
-                    logger.debug(f"Mapeo de ruta vendored (solo nombre): '{logical_path}' -> '{physical_path}'")
                     return os.path.normpath(physical_path)
     
     except Exception as e:
-        logger.debug(f"Error al buscar ruta vendored '{logical_path}': {e}")
+        logger.warning(f"[MAPEO] Error al buscar ruta vendored '{logical_path}': {e}")
     
+    logger.warning(f"[MAPEO] ❌ No se encontró archivo '{target_filename}' con subpath '{target_subpath}' en .terraform/modules/")
     return None
 
 
@@ -300,10 +317,13 @@ def normalize_file_path(file_path: str, project_root: Optional[str] = None) -> s
         if not os.path.exists(abs_file_path):
             # Si contiene terraform-aws-modules, intentar mapear a .terraform/modules/
             if "terraform-aws-modules" in abs_file_path:
+                logger.info(f"[MAPEO] Intentando mapear ruta vendored: '{abs_file_path}'")
                 mapped_path = _map_vendored_module_path(abs_file_path, root)
                 if mapped_path:
-                    logger.debug(f"Ruta vendored mapeada: '{file_path}' -> '{mapped_path}'")
+                    logger.info(f"[MAPEO] ✅ Ruta vendored mapeada exitosamente: '{file_path}' -> '{mapped_path}'")
                     return mapped_path
+                else:
+                    logger.warning(f"[MAPEO] ❌ No se pudo mapear ruta vendored: '{abs_file_path}' (no encontrada en .terraform/modules/)")
             # Log de advertencia pero continuar (puede ser un archivo en módulos remotos)
             logger.debug(f"Ruta normalizada no existe físicamente: '{abs_file_path}' (original: '{file_path}')")
         
@@ -834,18 +854,8 @@ def _should_filter_finding(finding: Dict[str, Any], project_root: Optional[str] 
     # Normalizar a ruta absoluta para análisis
     file_path_abs = normalize_file_path(file_path, project_root)
     
-    # Verificar si el archivo existe físicamente (CRÍTICO para módulos remotos)
-    # Los escáneres pueden reportar hallazgos en módulos de Terraform Registry que están en cache
-    # pero no existen en el código fuente del usuario
-    # COMENTADO: Este filtro estaba eliminando hallazgos válidos
-    # if file_path_abs and project_root:
-    #     if not os.path.exists(file_path_abs):
-    #         # El archivo no existe físicamente - probablemente es un módulo remoto en cache
-    #         logger.debug(f"Filtrando hallazgo en archivo inexistente (módulo remoto/cache): {file_path}")
-    #         return True
-    
     # Normalizar separadores para comparación
-    file_path_normalized = file_path_abs.replace("\\", "/").lower() if file_path_abs else ""
+    file_path_normalized = file_path_abs.replace("\\", "/").lower() if file_path_abs else file_path.replace("\\", "/").lower()
     
     # Filtrar archivos YAML
     if file_path_normalized.endswith((".yml", ".yaml")):
@@ -861,14 +871,18 @@ def _should_filter_finding(finding: Dict[str, Any], project_root: Optional[str] 
         logger.debug(f"Filtrando hallazgo en directorio tests/: {file_path}")
         return True
     
-    # Filtrar módulos remotos de Terraform Registry (están en cache pero no en el proyecto)
-    # Estos aparecen como terraform-aws-modules/... pero no existen físicamente
-    # COMENTADO: Este filtro estaba eliminando hallazgos válidos
-    # if "terraform-aws-modules/" in file_path_normalized:
-    #     logger.debug(f"Filtrando hallazgo en módulo remoto terraform-aws-modules/: {file_path}")
-    #     return True
+    # CRÍTICO: NO filtrar archivos que fueron mapeados exitosamente desde rutas vendored
+    # Si la ruta original contiene "terraform-aws-modules/" y fue mapeada exitosamente,
+    # significa que existe en .terraform/modules/ y debe ser procesada
+    original_path_lower = file_path.replace("\\", "/").lower()
+    if "terraform-aws-modules/" in original_path_lower:
+        # Este es un archivo vendored - verificar si fue mapeado exitosamente
+        # Si la ruta normalizada contiene .terraform/modules/, significa que fue mapeada
+        if "/.terraform/modules/" in file_path_normalized:
+            logger.debug(f"NO filtrando hallazgo en módulo vendored mapeado: {file_path} -> {file_path_abs}")
+            return False  # NO filtrar - fue mapeado exitosamente
     
-    # Filtrar directorio de cache de Terraform
+    # Filtrar directorio de cache de Terraform (solo si NO fue mapeado desde vendored)
     if "/.terraform/" in file_path_normalized or "\\.terraform\\" in file_path_normalized:
         logger.debug(f"Filtrando hallazgo en cache .terraform/: {file_path}")
         return True
