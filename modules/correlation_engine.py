@@ -1106,6 +1106,13 @@ def attach_findings_to_graph(graph_data: Dict[str, Any], unique_findings: List[D
                 message = message[:200] + "..."
             logger.warning(f"  💬 Mensaje: {message}")
             
+            # Verificar si el archivo existe físicamente
+            finding_file_abs = normalize_file_path(uf.get('file_path', ''), project_root)
+            file_exists = os.path.exists(finding_file_abs) if finding_file_abs else False
+            logger.warning(f"  📂 Archivo existe físicamente: {'✅ SÍ' if file_exists else '❌ NO'}")
+            if finding_file_abs:
+                logger.warning(f"  📂 Ruta absoluta: {finding_file_abs}")
+            
             # Verificar si hay nodos en el mismo archivo (usando rutas absolutas normalizadas)
             finding_file = uf.get('file_path', '')
             nodes_in_same_file = []
@@ -1113,18 +1120,23 @@ def attach_findings_to_graph(graph_data: Dict[str, Any], unique_findings: List[D
                 node_file = n.get('file', '')
                 # Normalizar rutas para comparación (usar rutas absolutas directamente)
                 if finding_file and node_file:
-                    # Normalizar separadores
-                    finding_normalized = finding_file.replace("\\", "/").lower()
-                    node_normalized = node_file.replace("\\", "/").lower()
-                    if finding_normalized == node_normalized or finding_normalized.endswith(node_normalized) or node_normalized.endswith(finding_normalized):
-                        nodes_in_same_file.append(n)
+                    finding_file_normalized = normalize_file_path(finding_file, project_root)
+                    node_file_normalized = normalize_file_path(node_file, project_root)
+                    if finding_file_normalized and node_file_normalized:
+                        if finding_file_normalized == node_file_normalized:
+                            nodes_in_same_file.append(n)
             
             if nodes_in_same_file:
                 logger.warning(f"  ℹ️  Hay {len(nodes_in_same_file)} nodo(s) en este archivo, pero ninguno coincidió:")
                 for node in nodes_in_same_file[:3]:
                     logger.warning(f"      - {node.get('id')} (tipo: {node.get('block_type', 'N/A')}, líneas: {node.get('start_line')}-{node.get('end_line')})")
             else:
-                logger.warning(f"  ❌ NO HAY NODOS en este archivo (el parser no encontró recursos en este archivo)")
+                if not file_exists:
+                    logger.warning(f"  ❌ NO HAY NODOS en este archivo Y el archivo NO EXISTE físicamente")
+                    logger.warning(f"  💡 Esto sugiere que el archivo no se descargó o está en otra ubicación")
+                else:
+                    logger.warning(f"  ❌ NO HAY NODOS en este archivo (el parser no encontró recursos en este archivo)")
+                    logger.warning(f"  💡 El archivo existe pero el parser no pudo extraer recursos (puede tener bloques dynamic/for_each)")
         logger.warning("=" * 80)
     
     enriched_graph["unassigned_findings"] = unassigned
