@@ -32,7 +32,7 @@ os.makedirs(CACHE_DIR, exist_ok=True)
 
 # Versión del pipeline (incrementar cuando cambie la lógica de generación de grafo/filtrado)
 # Esto invalida el caché automáticamente cuando cambiamos la lógica
-PIPELINE_VERSION = "v22.2"  # Force: Reducir verbosidad de logs [MAPEO] con caché y evitar logs repetidos - Test caché
+PIPELINE_VERSION = "v22.2"  # Force: Reducir verbosidad de logs [MAPEO] con caché y evitar logs repetidos
 
 
 class PipelineError(Exception):
@@ -213,6 +213,15 @@ async def get_cached_or_run_scanner(scanner, directory: str, output_file: str, p
         return True, cache_file_scanner
     
     # Ejecutar escáner (no hay caché)
+    # Limpiar cualquier archivo o directorio antiguo que pueda existir
+    if os.path.exists(output_file):
+        if os.path.isdir(output_file):
+            shutil.rmtree(output_file)
+            logger.info(f"Eliminado directorio antiguo: {output_file}")
+        else:
+            os.remove(output_file)
+            logger.info(f"Eliminado archivo antiguo: {output_file}")
+    
     logger.info(f"Ejecutando {scanner_name} para {project_name} (no hay caché)...")
     success = await scanner.scan(directory, output_file)
     
@@ -220,22 +229,36 @@ async def get_cached_or_run_scanner(scanner, directory: str, output_file: str, p
         # Copiar resultado a caché
         try:
             if scanner_name == "checkov":
-                # Checkov guarda en un subdirectorio
-                source_dir = output_file
-                if os.path.isdir(source_dir):
-                    source_file = os.path.join(source_dir, "results_sarif.sarif")
+                # Checkov puede guardar en un subdirectorio o en un archivo
+                source_path = output_file
+                if os.path.isdir(source_path):
+                    # Checkov guardó en un subdirectorio
+                    source_file = os.path.join(source_path, "results_sarif.sarif")
                     if os.path.exists(source_file):
                         os.makedirs(os.path.dirname(cache_file_scanner), exist_ok=True)
                         shutil.copy2(source_file, cache_file_scanner)
-                        logger.info(f"Resultados de {scanner_name} guardados en caché")
+                        logger.info(f"Resultados de {scanner_name} guardados en caché (desde directorio)")
+                    else:
+                        logger.warning(f"Archivo SARIF no encontrado en directorio: {source_file}")
+                elif os.path.isfile(source_path):
+                    # Checkov guardó directamente en un archivo
+                    os.makedirs(os.path.dirname(cache_file_scanner), exist_ok=True)
+                    shutil.copy2(source_path, cache_file_scanner)
+                    logger.info(f"Resultados de {scanner_name} guardados en caché (desde archivo)")
+                else:
+                    logger.warning(f"Path de salida de {scanner_name} no existe: {source_path}")
             else:
                 # Trivy guarda directamente en un archivo
-                if os.path.exists(output_file):
+                if os.path.exists(output_file) and os.path.isfile(output_file):
                     os.makedirs(os.path.dirname(cache_file_scanner), exist_ok=True)
                     shutil.copy2(output_file, cache_file_scanner)
                     logger.info(f"Resultados de {scanner_name} guardados en caché")
+                else:
+                    logger.warning(f"Archivo de salida de {scanner_name} no existe o no es un archivo: {output_file}")
         except Exception as e:
             logger.warning(f"Error al guardar en caché: {e}")
+            import traceback
+            logger.warning(traceback.format_exc())
     
     return success, output_file
 
