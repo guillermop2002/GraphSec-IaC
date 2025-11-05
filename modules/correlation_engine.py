@@ -161,12 +161,87 @@ def set_project_root(root_directory: str) -> None:
         logger.debug(f"Directorio raíz del proyecto establecido: {_project_root}")
 
 
+def _map_vendored_module_path(logical_path: str, project_root: Optional[str] = None) -> Optional[str]:
+    """
+    Mapea una ruta lógica de módulo vendored (ej: terraform-aws-modules/eks/aws/main.tf)
+    a su ruta física real en .terraform/modules/.
+    
+    Args:
+        logical_path: Ruta lógica reportada por el escáner (puede ser absoluta o relativa)
+        project_root: Directorio raíz del proyecto
+    
+    Returns:
+        Ruta física encontrada en .terraform/modules/, o None si no se encuentra
+    """
+    if not logical_path or "terraform-aws-modules" not in logical_path:
+        return None
+    
+    root = project_root or _project_root
+    if not root:
+        return None
+    
+    # Normalizar separadores
+    logical_path_clean = logical_path.replace("\\", "/")
+    
+    # Extraer la parte después de terraform-aws-modules/
+    # Ejemplo: "terraform-aws-modules/eks/aws/main.tf" -> "eks/aws/main.tf"
+    if "terraform-aws-modules/" in logical_path_clean:
+        module_path = logical_path_clean.split("terraform-aws-modules/", 1)[1]
+    else:
+        return None
+    
+    # Buscar en .terraform/modules/ recursivamente
+    terraform_modules_dir = os.path.join(root, ".terraform", "modules")
+    if not os.path.exists(terraform_modules_dir):
+        return None
+    
+    # Buscar el archivo que coincida con la estructura de directorios
+    # Ejemplo: buscar "eks/aws/main.tf" en .terraform/modules/
+    target_filename = os.path.basename(module_path)
+    target_subpath = os.path.dirname(module_path)  # ej: "eks/aws"
+    
+    try:
+        # Recorrer .terraform/modules/ recursivamente
+        for root_dir, dirs, files in os.walk(terraform_modules_dir):
+            # Buscar archivo que coincida con el nombre
+            if target_filename in files:
+                # Verificar si la estructura de directorios coincide
+                rel_path_from_modules = os.path.relpath(root_dir, terraform_modules_dir)
+                # Normalizar para comparación
+                rel_path_normalized = rel_path_from_modules.replace("\\", "/")
+                
+                # Verificar si el path relativo termina con el target_subpath
+                # Ejemplo: rel_path_normalized = "modules_*/eks/aws" y target_subpath = "eks/aws"
+                if rel_path_normalized.endswith(target_subpath) or target_subpath in rel_path_normalized:
+                    physical_path = os.path.join(root_dir, target_filename)
+                    if os.path.exists(physical_path):
+                        logger.debug(f"Mapeo de ruta vendored: '{logical_path}' -> '{physical_path}'")
+                        return os.path.normpath(physical_path)
+        
+        # Si no encontramos coincidencia exacta, buscar solo por nombre de archivo
+        # (último recurso)
+        for root_dir, dirs, files in os.walk(terraform_modules_dir):
+            if target_filename in files:
+                physical_path = os.path.join(root_dir, target_filename)
+                if os.path.exists(physical_path):
+                    logger.debug(f"Mapeo de ruta vendored (solo nombre): '{logical_path}' -> '{physical_path}'")
+                    return os.path.normpath(physical_path)
+    
+    except Exception as e:
+        logger.debug(f"Error al buscar ruta vendored '{logical_path}': {e}")
+    
+    return None
+
+
 def normalize_file_path(file_path: str, project_root: Optional[str] = None) -> str:
     """
     Normaliza una ruta de archivo a ruta absoluta para comparación directa.
     
     ESTRATEGIA CAMBIADA: Usamos rutas absolutas como fuente única de verdad.
     Esto elimina problemas de normalización y permite comparación directa.
+    
+    NUEVO: Si la ruta contiene "terraform-aws-modules/" y no existe físicamente,
+    intenta mapearla a su ubicación real en .terraform/modules/.
     
     Args:
         file_path: Ruta del archivo (absoluta, relativa, con subcarpetas)
@@ -194,6 +269,11 @@ def normalize_file_path(file_path: str, project_root: Optional[str] = None) -> s
         # Si ya es absoluta, normalizarla y retornar
         if os.path.isabs(file_path):
             abs_file_path = os.path.normpath(file_path)
+            # Si no existe y contiene terraform-aws-modules, intentar mapeo
+            if not os.path.exists(abs_file_path) and "terraform-aws-modules" in abs_file_path:
+                mapped_path = _map_vendored_module_path(abs_file_path, root)
+                if mapped_path:
+                    return mapped_path
             logger.debug(f"Ruta ya absoluta: '{file_path}' -> '{abs_file_path}'")
             return abs_file_path
         
@@ -218,6 +298,12 @@ def normalize_file_path(file_path: str, project_root: Optional[str] = None) -> s
         
         # Verificar que la ruta normalizada existe (para debugging)
         if not os.path.exists(abs_file_path):
+            # Si contiene terraform-aws-modules, intentar mapear a .terraform/modules/
+            if "terraform-aws-modules" in abs_file_path:
+                mapped_path = _map_vendored_module_path(abs_file_path, root)
+                if mapped_path:
+                    logger.debug(f"Ruta vendored mapeada: '{file_path}' -> '{mapped_path}'")
+                    return mapped_path
             # Log de advertencia pero continuar (puede ser un archivo en módulos remotos)
             logger.debug(f"Ruta normalizada no existe físicamente: '{abs_file_path}' (original: '{file_path}')")
         

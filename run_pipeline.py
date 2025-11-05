@@ -32,7 +32,7 @@ os.makedirs(CACHE_DIR, exist_ok=True)
 
 # Versión del pipeline (incrementar cuando cambie la lógica de generación de grafo/filtrado)
 # Esto invalida el caché automáticamente cuando cambiamos la lógica
-PIPELINE_VERSION = "v21.7"  # Force: Verificar también .terraform/modules/ y mejorar logging de módulos
+PIPELINE_VERSION = "v21.8"  # Force: Implementar mapeo de rutas vendored (terraform-aws-modules -> .terraform/modules)
 
 
 class PipelineError(Exception):
