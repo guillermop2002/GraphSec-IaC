@@ -239,16 +239,19 @@ async def get_cached_or_run_scanner(scanner, directory: str, output_file: str, p
     else:
         logger.info(f"[CACHÉ {scanner_name}] Archivo de caché NO encontrado: {cache_file_scanner}")
         # Para Checkov, intentar buscar directorios similares (fallback)
+        # SOLO si la versión coincide (para evitar usar caché antiguo cuando cambia la lógica)
         if scanner_name == "checkov" and os.path.exists(CACHE_DIR):
-            # Buscar cualquier directorio que empiece con el prefijo
+            # Buscar cualquier directorio que empiece con el prefijo y tenga la misma versión
             for item in os.listdir(CACHE_DIR):
                 if item.startswith(f"{scanner_name}_{project_name}") and os.path.isdir(os.path.join(CACHE_DIR, item)):
-                    potential_file = os.path.join(CACHE_DIR, item, "results_sarif.sarif")
-                    if os.path.exists(potential_file):
-                        logger.info(f"[CACHÉ {scanner_name}] ⚠️ Encontrado caché alternativo: {potential_file}")
-                        logger.info(f"[CACHÉ {scanner_name}] Esto sugiere que el hash cambió o el caché se guardó con un hash diferente")
-                        # Usar este archivo aunque el hash no coincida exactamente
-                        return True, potential_file
+                    # Verificar que el hash de versión coincida (los últimos 8 caracteres antes del nombre del archivo)
+                    if item.endswith(f"_{version_hash}"):
+                        potential_file = os.path.join(CACHE_DIR, item, "results_sarif.sarif")
+                        if os.path.exists(potential_file):
+                            logger.info(f"[CACHÉ {scanner_name}] ⚠️ Encontrado caché alternativo (misma versión): {potential_file}")
+                            logger.info(f"[CACHÉ {scanner_name}] Hash de archivos diferente pero versión coincide")
+                            # Usar este archivo si el hash de archivos es diferente pero la versión coincide
+                            return True, potential_file
     
     # Ejecutar escáner (no hay caché)
     # Limpiar cualquier archivo o directorio antiguo que pueda existir
