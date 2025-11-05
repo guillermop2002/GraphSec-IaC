@@ -50,10 +50,10 @@ jobs:
           which checkov || echo "Checkov no encontrado en PATH"
           checkov --version || echo "Checkov no se puede ejecutar"
       
-      # 6. Clonar el repositorio de EKS (para prueba)
-      - name: Clonar el repositorio de EKS (para prueba)
+      # 6. Clonar el repositorio de VPC (para prueba)
+      - name: Clonar el repositorio de VPC (para prueba)
         run: |
-          git clone https://github.com/terraform-aws-modules/terraform-aws-eks.git --depth 1
+          git clone https://github.com/terraform-aws-modules/terraform-aws-vpc.git --depth 1
       
       # 6.5. Cachear resultados del pipeline (grafo y escáneres)
       - name: Restaurar caché del pipeline
@@ -61,7 +61,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: .graphsec_cache
-          key: pipeline-cache-${{ runner.os }}-${{ hashFiles('terraform-aws-eks/**/*.tf') }}-v22.5
+          key: pipeline-cache-${{ runner.os }}-${{ hashFiles('terraform-aws-vpc/**/*.tf') }}-v22.5
           restore-keys: |
             pipeline-cache-${{ runner.os }}-
       
@@ -71,50 +71,50 @@ jobs:
           echo "=== Caché restaurado: ${{ steps.cache-pipeline.outputs.cache-hit }} ==="
           if [ -d .graphsec_cache ]; then
             echo "=== Directorios de Checkov en caché ==="
-            find .graphsec_cache -type d -name "checkov_eks_*" || echo "No se encontraron directorios de Checkov"
+            find .graphsec_cache -type d -name "checkov_vpc_*" || echo "No se encontraron directorios de Checkov"
             echo ""
             echo "=== Archivos de Trivy en caché ==="
-            find .graphsec_cache -type f -name "trivy_eks_*" | head -5 || echo "No se encontraron archivos de Trivy"
+            find .graphsec_cache -type f -name "trivy_vpc_*" | head -5 || echo "No se encontraron archivos de Trivy"
           else
             echo "Directorio .graphsec_cache no existe después de restaurar"
           fi
       
-      # 7. Inicializar Terraform (analizando 'terraform-aws-eks')
+      # 7. Inicializar Terraform (analizando 'terraform-aws-vpc')
       - name: Terraform Init
         run: terraform init -backend=false
-        working-directory: ./terraform-aws-eks
+        working-directory: ./terraform-aws-vpc
       
       # 7.1. Verificar que terraform-aws-modules existe después de init
       - name: Verificar directorio terraform-aws-modules
         run: |
           echo "Verificando estructura de directorios después de terraform init:"
-          ls -la ./terraform-aws-eks/ | head -20
+          ls -la ./terraform-aws-vpc/ | head -20
           echo ""
           echo "Buscando directorio terraform-aws-modules:"
-          if [ -d "./terraform-aws-eks/terraform-aws-modules" ]; then
+          if [ -d "./terraform-aws-vpc/terraform-aws-modules" ]; then
             echo "✅ Directorio terraform-aws-modules/ EXISTE"
-            find ./terraform-aws-eks/terraform-aws-modules -name "*.tf" | head -10
+            find ./terraform-aws-vpc/terraform-aws-modules -name "*.tf" | head -10
           else
             echo "❌ Directorio terraform-aws-modules/ NO EXISTE"
             echo "Buscando en .terraform/modules:"
-            if [ -d "./terraform-aws-eks/.terraform/modules" ]; then
+            if [ -d "./terraform-aws-vpc/.terraform/modules" ]; then
               echo "✅ Directorio .terraform/modules/ EXISTE"
-              find ./terraform-aws-eks/.terraform/modules -name "*.tf" | head -10
+              find ./terraform-aws-vpc/.terraform/modules -name "*.tf" | head -10
             else
               echo "❌ Directorio .terraform/modules/ TAMPOCO EXISTE"
             fi
           fi
       
-      # 8. Ejecutar el Pipeline (analizando 'terraform-aws-eks')
+      # 8. Ejecutar el Pipeline (analizando 'terraform-aws-vpc')
       - name: Ejecutar Pipeline de GraphSec-IaC
         id: run_pipeline
         run: |
           PR_NUMBER="${{ github.event.pull_request.number || github.run_number }}"
           echo "PR_NUMBER=${PR_NUMBER}" >> $GITHUB_ENV
-          # Usar nombre fijo para el caché ('eks'), pero el output JSON tendrá el PR number
+          # Usar nombre fijo para el caché ('vpc'), pero el output JSON tendrá el PR number
           python run_pipeline.py \
-            --directory ./terraform-aws-eks \
-            --project eks \
+            --directory ./terraform-aws-vpc \
+            --project vpc \
             --output graph_data.json
       
       # 8.5. Actualizar metadata del JSON con el PR number
@@ -128,7 +128,7 @@ jobs:
           with open('graph_data.json', 'r') as f:
               data = json.load(f)
           metadata = data.get('api_metadata', {})
-          metadata['project_name'] = f'eks_pr_{pr_num}'
+          metadata['project_name'] = f'vpc_pr_{pr_num}'
           metadata['pr_number'] = int(pr_num)
           data['api_metadata'] = metadata
           with open('graph_data.json', 'w') as f:
@@ -143,10 +143,10 @@ jobs:
             find .graphsec_cache -type f -o -type d | head -20
             echo ""
             echo "=== Directorios de Checkov ==="
-            find .graphsec_cache -type d -name "checkov_eks_*" || echo "No se encontraron directorios de Checkov"
+            find .graphsec_cache -type d -name "checkov_vpc_*" || echo "No se encontraron directorios de Checkov"
             echo ""
             echo "=== Archivos de Trivy ==="
-            find .graphsec_cache -type f -name "trivy_eks_*" | head -5 || echo "No se encontraron archivos de Trivy"
+            find .graphsec_cache -type f -name "trivy_vpc_*" | head -5 || echo "No se encontraron archivos de Trivy"
           else
             echo "Directorio .graphsec_cache no existe"
           fi
@@ -156,7 +156,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: .graphsec_cache
-          key: pipeline-cache-${{ runner.os }}-${{ hashFiles('terraform-aws-eks/**/*.tf') }}-v22.5
+          key: pipeline-cache-${{ runner.os }}-${{ hashFiles('terraform-aws-vpc/**/*.tf') }}-v22.5
       
       # 9. Renombrar artefacto JSON
       - name: Renombrar artefacto JSON
