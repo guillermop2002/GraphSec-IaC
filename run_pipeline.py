@@ -211,10 +211,25 @@ async def get_cached_or_run_scanner(scanner, directory: str, output_file: str, p
     logger.info(f"[CACHÉ {scanner_name}] Hash calculado: {scanner_hash[:16]}...")
     logger.info(f"[CACHÉ {scanner_name}] Versión pipeline: {PIPELINE_VERSION} (hash: {version_hash})")
     if os.path.exists(CACHE_DIR):
-        cache_files = [f for f in os.listdir(CACHE_DIR) if f.startswith(f"{scanner_name}_{project_name}")]
-        logger.info(f"[CACHÉ {scanner_name}] Archivos en caché que empiezan con '{scanner_name}_{project_name}': {len(cache_files)}")
-        if cache_files:
-            logger.info(f"[CACHÉ {scanner_name}] Ejemplos: {cache_files[:3]}")
+        # Buscar tanto archivos como directorios
+        all_cache_items = os.listdir(CACHE_DIR)
+        cache_items = [f for f in all_cache_items if f.startswith(f"{scanner_name}_{project_name}")]
+        logger.info(f"[CACHÉ {scanner_name}] Items en caché que empiezan con '{scanner_name}_{project_name}': {len(cache_items)}")
+        if cache_items:
+            logger.info(f"[CACHÉ {scanner_name}] Ejemplos: {cache_items[:3]}")
+            # Para Checkov, verificar si es un directorio y si contiene el archivo
+            if scanner_name == "checkov":
+                for item in cache_items:
+                    item_path = os.path.join(CACHE_DIR, item)
+                    if os.path.isdir(item_path):
+                        logger.info(f"[CACHÉ {scanner_name}] Encontrado directorio: {item}")
+                        expected_file = os.path.join(item_path, "results_sarif.sarif")
+                        if os.path.exists(expected_file):
+                            logger.info(f"[CACHÉ {scanner_name}] ✅ Archivo encontrado en directorio: {expected_file}")
+                        else:
+                            logger.info(f"[CACHÉ {scanner_name}] ❌ Archivo NO encontrado en directorio: {expected_file}")
+    else:
+        logger.warning(f"[CACHÉ {scanner_name}] Directorio de caché no existe: {CACHE_DIR}")
     
     # Intentar cargar desde caché
     if os.path.exists(cache_file_scanner):
@@ -223,6 +238,17 @@ async def get_cached_or_run_scanner(scanner, directory: str, output_file: str, p
         return True, cache_file_scanner
     else:
         logger.info(f"[CACHÉ {scanner_name}] Archivo de caché NO encontrado: {cache_file_scanner}")
+        # Para Checkov, intentar buscar directorios similares (fallback)
+        if scanner_name == "checkov" and os.path.exists(CACHE_DIR):
+            # Buscar cualquier directorio que empiece con el prefijo
+            for item in os.listdir(CACHE_DIR):
+                if item.startswith(f"{scanner_name}_{project_name}") and os.path.isdir(os.path.join(CACHE_DIR, item)):
+                    potential_file = os.path.join(CACHE_DIR, item, "results_sarif.sarif")
+                    if os.path.exists(potential_file):
+                        logger.info(f"[CACHÉ {scanner_name}] ⚠️ Encontrado caché alternativo: {potential_file}")
+                        logger.info(f"[CACHÉ {scanner_name}] Esto sugiere que el hash cambió o el caché se guardó con un hash diferente")
+                        # Usar este archivo aunque el hash no coincida exactamente
+                        return True, potential_file
     
     # Ejecutar escáner (no hay caché)
     # Limpiar cualquier archivo o directorio antiguo que pueda existir
