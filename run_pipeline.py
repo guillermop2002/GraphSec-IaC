@@ -32,7 +32,7 @@ os.makedirs(CACHE_DIR, exist_ok=True)
 
 # Versión del pipeline (incrementar cuando cambie la lógica de generación de grafo/filtrado)
 # Esto invalida el caché automáticamente cuando cambiamos la lógica
-PIPELINE_VERSION = "v21.5"  # Force: Usar rutas absolutas para detectar archivos problemáticos
+PIPELINE_VERSION = "v21.6"  # Force: Añadir logging detallado en _iter_tf_files para diagnosticar terraform-aws-modules
 
 
 class PipelineError(Exception):
