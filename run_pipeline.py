@@ -32,7 +32,7 @@ os.makedirs(CACHE_DIR, exist_ok=True)
 
 # Versión del pipeline (incrementar cuando cambie la lógica de generación de grafo/filtrado)
 # Esto invalida el caché automáticamente cuando cambiamos la lógica
-PIPELINE_VERSION = "v21.4"  # Force: Añadir logging incondicional para diagnosticar detección de archivos
+PIPELINE_VERSION = "v21.5"  # Force: Usar rutas absolutas para detectar archivos problemáticos
 
 
 class PipelineError(Exception):

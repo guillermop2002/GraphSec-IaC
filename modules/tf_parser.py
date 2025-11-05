@@ -6,7 +6,7 @@ correctamente todos los casos edge (comentarios, strings, bloques dinámicos, et
 y proporciona metadatos de línea precisos.
 """
 
-# FORCING CI CODE REFRESH v21.4 - Logging incondicional
+# FORCING CI CODE REFRESH v21.5 - Detección usando rutas absolutas
 from typing import List, Dict, Any
 import os
 import hcl2
@@ -272,14 +272,22 @@ def parse_terraform(directory: str) -> List[Dict[str, Any]]:
     BLOCK_TYPES = ['resource', 'data', 'variable', 'locals', 'module']
     
     # LOGGING: Contar archivos problemáticos antes de procesar
-    problematic_files = [f for f in tf_files if 'terraform-aws-modules' in f]
+    # Usar rutas absolutas para la detección porque las rutas relativas pueden no contener el path completo
+    problematic_files = [f for f in tf_files if 'terraform-aws-modules' in os.path.abspath(os.path.normpath(f))]
     logger.info(f"[DIAGNÓSTICO PARSER] Total archivos .tf encontrados: {len(tf_files)}")
     logger.info(f"[DIAGNÓSTICO PARSER] Archivos problemáticos detectados: {len(problematic_files)}")
     if problematic_files:
         logger.info(f"[DIAGNÓSTICO PARSER] Primeros archivos problemáticos: {[os.path.basename(f) for f in problematic_files[:5]]}")
-        logger.info(f"[DIAGNÓSTICO PARSER] Ejemplo ruta completa: {problematic_files[0] if problematic_files else 'N/A'}")
+        logger.info(f"[DIAGNÓSTICO PARSER] Ejemplo ruta completa: {os.path.abspath(os.path.normpath(problematic_files[0])) if problematic_files else 'N/A'}")
     else:
-        logger.warning(f"[DIAGNÓSTICO PARSER] ⚠️ NO se detectaron archivos problemáticos. Ejemplo de rutas: {[os.path.basename(f) for f in tf_files[:5]]}")
+        logger.warning(f"[DIAGNÓSTICO PARSER] ⚠️ NO se detectaron archivos problemáticos.")
+        logger.warning(f"[DIAGNÓSTICO PARSER] Ejemplo de nombres de archivo: {[os.path.basename(f) for f in tf_files[:5]]}")
+        logger.warning(f"[DIAGNÓSTICO PARSER] Ejemplo de rutas relativas: {tf_files[:5]}")
+        logger.warning(f"[DIAGNÓSTICO PARSER] Ejemplo de rutas absolutas: {[os.path.abspath(os.path.normpath(f)) for f in tf_files[:5]]}")
+        # Buscar manualmente archivos que deberían contener 'terraform-aws-modules' usando rutas absolutas
+        potential_problematic = [f for f in tf_files if 'terraform-aws-modules' in os.path.abspath(os.path.normpath(f))]
+        if potential_problematic:
+            logger.warning(f"[DIAGNÓSTICO PARSER] Archivos potencialmente problemáticos encontrados (absolutas): {[os.path.abspath(os.path.normpath(f)) for f in potential_problematic[:5]]}")
     
     for file_path in tf_files:
         try:
