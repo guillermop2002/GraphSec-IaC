@@ -47,22 +47,22 @@ jobs:
           which checkov || echo "Checkov no encontrado en PATH"
           checkov --version || echo "Checkov no se puede ejecutar"
       
-      # 6. Clonar el repositorio de VPC (para prueba)
-      - name: Clonar el repositorio de VPC (para prueba)
+      # 6. Clonar el repositorio de EKS (para prueba)
+      - name: Clonar el repositorio de EKS (para prueba)
         run: |
-          git clone https://github.com/terraform-aws-modules/terraform-aws-vpc.git --depth 1
+          git clone https://github.com/terraform-aws-modules/terraform-aws-eks.git --depth 1
       
-      # 7. Inicializar Terraform (analizando 'terraform-aws-vpc')
+      # 7. Inicializar Terraform (analizando 'terraform-aws-eks')
       - name: Terraform Init
         run: terraform init -backend=false
-        working-directory: ./terraform-aws-vpc
+        working-directory: ./terraform-aws-eks
       
-      # 8. Ejecutar el Pipeline (analizando 'terraform-aws-vpc')
+      # 8. Ejecutar el Pipeline (analizando 'terraform-aws-eks')
       - name: Ejecutar Pipeline de GraphSec-IaC
         run: |
           python run_pipeline.py \
-            --directory ./terraform-aws-vpc \
-            --project vpc_pr_${{ github.event.pull_request.number }} \
+            --directory ./terraform-aws-eks \
+            --project eks_pr_${{ github.event.pull_request.number }} \
             --output graph_data.json
       
       # 9. Renombrar artefacto JSON

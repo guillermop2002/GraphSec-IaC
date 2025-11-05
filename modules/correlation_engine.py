@@ -197,21 +197,29 @@ def normalize_file_path(file_path: str, project_root: Optional[str] = None) -> s
             logger.debug(f"Ruta ya absoluta: '{file_path}' -> '{abs_file_path}'")
             return abs_file_path
         
-        # Si es relativa, puede venir en varios formatos:
-        # - "main.tf" (relativa desde el directorio actual)
-        # - "terraform-aws-eks/main.tf" (incluye el nombre del directorio raíz)
+        # Si es relativa, puede venir en varios formatos desde los SARIF:
+        # - "main.tf" (relativa desde project_root donde se ejecutó el escáner)
+        # - "terraform-aws-modules/eks/aws/main.tf" (relativa desde project_root)
+        # - "terraform-aws-eks/main.tf" (incluye el nombre del directorio raíz - raro)
         
-        # Eliminar el prefijo del directorio raíz si existe
-        root_basename = os.path.basename(root)
+        # Normalizar separadores
         file_path_clean = file_path.replace("\\", "/")
         
+        # Eliminar el prefijo del directorio raíz si existe (caso raro)
+        root_basename = os.path.basename(root)
         if file_path_clean.startswith(f"{root_basename}/"):
             file_path_clean = file_path_clean[len(root_basename) + 1:]
         elif file_path_clean.startswith(f"{root_basename}\\"):
             file_path_clean = file_path_clean[len(root_basename) + 1:]
         
-        # Construir la ruta absoluta desde el directorio raíz
+        # CRÍTICO: Los escáneres se ejecutan desde project_root, así que las rutas
+        # en los SARIF son relativas desde project_root. Construir la ruta absoluta directamente.
         abs_file_path = os.path.normpath(os.path.join(root, file_path_clean))
+        
+        # Verificar que la ruta normalizada existe (para debugging)
+        if not os.path.exists(abs_file_path):
+            # Log de advertencia pero continuar (puede ser un archivo en módulos remotos)
+            logger.debug(f"Ruta normalizada no existe físicamente: '{abs_file_path}' (original: '{file_path}')")
         
         logger.debug(f"Ruta normalizada a absoluta: '{file_path}' -> '{abs_file_path}'")
         return abs_file_path
@@ -264,12 +272,15 @@ def create_canonical_finding_identifier(finding: Dict[str, Any], resource_id: st
     composite_key = f"cis:{cis_id}:{resource_id}:{normalized_file}:{start_line}"
     return hashlib.sha256(composite_key.encode("utf-8")).hexdigest()
 
-def load_sarif_results(sarif_path: str) -> List[Dict[str, Any]]:
+def load_sarif_results(sarif_path: str, project_root: Optional[str] = None) -> List[Dict[str, Any]]:
     """
     Carga y parsea los resultados de un archivo SARIF.
     
+    Normaliza las rutas de archivo al cargar para que sean consistentes con el parser.
+    
     Args:
         sarif_path (str): Ruta al archivo SARIF
+        project_root (str, optional): Directorio raíz del proyecto para normalizar rutas
         
     Returns:
         List[Dict[str, Any]]: Lista de hallazgos de seguridad simplificados
@@ -332,7 +343,10 @@ def load_sarif_results(sarif_path: str) -> List[Dict[str, Any]]:
                 artifact_location = physical_location.get("artifactLocation", {})
                 region = physical_location.get("region", {})
                 
-                finding["file_path"] = artifact_location.get("uri", "")
+                # Extraer ruta del archivo y normalizarla inmediatamente
+                raw_file_path = artifact_location.get("uri", "")
+                # Normalizar la ruta usando project_root si está disponible
+                finding["file_path"] = normalize_file_path(raw_file_path, project_root) if project_root else raw_file_path
                 finding["start_line"] = region.get("startLine", 0)
                 finding["end_line"] = region.get("endLine", 0)
             
@@ -361,12 +375,13 @@ def load_sarif_results(sarif_path: str) -> List[Dict[str, Any]]:
         return []
 
 
-def load_multiple_sarif_results(sarif_paths: List[str]) -> List[Dict[str, Any]]:
+def load_multiple_sarif_results(sarif_paths: List[str], project_root: Optional[str] = None) -> List[Dict[str, Any]]:
     """
     Carga y combina los resultados de múltiples archivos SARIF.
     
     Args:
         sarif_paths (List[str]): Lista de rutas a archivos SARIF
+        project_root (str, optional): Directorio raíz del proyecto para normalizar rutas
         
     Returns:
         List[Dict[str, Any]]: Lista combinada de hallazgos de seguridad
@@ -375,7 +390,7 @@ def load_multiple_sarif_results(sarif_paths: List[str]) -> List[Dict[str, Any]]:
     all_findings = []
     
     for sarif_path in sarif_paths:
-        findings = load_sarif_results(sarif_path)
+        findings = load_sarif_results(sarif_path, project_root=project_root)
         all_findings.extend(findings)
     
     logger.info(f"Total de hallazgos cargados de {len(sarif_paths)} archivos: {len(all_findings)}")
@@ -510,7 +525,12 @@ def _match_resource_id_by_filename(finding: Dict[str, Any], nodes: List[Dict[str
             nodes_in_file.append(node)
     
     if not nodes_in_file:
-        logger.debug(f"[Capa 2] NO SE ENCONTRO MATCH para archivo '{finding_path_abs}'")
+        # Logging detallado para Capa 2
+        logger.info(
+            f"[DIAGNÓSTICO] Hallazgo no asignado (Capa 2): rule_id={finding.get('rule_id')}, "
+            f"file='{finding_path_abs}' - NO HAY NODOS en este archivo "
+            f"(el parser no encontró recursos en este archivo)"
+        )
         return "unknown_resource"
     
     # Obtener la línea del hallazgo
@@ -685,7 +705,23 @@ def _match_resource_id_by_range(finding: Dict[str, Any], nodes: List[Dict[str, A
         logger.debug(f"[Capa 1] MEJOR MATCH seleccionado: {best_match} (de {len(candidates)} candidatos, {nodes_same_file} nodos en mismo archivo de {nodes_checked} verificados)")
         return best_match
     else:
-        logger.debug(f"[Capa 1] NO SE ENCONTRO MATCH: {nodes_same_file} nodos en mismo archivo '{finding_path_abs}', pero ninguno coincide en rango de líneas")
+        # Logging detallado para hallazgos no asignados
+        if nodes_same_file == 0:
+            # No hay nodos en este archivo - el archivo puede no tener recursos parseados
+            logger.info(
+                f"[DIAGNÓSTICO] Hallazgo no asignado (Capa 1): rule_id={finding.get('rule_id')}, "
+                f"file='{finding_path_abs}', line={finding_line} - NO HAY NODOS en este archivo "
+                f"(archivo puede no tener recursos Terraform, solo variables/data/modules)"
+            )
+        else:
+            # Hay nodos pero ninguno coincide en rango - obtener ejemplos de nodos en este archivo
+            nodes_in_this_file = [n for n in nodes if normalize_file_path(n.get('file', ''), project_root) == finding_path_abs]
+            sample_nodes = [f"{n.get('id')} (líneas {n.get('start_line')}-{n.get('end_line')})" for n in nodes_in_this_file[:3]]
+            logger.info(
+                f"[DIAGNÓSTICO] Hallazgo no asignado (Capa 1): rule_id={finding.get('rule_id')}, "
+                f"file='{finding_path_abs}', line={finding_line} - {nodes_same_file} nodos en archivo pero "
+                f"ninguno contiene línea {finding_line}. Ejemplos de nodos: {sample_nodes}"
+            )
         return "unknown_resource"
 
 
@@ -783,22 +819,26 @@ def process_and_deduplicate_findings(findings: List[Dict[str, Any]], graph_data:
     for finding in findings:
         if _should_filter_finding(finding, project_root):
             filtered_count += 1
-            file_path_norm = finding.get("file_path", "").lower()
-            if file_path_norm.endswith((".yml", ".yaml")):
+            # Lógica de conteo de filtros (CORREGIDA)
+            file_path = finding.get("file_path", "")
+            
+            # Replicar la normalización de _should_filter_finding para un conteo preciso
+            file_path_abs = normalize_file_path(file_path, project_root)
+            file_path_normalized = file_path_abs.replace("\\", "/").lower() if file_path_abs else file_path.lower()
+            
+            if file_path_normalized.endswith((".yml", ".yaml")):
                 filter_reasons["yaml"] += 1
-            elif "/examples/" in file_path_norm or "\\examples\\" in file_path_norm:
+            elif "/examples/" in file_path_normalized or "\\examples\\" in file_path_normalized:
                 filter_reasons["examples"] += 1
-            elif "/tests/" in file_path_norm or "\\tests\\" in file_path_norm:
+            elif "/tests/" in file_path_normalized or "\\tests\\" in file_path_normalized:
                 filter_reasons["tests"] += 1
-            elif "/.terraform/" in file_path_norm or "\\.terraform\\" in file_path_norm:
+            elif "/.terraform/" in file_path_normalized or "\\.terraform\\" in file_path_normalized:
                 filter_reasons["terraform_cache"] += 1
             else:
                 filter_reasons["other"] += 1
-                # Log detallado de hallazgos filtrados como "Otros"
-                logger.info(
-                    f"[DIAGNÓSTICO] Hallazgo filtrado (Otros): rule_id={finding.get('rule_id')}, "
-                    f"tool={finding.get('tool_name')}, file_path={finding.get('file_path')}, "
-                    f"file_path_normalized={file_path_norm}"
+                logger.debug(
+                    f"Hallazgo filtrado (Otros) - Razón desconocida: rule_id={finding.get('rule_id')}, "
+                    f"tool={finding.get('tool_name')}, file_path={file_path}, file_path_normalized={file_path_normalized}"
                 )
             continue
         filtered_findings.append(finding)
@@ -901,7 +941,7 @@ def process_and_deduplicate_findings(findings: List[Dict[str, Any]], graph_data:
     }
 
 
-def attach_findings_to_graph(graph_data: Dict[str, Any], unique_findings: List[Dict[str, Any]]) -> Dict[str, Any]:
+def attach_findings_to_graph(graph_data: Dict[str, Any], unique_findings: List[Dict[str, Any]], project_root: Optional[str] = None) -> Dict[str, Any]:
     """
     Adjunta hallazgos únicos (ya de-duplicados) a los nodos del grafo usando resource_id.
     Ahora resource_id es el ID único del nodo (no simple_name).
@@ -943,6 +983,49 @@ def attach_findings_to_graph(graph_data: Dict[str, Any], unique_findings: List[D
     
     # Calcular nodos vulnerables (nodos que tienen al menos 1 hallazgo)
     nodes_with_issues_count = sum(1 for n in nodes if len(n.get("security_issues", [])) > 0)
+    
+    # LOGGING DETALLADO: Mostrar información completa de cada hallazgo no asignado
+    if unassigned:
+        logger.warning("=" * 80)
+        logger.warning(f"[DIAGNÓSTICO] HALLAZGOS NO ASIGNADOS: {len(unassigned)} hallazgos no pudieron ser correlacionados")
+        logger.warning("=" * 80)
+        for i, uf in enumerate(unassigned, 1):
+            logger.warning(f"\n[DIAGNÓSTICO] Hallazgo No Asignado #{i}:")
+            logger.warning(f"  📋 Rule ID: {uf.get('rule_id', 'N/A')}")
+            logger.warning(f"  📊 Normalized CIS: {uf.get('normalized_cis', 'N/A')}")
+            logger.warning(f"  🔧 Tool: {uf.get('tool_name', 'N/A')}")
+            logger.warning(f"  📁 Archivo: {uf.get('file_path', 'N/A')}")
+            logger.warning(f"  📍 Línea: {uf.get('start_line', 'N/A')}")
+            logger.warning(f"  ⚠️ Severidad: {uf.get('level', 'N/A')}")
+            logger.warning(f"  🔗 Capa de correlación intentada: {uf.get('correlation_layer', 'N/A')}")
+            logger.warning(f"  🆔 Resource ID buscado: {uf.get('resource_id', 'N/A')}")
+            
+            # Mensaje del hallazgo (truncado si es muy largo)
+            message = uf.get('message', 'N/A')
+            if len(message) > 200:
+                message = message[:200] + "..."
+            logger.warning(f"  💬 Mensaje: {message}")
+            
+            # Verificar si hay nodos en el mismo archivo (usando rutas absolutas normalizadas)
+            finding_file = uf.get('file_path', '')
+            nodes_in_same_file = []
+            for n in nodes:
+                node_file = n.get('file', '')
+                # Normalizar rutas para comparación (usar rutas absolutas directamente)
+                if finding_file and node_file:
+                    # Normalizar separadores
+                    finding_normalized = finding_file.replace("\\", "/").lower()
+                    node_normalized = node_file.replace("\\", "/").lower()
+                    if finding_normalized == node_normalized or finding_normalized.endswith(node_normalized) or node_normalized.endswith(finding_normalized):
+                        nodes_in_same_file.append(n)
+            
+            if nodes_in_same_file:
+                logger.warning(f"  ℹ️  Hay {len(nodes_in_same_file)} nodo(s) en este archivo, pero ninguno coincidió:")
+                for node in nodes_in_same_file[:3]:
+                    logger.warning(f"      - {node.get('id')} (tipo: {node.get('block_type', 'N/A')}, líneas: {node.get('start_line')}-{node.get('end_line')})")
+            else:
+                logger.warning(f"  ❌ NO HAY NODOS en este archivo (el parser no encontró recursos en este archivo)")
+        logger.warning("=" * 80)
     
     enriched_graph["unassigned_findings"] = unassigned
     enriched_graph["correlation_metadata"] = {
