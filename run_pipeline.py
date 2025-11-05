@@ -239,19 +239,33 @@ async def get_cached_or_run_scanner(scanner, directory: str, output_file: str, p
     else:
         logger.info(f"[CACHÉ {scanner_name}] Archivo de caché NO encontrado: {cache_file_scanner}")
         # Para Checkov, intentar buscar directorios similares (fallback)
-        # SOLO si la versión coincide (para evitar usar caché antiguo cuando cambia la lógica)
+        # Buscar cualquier directorio que tenga el mismo hash de archivos (independientemente de la versión)
+        # Si los archivos .tf no han cambiado, los resultados de los escáneres deberían ser los mismos
         if scanner_name == "checkov" and os.path.exists(CACHE_DIR):
-            # Buscar cualquier directorio que empiece con el prefijo y tenga la misma versión
+            # Construir el prefijo con el hash de archivos (sin la versión)
+            file_hash_prefix = f"{scanner_name}_{project_name}_{scanner_hash}_"
+            potential_files = []
             for item in os.listdir(CACHE_DIR):
-                if item.startswith(f"{scanner_name}_{project_name}") and os.path.isdir(os.path.join(CACHE_DIR, item)):
-                    # Verificar que el hash de versión coincida (los últimos 8 caracteres antes del nombre del archivo)
-                    if item.endswith(f"_{version_hash}"):
-                        potential_file = os.path.join(CACHE_DIR, item, "results_sarif.sarif")
-                        if os.path.exists(potential_file):
-                            logger.info(f"[CACHÉ {scanner_name}] ⚠️ Encontrado caché alternativo (misma versión): {potential_file}")
-                            logger.info(f"[CACHÉ {scanner_name}] Hash de archivos diferente pero versión coincide")
-                            # Usar este archivo si el hash de archivos es diferente pero la versión coincide
-                            return True, potential_file
+                if item.startswith(file_hash_prefix) and os.path.isdir(os.path.join(CACHE_DIR, item)):
+                    potential_file = os.path.join(CACHE_DIR, item, "results_sarif.sarif")
+                    if os.path.exists(potential_file):
+                        # Obtener tiempo de modificación para usar el más reciente
+                        mtime = os.path.getmtime(potential_file)
+                        potential_files.append((mtime, potential_file, item))
+            
+            if potential_files:
+                # Ordenar por tiempo de modificación (más reciente primero)
+                potential_files.sort(reverse=True)
+                mtime, latest_file, latest_item = potential_files[0]
+                # Extraer la versión del nombre del directorio
+                item_version_hash = latest_item.split("_")[-1] if "_" in latest_item else "unknown"
+                if item_version_hash == version_hash:
+                    logger.info(f"[CACHÉ {scanner_name}] ⚠️ Encontrado caché alternativo (misma versión): {latest_file}")
+                else:
+                    logger.info(f"[CACHÉ {scanner_name}] ⚠️ Encontrado caché alternativo (versión diferente): {latest_file}")
+                    logger.info(f"[CACHÉ {scanner_name}] Versión en caché: {item_version_hash}, Versión actual: {version_hash}")
+                    logger.info(f"[CACHÉ {scanner_name}] Usando caché porque los archivos .tf no han cambiado")
+                return True, latest_file
     
     # Ejecutar escáner (no hay caché)
     # Limpiar cualquier archivo o directorio antiguo que pueda existir
