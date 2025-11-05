@@ -206,11 +206,23 @@ async def get_cached_or_run_scanner(scanner, directory: str, output_file: str, p
         # Trivy guarda directamente en un archivo
         cache_file_scanner = os.path.join(CACHE_DIR, f"{scanner_name}_{project_name}_{scanner_hash}_{version_hash}.sarif")
     
+    # Logging de diagnóstico
+    logger.info(f"[CACHÉ {scanner_name}] Buscando archivo: {cache_file_scanner}")
+    logger.info(f"[CACHÉ {scanner_name}] Hash calculado: {scanner_hash[:16]}...")
+    logger.info(f"[CACHÉ {scanner_name}] Versión pipeline: {PIPELINE_VERSION} (hash: {version_hash})")
+    if os.path.exists(CACHE_DIR):
+        cache_files = [f for f in os.listdir(CACHE_DIR) if f.startswith(f"{scanner_name}_{project_name}")]
+        logger.info(f"[CACHÉ {scanner_name}] Archivos en caché que empiezan con '{scanner_name}_{project_name}': {len(cache_files)}")
+        if cache_files:
+            logger.info(f"[CACHÉ {scanner_name}] Ejemplos: {cache_files[:3]}")
+    
     # Intentar cargar desde caché
     if os.path.exists(cache_file_scanner):
         logger.info(f"Resultados de {scanner_name} encontrados en caché para {project_name}...")
         # Retornar la ruta del caché como si fuera el output_file original
         return True, cache_file_scanner
+    else:
+        logger.info(f"[CACHÉ {scanner_name}] Archivo de caché NO encontrado: {cache_file_scanner}")
     
     # Ejecutar escáner (no hay caché)
     # Limpiar cualquier archivo o directorio antiguo que pueda existir
