@@ -326,6 +326,15 @@ Este es un proyecto de TFG (Trabajo de Fin de Grado). Para contribuir, por favor
 > **Nota**: Este proyecto utiliza GitHub Actions para análisis automático de seguridad en Pull Requests.
 
 ## Licencia
-#   U n   c a m b i o   d e   p r u e b a 
- 
- 
+
+Este proyecto es parte de un Trabajo de Fin de Grado. Todos los derechos reservados.
+
+---
+
+## 📚 Referencias
+
+- [Terraform](https://www.terraform.io/)
+- [Checkov](https://www.checkov.io/)
+- [Trivy](https://github.com/aquasecurity/trivy)
+- [SARIF](https://sarifweb.azurewebsites.net/)
+- [CIS Benchmarks](https://www.cisecurity.org/cis-benchmarks/)
