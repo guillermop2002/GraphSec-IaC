@@ -106,7 +106,7 @@ jobs:
           fi
       
       # 8. Ejecutar el Pipeline (analizando 'terraform-aws-vpc')
-      # PR #31: Prueba de análisis VPC
+      # PR #31: Ejecutando análisis VPC
       - name: Ejecutar Pipeline de GraphSec-IaC
         id: run_pipeline
         run: |
