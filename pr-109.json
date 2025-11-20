@@ -5807,17 +5807,12 @@
     },
     {
       "from": "aws_vpc_block_public_access_exclusion.this_3",
-      "to": "aws_subnet.intra_46",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_vpc_block_public_access_exclusion.this_3",
-      "to": "aws_subnet.outpost_52",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_vpc_block_public_access_exclusion.this_3",
       "to": "aws_subnet.private_14",
+      "arrows": "to"
+    },
+    {
+      "from": "aws_vpc_block_public_access_exclusion.this_3",
+      "to": "aws_subnet.intra_46",
       "arrows": "to"
     },
     {
@@ -5827,17 +5822,22 @@
     },
     {
       "from": "aws_vpc_block_public_access_exclusion.this_3",
+      "to": "aws_subnet.outpost_52",
+      "arrows": "to"
+    },
+    {
+      "from": "aws_vpc_block_public_access_exclusion.this_3",
       "to": "aws_subnet.redshift_31",
       "arrows": "to"
     },
     {
       "from": "aws_vpc_block_public_access_exclusion.this_3",
-      "to": "aws_subnet.database_20",
+      "to": "aws_subnet.elasticache_39",
       "arrows": "to"
     },
     {
       "from": "aws_vpc_block_public_access_exclusion.this_3",
-      "to": "aws_subnet.elasticache_39",
+      "to": "aws_subnet.database_20",
       "arrows": "to"
     },
     {
@@ -5862,22 +5862,22 @@
     },
     {
       "from": "aws_route.public_internet_gateway_9",
-      "to": "aws_route_table.public_7",
+      "to": "aws_internet_gateway.this_57",
       "arrows": "to"
     },
     {
       "from": "aws_route.public_internet_gateway_9",
-      "to": "aws_internet_gateway.this_57",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_route.public_internet_gateway_ipv6_10",
       "to": "aws_route_table.public_7",
       "arrows": "to"
     },
     {
       "from": "aws_route.public_internet_gateway_ipv6_10",
       "to": "aws_internet_gateway.this_57",
+      "arrows": "to"
+    },
+    {
+      "from": "aws_route.public_internet_gateway_ipv6_10",
+      "to": "aws_route_table.public_7",
       "arrows": "to"
     },
     {
@@ -5902,12 +5902,12 @@
     },
     {
       "from": "aws_route_table_association.private_16",
-      "to": "aws_subnet.private_14",
+      "to": "aws_route_table.private_15",
       "arrows": "to"
     },
     {
       "from": "aws_route_table_association.private_16",
-      "to": "aws_route_table.private_15",
+      "to": "aws_subnet.private_14",
       "arrows": "to"
     },
     {
@@ -5937,12 +5937,12 @@
     },
     {
       "from": "aws_route_table_association.database_23",
-      "to": "aws_route_table.database_22",
+      "to": "aws_route_table.private_15",
       "arrows": "to"
     },
     {
       "from": "aws_route_table_association.database_23",
-      "to": "aws_route_table.private_15",
+      "to": "aws_route_table.database_22",
       "arrows": "to"
     },
     {
@@ -5952,15 +5952,15 @@
     },
     {
       "from": "aws_route.database_internet_gateway_24",
-      "to": "aws_route_table.database_22",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_route.database_internet_gateway_24",
       "to": "aws_internet_gateway.this_57",
       "arrows": "to"
     },
     {
+      "from": "aws_route.database_internet_gateway_24",
+      "to": "aws_route_table.database_22",
+      "arrows": "to"
+    },
+    {
       "from": "aws_route.database_nat_gateway_25",
       "to": "aws_route_table.database_22",
       "arrows": "to"
@@ -5978,16 +5978,16 @@
     {
       "from": "aws_route.database_dns64_nat_gateway_26",
       "to": "aws_nat_gateway.this_61",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_route.database_ipv6_egress_27",
-      "to": "aws_route_table.database_22",
       "arrows": "to"
     },
     {
       "from": "aws_route.database_ipv6_egress_27",
       "to": "aws_egress_only_internet_gateway.this_58",
+      "arrows": "to"
+    },
+    {
+      "from": "aws_route.database_ipv6_egress_27",
+      "to": "aws_route_table.database_22",
       "arrows": "to"
     },
     {
@@ -6017,11 +6017,6 @@
     },
     {
       "from": "aws_route_table_association.redshift_34",
-      "to": "aws_route_table.redshift_33",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_route_table_association.redshift_34",
       "to": "aws_route_table.private_15",
       "arrows": "to"
     },
@@ -6031,7 +6026,7 @@
       "arrows": "to"
     },
     {
-      "from": "aws_route_table_association.redshift_public_35",
+      "from": "aws_route_table_association.redshift_34",
       "to": "aws_route_table.redshift_33",
       "arrows": "to"
     },
@@ -6043,6 +6038,11 @@
     {
       "from": "aws_route_table_association.redshift_public_35",
       "to": "aws_subnet.redshift_31",
+      "arrows": "to"
+    },
+    {
+      "from": "aws_route_table_association.redshift_public_35",
+      "to": "aws_route_table.redshift_33",
       "arrows": "to"
     },
     {
@@ -6107,12 +6107,12 @@
     },
     {
       "from": "aws_route_table_association.intra_48",
-      "to": "aws_subnet.intra_46",
+      "to": "aws_route_table.intra_47",
       "arrows": "to"
     },
     {
       "from": "aws_route_table_association.intra_48",
-      "to": "aws_route_table.intra_47",
+      "to": "aws_subnet.intra_46",
       "arrows": "to"
     },
     {
@@ -6137,12 +6137,12 @@
     },
     {
       "from": "aws_route_table_association.outpost_53",
-      "to": "aws_subnet.outpost_52",
+      "to": "aws_route_table.private_15",
       "arrows": "to"
     },
     {
       "from": "aws_route_table_association.outpost_53",
-      "to": "aws_route_table.private_15",
+      "to": "aws_subnet.outpost_52",
       "arrows": "to"
     },
     {
@@ -6177,17 +6177,12 @@
     },
     {
       "from": "aws_nat_gateway.this_61",
-      "to": "aws_subnet.public_6",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_nat_gateway.this_61",
       "to": "aws_internet_gateway.this_57",
       "arrows": "to"
     },
     {
-      "from": "aws_route.private_nat_gateway_62",
-      "to": "aws_nat_gateway.this_61",
+      "from": "aws_nat_gateway.this_61",
+      "to": "aws_subnet.public_6",
       "arrows": "to"
     },
     {
@@ -6196,7 +6191,7 @@
       "arrows": "to"
     },
     {
-      "from": "aws_route.private_dns64_nat_gateway_63",
+      "from": "aws_route.private_nat_gateway_62",
       "to": "aws_nat_gateway.this_61",
       "arrows": "to"
     },
@@ -6206,8 +6201,8 @@
       "arrows": "to"
     },
     {
-      "from": "aws_vpn_gateway_route_propagation.public_67",
-      "to": "aws_vpn_gateway_attachment.this_66",
+      "from": "aws_route.private_dns64_nat_gateway_63",
+      "to": "aws_nat_gateway.this_61",
       "arrows": "to"
     },
     {
@@ -6217,12 +6212,12 @@
     },
     {
       "from": "aws_vpn_gateway_route_propagation.public_67",
-      "to": "aws_vpn_gateway.this_65",
+      "to": "aws_vpn_gateway_attachment.this_66",
       "arrows": "to"
     },
     {
-      "from": "aws_vpn_gateway_route_propagation.private_68",
-      "to": "aws_vpn_gateway_attachment.this_66",
+      "from": "aws_vpn_gateway_route_propagation.public_67",
+      "to": "aws_vpn_gateway.this_65",
       "arrows": "to"
     },
     {
@@ -6232,17 +6227,22 @@
     },
     {
       "from": "aws_vpn_gateway_route_propagation.private_68",
+      "to": "aws_vpn_gateway_attachment.this_66",
+      "arrows": "to"
+    },
+    {
+      "from": "aws_vpn_gateway_route_propagation.private_68",
       "to": "aws_vpn_gateway.this_65",
       "arrows": "to"
     },
     {
       "from": "aws_vpn_gateway_route_propagation.intra_69",
-      "to": "aws_vpn_gateway_attachment.this_66",
+      "to": "aws_route_table.intra_47",
       "arrows": "to"
     },
     {
       "from": "aws_vpn_gateway_route_propagation.intra_69",
-      "to": "aws_route_table.intra_47",
+      "to": "aws_vpn_gateway_attachment.this_66",
       "arrows": "to"
     },
     {
@@ -6267,12 +6267,12 @@
     },
     {
       "from": "local.create_vpc_83",
-      "to": "aws_vpc_ipv4_cidr_block_association.this_1",
+      "to": "aws_vpc.this_0",
       "arrows": "to"
     },
     {
       "from": "local.create_vpc_83",
-      "to": "aws_vpc.this_0",
+      "to": "aws_vpc_ipv4_cidr_block_association.this_1",
       "arrows": "to"
     },
     {
@@ -6302,22 +6302,7 @@
     },
     {
       "from": "local.flow_log_group_arns_356",
-      "to": "aws_cloudwatch_log_group.flow_log_341",
-      "arrows": "to"
-    },
-    {
-      "from": "local.flow_log_group_arns_356",
-      "to": "aws_cloudwatch_log_group.flow_log_385",
-      "arrows": "to"
-    },
-    {
-      "from": "local.flow_log_group_arns_356",
-      "to": "data.aws_partition.current_347",
-      "arrows": "to"
-    },
-    {
-      "from": "local.flow_log_group_arns_356",
-      "to": "data.aws_partition.current_487",
+      "to": "aws_iam_role.vpc_flow_log_cloudwatch_342",
       "arrows": "to"
     },
     {
@@ -6342,12 +6327,27 @@
     },
     {
       "from": "local.flow_log_group_arns_356",
-      "to": "aws_iam_role.vpc_flow_log_cloudwatch_342",
+      "to": "data.aws_partition.current_347",
+      "arrows": "to"
+    },
+    {
+      "from": "local.flow_log_group_arns_356",
+      "to": "data.aws_partition.current_487",
+      "arrows": "to"
+    },
+    {
+      "from": "local.flow_log_group_arns_356",
+      "to": "aws_cloudwatch_log_group.flow_log_341",
+      "arrows": "to"
+    },
+    {
+      "from": "local.flow_log_group_arns_356",
+      "to": "aws_cloudwatch_log_group.flow_log_385",
       "arrows": "to"
     },
     {
       "from": "local.private_route_table_ids_359",
-      "to": "aws_route_table.redshift_33",
+      "to": "aws_route_table.private_15",
       "arrows": "to"
     },
     {
@@ -6357,7 +6357,7 @@
     },
     {
       "from": "local.private_route_table_ids_359",
-      "to": "aws_route_table.private_15",
+      "to": "aws_route_table.redshift_33",
       "arrows": "to"
     },
     {
@@ -6533,11 +6533,6 @@
     {
       "from": "aws_cloudwatch_log_group.flow_log_385",
       "to": "module.vpc_479",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_iam_role_policy.flow_log_cloudwatch_387",
-      "to": "aws_iam_role.flow_log_cloudwatch_386",
       "arrows": "to"
     },
     {
@@ -6551,6 +6546,11 @@
       "arrows": "to"
     },
     {
+      "from": "aws_iam_role_policy.flow_log_cloudwatch_387",
+      "to": "aws_iam_role.flow_log_cloudwatch_386",
+      "arrows": "to"
+    },
+    {
       "from": "local.tags_393",
       "to": "data.aws_availability_zones.available_369",
       "arrows": "to"
@@ -6667,6 +6667,11 @@
     },
     {
       "from": "module.flow_log_cloudwatch_external_395",
+      "to": "aws_iam_role.flow_log_cloudwatch_386",
+      "arrows": "to"
+    },
+    {
+      "from": "module.flow_log_cloudwatch_external_395",
       "to": "module.vpc_384",
       "arrows": "to"
     },
@@ -6718,11 +6723,6 @@
     {
       "from": "module.flow_log_cloudwatch_external_395",
       "to": "module.vpc_479",
-      "arrows": "to"
-    },
-    {
-      "from": "module.flow_log_cloudwatch_external_395",
-      "to": "aws_iam_role.flow_log_cloudwatch_386",
       "arrows": "to"
     },
     {
@@ -6987,12 +6987,12 @@
     },
     {
       "from": "aws_vpc_ipam_preview_next_cidr.this_423",
-      "to": "aws_vpc_ipam_pool.this_421",
+      "to": "aws_vpc_ipam_pool_cidr.this_422",
       "arrows": "to"
     },
     {
       "from": "aws_vpc_ipam_preview_next_cidr.this_423",
-      "to": "aws_vpc_ipam_pool_cidr.this_422",
+      "to": "aws_vpc_ipam_pool.this_421",
       "arrows": "to"
     },
     {
@@ -7307,6 +7307,11 @@
     },
     {
       "from": "module.vpc_endpoints_443",
+      "to": "data.aws_iam_policy_document.generic_endpoint_policy_436",
+      "arrows": "to"
+    },
+    {
+      "from": "module.vpc_endpoints_443",
       "to": "module.vpc_384",
       "arrows": "to"
     },
@@ -7362,17 +7367,12 @@
     },
     {
       "from": "module.vpc_endpoints_443",
-      "to": "data.aws_iam_policy_document.generic_endpoint_policy_436",
+      "to": "data.aws_iam_policy_document.dynamodb_endpoint_policy_435",
       "arrows": "to"
     },
     {
       "from": "module.vpc_endpoints_443",
       "to": "aws_security_group.rds_433",
-      "arrows": "to"
-    },
-    {
-      "from": "module.vpc_endpoints_443",
-      "to": "data.aws_iam_policy_document.dynamodb_endpoint_policy_435",
       "arrows": "to"
     },
     {
@@ -7702,17 +7702,27 @@
     },
     {
       "from": "aws_iam_role_policy_attachment.this_484",
-      "to": "aws_iam_role.this_482",
+      "to": "aws_iam_policy.this_483",
       "arrows": "to"
     },
     {
       "from": "aws_iam_role_policy_attachment.this_484",
-      "to": "aws_iam_policy.this_483",
+      "to": "aws_iam_role.this_482",
       "arrows": "to"
     },
     {
       "from": "data.aws_iam_policy_document.this_489",
       "to": "aws_cloudwatch_log_group.this_481",
+      "arrows": "to"
+    },
+    {
+      "from": "local.destination_is_s3_495",
+      "to": "data.aws_caller_identity.current_346",
+      "arrows": "to"
+    },
+    {
+      "from": "local.destination_is_s3_495",
+      "to": "data.aws_caller_identity.current_486",
       "arrows": "to"
     },
     {
@@ -7733,16 +7743,6 @@
     {
       "from": "local.destination_is_s3_495",
       "to": "data.aws_partition.current_487",
-      "arrows": "to"
-    },
-    {
-      "from": "local.destination_is_s3_495",
-      "to": "data.aws_caller_identity.current_346",
-      "arrows": "to"
-    },
-    {
-      "from": "local.destination_is_s3_495",
-      "to": "data.aws_caller_identity.current_486",
       "arrows": "to"
     },
     {
@@ -7838,7 +7838,7 @@
   "api_metadata": {
     "status": "success",
     "message": "Pipeline completado exitosamente para proyecto 'vpc'",
-    "project_name": "vpc_pr_31",
+    "project_name": "vpc_pr_109",
     "project_directory": "./terraform-aws-vpc",
     "scanners_used": 2,
     "checkov_success": true,
@@ -7862,6 +7862,6 @@
       }
     },
     "unassigned_findings_count": 4,
-    "pr_number": 31
+    "pr_number": 109
   }
 }
