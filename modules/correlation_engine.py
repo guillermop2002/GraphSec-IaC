@@ -1,8 +1,6 @@
 """
-Motor de correlación para GraphSec-IaC
-
-Este módulo proporciona funcionalidad para correlacionar hallazgos de seguridad
-con recursos de infraestructura, creando un grafo enriquecido con información de riesgo.
+Motor de correlación para GraphSec-IaC.
+Correlaciona hallazgos de seguridad con recursos de infraestructura.
 """
 
 import json
@@ -11,14 +9,10 @@ import os
 from typing import Dict, List, Any, Optional, Set, Tuple
 import hashlib
 
-# Configurar logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# Eliminado RULE_MAPPING (normalizamos directamente a CIS)
-
-# Mapeo adicional a un estándar común (CIS) para CFI
-# Normalizamos reglas heterogéneas (Checkov/Trivy) a un control CIS cuando sea posible
+# Mapeo de reglas Checkov/Trivy a controles CIS
 RULE_CIS_MAP: Dict[str, str] = {
     # ===== S3 (CIS-AWS-2.1.x) =====
     # S3 Bucket Encryption
@@ -152,12 +146,7 @@ _vendored_mapping_cache: Dict[str, Optional[str]] = {}
 
 
 def set_project_root(root_directory: str) -> None:
-    """
-    Establece el directorio raíz del proyecto para normalización de rutas.
-    
-    Args:
-        root_directory: Ruta absoluta del directorio raíz del proyecto
-    """
+    """Establece el directorio raíz del proyecto."""
     global _project_root, _vendored_mapping_cache
     if root_directory:
         new_root = os.path.abspath(os.path.normpath(root_directory))
@@ -169,19 +158,7 @@ def set_project_root(root_directory: str) -> None:
 
 
 def _map_vendored_module_path(logical_path: str, project_root: Optional[str] = None) -> Optional[str]:
-    """
-    Mapea una ruta lógica de módulo vendored (ej: terraform-aws-modules/eks/aws/main.tf)
-    a su ruta física real en .terraform/modules/.
-    
-    Usa caché para evitar búsquedas repetidas y logs excesivos.
-    
-    Args:
-        logical_path: Ruta lógica reportada por el escáner (puede ser absoluta o relativa)
-        project_root: Directorio raíz del proyecto
-    
-    Returns:
-        Ruta física encontrada en .terraform/modules/, o None si no se encuentra
-    """
+    """Mapea ruta lógica de módulo vendored a su ruta física en .terraform/modules/."""
     global _vendored_mapping_cache
     
     if not logical_path or "terraform-aws-modules" not in logical_path:
@@ -278,22 +255,7 @@ def _map_vendored_module_path(logical_path: str, project_root: Optional[str] = N
 
 
 def normalize_file_path(file_path: str, project_root: Optional[str] = None) -> str:
-    """
-    Normaliza una ruta de archivo a ruta absoluta para comparación directa.
-    
-    ESTRATEGIA CAMBIADA: Usamos rutas absolutas como fuente única de verdad.
-    Esto elimina problemas de normalización y permite comparación directa.
-    
-    NUEVO: Si la ruta contiene "terraform-aws-modules/" y no existe físicamente,
-    intenta mapearla a su ubicación real en .terraform/modules/.
-    
-    Args:
-        file_path: Ruta del archivo (absoluta, relativa, con subcarpetas)
-        project_root: Directorio raíz del proyecto (ruta absoluta)
-    
-    Returns:
-        Ruta absoluta normalizada del archivo
-    """
+    """Normaliza ruta de archivo a ruta absoluta."""
     if not file_path:
         return ""
     
@@ -366,10 +328,7 @@ def normalize_file_path(file_path: str, project_root: Optional[str] = None) -> s
 
 
 def normalize_rule_to_cis(rule_id: str) -> str:
-    """
-    Normaliza un ID de regla heterogéneo (Checkov/Trivy) a un control CIS cuando sea posible.
-    Si no hay mapeo, devuelve el propio rule_id.
-    """
+    """Normaliza ID de regla a control CIS si es posible."""
     return RULE_CIS_MAP.get(rule_id, rule_id)
 
 
@@ -380,19 +339,14 @@ def normalize_rule_to_cis(rule_id: str) -> str:
 
 
 def create_canonical_finding_identifier(finding: Dict[str, Any], resource_id: str) -> str:
-    """
-    Crea un Identificador Canónico de Hallazgo (CFI).
-    Prioriza partialFingerprints si existen, sino usa hash SHA-256.
-    """
-    # 1) Priorizar huella SARIF si está disponible
+    """Crea identificador canónico de hallazgo (CFI)."""
+    # Priorizar huella SARIF
     sarif_fp = finding.get("fingerprint")
     if sarif_fp:
         key = f"sarif:{sarif_fp}:{resource_id}"
         return hashlib.sha256(key.encode("utf-8")).hexdigest()
 
-    # 2) Fallback canónico propio basado en control CIS y ubicación
-    # IMPORTANTE: NO incluimos tool_name para que Checkov y Trivy puedan fusionarse
-    # cuando detectan el mismo problema (esa es la característica principal de la herramienta)
+    # Fallback: hash basado en CIS + ubicación
     rule_id = finding.get("rule_id", "unknown")
     cis_id = normalize_rule_to_cis(rule_id)
     normalized_file = normalize_file_path(finding.get("file_path", ""))
