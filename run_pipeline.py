@@ -30,9 +30,9 @@ logger = logging.getLogger(__name__)
 CACHE_DIR = ".graphsec_cache"
 os.makedirs(CACHE_DIR, exist_ok=True)
 
-# Versión del pipeline (incrementar cuando cambie la lógica de generación de grafo/filtrado)
-# Esto invalida el caché automáticamente cuando cambiamos la lógica
-PIPELINE_VERSION = "v22.5"  # Force: Test sin caché (fallback deshabilitado)
+# Versión del pipeline - incrementar cuando cambie la lógica
+# Invalida el caché automáticamente cuando cambiamos la lógica
+PIPELINE_VERSION = "v22.5"
 
 
 class PipelineError(Exception):
@@ -78,7 +78,7 @@ def get_cached_or_generate_graph(directory: str, project_name: str) -> Dict[str,
                 graph_data = json.load(f)
             nodes = graph_data.get('nodes', [])
             
-            # VALIDACIÓN: Verificar que los IDs del caché sean únicos
+            # Validar que los IDs del caché sean únicos
             node_ids = [n.get("id") for n in nodes]
             unique_ids = set(node_ids)
             if len(node_ids) != len(unique_ids):
@@ -135,7 +135,7 @@ def get_cached_or_generate_graph(directory: str, project_name: str) -> Dict[str,
     logger.info(f"[DIAGNÓSTICO] Ejemplos de IDs de nodos: {[n.get('id') for n in nodes[:5]]}")
     logger.info(f"[DIAGNÓSTICO] Ejemplos de simple_name: {[n.get('simple_name') for n in nodes[:5]]}")
     
-    # VALIDACIÓN: Verificar que todos los IDs sean únicos
+    # Validar que todos los IDs sean únicos
     node_ids = [n.get("id") for n in nodes]
     unique_ids = set(node_ids)
     if len(node_ids) != len(unique_ids):
@@ -162,17 +162,7 @@ def get_cached_or_generate_graph(directory: str, project_name: str) -> Dict[str,
 
 async def get_cached_or_run_scanner(scanner, directory: str, output_file: str, project_name: str, scanner_name: str) -> Tuple[bool, str]:
     """
-    Obtiene resultados del escáner desde caché o lo ejecuta si no existe (asíncrono).
-    
-    Args:
-        scanner: Instancia del escáner (CheckovScanner o TrivyScanner)
-        directory: Directorio a escanear
-        output_file: Archivo de salida del escáner
-        project_name: Nombre del proyecto
-        scanner_name: Nombre del escáner ("checkov" o "trivy")
-    
-    Returns:
-        Tupla (success: bool, output_file_path: str)
+    Obtiene resultados del escáner desde caché o lo ejecuta si no existe.
     """
     project_root = os.path.abspath(directory)
     
@@ -225,9 +215,9 @@ async def get_cached_or_run_scanner(scanner, directory: str, output_file: str, p
                         logger.info(f"[CACHÉ {scanner_name}] Encontrado directorio: {item}")
                         expected_file = os.path.join(item_path, "results_sarif.sarif")
                         if os.path.exists(expected_file):
-                            logger.info(f"[CACHÉ {scanner_name}] ✅ Archivo encontrado en directorio: {expected_file}")
+                            logger.info(f"[CACHÉ {scanner_name}] Archivo encontrado en directorio: {expected_file}")
                         else:
-                            logger.info(f"[CACHÉ {scanner_name}] ❌ Archivo NO encontrado en directorio: {expected_file}")
+                            logger.info(f"[CACHÉ {scanner_name}] Archivo NO encontrado en directorio: {expected_file}")
     else:
         logger.warning(f"[CACHÉ {scanner_name}] Directorio de caché no existe: {CACHE_DIR}")
     
@@ -260,9 +250,9 @@ async def get_cached_or_run_scanner(scanner, directory: str, output_file: str, p
                 # Extraer la versión del nombre del directorio
                 item_version_hash = latest_item.split("_")[-1] if "_" in latest_item else "unknown"
                 if item_version_hash == version_hash:
-                    logger.info(f"[CACHÉ {scanner_name}] ⚠️ Encontrado caché alternativo (misma versión): {latest_file}")
+                    logger.info(f"[CACHÉ {scanner_name}] Encontrado caché alternativo (misma versión): {latest_file}")
                 else:
-                    logger.info(f"[CACHÉ {scanner_name}] ⚠️ Encontrado caché alternativo (versión diferente): {latest_file}")
+                    logger.info(f"[CACHÉ {scanner_name}] Encontrado caché alternativo (versión diferente): {latest_file}")
                     logger.info(f"[CACHÉ {scanner_name}] Versión en caché: {item_version_hash}, Versión actual: {version_hash}")
                     logger.info(f"[CACHÉ {scanner_name}] Usando caché porque los archivos .tf no han cambiado")
                 return True, latest_file
@@ -297,9 +287,9 @@ async def get_cached_or_run_scanner(scanner, directory: str, output_file: str, p
                         logger.info(f"[GUARDAR CACHÉ] Archivo copiado: {source_file} -> {cache_file_scanner}")
                         # Verificar que el archivo existe después de copiar
                         if os.path.exists(cache_file_scanner):
-                            logger.info(f"[GUARDAR CACHÉ] ✅ Archivo de caché verificado: {cache_file_scanner}")
+                            logger.info(f"[GUARDAR CACHÉ] Archivo de caché verificado: {cache_file_scanner}")
                         else:
-                            logger.error(f"[GUARDAR CACHÉ] ❌ Archivo de caché NO existe después de copiar: {cache_file_scanner}")
+                            logger.error(f"[GUARDAR CACHÉ] Archivo de caché NO existe después de copiar: {cache_file_scanner}")
                         logger.info(f"Resultados de {scanner_name} guardados en caché (desde directorio)")
                     else:
                         logger.warning(f"Archivo SARIF no encontrado en directorio: {source_file}")
@@ -347,7 +337,7 @@ async def run_analysis_pipeline(directory: str, project_name: str) -> Dict[str, 
         logger.info("Ejecutando Etapa 1: Generación del grafo (con caché)...")
         graph_data = get_cached_or_generate_graph(directory, project_name)
         
-        # ===== ETAPA 2: ANÁLISIS DE SEGURIDAD (EN PARALELO) =====
+        # ETAPA 2: Análisis de seguridad (en paralelo)
         logger.info("Ejecutando Etapa 2: Análisis de seguridad con Checkov y Trivy (en paralelo)...")
         
         checkov_scanner = CheckovScanner()
@@ -402,7 +392,7 @@ async def run_analysis_pipeline(directory: str, project_name: str) -> Dict[str, 
         if not checkov_success and not trivy_success:
             raise PipelineError("Error: Ambos escáneres fallaron")
         
-        # ===== ETAPA 3: CARGA Y COMBINACIÓN =====
+        # ETAPA 3: Carga y combinación
         logger.info("Ejecutando Etapa 3: Carga y combinación de resultados...")
         
         # Obtener project_root para normalizar rutas en los SARIF
@@ -453,7 +443,7 @@ async def run_analysis_pipeline(directory: str, project_name: str) -> Dict[str, 
         logger.info(f"[DIAGNÓSTICO] Total de hallazgos cargados: {len(all_raw_findings)} desde {scanners_used} escáneres")
         logger.info(f"[DIAGNÓSTICO] Distribución por escáner: Checkov={len(checkov_findings)}, Trivy={len(trivy_findings)}")
         
-        # ===== ETAPA 4: DE-DUPLICACIÓN Y CORRELACIÓN =====
+        # ETAPA 4: De-duplicación y correlación
         logger.info("Ejecutando Etapa 4: Procesado y de-duplicación (CFI)...")
         
         # project_root ya está definido arriba, reutilizarlo
@@ -463,7 +453,7 @@ async def run_analysis_pipeline(directory: str, project_name: str) -> Dict[str, 
         
         logger.info(f"De-duplicación (CFI) completada: {len(all_raw_findings)} -> {len(unique_findings)} hallazgos únicos ({duplicates_removed} duplicados eliminados)")
         
-        # ===== ETAPA 5: ADJUNTO AL GRAFO =====
+        # ETAPA 5: Adjuntar al grafo
         logger.info("Ejecutando Etapa 5: Adjuntando hallazgos al grafo...")
         
         enriched_graph = attach_findings_to_graph(graph_data, unique_findings, project_root=directory)
@@ -524,7 +514,7 @@ if __name__ == "__main__":
         with open(args.output, 'w', encoding='utf-8') as f:
             json.dump(graph_data, f, indent=4)
         
-        print(f"\n✅ Análisis completado. Resultados guardados en: {args.output}")
+        print(f"\nAnálisis completado. Resultados guardados en: {args.output}")
         
         # Imprimir resumen de métricas
         metadata = graph_data.get("api_metadata", {})
@@ -537,9 +527,9 @@ if __name__ == "__main__":
         print(f"  No Asignados: {metadata.get('unassigned_findings_count', 0)}")
         
     except PipelineError as e:
-        print(f"\n❌ Error en el pipeline: {e}")
+        print(f"\nError en el pipeline: {e}")
         exit(1)
     except Exception as e:
-        print(f"\n❌ Error inesperado: {e}")
+        print(f"\nError inesperado: {e}")
         exit(1)
 
