@@ -1,8 +1,5 @@
 """
-Módulo escáner de seguridad para GraphSec-IaC
-
-Este módulo proporciona funcionalidad para ejecutar análisis de seguridad
-usando múltiples escáneres (Checkov y Trivy) y generar reportes en formato SARIF.
+Módulo para ejecutar análisis de seguridad con Checkov y Trivy.
 """
 
 import subprocess
@@ -15,42 +12,24 @@ import shutil
 from typing import Dict, Any, List, Optional
 from abc import ABC, abstractmethod
 
-# Configurar logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
 class Scanner(ABC):
-    """Clase base abstracta para todos los escáneres de seguridad."""
+    """Clase base para escáneres de seguridad."""
     
     def __init__(self, name: str):
         self.name = name
     
     @abstractmethod
     async def scan(self, directory_path: str, output_file: str) -> bool:
-        """
-        Ejecuta el escaneo de seguridad sobre un directorio.
-        
-        Args:
-            directory_path (str): Ruta al directorio del proyecto Terraform.
-            output_file (str): Ruta donde se guardará el archivo de resultados.
-            
-        Returns:
-            bool: True si el escaneo es exitoso, False en caso contrario.
-        """
+        """Ejecuta el escaneo de seguridad."""
         pass
     
     @abstractmethod
     def get_results_summary(self, results_file: str) -> dict:
-        """
-        Obtiene un resumen de los resultados del escaneo.
-        
-        Args:
-            results_file (str): Ruta al archivo de resultados.
-            
-        Returns:
-            dict: Diccionario con el resumen de los resultados.
-        """
+        """Obtiene resumen de resultados."""
         pass
 
 

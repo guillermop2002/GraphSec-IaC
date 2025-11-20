@@ -1,12 +1,6 @@
 """
-Parser robusto de Terraform usando python-hcl2.
-
-Esta implementación usa python-hcl2, un parser oficial de HCL que maneja
-correctamente todos los casos edge (comentarios, strings, bloques dinámicos, etc.)
-y proporciona metadatos de línea precisos.
+Parser de Terraform usando python-hcl2.
 """
-
-# Verificar .terraform/modules/ y mejorar logging
 from typing import List, Dict, Any
 import os
 import hcl2
@@ -16,7 +10,7 @@ logger = logging.getLogger(__name__)
 
 
 def _iter_tf_files(root_dir: str) -> List[str]:
-    """Itera sobre todos los archivos .tf en un directorio."""
+    """Itera sobre archivos .tf en un directorio."""
     files: List[str] = []
     root_dir_abs = os.path.abspath(os.path.normpath(root_dir))
     logger.info(f"[DIAGNÓSTICO PARSER] _iter_tf_files: Explorando desde: {root_dir_abs}")
@@ -294,11 +288,7 @@ def _extract_blocks_from_parsed(parsed: Dict[str, Any], block_type: str, content
 
 
 def parse_terraform(directory: str) -> List[Dict[str, Any]]:
-    """
-    Parsea archivos Terraform usando python-hcl2 y extrae bloques con metadatos de línea.
-    Soporta: 'resource', 'data', 'variable', 'locals', 'module'
-    Las rutas se normalizan como absolutas para facilitar la correlación.
-    """
+    """Parsea archivos Terraform y extrae bloques con metadatos."""
     resources: List[Dict[str, Any]] = []
     tf_files = _iter_tf_files(directory)
     
@@ -390,7 +380,7 @@ def parse_terraform(directory: str) -> List[Dict[str, Any]]:
             logger.error(f"Error inesperado al procesar {file_path}: {e}")
             continue
     
-    # Actualizar logging para mostrar distribución por tipo de bloque
+    # Contar por tipo de bloque
     resource_count = sum(1 for r in resources if r.get('block_type') == 'resource')
     data_count = sum(1 for r in resources if r.get('block_type') == 'data')
     variable_count = sum(1 for r in resources if r.get('block_type') == 'variable')
@@ -406,39 +396,15 @@ def parse_terraform(directory: str) -> List[Dict[str, Any]]:
 
 
 def _extract_block_text(content: str, start_line: int, end_line: int) -> str:
-    """
-    Extrae el bloque de texto crudo entre start_line y end_line.
-    
-    Args:
-        content: Contenido completo del archivo
-        start_line: Línea de inicio del bloque (1-based)
-        end_line: Línea de fin del bloque (1-based)
-    
-    Returns:
-        String con el texto del bloque
-    """
+    """Extrae texto del bloque entre líneas."""
     lines = content.split('\n')
-    # Convertir a índices 0-based
     start_idx = max(0, start_line - 1)
     end_idx = min(len(lines), end_line)
     return '\n'.join(lines[start_idx:end_idx])
 
 
 def _find_block_lines_fallback(content: str, block_type: str, block_resource_type: str | None, block_name: str) -> tuple[int | None, int | None]:
-    """
-    Fallback para encontrar líneas si hcl2 no proporciona metadatos.
-    Busca el patrón del bloque según su tipo y calcula el rango por balanceo.
-    
-    Args:
-        content: Contenido completo del archivo
-        block_type: Tipo de bloque ('resource', 'data', 'variable', 'module', 'locals')
-        block_resource_type: Tipo del recurso/data (ej: 'aws_vpc', 'aws_iam_policy_document')
-                           None para variable, module, locals
-        block_name: Nombre del bloque (ej: 'main', 'my_policy', 'my_var', 'my_module', 'my_local')
-    
-    Returns:
-        Tupla (start_line, end_line) en formato 1-based, o (None, None) si no se encuentra
-    """
+    """Fallback para encontrar líneas si hcl2 no da metadatos."""
     lines = content.split('\n')
     
     # Construir el patrón según el tipo de bloque

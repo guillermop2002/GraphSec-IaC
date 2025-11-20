@@ -1,9 +1,6 @@
 """
-Script CLI para ejecutar el pipeline de análisis de GraphSec-IaC.
-
-Este script puede ser ejecutado desde la línea de comandos o desde una GitHub Action.
-
-# Forzando validación de CI
+Script CLI para ejecutar el pipeline de análisis.
+Puede ejecutarse desde línea de comandos o GitHub Actions.
 """
 
 import os
@@ -16,27 +13,22 @@ import time
 import hashlib
 from typing import Dict, Any, Tuple
 
-# Importar funciones de los módulos existentes
 from modules.security_scanner import CheckovScanner, TrivyScanner
 from modules.correlation_engine import load_sarif_results, process_and_deduplicate_findings, attach_findings_to_graph
 from modules.tf_parser import parse_terraform, _iter_tf_files
 from modules.graph_builder import build_edges
 from modules.utils import generate_hash_for_files
 
-# Configurar logging
 logger = logging.getLogger(__name__)
 
-# Directorio de caché
 CACHE_DIR = ".graphsec_cache"
 os.makedirs(CACHE_DIR, exist_ok=True)
 
-# Versión del pipeline - incrementar cuando cambie la lógica
-# Invalida el caché automáticamente cuando cambiamos la lógica
+# Versión del pipeline - invalida caché cuando cambia la lógica
 PIPELINE_VERSION = "v22.5"
 
 
 class PipelineError(Exception):
-    """Excepción personalizada para errores del pipeline."""
     pass
 
 
@@ -62,15 +54,13 @@ def get_cached_or_generate_graph(directory: str, project_name: str) -> Dict[str,
     if not tf_files:
         raise PipelineError("Error: No se encontraron archivos .tf para analizar")
     
-    # Generar hash de todos los archivos .tf + versión del pipeline
+    # Hash de archivos + versión
     graph_hash = generate_hash_for_files(tf_files)
-    # Incluir versión del pipeline en el hash para invalidar caché cuando cambie la lógica
     version_hash = hashlib.md5(PIPELINE_VERSION.encode()).hexdigest()[:8]
     
-    # Definir archivo de caché (incluye versión del pipeline)
     cache_file_graph = os.path.join(CACHE_DIR, f"{project_name}_graph_{graph_hash}_{version_hash}.json")
     
-    # Intentar cargar desde caché
+    # Intentar usar caché
     if os.path.exists(cache_file_graph):
         logger.info(f"Cargando grafo desde caché para {project_name}...")
         try:
@@ -78,12 +68,12 @@ def get_cached_or_generate_graph(directory: str, project_name: str) -> Dict[str,
                 graph_data = json.load(f)
             nodes = graph_data.get('nodes', [])
             
-            # Validar que los IDs del caché sean únicos
+            # Verificar que no hay IDs duplicados
             node_ids = [n.get("id") for n in nodes]
             unique_ids = set(node_ids)
             if len(node_ids) != len(unique_ids):
-                logger.warning(f"Caché tiene IDs duplicados, regenerando grafo...")
-                raise ValueError("Caché corrupto con IDs duplicados")
+                logger.warning(f"Caché corrupto, regenerando...")
+                raise ValueError("IDs duplicados")
             
             logger.info(f"Grafo cargado desde caché: {len(nodes)} nodos, {len(graph_data.get('edges', []))} aristas")
             return graph_data
@@ -161,9 +151,7 @@ def get_cached_or_generate_graph(directory: str, project_name: str) -> Dict[str,
 
 
 async def get_cached_or_run_scanner(scanner, directory: str, output_file: str, project_name: str, scanner_name: str) -> Tuple[bool, str]:
-    """
-    Obtiene resultados del escáner desde caché o lo ejecuta si no existe.
-    """
+    """Obtiene resultados del escáner desde caché o lo ejecuta."""
     project_root = os.path.abspath(directory)
     
     # Obtener lista de archivos .tf y .tfvars para el hash
