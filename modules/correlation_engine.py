@@ -241,7 +241,7 @@ def _map_vendored_module_path(logical_path: str, project_root: Optional[str] = N
                         result = os.path.normpath(physical_path)
                         # Loggear solo una vez por subpath
                         if subpath_cache_key not in _vendored_mapping_cache:
-                            logger.info(f"[MAPEO] ✅ Módulo vendored encontrado: '{target_subpath}' -> '{result}'")
+                            logger.info(f"[MAPEO] Módulo vendored encontrado: '{target_subpath}' -> '{result}'")
                             _vendored_mapping_cache[subpath_cache_key] = True  # Marcar como loggeado
                         _vendored_mapping_cache[cache_key] = result
                         return result
@@ -251,7 +251,7 @@ def _map_vendored_module_path(logical_path: str, project_root: Optional[str] = N
         # Si no hay coincidencia exacta de subpath, el módulo no está descargado
         # Solo loggear una vez por subpath
         if subpath_cache_key not in _vendored_mapping_cache:
-            logger.warning(f"[MAPEO] ❌ Módulo vendored no encontrado: subpath='{target_subpath}'")
+            logger.warning(f"[MAPEO] Módulo vendored no encontrado: subpath='{target_subpath}'")
             logger.warning(f"[MAPEO] El módulo no está descargado en .terraform/modules/")
             # Listar módulos únicos encontrados (solo una vez)
             try:
@@ -381,9 +381,8 @@ def normalize_rule_to_cis(rule_id: str) -> str:
 
 def create_canonical_finding_identifier(finding: Dict[str, Any], resource_id: str) -> str:
     """
-    Crea un Identificador Canónico de Hallazgo (CFI) estable:
-    Prioriza partialFingerprints si existen; en su defecto, usa hash SHA-256 de
-    (cis_id_normalizado, resource_id, archivo_normalizado, start_line).
+    Crea un Identificador Canónico de Hallazgo (CFI).
+    Prioriza partialFingerprints si existen, sino usa hash SHA-256.
     """
     # 1) Priorizar huella SARIF si está disponible
     sarif_fp = finding.get("fingerprint")
@@ -596,7 +595,7 @@ def print_node_security_summary(node: Dict[str, Any]) -> None:
     security_issues = node.get("security_issues", [])
     
     if not security_issues:
-        print("  ✅ No se encontraron problemas de seguridad")
+        print("  No se encontraron problemas de seguridad")
         return
     
     for i, issue in enumerate(security_issues, 1):
@@ -1114,27 +1113,27 @@ def attach_findings_to_graph(graph_data: Dict[str, Any], unique_findings: List[D
         logger.warning("=" * 80)
         for i, uf in enumerate(unassigned, 1):
             logger.warning(f"\n[DIAGNÓSTICO] Hallazgo No Asignado #{i}:")
-            logger.warning(f"  📋 Rule ID: {uf.get('rule_id', 'N/A')}")
-            logger.warning(f"  📊 Normalized CIS: {uf.get('normalized_cis', 'N/A')}")
-            logger.warning(f"  🔧 Tool: {uf.get('tool_name', 'N/A')}")
-            logger.warning(f"  📁 Archivo: {uf.get('file_path', 'N/A')}")
-            logger.warning(f"  📍 Línea: {uf.get('start_line', 'N/A')}")
-            logger.warning(f"  ⚠️ Severidad: {uf.get('level', 'N/A')}")
-            logger.warning(f"  🔗 Capa de correlación intentada: {uf.get('correlation_layer', 'N/A')}")
-            logger.warning(f"  🆔 Resource ID buscado: {uf.get('resource_id', 'N/A')}")
+            logger.warning(f"  Rule ID: {uf.get('rule_id', 'N/A')}")
+            logger.warning(f"  Normalized CIS: {uf.get('normalized_cis', 'N/A')}")
+            logger.warning(f"  Tool: {uf.get('tool_name', 'N/A')}")
+            logger.warning(f"  Archivo: {uf.get('file_path', 'N/A')}")
+            logger.warning(f"  Línea: {uf.get('start_line', 'N/A')}")
+            logger.warning(f"  Severidad: {uf.get('level', 'N/A')}")
+            logger.warning(f"  Capa de correlación intentada: {uf.get('correlation_layer', 'N/A')}")
+            logger.warning(f"  Resource ID buscado: {uf.get('resource_id', 'N/A')}")
             
             # Mensaje del hallazgo (truncado si es muy largo)
             message = uf.get('message', 'N/A')
             if len(message) > 200:
                 message = message[:200] + "..."
-            logger.warning(f"  💬 Mensaje: {message}")
+            logger.warning(f"  Mensaje: {message}")
             
             # Verificar si el archivo existe físicamente
             finding_file_abs = normalize_file_path(uf.get('file_path', ''), project_root)
             file_exists = os.path.exists(finding_file_abs) if finding_file_abs else False
-            logger.warning(f"  📂 Archivo existe físicamente: {'✅ SÍ' if file_exists else '❌ NO'}")
+            logger.warning(f"  Archivo existe físicamente: {'SÍ' if file_exists else 'NO'}")
             if finding_file_abs:
-                logger.warning(f"  📂 Ruta absoluta: {finding_file_abs}")
+                logger.warning(f"  Ruta absoluta: {finding_file_abs}")
             
             # Verificar si hay nodos en el mismo archivo (usando rutas absolutas normalizadas)
             finding_file = uf.get('file_path', '')
@@ -1150,16 +1149,16 @@ def attach_findings_to_graph(graph_data: Dict[str, Any], unique_findings: List[D
                             nodes_in_same_file.append(n)
             
             if nodes_in_same_file:
-                logger.warning(f"  ℹ️  Hay {len(nodes_in_same_file)} nodo(s) en este archivo, pero ninguno coincidió:")
+                logger.warning(f"  Hay {len(nodes_in_same_file)} nodo(s) en este archivo, pero ninguno coincidió:")
                 for node in nodes_in_same_file[:3]:
                     logger.warning(f"      - {node.get('id')} (tipo: {node.get('block_type', 'N/A')}, líneas: {node.get('start_line')}-{node.get('end_line')})")
             else:
                 if not file_exists:
-                    logger.warning(f"  ❌ NO HAY NODOS en este archivo Y el archivo NO EXISTE físicamente")
-                    logger.warning(f"  💡 Esto sugiere que el archivo no se descargó o está en otra ubicación")
+                    logger.warning(f"  NO HAY NODOS en este archivo Y el archivo NO EXISTE físicamente")
+                    logger.warning(f"  Esto sugiere que el archivo no se descargó o está en otra ubicación")
                 else:
-                    logger.warning(f"  ❌ NO HAY NODOS en este archivo (el parser no encontró recursos en este archivo)")
-                    logger.warning(f"  💡 El archivo existe pero el parser no pudo extraer recursos (puede tener bloques dynamic/for_each)")
+                    logger.warning(f"  NO HAY NODOS en este archivo (el parser no encontró recursos en este archivo)")
+                    logger.warning(f"  El archivo existe pero el parser no pudo extraer recursos (puede tener bloques dynamic/for_each)")
         logger.warning("=" * 80)
     
     enriched_graph["unassigned_findings"] = unassigned

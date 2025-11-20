@@ -6,7 +6,7 @@ correctamente todos los casos edge (comentarios, strings, bloques dinámicos, et
 y proporciona metadatos de línea precisos.
 """
 
-# FORCING CI CODE REFRESH v21.7 - Verificar .terraform/modules/ y mejorar logging
+# Verificar .terraform/modules/ y mejorar logging
 from typing import List, Dict, Any
 import os
 import hcl2
@@ -26,14 +26,14 @@ def _iter_tf_files(root_dir: str) -> List[str]:
     terraform_dot_modules_path = os.path.join(root_dir_abs, '.terraform', 'modules')
     
     if os.path.exists(terraform_modules_path):
-        logger.info(f"[DIAGNÓSTICO PARSER] _iter_tf_files: ✅ Directorio terraform-aws-modules/ EXISTE: {terraform_modules_path}")
+        logger.info(f"[DIAGNÓSTICO PARSER] _iter_tf_files: Directorio terraform-aws-modules/ EXISTE: {terraform_modules_path}")
         tf_count = sum(1 for root, _, filenames in os.walk(terraform_modules_path) for f in filenames if f.endswith('.tf'))
         logger.info(f"[DIAGNÓSTICO PARSER] _iter_tf_files: Archivos .tf en terraform-aws-modules/: {tf_count}")
     else:
-        logger.warning(f"[DIAGNÓSTICO PARSER] _iter_tf_files: ❌ Directorio terraform-aws-modules/ NO EXISTE: {terraform_modules_path}")
+        logger.warning(f"[DIAGNÓSTICO PARSER] _iter_tf_files: Directorio terraform-aws-modules/ NO EXISTE: {terraform_modules_path}")
     
     if os.path.exists(terraform_dot_modules_path):
-        logger.info(f"[DIAGNÓSTICO PARSER] _iter_tf_files: ✅ Directorio .terraform/modules/ EXISTE: {terraform_dot_modules_path}")
+        logger.info(f"[DIAGNÓSTICO PARSER] _iter_tf_files: Directorio .terraform/modules/ EXISTE: {terraform_dot_modules_path}")
         tf_count = sum(1 for root, _, filenames in os.walk(terraform_dot_modules_path) for f in filenames if f.endswith('.tf'))
         logger.info(f"[DIAGNÓSTICO PARSER] _iter_tf_files: Archivos .tf en .terraform/modules/: {tf_count}")
         # Listar algunos subdirectorios para ver la estructura
@@ -43,7 +43,7 @@ def _iter_tf_files(root_dir: str) -> List[str]:
         except Exception as e:
             logger.warning(f"[DIAGNÓSTICO PARSER] _iter_tf_files: Error listando .terraform/modules/: {e}")
     else:
-        logger.warning(f"[DIAGNÓSTICO PARSER] _iter_tf_files: ❌ Directorio .terraform/modules/ NO EXISTE: {terraform_dot_modules_path}")
+        logger.warning(f"[DIAGNÓSTICO PARSER] _iter_tf_files: Directorio .terraform/modules/ NO EXISTE: {terraform_dot_modules_path}")
     
     directories_visited = []
     for dirpath, dirnames, filenames in os.walk(root_dir_abs):
@@ -67,13 +67,13 @@ def _iter_tf_files(root_dir: str) -> List[str]:
         logger.info(f"[DIAGNÓSTICO PARSER] _iter_tf_files: Directorios que contienen 'terraform-aws-modules': {len(modules_dirs)}")
         logger.info(f"[DIAGNÓSTICO PARSER] _iter_tf_files: Ejemplos: {modules_dirs[:5]}")
     else:
-        logger.warning(f"[DIAGNÓSTICO PARSER] _iter_tf_files: ⚠️ Ningún directorio visitado contiene 'terraform-aws-modules'")
+        logger.warning(f"[DIAGNÓSTICO PARSER] _iter_tf_files: Ningún directorio visitado contiene 'terraform-aws-modules'")
     
     if terraform_dirs:
         logger.info(f"[DIAGNÓSTICO PARSER] _iter_tf_files: Directorios que contienen '.terraform': {len(terraform_dirs)}")
         logger.info(f"[DIAGNÓSTICO PARSER] _iter_tf_files: Ejemplos: {terraform_dirs[:5]}")
     else:
-        logger.warning(f"[DIAGNÓSTICO PARSER] _iter_tf_files: ⚠️ Ningún directorio visitado contiene '.terraform'")
+        logger.warning(f"[DIAGNÓSTICO PARSER] _iter_tf_files: Ningún directorio visitado contiene '.terraform'")
     
     # Verificar si hay archivos .tf en rutas de módulos
     files_in_modules = [f for f in files if 'terraform-aws-modules' in f or '.terraform' in f]
@@ -81,7 +81,7 @@ def _iter_tf_files(root_dir: str) -> List[str]:
         logger.info(f"[DIAGNÓSTICO PARSER] _iter_tf_files: Archivos .tf en rutas de módulos: {len(files_in_modules)}")
         logger.info(f"[DIAGNÓSTICO PARSER] _iter_tf_files: Ejemplos: {files_in_modules[:5]}")
     else:
-        logger.warning(f"[DIAGNÓSTICO PARSER] _iter_tf_files: ⚠️ Ningún archivo .tf encontrado en rutas de módulos")
+        logger.warning(f"[DIAGNÓSTICO PARSER] _iter_tf_files: Ningún archivo .tf encontrado en rutas de módulos")
     
     return files
 
@@ -248,7 +248,7 @@ def _extract_blocks_from_parsed(parsed: Dict[str, Any], block_type: str, content
                     # Si no hay metadatos de línea, usar fallback
                     if start_line is None or end_line is None:
                         if is_problematic_file and block_type == 'resource':
-                            logger.warning(f"[DIAGNÓSTICO PARSER]     ⚠️ Sin metadatos de línea, usando fallback para {block_resource_type}.{block_name}")
+                            logger.warning(f"[DIAGNÓSTICO PARSER]     Sin metadatos de línea, usando fallback para {block_resource_type}.{block_name}")
                         start_line, end_line = _find_block_lines_fallback(
                             content, block_type, block_resource_type, block_name
                         )
@@ -279,13 +279,13 @@ def _extract_blocks_from_parsed(parsed: Dict[str, Any], block_type: str, content
                         })
                         
                         if is_problematic_file and block_type == 'resource':
-                            logger.info(f"[DIAGNÓSTICO PARSER]     ✅ Extraído: {simple_name} (líneas {start_line}-{end_line})")
+                            logger.info(f"[DIAGNÓSTICO PARSER]     Extraído: {simple_name} (líneas {start_line}-{end_line})")
                     else:
                         logger.warning(
                             f"No se pudieron obtener líneas para {block_type} {block_resource_type}.{block_name} en {file_path}"
                         )
                         if is_problematic_file and block_type == 'resource':
-                            logger.warning(f"[DIAGNÓSTICO PARSER]     ❌ NO SE PUDO EXTRAER: {block_resource_type}.{block_name}")
+                            logger.warning(f"[DIAGNÓSTICO PARSER]     NO SE PUDO EXTRAER: {block_resource_type}.{block_name}")
         
         if is_problematic_file and block_type == 'resource':
             logger.info(f"[DIAGNÓSTICO PARSER] Total extraído: {len(blocks)} bloques '{block_type}' de {blocks_in_ast} encontrados en AST")
@@ -295,32 +295,9 @@ def _extract_blocks_from_parsed(parsed: Dict[str, Any], block_type: str, content
 
 def parse_terraform(directory: str) -> List[Dict[str, Any]]:
     """
-    Parsea archivos Terraform usando python-hcl2 y extrae múltiples tipos de bloques con metadatos de línea.
-    
+    Parsea archivos Terraform usando python-hcl2 y extrae bloques con metadatos de línea.
     Soporta: 'resource', 'data', 'variable', 'locals', 'module'
-    
-    Las rutas de archivo se normalizan como rutas absolutas
-    para facilitar la correlación con hallazgos de seguridad.
-    
-    Args:
-        directory: Directorio raíz donde buscar archivos .tf (ruta absoluta)
-        
-    Returns:
-        Lista de diccionarios con la estructura:
-        {
-            'type': 'aws_s3_bucket' o 'variable' o 'local' o 'module',  # Tipo del bloque
-            'name': 'my_bucket' o 'my_var' o 'my_local' o 'my_module',  # Nombre del bloque
-            'simple_name': 'aws_s3_bucket.my_bucket' (resource),
-                          'data.aws_iam_policy_document.my_policy' (data),
-                          'var.my_var' (variable),
-                          'local.my_local' (locals),
-                          'module.my_module' (module),
-            'block_type': 'resource' | 'data' | 'variable' | 'locals' | 'module',  # Tipo de bloque Terraform
-            'file': 'C:\\...\\main.tf',  # Ruta absoluta
-            'start_line': 13,
-            'end_line': 16,
-            'raw_block_text': 'resource "aws_s3_bucket" "my_bucket" {...}'  # Texto crudo del bloque
-        }
+    Las rutas se normalizan como absolutas para facilitar la correlación.
     """
     resources: List[Dict[str, Any]] = []
     tf_files = _iter_tf_files(directory)
@@ -341,7 +318,7 @@ def parse_terraform(directory: str) -> List[Dict[str, Any]]:
         logger.info(f"[DIAGNÓSTICO PARSER] Primeros archivos problemáticos: {[os.path.basename(f) for f in problematic_files[:5]]}")
         logger.info(f"[DIAGNÓSTICO PARSER] Ejemplo ruta completa: {os.path.abspath(os.path.normpath(problematic_files[0])) if problematic_files else 'N/A'}")
     else:
-        logger.warning(f"[DIAGNÓSTICO PARSER] ⚠️ NO se detectaron archivos problemáticos.")
+        logger.warning(f"[DIAGNÓSTICO PARSER] NO se detectaron archivos problemáticos.")
         logger.warning(f"[DIAGNÓSTICO PARSER] Ejemplo de nombres de archivo: {[os.path.basename(f) for f in tf_files[:5]]}")
         logger.warning(f"[DIAGNÓSTICO PARSER] Ejemplo de rutas relativas: {tf_files[:5]}")
         logger.warning(f"[DIAGNÓSTICO PARSER] Ejemplo de rutas absolutas: {[os.path.abspath(os.path.normpath(f)) for f in tf_files[:5]]}")
@@ -370,11 +347,11 @@ def parse_terraform(directory: str) -> List[Dict[str, Any]]:
                 parsed = hcl2.loads(content)
             except Exception as e:
                 if is_problematic_file:
-                    logger.error(f"[DIAGNÓSTICO PARSER] ❌ Error al parsear archivo problemático: {e}")
+                    logger.error(f"[DIAGNÓSTICO PARSER] Error al parsear archivo problemático: {e}")
                 logger.warning(f"Error al parsear {file_path} con hcl2: {e}")
                 continue
             
-            # LOGGING DETALLADO: Para archivos problemáticos (DESPUÉS de parsear)
+            # Logging detallado para archivos problemáticos (después de parsear)
             if is_problematic_file:
                 logger.info(f"[DIAGNÓSTICO PARSER] Claves en el AST parseado: {list(parsed.keys())}")
                 
@@ -397,11 +374,11 @@ def parse_terraform(directory: str) -> List[Dict[str, Any]]:
                 blocks_found_in_file += len(blocks)
                 resources.extend(blocks)
             
-            # LOGGING DETALLADO: Si un archivo problemático no produjo bloques
+            # Logging detallado si un archivo problemático no produjo bloques
             if is_problematic_file:
                 logger.info(f"[DIAGNÓSTICO PARSER] Bloques extraídos de este archivo: {blocks_found_in_file}")
                 if blocks_found_in_file == 0:
-                    logger.warning(f"[DIAGNÓSTICO PARSER] ⚠️ ARCHIVO PROBLEMÁTICO SIN BLOQUES: {file_path_abs}")
+                    logger.warning(f"[DIAGNÓSTICO PARSER] ARCHIVO PROBLEMÁTICO SIN BLOQUES: {file_path_abs}")
                     logger.warning(f"[DIAGNÓSTICO PARSER]   El AST tiene {len(parsed)} claves pero no se extrajeron bloques")
                     logger.warning(f"[DIAGNÓSTICO PARSER]   Esto puede indicar un problema en la lógica de extracción")
                 logger.info(f"[DIAGNÓSTICO PARSER] ════════════════════════════════════════════════════════════")
