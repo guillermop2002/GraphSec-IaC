@@ -1,9 +1,5 @@
 """
-Construcción/enriquecimiento del grafo a partir del parser propio.
-
-Este módulo proporciona:
-1. Enriquecimiento de nodos existentes con metadatos del parser
-2. Construcción de aristas (edges) mediante análisis de dependencias en Terraform
+Construcción del grafo y análisis de dependencias en Terraform.
 """
 
 from typing import Dict, Any, List
@@ -14,15 +10,11 @@ logger = logging.getLogger(__name__)
 
 
 def enrich_graph_nodes_with_parsed(graph_data: Dict[str, Any], parsed_resources: List[Dict[str, Any]]) -> Dict[str, Any]:
-    """
-    Devuelve un grafo con nodos enriquecidos con `file`, `line` (start) y `end_line`.
-    Empareja por `simple_name`.
-    """
+    """Enriquece nodos del grafo con metadatos de archivo y línea."""
     if not graph_data:
         return graph_data
 
     nodes: List[Dict[str, Any]] = graph_data.get("nodes", [])
-    # Índice por simple_name del parser
     parsed_index = {r.get("simple_name"): r for r in parsed_resources}
 
     for node in nodes:
@@ -32,11 +24,10 @@ def enrich_graph_nodes_with_parsed(graph_data: Dict[str, Any], parsed_resources:
         match = parsed_index.get(sname)
         if not match:
             continue
-        # Enriquecer sin romper estructura
-        # Guardar tanto 'line' (compatibilidad) como 'start_line' (para correlación)
+        
         node["file"] = match.get("file")
         node["line"] = match.get("start_line")
-        node["start_line"] = match.get("start_line")  # CRÍTICO: Necesario para _match_resource_id_by_range
+        node["start_line"] = match.get("start_line")
         node["end_line"] = match.get("end_line")
 
     return graph_data
