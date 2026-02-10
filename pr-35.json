@@ -15312,7 +15312,7 @@
   "api_metadata": {
     "status": "success",
     "message": "Pipeline completado exitosamente para proyecto 'eks'",
-    "project_name": "eks_pr_115",
+    "project_name": "eks_pr_35",
     "project_directory": "./terraform-aws-eks",
     "scanners_used": 2,
     "checkov_success": true,
@@ -15336,6 +15336,6 @@
       }
     },
     "unassigned_findings_count": 3,
-    "pr_number": 115
+    "pr_number": 35
   }
 }
