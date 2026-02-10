@@ -9790,580 +9790,9 @@
       "start_line": 129,
       "end_line": 133,
       "security_issues": []
-    },
-    {
-      "id": "local.events_945",
-      "simple_name": "local.events",
-      "label": "local.events",
-      "type": "local",
-      "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/karpenter/main.tf",
-      "start_line": 243,
-      "end_line": 278,
-      "security_issues": []
-    },
-    {
-      "id": "local.create_node_iam_role_946",
-      "simple_name": "local.create_node_iam_role",
-      "label": "local.create_node_iam_role",
-      "type": "local",
-      "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/karpenter/main.tf",
-      "start_line": 310,
-      "end_line": 322,
-      "security_issues": []
-    },
-    {
-      "id": "local.node_iam_role_name_947",
-      "simple_name": "local.node_iam_role_name",
-      "label": "local.node_iam_role_name",
-      "type": "local",
-      "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/karpenter/main.tf",
-      "start_line": 310,
-      "end_line": 322,
-      "security_issues": []
-    },
-    {
-      "id": "local.node_iam_role_policy_prefix_948",
-      "simple_name": "local.node_iam_role_policy_prefix",
-      "label": "local.node_iam_role_policy_prefix",
-      "type": "local",
-      "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/karpenter/main.tf",
-      "start_line": 310,
-      "end_line": 322,
-      "security_issues": []
-    },
-    {
-      "id": "local.ipv4_cni_policy_949",
-      "simple_name": "local.ipv4_cni_policy",
-      "label": "local.ipv4_cni_policy",
-      "type": "local",
-      "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/karpenter/main.tf",
-      "start_line": 310,
-      "end_line": 322,
-      "security_issues": []
-    },
-    {
-      "id": "local.ipv6_cni_policy_950",
-      "simple_name": "local.ipv6_cni_policy",
-      "label": "local.ipv6_cni_policy",
-      "type": "local",
-      "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/karpenter/main.tf",
-      "start_line": 310,
-      "end_line": 322,
-      "security_issues": []
-    },
-    {
-      "id": "local.external_role_name_951",
-      "simple_name": "local.external_role_name",
-      "label": "local.external_role_name",
-      "type": "local",
-      "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/karpenter/main.tf",
-      "start_line": 404,
-      "end_line": 406,
-      "security_issues": []
-    },
-    {
-      "id": "var.create_952",
-      "simple_name": "var.create",
-      "label": "var.create",
-      "type": "variable",
-      "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/karpenter/variables.tf",
-      "start_line": 1,
-      "end_line": 5,
-      "security_issues": []
-    },
-    {
-      "id": "var.tags_953",
-      "simple_name": "var.tags",
-      "label": "var.tags",
-      "type": "variable",
-      "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/karpenter/variables.tf",
-      "start_line": 7,
-      "end_line": 11,
-      "security_issues": []
-    },
-    {
-      "id": "var.cluster_name_954",
-      "simple_name": "var.cluster_name",
-      "label": "var.cluster_name",
-      "type": "variable",
-      "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/karpenter/variables.tf",
-      "start_line": 13,
-      "end_line": 17,
-      "security_issues": []
-    },
-    {
-      "id": "var.region_955",
-      "simple_name": "var.region",
-      "label": "var.region",
-      "type": "variable",
-      "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/karpenter/variables.tf",
-      "start_line": 19,
-      "end_line": 23,
-      "security_issues": []
-    },
-    {
-      "id": "var.create_iam_role_956",
-      "simple_name": "var.create_iam_role",
-      "label": "var.create_iam_role",
-      "type": "variable",
-      "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/karpenter/variables.tf",
-      "start_line": 29,
-      "end_line": 33,
-      "security_issues": []
-    },
-    {
-      "id": "var.enable_inline_policy_957",
-      "simple_name": "var.enable_inline_policy",
-      "label": "var.enable_inline_policy",
-      "type": "variable",
-      "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/karpenter/variables.tf",
-      "start_line": 35,
-      "end_line": 39,
-      "security_issues": []
-    },
-    {
-      "id": "var.iam_role_name_958",
-      "simple_name": "var.iam_role_name",
-      "label": "var.iam_role_name",
-      "type": "variable",
-      "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/karpenter/variables.tf",
-      "start_line": 41,
-      "end_line": 45,
-      "security_issues": []
-    },
-    {
-      "id": "var.iam_role_use_name_prefix_959",
-      "simple_name": "var.iam_role_use_name_prefix",
-      "label": "var.iam_role_use_name_prefix",
-      "type": "variable",
-      "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/karpenter/variables.tf",
-      "start_line": 47,
-      "end_line": 51,
-      "security_issues": []
-    },
-    {
-      "id": "var.iam_role_path_960",
-      "simple_name": "var.iam_role_path",
-      "label": "var.iam_role_path",
-      "type": "variable",
-      "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/karpenter/variables.tf",
-      "start_line": 53,
-      "end_line": 57,
-      "security_issues": []
-    },
-    {
-      "id": "var.iam_role_description_961",
-      "simple_name": "var.iam_role_description",
-      "label": "var.iam_role_description",
-      "type": "variable",
-      "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/karpenter/variables.tf",
-      "start_line": 59,
-      "end_line": 63,
-      "security_issues": []
-    },
-    {
-      "id": "var.iam_role_max_session_duration_962",
-      "simple_name": "var.iam_role_max_session_duration",
-      "label": "var.iam_role_max_session_duration",
-      "type": "variable",
-      "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/karpenter/variables.tf",
-      "start_line": 65,
-      "end_line": 69,
-      "security_issues": []
-    },
-    {
-      "id": "var.iam_role_permissions_boundary_arn_963",
-      "simple_name": "var.iam_role_permissions_boundary_arn",
-      "label": "var.iam_role_permissions_boundary_arn",
-      "type": "variable",
-      "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/karpenter/variables.tf",
-      "start_line": 71,
-      "end_line": 75,
-      "security_issues": []
-    },
-    {
-      "id": "var.iam_role_tags_964",
-      "simple_name": "var.iam_role_tags",
-      "label": "var.iam_role_tags",
-      "type": "variable",
-      "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/karpenter/variables.tf",
-      "start_line": 77,
-      "end_line": 81,
-      "security_issues": []
-    },
-    {
-      "id": "var.iam_policy_name_965",
-      "simple_name": "var.iam_policy_name",
-      "label": "var.iam_policy_name",
-      "type": "variable",
-      "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/karpenter/variables.tf",
-      "start_line": 83,
-      "end_line": 87,
-      "security_issues": []
-    },
-    {
-      "id": "var.iam_policy_use_name_prefix_966",
-      "simple_name": "var.iam_policy_use_name_prefix",
-      "label": "var.iam_policy_use_name_prefix",
-      "type": "variable",
-      "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/karpenter/variables.tf",
-      "start_line": 89,
-      "end_line": 93,
-      "security_issues": []
-    },
-    {
-      "id": "var.iam_policy_path_967",
-      "simple_name": "var.iam_policy_path",
-      "label": "var.iam_policy_path",
-      "type": "variable",
-      "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/karpenter/variables.tf",
-      "start_line": 95,
-      "end_line": 99,
-      "security_issues": []
-    },
-    {
-      "id": "var.iam_policy_description_968",
-      "simple_name": "var.iam_policy_description",
-      "label": "var.iam_policy_description",
-      "type": "variable",
-      "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/karpenter/variables.tf",
-      "start_line": 101,
-      "end_line": 105,
-      "security_issues": []
-    },
-    {
-      "id": "var.iam_role_override_assume_policy_documents_969",
-      "simple_name": "var.iam_role_override_assume_policy_documents",
-      "label": "var.iam_role_override_assume_policy_documents",
-      "type": "variable",
-      "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/karpenter/variables.tf",
-      "start_line": 107,
-      "end_line": 111,
-      "security_issues": []
-    },
-    {
-      "id": "var.iam_role_source_assume_policy_documents_970",
-      "simple_name": "var.iam_role_source_assume_policy_documents",
-      "label": "var.iam_role_source_assume_policy_documents",
-      "type": "variable",
-      "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/karpenter/variables.tf",
-      "start_line": 113,
-      "end_line": 117,
-      "security_issues": []
-    },
-    {
-      "id": "var.iam_policy_statements_971",
-      "simple_name": "var.iam_policy_statements",
-      "label": "var.iam_policy_statements",
-      "type": "variable",
-      "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/karpenter/variables.tf",
-      "start_line": 119,
-      "end_line": 143,
-      "security_issues": []
-    },
-    {
-      "id": "var.iam_role_policies_972",
-      "simple_name": "var.iam_role_policies",
-      "label": "var.iam_role_policies",
-      "type": "variable",
-      "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/karpenter/variables.tf",
-      "start_line": 145,
-      "end_line": 149,
-      "security_issues": []
-    },
-    {
-      "id": "var.ami_id_ssm_parameter_arns_973",
-      "simple_name": "var.ami_id_ssm_parameter_arns",
-      "label": "var.ami_id_ssm_parameter_arns",
-      "type": "variable",
-      "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/karpenter/variables.tf",
-      "start_line": 151,
-      "end_line": 155,
-      "security_issues": []
-    },
-    {
-      "id": "var.create_pod_identity_association_974",
-      "simple_name": "var.create_pod_identity_association",
-      "label": "var.create_pod_identity_association",
-      "type": "variable",
-      "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/karpenter/variables.tf",
-      "start_line": 161,
-      "end_line": 165,
-      "security_issues": []
-    },
-    {
-      "id": "var.namespace_975",
-      "simple_name": "var.namespace",
-      "label": "var.namespace",
-      "type": "variable",
-      "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/karpenter/variables.tf",
-      "start_line": 167,
-      "end_line": 171,
-      "security_issues": []
-    },
-    {
-      "id": "var.service_account_976",
-      "simple_name": "var.service_account",
-      "label": "var.service_account",
-      "type": "variable",
-      "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/karpenter/variables.tf",
-      "start_line": 173,
-      "end_line": 177,
-      "security_issues": []
-    },
-    {
-      "id": "var.enable_spot_termination_977",
-      "simple_name": "var.enable_spot_termination",
-      "label": "var.enable_spot_termination",
-      "type": "variable",
-      "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/karpenter/variables.tf",
-      "start_line": 183,
-      "end_line": 187,
-      "security_issues": []
-    },
-    {
-      "id": "var.queue_name_978",
-      "simple_name": "var.queue_name",
-      "label": "var.queue_name",
-      "type": "variable",
-      "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/karpenter/variables.tf",
-      "start_line": 189,
-      "end_line": 193,
-      "security_issues": []
-    },
-    {
-      "id": "var.queue_managed_sse_enabled_979",
-      "simple_name": "var.queue_managed_sse_enabled",
-      "label": "var.queue_managed_sse_enabled",
-      "type": "variable",
-      "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/karpenter/variables.tf",
-      "start_line": 195,
-      "end_line": 199,
-      "security_issues": []
-    },
-    {
-      "id": "var.queue_kms_master_key_id_980",
-      "simple_name": "var.queue_kms_master_key_id",
-      "label": "var.queue_kms_master_key_id",
-      "type": "variable",
-      "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/karpenter/variables.tf",
-      "start_line": 201,
-      "end_line": 205,
-      "security_issues": []
-    },
-    {
-      "id": "var.queue_kms_data_key_reuse_period_seconds_981",
-      "simple_name": "var.queue_kms_data_key_reuse_period_seconds",
-      "label": "var.queue_kms_data_key_reuse_period_seconds",
-      "type": "variable",
-      "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/karpenter/variables.tf",
-      "start_line": 207,
-      "end_line": 211,
-      "security_issues": []
-    },
-    {
-      "id": "var.queue_policy_statements_982",
-      "simple_name": "var.queue_policy_statements",
-      "label": "var.queue_policy_statements",
-      "type": "variable",
-      "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/karpenter/variables.tf",
-      "start_line": 213,
-      "end_line": 237,
-      "security_issues": []
-    },
-    {
-      "id": "var.create_node_iam_role_983",
-      "simple_name": "var.create_node_iam_role",
-      "label": "var.create_node_iam_role",
-      "type": "variable",
-      "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/karpenter/variables.tf",
-      "start_line": 243,
-      "end_line": 247,
-      "security_issues": []
-    },
-    {
-      "id": "var.cluster_ip_family_984",
-      "simple_name": "var.cluster_ip_family",
-      "label": "var.cluster_ip_family",
-      "type": "variable",
-      "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/karpenter/variables.tf",
-      "start_line": 249,
-      "end_line": 253,
-      "security_issues": []
-    },
-    {
-      "id": "var.node_iam_role_arn_985",
-      "simple_name": "var.node_iam_role_arn",
-      "label": "var.node_iam_role_arn",
-      "type": "variable",
-      "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/karpenter/variables.tf",
-      "start_line": 255,
-      "end_line": 259,
-      "security_issues": []
-    },
-    {
-      "id": "var.node_iam_role_name_986",
-      "simple_name": "var.node_iam_role_name",
-      "label": "var.node_iam_role_name",
-      "type": "variable",
-      "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/karpenter/variables.tf",
-      "start_line": 261,
-      "end_line": 265,
-      "security_issues": []
-    },
-    {
-      "id": "var.node_iam_role_use_name_prefix_987",
-      "simple_name": "var.node_iam_role_use_name_prefix",
-      "label": "var.node_iam_role_use_name_prefix",
-      "type": "variable",
-      "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/karpenter/variables.tf",
-      "start_line": 267,
-      "end_line": 271,
-      "security_issues": []
-    },
-    {
-      "id": "var.node_iam_role_path_988",
-      "simple_name": "var.node_iam_role_path",
-      "label": "var.node_iam_role_path",
-      "type": "variable",
-      "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/karpenter/variables.tf",
-      "start_line": 273,
-      "end_line": 277,
-      "security_issues": []
-    },
-    {
-      "id": "var.node_iam_role_description_989",
-      "simple_name": "var.node_iam_role_description",
-      "label": "var.node_iam_role_description",
-      "type": "variable",
-      "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/karpenter/variables.tf",
-      "start_line": 279,
-      "end_line": 283,
-      "security_issues": []
-    },
-    {
-      "id": "var.node_iam_role_max_session_duration_990",
-      "simple_name": "var.node_iam_role_max_session_duration",
-      "label": "var.node_iam_role_max_session_duration",
-      "type": "variable",
-      "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/karpenter/variables.tf",
-      "start_line": 285,
-      "end_line": 289,
-      "security_issues": []
-    },
-    {
-      "id": "var.node_iam_role_permissions_boundary_991",
-      "simple_name": "var.node_iam_role_permissions_boundary",
-      "label": "var.node_iam_role_permissions_boundary",
-      "type": "variable",
-      "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/karpenter/variables.tf",
-      "start_line": 291,
-      "end_line": 295,
-      "security_issues": []
-    },
-    {
-      "id": "var.node_iam_role_attach_cni_policy_992",
-      "simple_name": "var.node_iam_role_attach_cni_policy",
-      "label": "var.node_iam_role_attach_cni_policy",
-      "type": "variable",
-      "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/karpenter/variables.tf",
-      "start_line": 297,
-      "end_line": 301,
-      "security_issues": []
-    },
-    {
-      "id": "var.node_iam_role_additional_policies_993",
-      "simple_name": "var.node_iam_role_additional_policies",
-      "label": "var.node_iam_role_additional_policies",
-      "type": "variable",
-      "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/karpenter/variables.tf",
-      "start_line": 303,
-      "end_line": 307,
-      "security_issues": []
-    },
-    {
-      "id": "var.node_iam_role_tags_994",
-      "simple_name": "var.node_iam_role_tags",
-      "label": "var.node_iam_role_tags",
-      "type": "variable",
-      "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/karpenter/variables.tf",
-      "start_line": 309,
-      "end_line": 313,
-      "security_issues": []
-    },
-    {
-      "id": "var.create_access_entry_995",
-      "simple_name": "var.create_access_entry",
-      "label": "var.create_access_entry",
-      "type": "variable",
-      "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/karpenter/variables.tf",
-      "start_line": 319,
-      "end_line": 323,
-      "security_issues": []
-    },
-    {
-      "id": "var.access_entry_type_996",
-      "simple_name": "var.access_entry_type",
-      "label": "var.access_entry_type",
-      "type": "variable",
-      "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/karpenter/variables.tf",
-      "start_line": 325,
-      "end_line": 329,
-      "security_issues": []
-    },
-    {
-      "id": "var.create_instance_profile_997",
-      "simple_name": "var.create_instance_profile",
-      "label": "var.create_instance_profile",
-      "type": "variable",
-      "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/karpenter/variables.tf",
-      "start_line": 335,
-      "end_line": 339,
-      "security_issues": []
-    },
-    {
-      "id": "var.rule_name_prefix_998",
-      "simple_name": "var.rule_name_prefix",
-      "label": "var.rule_name_prefix",
-      "type": "variable",
-      "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/karpenter/variables.tf",
-      "start_line": 345,
-      "end_line": 349,
-      "security_issues": []
-    },
-    {
-      "id": "data.aws_iam_policy_document.controller_999",
-      "simple_name": "data.aws_iam_policy_document.controller",
-      "label": "data.aws_iam_policy_document.controller",
-      "type": "aws_iam_policy_document",
-      "file": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/karpenter/policy.tf",
-      "start_line": 1,
-      "end_line": 405,
-      "security_issues": [
-        {
-          "cfi": "c9d32091b887bfe4408cdab36d510fb8c4ce94e4028343b14cf054e736019a73",
-          "rule_id": "AWS-0342",
-          "normalized_cis": "AWS-0342",
-          "resource_id": "data.aws_iam_policy_document.controller_999",
-          "message": "Artifact: modules/karpenter/policy.tf\nType: terraform\nVulnerability AWS-0342\nSeverity: MEDIUM\nMessage: IAM policy allows 'iam:PassRole' action\nLink: [AWS-0342](https://avd.aquasec.com/misconfig/aws-0342)",
-          "level": "warning",
-          "file_path": "/home/runner/work/GraphSec-IaC/GraphSec-IaC/terraform-aws-eks/modules/karpenter/policy.tf",
-          "start_line": 1,
-          "tool_name": "Trivy",
-          "sources": [
-            "Trivy"
-          ],
-          "correlation_layer": 1
-        }
-      ]
     }
   ],
   "edges": [
-    {
-      "from": "aws_eks_cluster.this_0",
-      "to": "aws_iam_role.eks_auto_18",
-      "arrows": "to"
-    },
     {
       "from": "aws_eks_cluster.this_0",
       "to": "aws_cloudwatch_log_group.this_2",
@@ -10371,27 +9800,12 @@
     },
     {
       "from": "aws_eks_cluster.this_0",
-      "to": "module.kms_54",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_eks_cluster.this_0",
-      "to": "module.kms_299",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_eks_cluster.this_0",
-      "to": "aws_iam_policy.cni_ipv6_policy_159",
+      "to": "aws_security_group_rule.cluster_6",
       "arrows": "to"
     },
     {
       "from": "aws_eks_cluster.this_0",
       "to": "aws_security_group_rule.node_161",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_eks_cluster.this_0",
-      "to": "aws_security_group_rule.cluster_6",
       "arrows": "to"
     },
     {
@@ -10422,6 +9836,26 @@
     {
       "from": "aws_eks_cluster.this_0",
       "to": "aws_iam_role_policy_attachment.this_880",
+      "arrows": "to"
+    },
+    {
+      "from": "aws_eks_cluster.this_0",
+      "to": "aws_iam_policy.cni_ipv6_policy_159",
+      "arrows": "to"
+    },
+    {
+      "from": "aws_eks_cluster.this_0",
+      "to": "module.kms_54",
+      "arrows": "to"
+    },
+    {
+      "from": "aws_eks_cluster.this_0",
+      "to": "module.kms_299",
+      "arrows": "to"
+    },
+    {
+      "from": "aws_eks_cluster.this_0",
+      "to": "aws_iam_role.eks_auto_18",
       "arrows": "to"
     },
     {
@@ -10606,6 +10040,11 @@
     },
     {
       "from": "aws_iam_role_policy_attachment.custom_14",
+      "to": "aws_iam_policy.custom_13",
+      "arrows": "to"
+    },
+    {
+      "from": "aws_iam_role_policy_attachment.custom_14",
       "to": "aws_iam_role.this_8",
       "arrows": "to"
     },
@@ -10640,11 +10079,6 @@
       "arrows": "to"
     },
     {
-      "from": "aws_iam_role_policy_attachment.custom_14",
-      "to": "aws_iam_policy.custom_13",
-      "arrows": "to"
-    },
-    {
       "from": "aws_eks_addon.this_15",
       "to": "module.eks_managed_node_group_170",
       "arrows": "to"
@@ -10652,6 +10086,11 @@
     {
       "from": "aws_eks_addon.this_15",
       "to": "module.eks_managed_node_group_276",
+      "arrows": "to"
+    },
+    {
+      "from": "aws_eks_addon.this_15",
+      "to": "aws_eks_cluster.this_0",
       "arrows": "to"
     },
     {
@@ -10675,18 +10114,13 @@
       "arrows": "to"
     },
     {
-      "from": "aws_eks_addon.this_15",
+      "from": "aws_eks_addon.before_compute_16",
       "to": "aws_eks_cluster.this_0",
       "arrows": "to"
     },
     {
       "from": "aws_eks_addon.before_compute_16",
       "to": "data.aws_eks_addon_version.this_27",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_eks_addon.before_compute_16",
-      "to": "aws_eks_cluster.this_0",
       "arrows": "to"
     },
     {
@@ -10936,11 +10370,6 @@
     },
     {
       "from": "module.eks_managed_node_group_170",
-      "to": "aws_eks_cluster.this_0",
-      "arrows": "to"
-    },
-    {
-      "from": "module.eks_managed_node_group_170",
       "to": "time_sleep.this_158",
       "arrows": "to"
     },
@@ -10950,7 +10379,7 @@
       "arrows": "to"
     },
     {
-      "from": "module.self_managed_node_group_171",
+      "from": "module.eks_managed_node_group_170",
       "to": "aws_eks_cluster.this_0",
       "arrows": "to"
     },
@@ -10962,6 +10391,11 @@
     {
       "from": "module.self_managed_node_group_171",
       "to": "time_sleep.this_876",
+      "arrows": "to"
+    },
+    {
+      "from": "module.self_managed_node_group_171",
+      "to": "aws_eks_cluster.this_0",
       "arrows": "to"
     },
     {
@@ -11376,6 +10810,11 @@
     },
     {
       "from": "aws_route.peer_202",
+      "to": "aws_vpc_peering_connection.remote_node_221",
+      "arrows": "to"
+    },
+    {
+      "from": "aws_route.peer_202",
       "to": "module.vpc_178",
       "arrows": "to"
     },
@@ -11417,11 +10856,6 @@
     {
       "from": "aws_route.peer_202",
       "to": "module.vpc_320",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_route.peer_202",
-      "to": "aws_vpc_peering_connection.remote_node_221",
       "arrows": "to"
     },
     {
@@ -11566,6 +11000,11 @@
     },
     {
       "from": "local_file.join_215",
+      "to": "aws_instance.hybrid_node_216",
+      "arrows": "to"
+    },
+    {
+      "from": "local_file.join_215",
       "to": "module.eks_188",
       "arrows": "to"
     },
@@ -11606,22 +11045,17 @@
     },
     {
       "from": "local_file.join_215",
-      "to": "aws_instance.hybrid_node_216",
-      "arrows": "to"
-    },
-    {
-      "from": "local_file.join_215",
       "to": "aws_ssm_activation.this_212",
       "arrows": "to"
     },
     {
       "from": "aws_instance.hybrid_node_216",
-      "to": "aws_security_group.remote_node_217",
+      "to": "data.aws_ami.hybrid_node_224",
       "arrows": "to"
     },
     {
       "from": "aws_instance.hybrid_node_216",
-      "to": "data.aws_ami.hybrid_node_224",
+      "to": "aws_security_group.remote_node_217",
       "arrows": "to"
     },
     {
@@ -11636,7 +11070,7 @@
     },
     {
       "from": "aws_vpc_security_group_ingress_rule.remote_node_218",
-      "to": "aws_security_group.remote_node_217",
+      "to": "data.http.icanhazip_225",
       "arrows": "to"
     },
     {
@@ -11686,7 +11120,7 @@
     },
     {
       "from": "aws_vpc_security_group_ingress_rule.remote_node_218",
-      "to": "data.http.icanhazip_225",
+      "to": "aws_security_group.remote_node_217",
       "arrows": "to"
     },
     {
@@ -11696,6 +11130,11 @@
     },
     {
       "from": "aws_vpc_peering_connection.remote_node_221",
+      "to": "module.remote_node_vpc_233",
+      "arrows": "to"
+    },
+    {
+      "from": "aws_vpc_peering_connection.remote_node_221",
       "to": "module.vpc_178",
       "arrows": "to"
     },
@@ -11737,11 +11176,6 @@
     {
       "from": "aws_vpc_peering_connection.remote_node_221",
       "to": "module.vpc_320",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_vpc_peering_connection.remote_node_221",
-      "to": "module.remote_node_vpc_233",
       "arrows": "to"
     },
     {
@@ -11751,11 +11185,6 @@
     },
     {
       "from": "aws_route.remote_node_private_222",
-      "to": "module.remote_node_vpc_233",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_route.remote_node_private_222",
       "to": "module.vpc_178",
       "arrows": "to"
     },
@@ -11800,7 +11229,7 @@
       "arrows": "to"
     },
     {
-      "from": "aws_route.remote_node_public_223",
+      "from": "aws_route.remote_node_private_222",
       "to": "module.remote_node_vpc_233",
       "arrows": "to"
     },
@@ -11852,6 +11281,11 @@
     {
       "from": "aws_route.remote_node_public_223",
       "to": "module.vpc_320",
+      "arrows": "to"
+    },
+    {
+      "from": "aws_route.remote_node_public_223",
+      "to": "module.remote_node_vpc_233",
       "arrows": "to"
     },
     {
@@ -11946,12 +11380,12 @@
     },
     {
       "from": "module.argocd_eks_capability_243",
-      "to": "data.aws_ssoadmin_instances.this_235",
+      "to": "data.aws_identitystore_group.aws_administrator_236",
       "arrows": "to"
     },
     {
       "from": "module.argocd_eks_capability_243",
-      "to": "data.aws_identitystore_group.aws_administrator_236",
+      "to": "data.aws_ssoadmin_instances.this_235",
       "arrows": "to"
     },
     {
@@ -12331,16 +11765,6 @@
     },
     {
       "from": "module.eks_274",
-      "to": "module.ebs_kms_key_280",
-      "arrows": "to"
-    },
-    {
-      "from": "module.eks_274",
-      "to": "module.ebs_kms_key_298",
-      "arrows": "to"
-    },
-    {
-      "from": "module.eks_274",
       "to": "module.vpc_178",
       "arrows": "to"
     },
@@ -12386,7 +11810,112 @@
     },
     {
       "from": "module.eks_274",
+      "to": "aws_iam_policy.node_additional_261",
+      "arrows": "to"
+    },
+    {
+      "from": "module.eks_274",
+      "to": "module.key_pair_232",
+      "arrows": "to"
+    },
+    {
+      "from": "module.eks_274",
+      "to": "module.key_pair_281",
+      "arrows": "to"
+    },
+    {
+      "from": "module.eks_274",
+      "to": "module.key_pair_297",
+      "arrows": "to"
+    },
+    {
+      "from": "module.eks_274",
+      "to": "aws_security_group.remote_access_260",
+      "arrows": "to"
+    },
+    {
+      "from": "module.eks_274",
+      "to": "data.aws_ami.eks_default_bottlerocket_267",
+      "arrows": "to"
+    },
+    {
+      "from": "module.eks_274",
+      "to": "data.aws_ami.eks_default_bottlerocket_286",
+      "arrows": "to"
+    },
+    {
+      "from": "module.eks_274",
+      "to": "module.aws_vpc_cni_ipv6_pod_identity_279",
+      "arrows": "to"
+    },
+    {
+      "from": "module.eks_274",
+      "to": "module.ebs_kms_key_280",
+      "arrows": "to"
+    },
+    {
+      "from": "module.eks_274",
+      "to": "module.ebs_kms_key_298",
+      "arrows": "to"
+    },
+    {
+      "from": "module.eks_274",
+      "to": "data.aws_caller_identity.current_22",
+      "arrows": "to"
+    },
+    {
+      "from": "module.eks_274",
+      "to": "data.aws_caller_identity.current_263",
+      "arrows": "to"
+    },
+    {
+      "from": "module.eks_274",
+      "to": "data.aws_caller_identity.current_283",
+      "arrows": "to"
+    },
+    {
+      "from": "module.eks_274",
+      "to": "data.aws_caller_identity.current_395",
+      "arrows": "to"
+    },
+    {
+      "from": "module.eks_274",
+      "to": "data.aws_caller_identity.current_445",
+      "arrows": "to"
+    },
+    {
+      "from": "module.eks_274",
+      "to": "data.aws_caller_identity.current_473",
+      "arrows": "to"
+    },
+    {
+      "from": "module.eks_274",
+      "to": "data.aws_caller_identity.current_640",
+      "arrows": "to"
+    },
+    {
+      "from": "module.eks_274",
+      "to": "data.aws_caller_identity.current_786",
+      "arrows": "to"
+    },
+    {
+      "from": "module.eks_274",
+      "to": "data.aws_caller_identity.current_933",
+      "arrows": "to"
+    },
+    {
+      "from": "module.eks_274",
       "to": "data.aws_ami.eks_default_arm_266",
+      "arrows": "to"
+    },
+    {
+      "from": "module.eks_274",
+      "to": "data.aws_ami.eks_default_265",
+      "arrows": "to"
+    },
+    {
+      "from": "module.eks_274",
+      "to": "data.aws_ami.eks_default_285",
       "arrows": "to"
     },
     {
@@ -12425,101 +11954,6 @@
       "arrows": "to"
     },
     {
-      "from": "module.eks_274",
-      "to": "aws_security_group.remote_access_260",
-      "arrows": "to"
-    },
-    {
-      "from": "module.eks_274",
-      "to": "data.aws_ami.eks_default_bottlerocket_267",
-      "arrows": "to"
-    },
-    {
-      "from": "module.eks_274",
-      "to": "data.aws_ami.eks_default_bottlerocket_286",
-      "arrows": "to"
-    },
-    {
-      "from": "module.eks_274",
-      "to": "data.aws_ami.eks_default_265",
-      "arrows": "to"
-    },
-    {
-      "from": "module.eks_274",
-      "to": "data.aws_ami.eks_default_285",
-      "arrows": "to"
-    },
-    {
-      "from": "module.eks_274",
-      "to": "data.aws_caller_identity.current_22",
-      "arrows": "to"
-    },
-    {
-      "from": "module.eks_274",
-      "to": "data.aws_caller_identity.current_263",
-      "arrows": "to"
-    },
-    {
-      "from": "module.eks_274",
-      "to": "data.aws_caller_identity.current_283",
-      "arrows": "to"
-    },
-    {
-      "from": "module.eks_274",
-      "to": "data.aws_caller_identity.current_395",
-      "arrows": "to"
-    },
-    {
-      "from": "module.eks_274",
-      "to": "data.aws_caller_identity.current_445",
-      "arrows": "to"
-    },
-    {
-      "from": "module.eks_274",
-      "to": "data.aws_caller_identity.current_473",
-      "arrows": "to"
-    },
-    {
-      "from": "module.eks_274",
-      "to": "data.aws_caller_identity.current_640",
-      "arrows": "to"
-    },
-    {
-      "from": "module.eks_274",
-      "to": "data.aws_caller_identity.current_786",
-      "arrows": "to"
-    },
-    {
-      "from": "module.eks_274",
-      "to": "data.aws_caller_identity.current_933",
-      "arrows": "to"
-    },
-    {
-      "from": "module.eks_274",
-      "to": "module.key_pair_232",
-      "arrows": "to"
-    },
-    {
-      "from": "module.eks_274",
-      "to": "module.key_pair_281",
-      "arrows": "to"
-    },
-    {
-      "from": "module.eks_274",
-      "to": "module.key_pair_297",
-      "arrows": "to"
-    },
-    {
-      "from": "module.eks_274",
-      "to": "module.aws_vpc_cni_ipv6_pod_identity_279",
-      "arrows": "to"
-    },
-    {
-      "from": "module.eks_274",
-      "to": "aws_iam_policy.node_additional_261",
-      "arrows": "to"
-    },
-    {
       "from": "module.eks_managed_node_group_276",
       "to": "module.eks_188",
       "arrows": "to"
@@ -12601,41 +12035,6 @@
     },
     {
       "from": "module.ebs_kms_key_280",
-      "to": "module.eks_188",
-      "arrows": "to"
-    },
-    {
-      "from": "module.ebs_kms_key_280",
-      "to": "module.eks_210",
-      "arrows": "to"
-    },
-    {
-      "from": "module.ebs_kms_key_280",
-      "to": "module.eks_246",
-      "arrows": "to"
-    },
-    {
-      "from": "module.ebs_kms_key_280",
-      "to": "module.eks_256",
-      "arrows": "to"
-    },
-    {
-      "from": "module.ebs_kms_key_280",
-      "to": "module.eks_274",
-      "arrows": "to"
-    },
-    {
-      "from": "module.ebs_kms_key_280",
-      "to": "module.eks_293",
-      "arrows": "to"
-    },
-    {
-      "from": "module.ebs_kms_key_280",
-      "to": "module.eks_317",
-      "arrows": "to"
-    },
-    {
-      "from": "module.ebs_kms_key_280",
       "to": "data.aws_caller_identity.current_22",
       "arrows": "to"
     },
@@ -12677,6 +12076,41 @@
     {
       "from": "module.ebs_kms_key_280",
       "to": "data.aws_caller_identity.current_933",
+      "arrows": "to"
+    },
+    {
+      "from": "module.ebs_kms_key_280",
+      "to": "module.eks_188",
+      "arrows": "to"
+    },
+    {
+      "from": "module.ebs_kms_key_280",
+      "to": "module.eks_210",
+      "arrows": "to"
+    },
+    {
+      "from": "module.ebs_kms_key_280",
+      "to": "module.eks_246",
+      "arrows": "to"
+    },
+    {
+      "from": "module.ebs_kms_key_280",
+      "to": "module.eks_256",
+      "arrows": "to"
+    },
+    {
+      "from": "module.ebs_kms_key_280",
+      "to": "module.eks_274",
+      "arrows": "to"
+    },
+    {
+      "from": "module.ebs_kms_key_280",
+      "to": "module.eks_293",
+      "arrows": "to"
+    },
+    {
+      "from": "module.ebs_kms_key_280",
+      "to": "module.eks_317",
       "arrows": "to"
     },
     {
@@ -12771,12 +12205,17 @@
     },
     {
       "from": "module.eks_293",
-      "to": "module.ebs_kms_key_280",
+      "to": "module.key_pair_232",
       "arrows": "to"
     },
     {
       "from": "module.eks_293",
-      "to": "module.ebs_kms_key_298",
+      "to": "module.key_pair_281",
+      "arrows": "to"
+    },
+    {
+      "from": "module.eks_293",
+      "to": "module.key_pair_297",
       "arrows": "to"
     },
     {
@@ -12796,22 +12235,22 @@
     },
     {
       "from": "module.eks_293",
-      "to": "aws_iam_policy.additional_282",
-      "arrows": "to"
-    },
-    {
-      "from": "module.eks_293",
-      "to": "aws_iam_policy.additional_309",
-      "arrows": "to"
-    },
-    {
-      "from": "module.eks_293",
       "to": "module.kms_54",
       "arrows": "to"
     },
     {
       "from": "module.eks_293",
       "to": "module.kms_299",
+      "arrows": "to"
+    },
+    {
+      "from": "module.eks_293",
+      "to": "module.ebs_kms_key_280",
+      "arrows": "to"
+    },
+    {
+      "from": "module.eks_293",
+      "to": "module.ebs_kms_key_298",
       "arrows": "to"
     },
     {
@@ -12826,52 +12265,12 @@
     },
     {
       "from": "module.eks_293",
-      "to": "module.key_pair_232",
+      "to": "aws_iam_policy.additional_282",
       "arrows": "to"
     },
     {
       "from": "module.eks_293",
-      "to": "module.key_pair_281",
-      "arrows": "to"
-    },
-    {
-      "from": "module.eks_293",
-      "to": "module.key_pair_297",
-      "arrows": "to"
-    },
-    {
-      "from": "module.ebs_kms_key_298",
-      "to": "module.eks_188",
-      "arrows": "to"
-    },
-    {
-      "from": "module.ebs_kms_key_298",
-      "to": "module.eks_210",
-      "arrows": "to"
-    },
-    {
-      "from": "module.ebs_kms_key_298",
-      "to": "module.eks_246",
-      "arrows": "to"
-    },
-    {
-      "from": "module.ebs_kms_key_298",
-      "to": "module.eks_256",
-      "arrows": "to"
-    },
-    {
-      "from": "module.ebs_kms_key_298",
-      "to": "module.eks_274",
-      "arrows": "to"
-    },
-    {
-      "from": "module.ebs_kms_key_298",
-      "to": "module.eks_293",
-      "arrows": "to"
-    },
-    {
-      "from": "module.ebs_kms_key_298",
-      "to": "module.eks_317",
+      "to": "aws_iam_policy.additional_309",
       "arrows": "to"
     },
     {
@@ -12917,6 +12316,41 @@
     {
       "from": "module.ebs_kms_key_298",
       "to": "data.aws_caller_identity.current_933",
+      "arrows": "to"
+    },
+    {
+      "from": "module.ebs_kms_key_298",
+      "to": "module.eks_188",
+      "arrows": "to"
+    },
+    {
+      "from": "module.ebs_kms_key_298",
+      "to": "module.eks_210",
+      "arrows": "to"
+    },
+    {
+      "from": "module.ebs_kms_key_298",
+      "to": "module.eks_246",
+      "arrows": "to"
+    },
+    {
+      "from": "module.ebs_kms_key_298",
+      "to": "module.eks_256",
+      "arrows": "to"
+    },
+    {
+      "from": "module.ebs_kms_key_298",
+      "to": "module.eks_274",
+      "arrows": "to"
+    },
+    {
+      "from": "module.ebs_kms_key_298",
+      "to": "module.eks_293",
+      "arrows": "to"
+    },
+    {
+      "from": "module.ebs_kms_key_298",
+      "to": "module.eks_317",
       "arrows": "to"
     },
     {
@@ -13566,6 +13000,16 @@
     },
     {
       "from": "aws_launch_template.this_462",
+      "to": "aws_placement_group.this_468",
+      "arrows": "to"
+    },
+    {
+      "from": "aws_launch_template.this_462",
+      "to": "aws_placement_group.this_634",
+      "arrows": "to"
+    },
+    {
+      "from": "aws_launch_template.this_462",
       "to": "aws_iam_role_policy_attachment.this_9",
       "arrows": "to"
     },
@@ -13617,16 +13061,6 @@
     {
       "from": "aws_launch_template.this_462",
       "to": "aws_iam_role_policy_attachment.additional_881",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_launch_template.this_462",
-      "to": "aws_placement_group.this_468",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_launch_template.this_462",
-      "to": "aws_placement_group.this_634",
       "arrows": "to"
     },
     {
@@ -13756,6 +13190,21 @@
     },
     {
       "from": "aws_iam_role_policy.this_467",
+      "to": "data.aws_iam_policy_document.role_478",
+      "arrows": "to"
+    },
+    {
+      "from": "aws_iam_role_policy.this_467",
+      "to": "data.aws_iam_policy_document.role_644",
+      "arrows": "to"
+    },
+    {
+      "from": "aws_iam_role_policy.this_467",
+      "to": "data.aws_iam_policy_document.role_788",
+      "arrows": "to"
+    },
+    {
+      "from": "aws_iam_role_policy.this_467",
       "to": "aws_iam_role.this_8",
       "arrows": "to"
     },
@@ -13787,21 +13236,6 @@
     {
       "from": "aws_iam_role_policy.this_467",
       "to": "aws_iam_role.this_878",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_iam_role_policy.this_467",
-      "to": "data.aws_iam_policy_document.role_478",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_iam_role_policy.this_467",
-      "to": "data.aws_iam_policy_document.role_644",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_iam_role_policy.this_467",
-      "to": "data.aws_iam_policy_document.role_788",
       "arrows": "to"
     },
     {
@@ -13936,17 +13370,17 @@
     },
     {
       "from": "local.latest_ami_release_version_493",
-      "to": "data.aws_eks_cluster_versions.this_475",
-      "arrows": "to"
-    },
-    {
-      "from": "local.latest_ami_release_version_493",
       "to": "data.aws_ssm_parameter.ami_476",
       "arrows": "to"
     },
     {
       "from": "local.latest_ami_release_version_493",
       "to": "data.aws_ssm_parameter.ami_641",
+      "arrows": "to"
+    },
+    {
+      "from": "local.latest_ami_release_version_493",
+      "to": "data.aws_eks_cluster_versions.this_475",
       "arrows": "to"
     },
     {
@@ -13961,22 +13395,12 @@
     },
     {
       "from": "local.user_data_type_to_rendered_609",
-      "to": "data.cloudinit_config.al2023_eks_managed_node_group_602",
-      "arrows": "to"
-    },
-    {
-      "from": "local.user_data_type_to_rendered_609",
       "to": "data.cloudinit_config.al2_eks_managed_node_group_601",
       "arrows": "to"
     },
     {
-      "from": "aws_launch_template.this_627",
-      "to": "aws_iam_instance_profile.this_632",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_launch_template.this_627",
-      "to": "aws_iam_instance_profile.this_930",
+      "from": "local.user_data_type_to_rendered_609",
+      "to": "data.cloudinit_config.al2023_eks_managed_node_group_602",
       "arrows": "to"
     },
     {
@@ -14001,32 +13425,12 @@
     },
     {
       "from": "aws_launch_template.this_627",
-      "to": "aws_iam_role_policy_attachment.this_9",
+      "to": "aws_placement_group.this_468",
       "arrows": "to"
     },
     {
       "from": "aws_launch_template.this_627",
-      "to": "aws_iam_role_policy_attachment.this_465",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_launch_template.this_627",
-      "to": "aws_iam_role_policy_attachment.this_630",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_launch_template.this_627",
-      "to": "aws_iam_role_policy_attachment.this_780",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_launch_template.this_627",
-      "to": "aws_iam_role_policy_attachment.this_823",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_launch_template.this_627",
-      "to": "aws_iam_role_policy_attachment.this_880",
+      "to": "aws_placement_group.this_634",
       "arrows": "to"
     },
     {
@@ -14056,12 +13460,42 @@
     },
     {
       "from": "aws_launch_template.this_627",
-      "to": "aws_placement_group.this_468",
+      "to": "aws_iam_instance_profile.this_632",
       "arrows": "to"
     },
     {
       "from": "aws_launch_template.this_627",
-      "to": "aws_placement_group.this_634",
+      "to": "aws_iam_instance_profile.this_930",
+      "arrows": "to"
+    },
+    {
+      "from": "aws_launch_template.this_627",
+      "to": "aws_iam_role_policy_attachment.this_9",
+      "arrows": "to"
+    },
+    {
+      "from": "aws_launch_template.this_627",
+      "to": "aws_iam_role_policy_attachment.this_465",
+      "arrows": "to"
+    },
+    {
+      "from": "aws_launch_template.this_627",
+      "to": "aws_iam_role_policy_attachment.this_630",
+      "arrows": "to"
+    },
+    {
+      "from": "aws_launch_template.this_627",
+      "to": "aws_iam_role_policy_attachment.this_780",
+      "arrows": "to"
+    },
+    {
+      "from": "aws_launch_template.this_627",
+      "to": "aws_iam_role_policy_attachment.this_823",
+      "arrows": "to"
+    },
+    {
+      "from": "aws_launch_template.this_627",
+      "to": "aws_iam_role_policy_attachment.this_880",
       "arrows": "to"
     },
     {
@@ -14191,6 +13625,21 @@
     },
     {
       "from": "aws_iam_role_policy.this_633",
+      "to": "data.aws_iam_policy_document.role_478",
+      "arrows": "to"
+    },
+    {
+      "from": "aws_iam_role_policy.this_633",
+      "to": "data.aws_iam_policy_document.role_644",
+      "arrows": "to"
+    },
+    {
+      "from": "aws_iam_role_policy.this_633",
+      "to": "data.aws_iam_policy_document.role_788",
+      "arrows": "to"
+    },
+    {
+      "from": "aws_iam_role_policy.this_633",
       "to": "aws_iam_role.this_8",
       "arrows": "to"
     },
@@ -14222,21 +13671,6 @@
     {
       "from": "aws_iam_role_policy.this_633",
       "to": "aws_iam_role.this_878",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_iam_role_policy.this_633",
-      "to": "data.aws_iam_policy_document.role_478",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_iam_role_policy.this_633",
-      "to": "data.aws_iam_policy_document.role_644",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_iam_role_policy.this_633",
-      "to": "data.aws_iam_policy_document.role_788",
       "arrows": "to"
     },
     {
@@ -14477,776 +13911,6 @@
     {
       "from": "aws_iam_role_policy_attachment.additional_781",
       "to": "aws_iam_role.this_629",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_iam_role_policy_attachment.additional_781",
-      "to": "aws_iam_role.this_779",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_iam_role_policy_attachment.additional_781",
-      "to": "aws_iam_role.this_821",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_iam_role_policy_attachment.additional_781",
-      "to": "aws_iam_role.this_878",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_iam_role_policy.this_782",
-      "to": "aws_iam_role.this_8",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_iam_role_policy.this_782",
-      "to": "aws_iam_role.this_262",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_iam_role_policy.this_782",
-      "to": "aws_iam_role.this_464",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_iam_role_policy.this_782",
-      "to": "aws_iam_role.this_629",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_iam_role_policy.this_782",
-      "to": "aws_iam_role.this_779",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_iam_role_policy.this_782",
-      "to": "aws_iam_role.this_821",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_iam_role_policy.this_782",
-      "to": "aws_iam_role.this_878",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_iam_role_policy.this_782",
-      "to": "data.aws_iam_policy_document.role_478",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_iam_role_policy.this_782",
-      "to": "data.aws_iam_policy_document.role_644",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_iam_role_policy.this_782",
-      "to": "data.aws_iam_policy_document.role_788",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_eks_fargate_profile.this_783",
-      "to": "aws_iam_role.this_8",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_eks_fargate_profile.this_783",
-      "to": "aws_iam_role.this_262",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_eks_fargate_profile.this_783",
-      "to": "aws_iam_role.this_464",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_eks_fargate_profile.this_783",
-      "to": "aws_iam_role.this_629",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_eks_fargate_profile.this_783",
-      "to": "aws_iam_role.this_779",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_eks_fargate_profile.this_783",
-      "to": "aws_iam_role.this_821",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_eks_fargate_profile.this_783",
-      "to": "aws_iam_role.this_878",
-      "arrows": "to"
-    },
-    {
-      "from": "local.region_791",
-      "to": "data.aws_caller_identity.current_22",
-      "arrows": "to"
-    },
-    {
-      "from": "local.region_791",
-      "to": "data.aws_caller_identity.current_263",
-      "arrows": "to"
-    },
-    {
-      "from": "local.region_791",
-      "to": "data.aws_caller_identity.current_283",
-      "arrows": "to"
-    },
-    {
-      "from": "local.region_791",
-      "to": "data.aws_caller_identity.current_395",
-      "arrows": "to"
-    },
-    {
-      "from": "local.region_791",
-      "to": "data.aws_caller_identity.current_445",
-      "arrows": "to"
-    },
-    {
-      "from": "local.region_791",
-      "to": "data.aws_caller_identity.current_473",
-      "arrows": "to"
-    },
-    {
-      "from": "local.region_791",
-      "to": "data.aws_caller_identity.current_640",
-      "arrows": "to"
-    },
-    {
-      "from": "local.region_791",
-      "to": "data.aws_caller_identity.current_786",
-      "arrows": "to"
-    },
-    {
-      "from": "local.region_791",
-      "to": "data.aws_caller_identity.current_933",
-      "arrows": "to"
-    },
-    {
-      "from": "local.region_791",
-      "to": "data.aws_region.current_784",
-      "arrows": "to"
-    },
-    {
-      "from": "local.region_791",
-      "to": "data.aws_region.current_931",
-      "arrows": "to"
-    },
-    {
-      "from": "local.region_791",
-      "to": "data.aws_partition.current_21",
-      "arrows": "to"
-    },
-    {
-      "from": "local.region_791",
-      "to": "data.aws_partition.current_394",
-      "arrows": "to"
-    },
-    {
-      "from": "local.region_791",
-      "to": "data.aws_partition.current_472",
-      "arrows": "to"
-    },
-    {
-      "from": "local.region_791",
-      "to": "data.aws_partition.current_639",
-      "arrows": "to"
-    },
-    {
-      "from": "local.region_791",
-      "to": "data.aws_partition.current_785",
-      "arrows": "to"
-    },
-    {
-      "from": "local.region_791",
-      "to": "data.aws_partition.current_829",
-      "arrows": "to"
-    },
-    {
-      "from": "local.region_791",
-      "to": "data.aws_partition.current_932",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_iam_role.this_821",
-      "to": "data.aws_iam_policy_document.assume_role_830",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_iam_role.this_821",
-      "to": "data.aws_iam_policy_document.assume_role_883",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_iam_policy.this_822",
-      "to": "data.aws_iam_policy_document.this_396",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_iam_policy.this_822",
-      "to": "data.aws_iam_policy_document.this_831",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_iam_policy.this_822",
-      "to": "data.aws_iam_policy_document.this_884",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_iam_role_policy_attachment.this_823",
-      "to": "aws_iam_policy.this_822",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_iam_role_policy_attachment.this_823",
-      "to": "aws_iam_policy.this_879",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_iam_role_policy_attachment.this_823",
-      "to": "aws_iam_role.this_8",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_iam_role_policy_attachment.this_823",
-      "to": "aws_iam_role.this_262",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_iam_role_policy_attachment.this_823",
-      "to": "aws_iam_role.this_464",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_iam_role_policy_attachment.this_823",
-      "to": "aws_iam_role.this_629",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_iam_role_policy_attachment.this_823",
-      "to": "aws_iam_role.this_779",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_iam_role_policy_attachment.this_823",
-      "to": "aws_iam_role.this_821",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_iam_role_policy_attachment.this_823",
-      "to": "aws_iam_role.this_878",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_rolesanywhere_profile.this_824",
-      "to": "aws_iam_role.intermediate_826",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_iam_role.intermediate_826",
-      "to": "data.aws_iam_policy_document.intermediate_assume_role_832",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_iam_policy.intermediate_827",
-      "to": "data.aws_iam_policy_document.intermediate_833",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_iam_role_policy_attachment.intermediate_828",
-      "to": "aws_iam_policy.intermediate_827",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_iam_role_policy_attachment.intermediate_828",
-      "to": "aws_iam_role.this_8",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_iam_role_policy_attachment.intermediate_828",
-      "to": "aws_iam_role.this_262",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_iam_role_policy_attachment.intermediate_828",
-      "to": "aws_iam_role.this_464",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_iam_role_policy_attachment.intermediate_828",
-      "to": "aws_iam_role.this_629",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_iam_role_policy_attachment.intermediate_828",
-      "to": "aws_iam_role.this_779",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_iam_role_policy_attachment.intermediate_828",
-      "to": "aws_iam_role.this_821",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_iam_role_policy_attachment.intermediate_828",
-      "to": "aws_iam_role.this_878",
-      "arrows": "to"
-    },
-    {
-      "from": "data.aws_iam_policy_document.assume_role_830",
-      "to": "aws_iam_role.intermediate_826",
-      "arrows": "to"
-    },
-    {
-      "from": "data.aws_iam_policy_document.intermediate_assume_role_832",
-      "to": "aws_rolesanywhere_trust_anchor.this_825",
-      "arrows": "to"
-    },
-    {
-      "from": "local.partition_834",
-      "to": "data.aws_partition.current_21",
-      "arrows": "to"
-    },
-    {
-      "from": "local.partition_834",
-      "to": "data.aws_partition.current_394",
-      "arrows": "to"
-    },
-    {
-      "from": "local.partition_834",
-      "to": "data.aws_partition.current_472",
-      "arrows": "to"
-    },
-    {
-      "from": "local.partition_834",
-      "to": "data.aws_partition.current_639",
-      "arrows": "to"
-    },
-    {
-      "from": "local.partition_834",
-      "to": "data.aws_partition.current_785",
-      "arrows": "to"
-    },
-    {
-      "from": "local.partition_834",
-      "to": "data.aws_partition.current_829",
-      "arrows": "to"
-    },
-    {
-      "from": "local.partition_834",
-      "to": "data.aws_partition.current_932",
-      "arrows": "to"
-    },
-    {
-      "from": "time_sleep.this_876",
-      "to": "aws_iam_role.this_8",
-      "arrows": "to"
-    },
-    {
-      "from": "time_sleep.this_876",
-      "to": "aws_iam_role.this_262",
-      "arrows": "to"
-    },
-    {
-      "from": "time_sleep.this_876",
-      "to": "aws_iam_role.this_464",
-      "arrows": "to"
-    },
-    {
-      "from": "time_sleep.this_876",
-      "to": "aws_iam_role.this_629",
-      "arrows": "to"
-    },
-    {
-      "from": "time_sleep.this_876",
-      "to": "aws_iam_role.this_779",
-      "arrows": "to"
-    },
-    {
-      "from": "time_sleep.this_876",
-      "to": "aws_iam_role.this_821",
-      "arrows": "to"
-    },
-    {
-      "from": "time_sleep.this_876",
-      "to": "aws_iam_role.this_878",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_eks_capability.this_877",
-      "to": "time_sleep.this_158",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_eks_capability.this_877",
-      "to": "time_sleep.this_876",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_eks_capability.this_877",
-      "to": "aws_iam_role_policy_attachment.this_9",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_eks_capability.this_877",
-      "to": "aws_iam_role_policy_attachment.this_465",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_eks_capability.this_877",
-      "to": "aws_iam_role_policy_attachment.this_630",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_eks_capability.this_877",
-      "to": "aws_iam_role_policy_attachment.this_780",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_eks_capability.this_877",
-      "to": "aws_iam_role_policy_attachment.this_823",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_eks_capability.this_877",
-      "to": "aws_iam_role_policy_attachment.this_880",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_eks_capability.this_877",
-      "to": "aws_iam_role_policy_attachment.additional_10",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_eks_capability.this_877",
-      "to": "aws_iam_role_policy_attachment.additional_466",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_eks_capability.this_877",
-      "to": "aws_iam_role_policy_attachment.additional_631",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_eks_capability.this_877",
-      "to": "aws_iam_role_policy_attachment.additional_781",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_eks_capability.this_877",
-      "to": "aws_iam_role_policy_attachment.additional_881",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_iam_role.this_878",
-      "to": "data.aws_iam_policy_document.assume_role_830",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_iam_role.this_878",
-      "to": "data.aws_iam_policy_document.assume_role_883",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_iam_policy.this_879",
-      "to": "data.aws_iam_policy_document.this_396",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_iam_policy.this_879",
-      "to": "data.aws_iam_policy_document.this_831",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_iam_policy.this_879",
-      "to": "data.aws_iam_policy_document.this_884",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_iam_role_policy_attachment.this_880",
-      "to": "aws_iam_policy.this_822",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_iam_role_policy_attachment.this_880",
-      "to": "aws_iam_policy.this_879",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_iam_role_policy_attachment.this_880",
-      "to": "aws_iam_role.this_8",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_iam_role_policy_attachment.this_880",
-      "to": "aws_iam_role.this_262",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_iam_role_policy_attachment.this_880",
-      "to": "aws_iam_role.this_464",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_iam_role_policy_attachment.this_880",
-      "to": "aws_iam_role.this_629",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_iam_role_policy_attachment.this_880",
-      "to": "aws_iam_role.this_779",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_iam_role_policy_attachment.this_880",
-      "to": "aws_iam_role.this_821",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_iam_role_policy_attachment.this_880",
-      "to": "aws_iam_role.this_878",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_iam_role_policy_attachment.additional_881",
-      "to": "aws_iam_role.this_8",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_iam_role_policy_attachment.additional_881",
-      "to": "aws_iam_role.this_262",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_iam_role_policy_attachment.additional_881",
-      "to": "aws_iam_role.this_464",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_iam_role_policy_attachment.additional_881",
-      "to": "aws_iam_role.this_629",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_iam_role_policy_attachment.additional_881",
-      "to": "aws_iam_role.this_779",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_iam_role_policy_attachment.additional_881",
-      "to": "aws_iam_role.this_821",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_iam_role_policy_attachment.additional_881",
-      "to": "aws_iam_role.this_878",
-      "arrows": "to"
-    },
-    {
-      "from": "data.aws_iam_policy_document.assume_role_883",
-      "to": "data.aws_service_principal.capabilities_eks_882",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_iam_role.controller_916",
-      "to": "data.aws_iam_policy_document.controller_assume_role_935",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_iam_role_policy.controller_917",
-      "to": "data.aws_iam_policy_document.controller_999",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_iam_role_policy.controller_917",
-      "to": "aws_iam_role.controller_916",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_iam_policy.controller_918",
-      "to": "data.aws_iam_policy_document.controller_999",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_iam_role_policy_attachment.controller_919",
-      "to": "aws_iam_role.controller_916",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_iam_role_policy_attachment.controller_919",
-      "to": "aws_iam_policy.controller_918",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_iam_role_policy_attachment.controller_additional_920",
-      "to": "aws_iam_role.controller_916",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_eks_pod_identity_association.karpenter_921",
-      "to": "aws_iam_role.controller_916",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_sqs_queue_policy.this_923",
-      "to": "data.aws_iam_policy_document.queue_936",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_sqs_queue_policy.this_923",
-      "to": "aws_sqs_queue.this_922",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_cloudwatch_event_target.this_925",
-      "to": "aws_sqs_queue.this_922",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_cloudwatch_event_target.this_925",
-      "to": "aws_cloudwatch_event_rule.this_924",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_iam_role.node_926",
-      "to": "data.aws_iam_policy_document.node_assume_role_937",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_iam_role_policy_attachment.node_927",
-      "to": "aws_iam_role.node_926",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_iam_role_policy_attachment.node_additional_928",
-      "to": "aws_iam_role.node_926",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_eks_access_entry.node_929",
-      "to": "aws_sqs_queue_policy.this_923",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_eks_access_entry.node_929",
-      "to": "aws_iam_role.node_926",
-      "arrows": "to"
-    },
-    {
-      "from": "aws_iam_instance_profile.this_930",
-      "to": "aws_iam_role.node_926",
-      "arrows": "to"
-    },
-    {
-      "from": "data.aws_iam_policy_document.queue_936",
-      "to": "aws_sqs_queue.this_922",
-      "arrows": "to"
-    },
-    {
-      "from": "local.region_941",
-      "to": "data.aws_partition.current_21",
-      "arrows": "to"
-    },
-    {
-      "from": "local.region_941",
-      "to": "data.aws_partition.current_394",
-      "arrows": "to"
-    },
-    {
-      "from": "local.region_941",
-      "to": "data.aws_partition.current_472",
-      "arrows": "to"
-    },
-    {
-      "from": "local.region_941",
-      "to": "data.aws_partition.current_639",
-      "arrows": "to"
-    },
-    {
-      "from": "local.region_941",
-      "to": "data.aws_partition.current_785",
-      "arrows": "to"
-    },
-    {
-      "from": "local.region_941",
-      "to": "data.aws_partition.current_829",
-      "arrows": "to"
-    },
-    {
-      "from": "local.region_941",
-      "to": "data.aws_partition.current_932",
-      "arrows": "to"
-    },
-    {
-      "from": "local.region_941",
-      "to": "data.aws_caller_identity.current_22",
-      "arrows": "to"
-    },
-    {
-      "from": "local.region_941",
-      "to": "data.aws_caller_identity.current_263",
-      "arrows": "to"
-    },
-    {
-      "from": "local.region_941",
-      "to": "data.aws_caller_identity.current_283",
-      "arrows": "to"
-    },
-    {
-      "from": "local.region_941",
-      "to": "data.aws_caller_identity.current_395",
-      "arrows": "to"
-    },
-    {
-      "from": "local.region_941",
-      "to": "data.aws_caller_identity.current_445",
-      "arrows": "to"
-    },
-    {
-      "from": "local.region_941",
-      "to": "data.aws_caller_identity.current_473",
-      "arrows": "to"
-    },
-    {
-      "from": "local.region_941",
-      "to": "data.aws_caller_identity.current_640",
-      "arrows": "to"
-    },
-    {
-      "from": "local.region_941",
-      "to": "data.aws_caller_identity.current_786",
-      "arrows": "to"
-    },
-    {
-      "from": "local.region_941",
-      "to": "data.aws_caller_identity.current_933",
-      "arrows": "to"
-    },
-    {
-      "from": "local.region_941",
-      "to": "data.aws_service_principal.ec2_934",
-      "arrows": "to"
-    },
-    {
-      "from": "local.region_941",
-      "to": "data.aws_region.current_784",
-      "arrows": "to"
-    },
-    {
-      "from": "local.region_941",
-      "to": "data.aws_region.current_931",
-      "arrows": "to"
-    },
-    {
-      "from": "data.aws_iam_policy_document.controller_999",
-      "to": "aws_iam_role.node_926",
-      "arrows": "to"
-    },
-    {
-      "from": "data.aws_iam_policy_document.controller_999",
-      "to": "aws_sqs_queue.this_922",
       "arrows": "to"
     }
   ],
@@ -15312,17 +13976,17 @@
   "api_metadata": {
     "status": "success",
     "message": "Pipeline completado exitosamente para proyecto 'eks'",
-    "project_name": "eks_pr_37",
+    "project_name": "eks_pr_38",
     "project_directory": "./terraform-aws-eks",
     "scanners_used": 2,
     "checkov_success": true,
     "trivy_success": true,
     "total_findings_original": 234,
     "total_findings_unique": 26,
-    "duplicates_removed": 208,
+    "duplicates_removed": 202,
     "deduplication_method": "CFI_CIS+SARIF_FP",
-    "total_nodes": 1000,
-    "total_edges": 978,
+    "total_nodes": 945,
+    "total_edges": 824,
     "correlation_metadata": {
       "assigned_findings": 23,
       "unassigned_findings_count": 3,
@@ -15336,6 +14000,6 @@
       }
     },
     "unassigned_findings_count": 3,
-    "pr_number": 37
+    "pr_number": 38
   }
 }
