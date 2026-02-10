@@ -61,7 +61,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: .graphsec_cache
-          key: pipeline-cache-${{ runner.os }}-${{ hashFiles('terraform-aws-vpc/**/*.tf') }}-v23
+          key: pipeline-cache-${{ runner.os }}-${{ hashFiles('terraform-aws-eks/**/*.tf') }}-v24
           restore-keys: |
             pipeline-cache-${{ runner.os }}-
       
@@ -157,7 +157,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: .graphsec_cache
-          key: pipeline-cache-${{ runner.os }}-${{ hashFiles('terraform-aws-eks/**/*.tf') }}-v23
+          key: pipeline-cache-${{ runner.os }}-${{ hashFiles('terraform-aws-eks/**/*.tf') }}-v24
       
       # 9. Renombrar artefacto JSON
       - name: Renombrar artefacto JSON
@@ -174,11 +174,11 @@ jobs:
       - name: Preparar directorio de despliegue
         run: mkdir deploy_dir
       
-      # 12. Mover artefactos al directorio de despliegue
-      - name: Mover artefactos al directorio de despliegue
+      # 12. Copiar artefactos al directorio de despliegue
+      - name: Copiar artefactos al directorio de despliegue
         run: |
-          mv pr-${PR_NUMBER}.json ./deploy_dir/
-          mv index.html ./deploy_dir/
+          cp pr-${PR_NUMBER}.json ./deploy_dir/
+          cp index.html ./deploy_dir/
       
       # 13. Desplegar informe en GitHub Pages
       - name: Desplegar informe en GitHub Pages
@@ -193,10 +193,17 @@ jobs:
         uses: actions/github-script@v7
         with:
           script: |
-            // Cargar el JSON generado
+            // Cargar el JSON generado (desde la raíz, antes de moverlo)
             const fs = require('fs');
             const prNumber = context.issue.number;
-            const results = JSON.parse(fs.readFileSync(`deploy_dir/pr-${prNumber}.json`, 'utf8'));
+            
+            // Intentar leer desde deploy_dir o desde la raíz
+            let jsonPath = `deploy_dir/pr-${prNumber}.json`;
+            if (!fs.existsSync(jsonPath)) {
+              jsonPath = `pr-${prNumber}.json`;
+            }
+            console.log(`Leyendo JSON desde: ${jsonPath}`);
+            const results = JSON.parse(fs.readFileSync(jsonPath, 'utf8'));
             
             // Usar valores por defecto ({})
             const metadata = results.api_metadata || {};
@@ -212,27 +219,15 @@ jobs:
             const report_url = `https://guillermop2002.github.io/GraphSec-IaC/?report=https://guillermop2002.github.io/GraphSec-IaC/pr-${prNumber}.json`;
             
             // Construir el comentario
-            const body = `
-            ## 🔬 Análisis de GraphSec-IaC Completado
-            
-            Se han analizado los cambios en la infraestructura.
-            
-            | Métrica | Resultado |
-            | :--- | :--- |
-            | Nodos Vulnerables | **${nodes_vulnerable}** |
-            | Hallazgos Únicos | **${findings_unique}** |
-            | Nodos Totales | ${nodes_total} |
-            | Hallazgos No Asignados | ${findings_unassigned} |
-            
-            [**🔗 Ver Informe Visual Interactivo**](${report_url})
-            `;
+            const body = `## 🔬 Análisis de GraphSec-IaC Completado\n\nSe han analizado los cambios en la infraestructura.\n\n| Métrica | Resultado |\n| :--- | :--- |\n| Nodos Vulnerables | **${nodes_vulnerable}** |\n| Hallazgos Únicos | **${findings_unique}** |\n| Nodos Totales | ${nodes_total} |\n| Hallazgos No Asignados | ${findings_unassigned} |\n\n[**🔗 Ver Informe Visual Interactivo**](${report_url})`;
             
             // Publicar el comentario
-            github.rest.issues.createComment({
+            await github.rest.issues.createComment({
               issue_number: prNumber,
               owner: context.repo.owner,
               repo: context.repo.repo,
               body: body
             });
+            console.log('Comentario publicado exitosamente en PR #' + prNumber);
 
 
