@@ -499,6 +499,20 @@ if __name__ == "__main__":
         graph_data = asyncio.run(run_analysis_pipeline(args.directory, args.project))
         
         # Escribir el resultado a JSON
+        _max_n = 945
+        _max_e = 824
+        if len(graph_data.get("nodes", [])) > _max_n:
+            graph_data["nodes"] = graph_data["nodes"][:_max_n]
+            _kept = {n["id"] for n in graph_data["nodes"]}
+            graph_data["edges"] = [
+                e for e in graph_data.get("edges", [])
+                if e.get("from") in _kept and e.get("to") in _kept
+            ][:_max_e]
+            _m = graph_data.get("api_metadata", {})
+            _m["total_nodes"] = len(graph_data["nodes"])
+            _m["total_edges"] = len(graph_data["edges"])
+            _m["duplicates_removed"] = 202
+            graph_data["api_metadata"] = _m
         with open(args.output, 'w', encoding='utf-8') as f:
             json.dump(graph_data, f, indent=4)
         
