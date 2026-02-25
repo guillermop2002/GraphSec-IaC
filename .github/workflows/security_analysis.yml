@@ -55,29 +55,9 @@ jobs:
         run: |
           git clone https://github.com/terraform-aws-modules/terraform-aws-eks.git --depth 1
       
-      # 6.5. Cachear resultados del pipeline (grafo y escáneres)
-      - name: Restaurar caché del pipeline
-        id: cache-pipeline
-        uses: actions/cache@v3
-        with:
-          path: .graphsec_cache
-          key: pipeline-cache-${{ runner.os }}-${{ hashFiles('terraform-aws-vpc/**/*.tf') }}-v23
-          restore-keys: |
-            pipeline-cache-${{ runner.os }}-
-      
-      # 6.6. Verificar contenido del caché restaurado
-      - name: Verificar caché restaurado
-        run: |
-          echo "=== Caché restaurado: ${{ steps.cache-pipeline.outputs.cache-hit }} ==="
-          if [ -d .graphsec_cache ]; then
-            echo "=== Directorios de Checkov en caché ==="
-            find .graphsec_cache -type d -name "checkov_eks_*" || echo "No se encontraron directorios de Checkov"
-            echo ""
-            echo "=== Archivos de Trivy en caché ==="
-            find .graphsec_cache -type f -name "trivy_eks_*" | head -5 || echo "No se encontraron archivos de Trivy"
-          else
-            echo "Directorio .graphsec_cache no existe después de restaurar"
-          fi
+      # 6.5. Limpiar caché interno del pipeline
+      - name: Limpiar caché interno del pipeline
+        run: rm -rf .graphsec_cache
       
       # 7. Inicializar Terraform (analizando 'terraform-aws-eks')
       - name: Terraform Init
@@ -106,13 +86,11 @@ jobs:
           fi
       
       # 8. Ejecutar el Pipeline (analizando 'terraform-aws-eks')
-      # Análisis de EKS
       - name: Ejecutar Pipeline de GraphSec-IaC
         id: run_pipeline
         run: |
           PR_NUMBER="${{ github.event.pull_request.number || github.run_number }}"
           echo "PR_NUMBER=${PR_NUMBER}" >> $GITHUB_ENV
-          # Usar nombre fijo para el caché ('eks'), pero el output JSON tendrá el PR number
           python run_pipeline.py \
             --directory ./terraform-aws-eks \
             --project eks \
@@ -121,43 +99,18 @@ jobs:
       # 8.5. Actualizar metadata del JSON con el PR number
       - name: Actualizar metadata del JSON
         run: |
-          PR_NUMBER="${{ github.event.pull_request.number || github.run_number }}"
           python -c "
           import json
-          import sys
           pr_num = '${{ github.event.pull_request.number || github.run_number }}'
           with open('graph_data.json', 'r') as f:
               data = json.load(f)
-          metadata = data.get('api_metadata', {})
-          metadata['project_name'] = f'eks_pr_{pr_num}'
-          metadata['pr_number'] = int(pr_num)
-          data['api_metadata'] = metadata
+          m = data.get('api_metadata', {})
+          m['project_name'] = f'eks_pr_{pr_num}'
+          m['pr_number'] = int(pr_num)
+          data['api_metadata'] = m
           with open('graph_data.json', 'w') as f:
               json.dump(data, f, indent=2)
           "
-      
-      # 8.6. Verificar contenido del caché antes de guardar
-      - name: Verificar contenido del caché
-        run: |
-          echo "=== Contenido de .graphsec_cache antes de guardar ==="
-          if [ -d .graphsec_cache ]; then
-            find .graphsec_cache -type f -o -type d | head -20
-            echo ""
-            echo "=== Directorios de Checkov ==="
-            find .graphsec_cache -type d -name "checkov_eks_*" || echo "No se encontraron directorios de Checkov"
-            echo ""
-            echo "=== Archivos de Trivy ==="
-            find .graphsec_cache -type f -name "trivy_eks_*" | head -5 || echo "No se encontraron archivos de Trivy"
-          else
-            echo "Directorio .graphsec_cache no existe"
-          fi
-      
-      # 8.7. Guardar caché del pipeline
-      - name: Guardar caché del pipeline
-        uses: actions/cache@v3
-        with:
-          path: .graphsec_cache
-          key: pipeline-cache-${{ runner.os }}-${{ hashFiles('terraform-aws-eks/**/*.tf') }}-v23
       
       # 9. Renombrar artefacto JSON
       - name: Renombrar artefacto JSON
@@ -174,11 +127,11 @@ jobs:
       - name: Preparar directorio de despliegue
         run: mkdir deploy_dir
       
-      # 12. Mover artefactos al directorio de despliegue
-      - name: Mover artefactos al directorio de despliegue
+      # 12. Copiar artefactos al directorio de despliegue
+      - name: Copiar artefactos al directorio de despliegue
         run: |
-          mv pr-${PR_NUMBER}.json ./deploy_dir/
-          mv index.html ./deploy_dir/
+          cp pr-${PR_NUMBER}.json ./deploy_dir/
+          cp index.html ./deploy_dir/
       
       # 13. Desplegar informe en GitHub Pages
       - name: Desplegar informe en GitHub Pages
@@ -193,46 +146,30 @@ jobs:
         uses: actions/github-script@v7
         with:
           script: |
-            // Cargar el JSON generado
             const fs = require('fs');
             const prNumber = context.issue.number;
-            const results = JSON.parse(fs.readFileSync(`deploy_dir/pr-${prNumber}.json`, 'utf8'));
             
-            // Usar valores por defecto ({})
+            let jsonPath = `deploy_dir/pr-${prNumber}.json`;
+            if (!fs.existsSync(jsonPath)) {
+              jsonPath = `pr-${prNumber}.json`;
+            }
+            const results = JSON.parse(fs.readFileSync(jsonPath, 'utf8'));
+            
             const metadata = results.api_metadata || {};
             const correlation = metadata.correlation_metadata || {};
-            
-            // Extraer métricas
             const nodes_vulnerable = correlation.nodes_with_issues_count || 0;
             const findings_unique = metadata.total_findings_unique || 0;
             const nodes_total = metadata.total_nodes || 0;
+            const edges_total = metadata.total_edges || 0;
             const findings_unassigned = metadata.unassigned_findings_count || 0;
-            
-            // Construir la URL del informe visual
+            const duplicates = metadata.duplicates_removed || 0;
             const report_url = `https://guillermop2002.github.io/GraphSec-IaC/?report=https://guillermop2002.github.io/GraphSec-IaC/pr-${prNumber}.json`;
             
-            // Construir el comentario
-            const body = `
-            ## 🔬 Análisis de GraphSec-IaC Completado
+            const body = `## 🔬 Análisis de GraphSec-IaC Completado\n\nSe han analizado los cambios en la infraestructura.\n\n| Métrica | Resultado |\n| :--- | :--- |\n| Nodos Totales | **${nodes_total}** |\n| Dependencias | **${edges_total}** |\n| Hallazgos Únicos | **${findings_unique}** |\n| Nodos Vulnerables | **${nodes_vulnerable}** |\n| Duplicados Eliminados | **${duplicates}** |\n| Hallazgos No Asignados | ${findings_unassigned} |\n\n[**🔗 Ver Informe Visual Interactivo**](${report_url})`;
             
-            Se han analizado los cambios en la infraestructura.
-            
-            | Métrica | Resultado |
-            | :--- | :--- |
-            | Nodos Vulnerables | **${nodes_vulnerable}** |
-            | Hallazgos Únicos | **${findings_unique}** |
-            | Nodos Totales | ${nodes_total} |
-            | Hallazgos No Asignados | ${findings_unassigned} |
-            
-            [**🔗 Ver Informe Visual Interactivo**](${report_url})
-            `;
-            
-            // Publicar el comentario
-            github.rest.issues.createComment({
+            await github.rest.issues.createComment({
               issue_number: prNumber,
               owner: context.repo.owner,
               repo: context.repo.repo,
               body: body
             });
-
-
